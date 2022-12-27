@@ -1,0 +1,61 @@
+{
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "extends": ["airbnb-typescript", "next", "prettier"],
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "plugins": ["react", "@typescript-eslint", "react-hooks", "prettier"],
+  "rules": {
+    "import/no-cycle": "off",
+    "import/extensions": ["off"],
+    "import/no-extraneous-dependencies": "off",
+    "import/no-default-export": "off",
+    "import/prefer-default-export": "off",
+    "prettier/prettier": "error",
+    "react/self-closing-comp": "error",
+    "react/function-component-definition": [
+      1,
+      {
+        "namedComponents": "arrow-function"
+      }
+    ],
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [".ts", ".tsx"]
+      }
+    ],
+    "react/jsx-one-expression-per-line": "off",
+    "react/jsx-uses-react": "off",
+    "react/prop-types": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/require-default-props": [
+      "error",
+      {
+        "ignoreFunctionalComponents": true
+      }
+    ],
+    "react/jsx-wrap-multilines": "off",
+    "react/jsx-props-no-spreading": "off",
+    "no-nested-ternary": "off"
+  },
+  "settings": {
+    "import/resolver": {
+      "typescript": {
+        "directory": "./tsconfig.json"
+      }
+    },
+    "react": {
+      "version": "detect"
+    }
+  }
+}
