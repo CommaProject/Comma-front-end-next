@@ -29,23 +29,13 @@ export const GlobalStyle = createGlobalStyle`
         border: none;
     }
     ::-webkit-scrollbar {
-        width: 10px;
-        height: 10px;
-        background: #ffffff;
+        display: none;
     }
-    ::-webkit-scrollbar-thumb {
-        border-radius: 4px;
-        background-color: #ced4da;
-        &:hover {
-            background-color: #adb5bd;
-        }
-    }
-    
+
     button {
         background: none;
         padding: 0;
         border: none;
         cursor: pointer;
     }
-
 `;
