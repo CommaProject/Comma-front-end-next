@@ -3,7 +3,7 @@ import { createGlobalStyle } from 'styled-components';
 export const GlobalStyle = createGlobalStyle`
     html,
     body {
-    width: 360px;
+    max-width: 390px;
     padding: 0;
     margin: 0px auto;
     -webkit-text-size-adjust: none;
