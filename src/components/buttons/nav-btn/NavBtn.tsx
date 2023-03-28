@@ -1,5 +1,5 @@
-import DeactivateArrow from '../../../assets/images/deactivateArrow.svg';
-import ActivateArrow from '../../../assets/images/activateArrow.svg';
+import DeactivateArrow from '@/assets/images/deactivateArrow.svg';
+import ActivateArrow from '@/assets/images/activateArrow.svg';
 import { NavBtnStyle } from './NavBtn.style';
 
 interface NavBtnProps {

@@ -1,19 +1,15 @@
-import NameInput from '../../inputs';
-import { SubTextBox } from '../../text-box';
-import AgeBtnList from '../age-btn-list';
-import GenderBtnList from '../gender-btn-list';
-import { CommonContainer, CommonTextWrapper } from '../SignUpCommon.style';
+import NameInput from '@/components/inputs';
+import { SubTextBox } from '@/components/text-box';
+import AgeBtnList from '@/components/signup/age-btn-list';
+import GenderBtnList from '@/components/signup/gender-btn-list';
+import {
+  CommonContainer,
+  CommonTextWrapper,
+} from '@/components/signup/SignUpCommon.style';
+import { FormBox } from './GenderAgeInputForm.style';
 
 export const GenderAgeInputForm = ({ name }: { name: string }) => (
-  <div
-    style={{
-      height: '75%',
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'space-between',
-      paddingTop: '30px',
-    }}
-  >
+  <FormBox>
     <CommonContainer>
       <CommonTextWrapper>
         <NameInput disabled maxLength={8} value={name} />
@@ -23,5 +19,5 @@ export const GenderAgeInputForm = ({ name }: { name: string }) => (
     </CommonContainer>
     <GenderBtnList />
     <AgeBtnList />
-  </div>
+  </FormBox>
 );

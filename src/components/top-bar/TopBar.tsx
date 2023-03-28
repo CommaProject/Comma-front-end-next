@@ -1,11 +1,11 @@
-import ProgressBar from '../progress-bar';
+import ProgressBar from '@/components/progress-bar';
 import {
   BtnContainer,
   NextBtn,
   PrevBtn,
   TopBarContainer,
 } from './TopBar.style';
-import PrevIcon from '../../assets/images/PrevArrow.svg';
+import PrevIcon from '@/assets/images/PrevArrow.svg';
 
 interface TopBarProps {
   step: number;

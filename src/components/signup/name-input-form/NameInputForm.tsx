@@ -1,9 +1,12 @@
 import { ChangeEvent } from 'react';
-import { theme } from '~/src/styles';
-import NameInput from '../../inputs';
-import { ExplainTextBox, SubTextBox } from '../../text-box';
-import { CommonContainer, CommonTextWrapper } from '../SignUpCommon.style';
+import NameInput from '@/components/inputs';
+import { ExplainTextBox, SubTextBox } from '@/components/text-box';
+import {
+  CommonContainer,
+  CommonTextWrapper,
+} from '@/components/signup/SignUpCommon.style';
 import { ExplainContainer } from './NameInputForm.style';
+import { theme } from '@/styles/theme';
 
 interface NameInputFormProps {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;

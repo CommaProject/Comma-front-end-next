@@ -1,9 +1,9 @@
 import { useAtom } from 'jotai';
-import { AgeType } from '~/src/constants/types/authTypes';
-import { signUpStateAtom } from '~/src/stores/atoms';
-import { theme } from '../../../styles/theme';
-import { SelectBtn } from '../../buttons/Buttons.style';
-import { ExplainTextBox, SubTextBox } from '../../text-box';
+import { AgeType } from '@/constants/types/authTypes';
+import { signUpStateAtom } from '@/stores/atoms';
+import { theme } from '@/styles/theme';
+import { SelectBtn } from '@/components/buttons/Buttons.style';
+import { ExplainTextBox, SubTextBox } from '@/components/text-box';
 import {
   AgeBtnListContainer,
   AgeContainer,

@@ -1,9 +1,9 @@
 import { GenderType } from '~/src/constants/types';
 import { useAtom } from 'jotai';
-import { signUpStateAtom } from '~/src/stores/atoms';
-import { SubTextBox } from '../../text-box';
+import { signUpStateAtom } from '@/stores/atoms';
+import { SubTextBox } from '@/components/text-box';
 import { GenderBtnListContainer, GenderContainer } from './GenderBtnList.style';
-import { SelectBtn } from '../../buttons/Buttons.style';
+import { SelectBtn } from '@/components/buttons/Buttons.style';
 
 const GENDER_LIST: { type: GenderType; value: string }[] = [
   { type: 'm', value: '남' },

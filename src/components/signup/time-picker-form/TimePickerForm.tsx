@@ -1,6 +1,6 @@
-import { theme } from '~/src/styles';
-import { ExplainTextBox, SubTextBox } from '../../text-box';
-import TimePicker from '../../time-picker';
+import { theme } from '@/styles/theme';
+import { ExplainTextBox, SubTextBox } from '@/components/text-box';
+import TimePicker from '@/components/time-picker';
 import { TextWrapper, TimePickerContainer } from './TimePickerForm.style';
 
 interface TimePickerFormProps {

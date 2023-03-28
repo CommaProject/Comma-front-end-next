@@ -1,5 +1,5 @@
 import { useAtom } from 'jotai';
-import { signUpStateAtom } from '../stores/atoms';
+import { signUpStateAtom } from '@/stores/atoms';
 
 /**
  * 회원가입시 step 별로 아래 nav 버튼 활성화 상태 반환하는 hook

@@ -1,5 +1,5 @@
 import { useAtom } from 'jotai';
-import { signUpStateAtom } from '~/src/stores/atoms';
+import { signUpStateAtom } from '@/stores/atoms';
 import { Background, Container, Progress } from './ProgressBar.style';
 
 const ProgressBar = () => {

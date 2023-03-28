@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import { atom } from 'jotai';
-import { GenderType, AgeType } from '../constants/types/authTypes';
+import { GenderType, AgeType } from '@/constants/types/authTypes';
 
 export interface ModalStateType {
   isOpen: boolean;
