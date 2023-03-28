@@ -1,6 +1,7 @@
 import { useAtom } from 'jotai';
 import { AgeType } from '~/src/constants/types/authTypes';
 import { signUpStateAtom } from '~/src/stores/atoms';
+import { theme } from '../../../styles/theme';
 import { SelectBtn } from '../../buttons/Buttons.style';
 import { ExplainTextBox, SubTextBox } from '../../text-box';
 import {
@@ -8,7 +9,6 @@ import {
   AgeContainer,
   BtnWrapper,
 } from './AgeBtnList.style';
-import { theme } from '~/src/styles';
 
 const AGE_LIST: { type: AgeType; value: string }[] = [
   { type: '19', value: '20↓' },
@@ -41,7 +41,7 @@ export const AgeBtnList = () => {
                   : theme.colors.grayscale.gray300
               }
             >
-              {'20대'}
+              20대
             </ExplainTextBox>
           </BtnWrapper>
         ))}

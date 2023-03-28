@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import { SwiperSlide } from 'swiper/react';
+import SwiperCore, { Navigation, Scrollbar } from 'swiper';
 import {
   Container,
   StyledSwiper,
@@ -7,7 +7,6 @@ import {
   SwiperBlock,
   SwiperContainer,
 } from './TimePicker.style';
-import SwiperCore, { Navigation, Scrollbar } from 'swiper';
 
 SwiperCore.use([Navigation, Scrollbar]);
 
@@ -24,29 +23,27 @@ const MeridiemPicker = ({
 }: {
   meridiem: string;
   setMeridiem: (text: string) => void;
-}) => {
-  return (
-    <Container>
-      <StyledSwiperSlides
-        onClick={() => setMeridiem('AM')}
-        disable={meridiem === 'AM'}
-        key={'am'}
-      >
-        AM
-      </StyledSwiperSlides>
-      <StyledSwiperSlides disable={false} key={'-'}>
-        ---
-      </StyledSwiperSlides>
-      <StyledSwiperSlides
-        onClick={() => setMeridiem('PM')}
-        disable={meridiem === 'PM'}
-        key={'pm'}
-      >
-        PM
-      </StyledSwiperSlides>
-    </Container>
-  );
-};
+}) => (
+  <Container>
+    <StyledSwiperSlides
+      onClick={() => setMeridiem('AM')}
+      disable={meridiem === 'AM'}
+      key="am"
+    >
+      AM
+    </StyledSwiperSlides>
+    <StyledSwiperSlides disable={false} key="-">
+      ---
+    </StyledSwiperSlides>
+    <StyledSwiperSlides
+      onClick={() => setMeridiem('PM')}
+      disable={meridiem === 'PM'}
+      key="pm"
+    >
+      PM
+    </StyledSwiperSlides>
+  </Container>
+);
 
 const HourPicker = ({
   hour,
@@ -54,31 +51,29 @@ const HourPicker = ({
 }: {
   hour: number;
   setHour: (num: number) => void;
-}) => {
-  return (
-    <Container>
-      <StyledSwiper
-        direction={'vertical'}
-        slidesPerView={3}
-        mousewheel
-        slideToClickedSlide
-        centeredSlides
-        loop={true}
-        onSlideChange={(swiper) => {
-          setHour(swiper.realIndex + 1);
-        }}
-      >
-        {HOUR_LIST.map((data) => (
-          <SwiperSlide key={data}>
-            <StyledSwiperSlides disable={hour === data}>
-              {data}
-            </StyledSwiperSlides>
-          </SwiperSlide>
-        ))}
-      </StyledSwiper>
-    </Container>
-  );
-};
+}) => (
+  <Container>
+    <StyledSwiper
+      direction="vertical"
+      slidesPerView={3}
+      mousewheel
+      slideToClickedSlide
+      centeredSlides
+      loop
+      onSlideChange={(swiper) => {
+        setHour(swiper.realIndex + 1);
+      }}
+    >
+      {HOUR_LIST.map((data) => (
+        <SwiperSlide key={data}>
+          <StyledSwiperSlides disable={hour === data}>
+            {data}
+          </StyledSwiperSlides>
+        </SwiperSlide>
+      ))}
+    </StyledSwiper>
+  </Container>
+);
 
 const MinPicker = ({
   min,
@@ -86,32 +81,28 @@ const MinPicker = ({
 }: {
   min: number;
   setMin: (num: number) => void;
-}) => {
-  return (
-    <Container>
-      <StyledSwiper
-        direction={'vertical'}
-        slidesPerView={3}
-        autoHeight={true}
-        mousewheel
-        slideToClickedSlide
-        centeredSlides
-        loop={true}
-        onSlideChange={(swiper) => {
-          setMin(swiper.realIndex);
-        }}
-      >
-        {MIN_LIST.map((data) => (
-          <SwiperSlide key={data}>
-            <StyledSwiperSlides disable={data === min}>
-              {data}
-            </StyledSwiperSlides>
-          </SwiperSlide>
-        ))}
-      </StyledSwiper>
-    </Container>
-  );
-};
+}) => (
+  <Container>
+    <StyledSwiper
+      direction="vertical"
+      slidesPerView={3}
+      autoHeight
+      mousewheel
+      slideToClickedSlide
+      centeredSlides
+      loop
+      onSlideChange={(swiper) => {
+        setMin(swiper.realIndex);
+      }}
+    >
+      {MIN_LIST.map((data) => (
+        <SwiperSlide key={data}>
+          <StyledSwiperSlides disable={data === min}>{data}</StyledSwiperSlides>
+        </SwiperSlide>
+      ))}
+    </StyledSwiper>
+  </Container>
+);
 
 interface TimePickerProps {
   meridiem: string;
@@ -128,14 +119,12 @@ export const TimePicker = ({
   setMeridiem,
   setHour,
   setMin,
-}: TimePickerProps) => {
-  return (
-    <SwiperContainer>
-      <MeridiemPicker meridiem={meridiem} setMeridiem={setMeridiem} />
-      <SwiperBlock>:</SwiperBlock>
-      <HourPicker hour={hour} setHour={setHour} />
-      <SwiperBlock>:</SwiperBlock>
-      <MinPicker min={min} setMin={setMin} />
-    </SwiperContainer>
-  );
-};
+}: TimePickerProps) => (
+  <SwiperContainer>
+    <MeridiemPicker meridiem={meridiem} setMeridiem={setMeridiem} />
+    <SwiperBlock>:</SwiperBlock>
+    <HourPicker hour={hour} setHour={setHour} />
+    <SwiperBlock>:</SwiperBlock>
+    <MinPicker min={min} setMin={setMin} />
+  </SwiperContainer>
+);

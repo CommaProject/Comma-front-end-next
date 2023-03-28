@@ -10,11 +10,9 @@ const useCheckSignupStep = (step: number) => {
   const [signUpState] = useAtom(signUpStateAtom);
   switch (step) {
     case 0: // 이름
-      return signUpState.name.length >= 1 ? true : false;
+      return signUpState.name.length >= 1;
     case 1: // 성별 연령
-      return signUpState.gender !== 'x' && signUpState.age !== 'x'
-        ? true
-        : false;
+      return signUpState.gender !== 'x' && signUpState.age !== 'x';
     case 2: // 카테고리
       return true;
     case 3: // 시간

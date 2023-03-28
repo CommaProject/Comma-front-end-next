@@ -6,14 +6,12 @@ interface NavBtnProps {
   isActivate: boolean;
   onClick: () => void;
 }
-export const NavBtn = ({ isActivate, onClick }: NavBtnProps) => {
-  return (
-    <NavBtnStyle
-      onClick={() => {
-        isActivate && onClick();
-      }}
-    >
-      {isActivate ? <ActivateArrow /> : <DeactivateArrow />}
-    </NavBtnStyle>
-  );
-};
+export const NavBtn = ({ isActivate, onClick }: NavBtnProps) => (
+  <NavBtnStyle
+    onClick={() => {
+      if (isActivate) onClick();
+    }}
+  >
+    {isActivate ? <ActivateArrow /> : <DeactivateArrow />}
+  </NavBtnStyle>
+);

@@ -10,21 +10,19 @@ interface NameInputFormProps {
   len: number;
 }
 
-export const NameInputForm = ({ onChange, len }: NameInputFormProps) => {
-  return (
-    <CommonContainer>
-      <SubTextBox>안녕하세요,</SubTextBox>
-      <div>
-        <CommonTextWrapper>
-          <NameInput maxLength={8} onChange={onChange} />
-          <SubTextBox>님</SubTextBox>
-        </CommonTextWrapper>
-        <ExplainContainer>
-          <ExplainTextBox
-            color={theme.colors.grayscale.gray300}
-          >{`(${len}/8)`}</ExplainTextBox>
-        </ExplainContainer>
-      </div>
-    </CommonContainer>
-  );
-};
+export const NameInputForm = ({ onChange, len }: NameInputFormProps) => (
+  <CommonContainer>
+    <SubTextBox>안녕하세요,</SubTextBox>
+    <div>
+      <CommonTextWrapper>
+        <NameInput maxLength={8} onChange={onChange} />
+        <SubTextBox>님</SubTextBox>
+      </CommonTextWrapper>
+      <ExplainContainer>
+        <ExplainTextBox
+          color={theme.colors.grayscale.gray300}
+        >{`(${len}/8)`}</ExplainTextBox>
+      </ExplainContainer>
+    </div>
+  </CommonContainer>
+);

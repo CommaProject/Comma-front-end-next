@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { CommonBtnContainer } from '../SignUpCommon.style';
 
 export const GenderBtnListContainer = styled(CommonBtnContainer)`

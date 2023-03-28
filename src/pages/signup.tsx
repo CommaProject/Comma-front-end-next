@@ -1,10 +1,10 @@
 import { ChangeEvent, useCallback, useState } from 'react';
 import { useAtom } from 'jotai';
-import { signUpStateAtom } from '../stores/atoms';
-import styled from 'styled-components';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper } from 'swiper/react';
 import { Swiper as SwiperClass } from 'swiper/types';
-import 'swiper/css';
+import 'swiper/swiper-bundle.min.css';
+import 'swiper/swiper.min.css';
+import { signUpStateAtom } from '../stores/atoms';
 import useCheckSignupStep from '../hooks/useCheckSignupStep';
 import TopBar from '../components/top-bar';
 import NavBtn from '../components/buttons/nav-btn';
@@ -46,9 +46,9 @@ const SignUp = () => {
           onSwiper={setSwiperRef}
           slidesPerView={1}
           centeredSlides
-          noSwiping={true}
+          noSwiping
           mousewheel={false}
-          centerInsufficientSlides={true}
+          centerInsufficientSlides
           allowTouchMove={false}
           onSlideChange={(swiper) => {
             setSlideStep(swiper.realIndex);
