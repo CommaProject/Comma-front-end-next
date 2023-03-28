@@ -1,9 +1,7 @@
 import { GenderType } from '~/src/constants/types';
-import { useAtom } from 'jotai';
-import { signUpStateAtom } from '@/stores/atoms';
 import { SubTextBox } from '@/components/text-box';
-import { GenderBtnListContainer, GenderContainer } from './GenderBtnList.style';
 import { SelectBtn } from '@/components/buttons/Buttons.style';
+import { GenderBtnListContainer, GenderContainer } from './GenderBtnList.style';
 
 const GENDER_LIST: { type: GenderType; value: string }[] = [
   { type: 'm', value: '남' },
@@ -11,23 +9,31 @@ const GENDER_LIST: { type: GenderType; value: string }[] = [
   { type: 'x', value: 'X' },
 ];
 
-export const GenderBtnList = () => {
-  const [signUpState, setSignUpState] = useAtom(signUpStateAtom);
-
-  return (
-    <GenderBtnListContainer>
-      <SubTextBox>성별</SubTextBox>
-      <GenderContainer>
-        {GENDER_LIST.map(({ type, value }) => (
-          <SelectBtn
-            onClick={() => setSignUpState({ ...signUpState, gender: type })}
-            disable={signUpState.gender === type}
-            key={type}
-          >
-            {value}
-          </SelectBtn>
-        ))}
-      </GenderContainer>
-    </GenderBtnListContainer>
-  );
-};
+/**
+ * 성별 관리를 위한 인터페이스
+ */
+interface GenderBtnListProps {
+  /** 성별 */
+  gender: string;
+  /** 성별 change event 함수 */
+  onChangeSelect: (name: string, value: string) => void;
+}
+export const GenderBtnList = ({
+  gender,
+  onChangeSelect,
+}: GenderBtnListProps) => (
+  <GenderBtnListContainer>
+    <SubTextBox>성별</SubTextBox>
+    <GenderContainer>
+      {GENDER_LIST.map(({ type, value }) => (
+        <SelectBtn
+          onClick={() => onChangeSelect('gender', type)}
+          disable={gender === type}
+          key={type}
+        >
+          {value}
+        </SelectBtn>
+      ))}
+    </GenderContainer>
+  </GenderBtnListContainer>
+);

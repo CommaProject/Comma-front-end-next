@@ -1,16 +1,8 @@
 import { theme } from '@/styles/theme';
 import { ExplainTextBox, SubTextBox } from '@/components/text-box';
 import TimePicker from '@/components/time-picker';
+import { TimePickerProps } from '@/components/time-picker/TimePicker';
 import { TextWrapper, TimePickerContainer } from './TimePickerForm.style';
-
-interface TimePickerFormProps {
-  meridiem: string;
-  setMeridiem: (text: string) => void;
-  hour: number;
-  setHour: (num: number) => void;
-  min: number;
-  setMin: (num: number) => void;
-}
 
 export const TimePickerForm = ({
   meridiem,
@@ -19,7 +11,7 @@ export const TimePickerForm = ({
   setMeridiem,
   setHour,
   setMin,
-}: TimePickerFormProps) => (
+}: TimePickerProps) => (
   <TimePickerContainer>
     <TextWrapper>
       <SubTextBox>주로 음악을 듣는 시간대는 언제인가요?</SubTextBox>

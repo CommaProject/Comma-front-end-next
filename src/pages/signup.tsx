@@ -1,11 +1,7 @@
 import { ChangeEvent, useCallback, useState } from 'react';
-import { useAtom } from 'jotai';
-import { Swiper } from 'swiper/react';
 import { Swiper as SwiperClass } from 'swiper/types';
 import 'swiper/swiper-bundle.min.css';
 import 'swiper/swiper.min.css';
-import { signUpStateAtom } from '@/stores/atoms';
-import useCheckSignupStep from '@/hooks/useCheckSignupStep';
 import TopBar from '@/components/top-bar';
 import NavBtn from '@/components/buttons/nav-btn';
 import NameInputForm from '@/components/signup/name-input-form';
@@ -15,17 +11,43 @@ import {
   SignUpContainer,
   SignUpWrapper,
   StyledSlide,
+  StyledSwiper,
 } from '@/components/signup/SignUpCommon.style';
+import { AgeType, GenderType, TimeType } from '@/constants/types/authTypes';
 
+/**
+ * 회원가입시 필요한 데이터
+ */
+export interface SignUpStateType {
+  /** 이름 */
+  name: string;
+  /** 성별 남/여/x */
+  gender: GenderType;
+  /** 연령 20대 미만/20대/30대/40대/50대 이상/x */
+  age: AgeType;
+  /** 아티스트 선택 리스트 */
+  artist: string[];
+  /** 장르 선택 리스트 */
+  genre: string[];
+  /** 오전/오후 - 시간- 분 */
+  time: TimeType;
+}
 const SignUp = () => {
-  const [signUpState, setSignUpState] = useAtom(signUpStateAtom);
+  const [signUpState, setSignUpState] = useState<SignUpStateType>({
+    name: '',
+    gender: 'x',
+    age: 'x',
+    artist: [],
+    genre: [],
+    time: { meridiem: 'AM', hour: 1, min: 1 },
+  });
   const [swiperRef, setSwiperRef] = useState<SwiperClass>();
   const [slideStep, setSlideStep] = useState(0);
+  const [topBarState, setTopBarState] = useState(0);
 
   const handleNext = useCallback(() => {
     swiperRef?.slideNext();
   }, [swiperRef]);
-
   const handlePrev = useCallback(() => {
     swiperRef?.slidePrev();
   }, [swiperRef]);
@@ -33,16 +55,35 @@ const SignUp = () => {
   const handleNameInput = (e: ChangeEvent<HTMLInputElement>) => {
     setSignUpState({ ...signUpState, name: e.target.value });
   };
+  const handleSelect = (name: string, value: string) => {
+    setSignUpState({ ...signUpState, [name]: value });
+  };
+
+  const useCheckSignupStep = () => {
+    switch (slideStep) {
+      case 0: // 이름
+        return signUpState.name.length >= 1;
+      case 1: // 성별 연령
+        return signUpState.gender !== 'x' && signUpState.age !== 'x';
+      case 2: // 카테고리
+        return true;
+      case 3: // 시간
+        return true;
+      default:
+        return false;
+    }
+  };
 
   return (
     <SignUpContainer>
       <TopBar
+        step={slideStep}
+        topBarState={topBarState}
         onClickNext={handleNext}
         onClickPrev={handlePrev}
-        step={slideStep}
       />
       <SignUpWrapper>
-        <Swiper
+        <StyledSwiper
           onSwiper={setSwiperRef}
           slidesPerView={1}
           centeredSlides
@@ -53,7 +94,6 @@ const SignUp = () => {
           onSlideChange={(swiper) => {
             setSlideStep(swiper.realIndex);
           }}
-          style={{ height: '600px' }}
         >
           <StyledSlide>
             <NameInputForm
@@ -62,7 +102,12 @@ const SignUp = () => {
             />
           </StyledSlide>
           <StyledSlide>
-            <GenderAgeInputForm name={signUpState.name} />
+            <GenderAgeInputForm
+              name={signUpState.name}
+              gender={signUpState.gender}
+              age={signUpState.age}
+              onChageSelect={handleSelect}
+            />
           </StyledSlide>
           <StyledSlide>
             <div>category</div>
@@ -95,14 +140,11 @@ const SignUp = () => {
           <StyledSlide>
             <div>success</div>
           </StyledSlide>
-        </Swiper>
+        </StyledSwiper>
         <NavBtn
-          isActivate={useCheckSignupStep(slideStep)}
+          isActivate={useCheckSignupStep()}
           onClick={() => {
-            setSignUpState({
-              ...signUpState,
-              percent: signUpState.percent + 20,
-            });
+            setTopBarState(topBarState + 20);
             handleNext();
           }}
         />

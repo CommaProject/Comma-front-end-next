@@ -1,3 +1,4 @@
+import { theme } from '@/styles/theme';
 import { ChangeEvent } from 'react';
 import NameInput from '@/components/inputs';
 import { ExplainTextBox, SubTextBox } from '@/components/text-box';
@@ -6,13 +7,16 @@ import {
   CommonTextWrapper,
 } from '@/components/signup/SignUpCommon.style';
 import { ExplainContainer } from './NameInputForm.style';
-import { theme } from '@/styles/theme';
 
+/**
+ * 이름 입력 폼 인터페이스
+ */
 interface NameInputFormProps {
+  /** 이름값 change event 함수 */
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  /** 이름 길이 */
   len: number;
 }
-
 export const NameInputForm = ({ onChange, len }: NameInputFormProps) => (
   <CommonContainer>
     <SubTextBox>안녕하세요,</SubTextBox>

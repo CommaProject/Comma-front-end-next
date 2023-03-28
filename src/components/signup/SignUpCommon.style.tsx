@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 export const CommonContainer = styled.div`
   height: 61px;
@@ -41,4 +41,8 @@ export const StyledSlide = styled(SwiperSlide)`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+`;
+
+export const StyledSwiper = styled(Swiper)`
+  height: 600px;
 `;

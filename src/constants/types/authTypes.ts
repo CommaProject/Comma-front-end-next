@@ -3,6 +3,18 @@ export interface LoginInputsType {
   password: string;
 }
 
+/**
+ * time-picker 정의를 위한 type
+ */
+export interface TimeType {
+  /** AM/PM */
+  meridiem: string;
+  /** 시간 1 ~ 12 */
+  hour: number;
+  /** 분 0 ~ 59 */
+  min: number;
+}
+
 export type GenderType = 'm' | 'f' | 'x';
 export type AgeType = '19' | '20' | '30' | '40' | '50' | 'x';
 

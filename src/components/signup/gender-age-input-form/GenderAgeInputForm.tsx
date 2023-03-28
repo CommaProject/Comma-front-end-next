@@ -8,7 +8,25 @@ import {
 } from '@/components/signup/SignUpCommon.style';
 import { FormBox } from './GenderAgeInputForm.style';
 
-export const GenderAgeInputForm = ({ name }: { name: string }) => (
+/**
+ * 성별/연령 form 관리를 위한 인터페이스
+ */
+interface GenderAgeInputFormProps {
+  /** 앞에서 입력한 이름 */
+  name: string;
+  /** 성별 */
+  gender: string;
+  /** 연령 */
+  age: string;
+  /** 성별 연령 change event 함수 */
+  onChageSelect: (name: string, value: string) => void;
+}
+export const GenderAgeInputForm = ({
+  name,
+  gender,
+  age,
+  onChageSelect,
+}: GenderAgeInputFormProps) => (
   <FormBox>
     <CommonContainer>
       <CommonTextWrapper>
@@ -17,7 +35,7 @@ export const GenderAgeInputForm = ({ name }: { name: string }) => (
       </CommonTextWrapper>
       <SubTextBox>반갑습니다</SubTextBox>
     </CommonContainer>
-    <GenderBtnList />
-    <AgeBtnList />
+    <GenderBtnList gender={gender} onChangeSelect={onChageSelect} />
+    <AgeBtnList age={age} onChangeSelect={onChageSelect} />
   </FormBox>
 );

@@ -104,12 +104,21 @@ const MinPicker = ({
   </Container>
 );
 
-interface TimePickerProps {
+/**
+ * Time Picker form을 관리하기 위한 인터페이스
+ */
+export interface TimePickerProps {
+  /** AM/PM 출력을 위한 데이터 */
   meridiem: string;
+  /** AM/PM에 대한 change event 함수 */
   setMeridiem: (text: string) => void;
+  /** 시간 출력을 위한 데이터 */
   hour: number;
+  /** 시간에 대한 change event 함수 */
   setHour: (num: number) => void;
+  /** 분 출력을 위한 데이터 */
   min: number;
+  /** 분에 대한 change event 함수 */
   setMin: (num: number) => void;
 }
 export const TimePicker = ({
