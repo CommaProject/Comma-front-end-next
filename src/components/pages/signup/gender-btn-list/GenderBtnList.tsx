@@ -1,6 +1,6 @@
 import { GenderType } from '~/src/constants/types';
-import { SubTextBox } from '@/components/text-box';
-import { SelectBtn } from '@/components/buttons/Buttons.style';
+import { SubTextBox } from '~/src/components/pages/signup/text-box';
+import { SelectBtn } from '~/src/components/pages/signup/buttons/Buttons.style';
 import { GenderBtnListContainer, GenderContainer } from './GenderBtnList.style';
 
 const GENDER_LIST: { type: GenderType; value: string }[] = [

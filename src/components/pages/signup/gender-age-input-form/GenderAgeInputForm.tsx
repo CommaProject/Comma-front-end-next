@@ -1,11 +1,11 @@
-import NameInput from '@/components/inputs';
-import { SubTextBox } from '@/components/text-box';
-import AgeBtnList from '@/components/signup/age-btn-list';
-import GenderBtnList from '@/components/signup/gender-btn-list';
+import NameInput from '~/src/components/pages/signup/inputs';
+import { SubTextBox } from '~/src/components/pages/signup/text-box';
+import AgeBtnList from '~/src/components/pages/signup/age-btn-list';
+import GenderBtnList from '~/src/components/pages/signup/gender-btn-list';
 import {
   CommonContainer,
   CommonTextWrapper,
-} from '@/components/signup/SignUpCommon.style';
+} from '~/src/components/pages/signup/SignUpCommon.style';
 import { FormBox } from './GenderAgeInputForm.style';
 
 /**

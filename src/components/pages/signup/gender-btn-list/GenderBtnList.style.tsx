@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { CommonBtnContainer } from '@/components/signup/SignUpCommon.style';
+import { CommonBtnContainer } from '~/src/components/pages/signup/SignUpCommon.style';
 
 export const GenderBtnListContainer = styled(CommonBtnContainer)`
   text-align: center;

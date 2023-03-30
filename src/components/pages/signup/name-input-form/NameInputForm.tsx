@@ -1,11 +1,14 @@
 import { theme } from '@/styles/theme';
 import { ChangeEvent } from 'react';
-import NameInput from '@/components/inputs';
-import { ExplainTextBox, SubTextBox } from '@/components/text-box';
+import NameInput from '~/src/components/pages/signup/inputs';
+import {
+  ExplainTextBox,
+  SubTextBox,
+} from '~/src/components/pages/signup/text-box';
 import {
   CommonContainer,
   CommonTextWrapper,
-} from '@/components/signup/SignUpCommon.style';
+} from '~/src/components/pages/signup/SignUpCommon.style';
 import { ExplainContainer } from './NameInputForm.style';
 
 /**

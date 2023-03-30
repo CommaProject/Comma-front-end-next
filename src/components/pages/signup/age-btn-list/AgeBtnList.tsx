@@ -1,7 +1,10 @@
 import { AgeType } from '@/constants/types/authTypes';
 import { theme } from '@/styles/theme';
-import { SelectBtn } from '@/components/buttons/Buttons.style';
-import { ExplainTextBox, SubTextBox } from '@/components/text-box';
+import { SelectBtn } from '~/src/components/pages/signup/buttons/Buttons.style';
+import {
+  ExplainTextBox,
+  SubTextBox,
+} from '~/src/components/pages/signup/text-box';
 import {
   AgeBtnListContainer,
   AgeContainer,

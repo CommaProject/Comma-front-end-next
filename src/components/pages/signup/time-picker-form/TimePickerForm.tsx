@@ -1,7 +1,10 @@
 import { theme } from '@/styles/theme';
-import { ExplainTextBox, SubTextBox } from '@/components/text-box';
-import TimePicker from '@/components/time-picker';
-import { TimePickerProps } from '@/components/time-picker/TimePicker';
+import {
+  ExplainTextBox,
+  SubTextBox,
+} from '~/src/components/pages/signup/text-box';
+import TimePicker from '~/src/components/common/time-picker';
+import { TimePickerProps } from '@/components/common/time-picker/TimePicker';
 import { TextWrapper, TimePickerContainer } from './TimePickerForm.style';
 
 export const TimePickerForm = ({

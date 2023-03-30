@@ -2,17 +2,17 @@ import { ChangeEvent, useCallback, useState } from 'react';
 import { Swiper as SwiperClass } from 'swiper/types';
 import 'swiper/swiper-bundle.min.css';
 import 'swiper/swiper.min.css';
-import TopBar from '@/components/top-bar';
-import NavBtn from '@/components/buttons/nav-btn';
-import NameInputForm from '@/components/signup/name-input-form';
-import GenderAgeInputForm from '@/components/signup/gender-age-input-form';
-import TimePickerForm from '@/components/signup/time-picker-form';
+import TopBar from '~/src/components/pages/signup/top-bar';
+import NavBtn from '~/src/components/pages/signup/buttons/nav-btn';
+import NameInputForm from '~/src/components/pages/signup/name-input-form';
+import GenderAgeInputForm from '~/src/components/pages/signup/gender-age-input-form';
+import TimePickerForm from '~/src/components/pages/signup/time-picker-form';
 import {
   SignUpContainer,
   SignUpWrapper,
   StyledSlide,
   StyledSwiper,
-} from '@/components/signup/SignUpCommon.style';
+} from '~/src/components/pages/signup/SignUpCommon.style';
 import { AgeType, GenderType, TimeType } from '@/constants/types/authTypes';
 
 /**

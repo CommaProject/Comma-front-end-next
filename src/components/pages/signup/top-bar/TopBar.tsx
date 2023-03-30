@@ -1,5 +1,5 @@
 import PrevIcon from '@/assets/images/PrevArrow.svg';
-import ProgressBar from '@/components/progress-bar';
+import ProgressBar from '@/components/pages/signup/progress-bar';
 import {
   BtnContainer,
   NextBtn,
