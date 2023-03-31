@@ -1,51 +1,25 @@
-import { useState } from 'react';
-import {
-  HidePasswordIcon,
-  LoginContainer,
-  LoginInputContainer,
-  ShowPasswordIcon,
-  SimpleLoginConatiner,
-} from '@/components/login/common-style/LoginCommon.style';
-import MainLogo from '@/components/login/main-logo';
-import LoginIdInput from '@/components/login/inputs/login-id-input';
-import LoginPasswordInput from '@/components/login/inputs/login-password-input';
-import LoginBtn from '@/components/login/login-btn';
-import { FindIdPwLink } from '@/components/login/find-id-pw-link/FindIdPwLink';
-import RegisterLink from '@/components/login/register-link/index';
-import SnsLoginTextDiv from '@/components/login/sns-login-text-div';
-import SnsLoginIcons from '@/components/login/sns-login-icons';
+import { ChangeEvent, useState } from 'react';
+import LoginTemplate from '@/components/template/login';
 
 const Login = () => {
-  const [showPassword, setShowPassword] = useState(false);
+  const [enteredInputId, setEnteredInputId] = useState('');
+  const [enteredInputPw, setEnteredInputPw] = useState('');
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+  const onChangeInputId = (event: React.ChangeEvent<HTMLInputElement>): void =>
+    setEnteredInputId(event.target.value);
+  const onChangeInputPw = (event: React.ChangeEvent<HTMLInputElement>): void =>
+    setEnteredInputPw(event.target.value);
 
   return (
-    <LoginContainer>
-      <MainLogo />
-      <LoginInputContainer>
-        <LoginIdInput />
-        <LoginPasswordInput showPassword={showPassword} />
-        {showPassword ? (
-          <ShowPasswordIcon
-            onClick={() => {
-              setShowPassword(!showPassword);
-            }}
-          />
-        ) : (
-          <HidePasswordIcon
-            onClick={() => {
-              setShowPassword(!showPassword);
-            }}
-          />
-        )}
-      </LoginInputContainer>
-      <LoginBtn />
-      <FindIdPwLink />
-      <RegisterLink />
-      <SimpleLoginConatiner>
-        <SnsLoginTextDiv />
-        <SnsLoginIcons />
-      </SimpleLoginConatiner>
-    </LoginContainer>
+    <LoginTemplate
+      inputId={enteredInputId}
+      setIsPasswordVisible={setIsPasswordVisible}
+      onChangeInputId={onChangeInputId}
+      inputPw={enteredInputPw}
+      onChangeInputPw={onChangeInputPw}
+      isPasswordVisible={isPasswordVisible}
+    />
   );
 };
 
