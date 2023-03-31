@@ -15,7 +15,7 @@ export const FindLinkBox = () => (
     <style.Box>
       아직 계정이 없으세요?
       <Link href="/signup">
-        <span>가입하기</span>
+        <style.Text>가입하기</style.Text>
       </Link>
     </style.Box>
   </style.Wrapper>

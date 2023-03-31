@@ -1,12 +1,29 @@
 import styled, { css } from 'styled-components';
+import KakaoIconSvg from '@/assets/images/kakao.svg';
+import NaverIconSvg from '@/assets/images/naver.svg';
+import InstagramIconSvg from '@/assets/images/instagram.svg';
+import GoogleIconSvg from '@/assets/images/google.svg';
 
 export const Wrapper = styled.div`
   width: 100%;
   height: 160px;
-  position: relative;
+
+  position: absolute;
+  top: 340px;
 `;
 
 export const Box = styled.div`
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  top: 36px;
+  > * {
+    margin: 0 14px;
+  }
+`;
+
+export const Text = styled.div`
   ${({ theme }) => {
     const { fonts, colors } = theme;
     return css`
@@ -42,3 +59,8 @@ export const Box = styled.div`
     `;
   }}
 `;
+
+export const KakaoIcon = styled(KakaoIconSvg)``;
+export const NaverIcon = styled(NaverIconSvg)``;
+export const InstagramIcon = styled(InstagramIconSvg)``;
+export const GoogleIcon = styled(GoogleIconSvg)``;

@@ -14,7 +14,7 @@ const Login = () => {
     setEnteredInputId(event.target.value);
   const onChangeInputPw = (event: ChangeEvent<HTMLInputElement>): void =>
     setEnteredInputPw(event.target.value);
-  const onChangeIsPasswordVisible = () => {
+  const onClickIsPasswordVisible = () => {
     setIsPasswordVisible(!isPasswordVisible);
   };
   /** 로그인 로직 API 구조만 짜놓았습니다. */
@@ -26,10 +26,11 @@ const Login = () => {
         password: enteredInputPw,
       })
       .then((res) => {
-        // TODO : API SPEC 나온후 작성 필요
+        // TODO : API SPEC 나온후 수정 필요
         router.push('/');
       });
   };
+
   return (
     <LoginTemplate
       inputId={enteredInputId}
@@ -38,7 +39,7 @@ const Login = () => {
       inputPw={enteredInputPw}
       onChangeInputPw={onChangeInputPw}
       isPasswordVisible={isPasswordVisible}
-      onChangeIsPasswordVisible={onChangeIsPasswordVisible}
+      onClickIsPasswordVisible={onClickIsPasswordVisible}
       onClickLoginLogic={onClickLoginLogic}
     />
   );

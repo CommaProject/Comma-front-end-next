@@ -1,8 +1,9 @@
 import * as style from './LoginTemplate.style';
 import { ChangeEvent } from 'react';
-import LoginInputBox from '~/src/components/pages/login/login-input-box';
 import FindLinkBox from '@/components/pages/login/find-link-box';
 import SnsLoginBox from '@/components/pages/login/sns-login-box';
+import { LoginInputForm } from '@/components/pages/login/login-input-form/LoginInputForm';
+import IsPasswordVisibleIcon from '@/components/pages/login/login-input-form/is-password-visible-icon';
 
 interface LoginTemplateProps {
   inputId: string;
@@ -11,7 +12,7 @@ interface LoginTemplateProps {
   onChangeInputPw: (event: ChangeEvent<HTMLInputElement>) => void;
   isPasswordVisible: boolean;
   setIsPasswordVisible: React.Dispatch<React.SetStateAction<boolean>>;
-  onChangeIsPasswordVisible: () => void;
+  onClickIsPasswordVisible: () => void;
   onClickLoginLogic: () => void;
 }
 
@@ -21,25 +22,33 @@ export const LoginTemplate = ({
   inputPw,
   onChangeInputPw,
   isPasswordVisible,
-  setIsPasswordVisible,
-  onChangeIsPasswordVisible,
+  onClickIsPasswordVisible,
   onClickLoginLogic,
 }: LoginTemplateProps) => {
   return (
     <style.Wrapper>
       <style.MainIcon />
-      <LoginInputBox
-        inputId={inputId}
-        onChangeInputId={onChangeInputId}
-        inputPw={inputPw}
-        onChangeInputPw={onChangeInputPw}
-        isPasswordVisible={isPasswordVisible}
-        setIsPasswordVisible={setIsPasswordVisible}
-        onChangeIsPasswordVisible={onChangeIsPasswordVisible}
-        onClickLoginLogic={onClickLoginLogic}
-      />
-      <FindLinkBox />
-      <SnsLoginBox />
+      <style.Box>
+        <LoginInputForm
+          isPassword={false}
+          input={inputId}
+          onChange={onChangeInputId}
+          isPasswordVisible={isPasswordVisible}
+        />
+        <LoginInputForm
+          isPassword={true}
+          input={inputPw}
+          onChange={onChangeInputPw}
+          isPasswordVisible={isPasswordVisible}
+        />
+        <IsPasswordVisibleIcon
+          isPasswordVisible={isPasswordVisible}
+          onClicks={onClickIsPasswordVisible}
+        />
+        <style.Button onClick={onClickLoginLogic}>로그인</style.Button>
+        <FindLinkBox />
+        <SnsLoginBox />
+      </style.Box>
     </style.Wrapper>
   );
 };

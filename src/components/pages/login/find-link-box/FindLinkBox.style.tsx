@@ -8,7 +8,8 @@ export const Wrapper = styled.div`
       height: 149px;
       margin: 0 auto 44px;
 
-      position: relative;
+      position: absolute;
+      top: 191px;
       text-align: center;
 
       color: ${colors.grayscale.dark};
@@ -59,15 +60,20 @@ export const Box = styled.div`
       font-family: ${fonts.family.noto};
       font-weight: ${fonts.weight.regular};
       line-height: 15px;
+    `;
+  }}
+`;
 
-      > * {
-        padding-left: 5px;
+export const Text = styled.span`
+  ${({ theme }) => {
+    const { colors, fonts } = theme;
+    return css`
+      padding-left: 5px;
 
-        display: inline-block;
+      display: inline-block;
 
-        font-weight: ${fonts.weight.bold};
-        text-decoration: underline;
-      }
+      font-weight: ${fonts.weight.bold};
+      text-decoration: underline;
     `;
   }}
 `;
