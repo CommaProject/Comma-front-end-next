@@ -4,8 +4,8 @@ export const Wrapper = styled.div`
   ${({ theme }) => {
     const { colors, fonts } = theme;
     return css`
-      width: 200px;
-      height: 12px;
+      width: 100%;
+      height: 149px;
       margin: 0 auto 44px;
 
       position: relative;
@@ -17,7 +17,7 @@ export const Wrapper = styled.div`
       font-weight: ${fonts.weight.medium};
       line-height: 12px;
 
-      > * {
+      > a {
         padding: 0 5px;
 
         text-decoration: none;
@@ -46,4 +46,28 @@ export const Wrapper = styled.div`
   }};
 `;
 
-export const Div = styled.div``;
+export const Box = styled.div`
+  ${({ theme }) => {
+    const { colors, fonts } = theme;
+    return css`
+      position: relative;
+      text-align: center;
+      top: 44px;
+
+      color: ${colors.grayscale.dark};
+      font-size: 15px;
+      font-family: ${fonts.family.noto};
+      font-weight: ${fonts.weight.regular};
+      line-height: 15px;
+
+      > * {
+        padding-left: 5px;
+
+        display: inline-block;
+
+        font-weight: ${fonts.weight.bold};
+        text-decoration: underline;
+      }
+    `;
+  }}
+`;

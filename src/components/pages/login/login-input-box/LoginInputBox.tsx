@@ -1,7 +1,7 @@
 import { ChangeEvent } from 'react';
 import LoginIdInput from './login-id-input';
 import LoginPasswordInput from './login-password-input';
-import * as style from './LoginInputs.style';
+import * as style from './LoginInputBox.style';
 
 interface LoginInputsProps {
   inputId: string;
@@ -10,20 +10,19 @@ interface LoginInputsProps {
   onChangeInputPw: (event: ChangeEvent<HTMLInputElement>) => void;
   isPasswordVisible: boolean;
   setIsPasswordVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  onChangeIsPasswordVisible: () => void;
+  onClickLoginLogic: () => void;
 }
 
-export const LoginInputs = ({
+export const LoginInputBox = ({
   inputId,
   onChangeInputId,
   inputPw,
   onChangeInputPw,
   isPasswordVisible,
   setIsPasswordVisible,
+  onClickLoginLogic,
 }: LoginInputsProps) => {
-  const changeIsPasswordVisible = () => {
-    setIsPasswordVisible(!isPasswordVisible);
-  };
-
   return (
     <style.Wrapper>
       <LoginIdInput inputId={inputId} onChangeInputId={onChangeInputId} />
@@ -33,10 +32,11 @@ export const LoginInputs = ({
         onChangeInputPw={onChangeInputPw}
       />
       {isPasswordVisible ? (
-        <style.NowPasswordVisibleIcon onClick={changeIsPasswordVisible} />
+        <style.NowPasswordVisibleIcon onClick={setIsPasswordVisible} />
       ) : (
-        <style.NowPasswordInvisibleIcon onClick={changeIsPasswordVisible} />
+        <style.NowPasswordInvisibleIcon onClick={setIsPasswordVisible} />
       )}
+      <style.Button onClick={onClickLoginLogic}>로그인</style.Button>
     </style.Wrapper>
   );
 };

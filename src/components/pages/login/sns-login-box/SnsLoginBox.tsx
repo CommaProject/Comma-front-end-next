@@ -1,10 +1,9 @@
-import SnsLoginIcons from './sns-login-icons';
-import SnsLoginTextDiv from './sns-login-text-div';
 import * as style from './SnsLoginBox.style';
+import SnsLoginIcons from './sns-login-icons';
 
 export const SnsLoginBox = () => (
   <style.Wrapper>
-    <SnsLoginTextDiv />
+    <style.Box>간편 로그인</style.Box>
     <SnsLoginIcons />
   </style.Wrapper>
 );

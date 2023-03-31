@@ -1,16 +1,35 @@
 import { ChangeEvent, useState } from 'react';
 import LoginTemplate from '@/components/template/login';
+import { useRouter } from 'next/router';
+import axios from 'axios';
 
 const Login = () => {
+  const router = useRouter();
+
   const [enteredInputId, setEnteredInputId] = useState('');
   const [enteredInputPw, setEnteredInputPw] = useState('');
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
-  const onChangeInputId = (event: React.ChangeEvent<HTMLInputElement>): void =>
+  const onChangeInputId = (event: ChangeEvent<HTMLInputElement>): void =>
     setEnteredInputId(event.target.value);
-  const onChangeInputPw = (event: React.ChangeEvent<HTMLInputElement>): void =>
+  const onChangeInputPw = (event: ChangeEvent<HTMLInputElement>): void =>
     setEnteredInputPw(event.target.value);
-
+  const onChangeIsPasswordVisible = () => {
+    setIsPasswordVisible(!isPasswordVisible);
+  };
+  /** 로그인 로직 API 구조만 짜놓았습니다. */
+  const onClickLoginLogic = () => {
+    // TODO : 백엔드 로그인 URI 기입 필요
+    axios
+      .post('/', {
+        id: enteredInputId,
+        password: enteredInputPw,
+      })
+      .then((res) => {
+        // TODO : API SPEC 나온후 작성 필요
+        router.push('/');
+      });
+  };
   return (
     <LoginTemplate
       inputId={enteredInputId}
@@ -19,6 +38,8 @@ const Login = () => {
       inputPw={enteredInputPw}
       onChangeInputPw={onChangeInputPw}
       isPasswordVisible={isPasswordVisible}
+      onChangeIsPasswordVisible={onChangeIsPasswordVisible}
+      onClickLoginLogic={onClickLoginLogic}
     />
   );
 };

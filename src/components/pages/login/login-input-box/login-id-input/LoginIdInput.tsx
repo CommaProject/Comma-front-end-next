@@ -1,8 +1,9 @@
+import { ChangeEvent } from 'react';
 import * as style from './LoginIdInput.style';
 
 interface LoginIdInputProps {
   inputId: string;
-  onChangeInputId: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeInputId: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const LoginIdInput = ({ inputId, onChangeInputId }: LoginIdInputProps) => (

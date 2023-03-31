@@ -1,8 +1,9 @@
+import { ChangeEvent } from 'react';
 import * as style from './LoginpasswordInput.style';
 
 interface LoginPasswordInputProps {
   inputPw: string;
-  onChangeInputPw: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeInputPw: (event: ChangeEvent<HTMLInputElement>) => void;
   isPasswordVisible: boolean;
 }
 

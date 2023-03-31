@@ -1,10 +1,7 @@
 import * as style from './LoginTemplate.style';
 import { ChangeEvent } from 'react';
-import MainLogo from '@/components/pages/login/main-logo';
-import LoginInputs from '@/components/pages/login/login-inputs';
-import LoginBtn from '@/components/pages/login/login-btn';
-import FindIdPwLink from '@/components/pages/login/find-id-pw-link';
-import RegisterLink from '@/components/pages/login/register-link';
+import LoginInputBox from '~/src/components/pages/login/login-input-box';
+import FindLinkBox from '@/components/pages/login/find-link-box';
 import SnsLoginBox from '@/components/pages/login/sns-login-box';
 
 interface LoginTemplateProps {
@@ -14,6 +11,8 @@ interface LoginTemplateProps {
   onChangeInputPw: (event: ChangeEvent<HTMLInputElement>) => void;
   isPasswordVisible: boolean;
   setIsPasswordVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  onChangeIsPasswordVisible: () => void;
+  onClickLoginLogic: () => void;
 }
 
 export const LoginTemplate = ({
@@ -23,21 +22,23 @@ export const LoginTemplate = ({
   onChangeInputPw,
   isPasswordVisible,
   setIsPasswordVisible,
+  onChangeIsPasswordVisible,
+  onClickLoginLogic,
 }: LoginTemplateProps) => {
   return (
     <style.Wrapper>
-      <MainLogo />
-      <LoginInputs
+      <style.MainIcon />
+      <LoginInputBox
         inputId={inputId}
         onChangeInputId={onChangeInputId}
         inputPw={inputPw}
         onChangeInputPw={onChangeInputPw}
         isPasswordVisible={isPasswordVisible}
         setIsPasswordVisible={setIsPasswordVisible}
+        onChangeIsPasswordVisible={onChangeIsPasswordVisible}
+        onClickLoginLogic={onClickLoginLogic}
       />
-      <LoginBtn inputId={inputId} inputPw={inputPw} />
-      <FindIdPwLink />
-      <RegisterLink />
+      <FindLinkBox />
       <SnsLoginBox />
     </style.Wrapper>
   );
