@@ -1,26 +1,48 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const Container = styled.div`
-  height: 4px;
+interface ProgressProps {
+  percent: number;
+}
+
+export const Wrapper = styled.div`
   width: 100%;
+  height: 4px;
+
   position: relative;
 `;
 
-export const BaseBox = styled.div`
-  height: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
-  border-radius: 3px;
-  transition: width 500ms ease-in-out;
+export const Background = styled.div`
+  ${({ theme }) => {
+    const { colors } = theme;
+    return css`
+      width: 100%;
+      height: 100%;
+
+      position: absolute;
+      left: 0;
+      top: 0;
+
+      border-radius: 3px;
+      background: ${colors.grayscale.dark}1a;
+    `;
+  }}
 `;
 
-export const Background = styled(BaseBox)`
-  background: #0f0f0f1a;
-  width: 100%;
-`;
+export const Progress = styled.div<Partial<ProgressProps>>`
+  ${({ theme, percent }) => {
+    const { colors } = theme;
+    return css`
+      width: ${percent}%;
+      height: 100%;
 
-export const Progress = styled(BaseBox)<{ percent: number }>`
-  background: #5a90ff;
-  width: ${({ percent }) => percent}%;
+      position: absolute;
+      left: 0;
+      top: 0;
+
+      border-radius: 3px;
+      background: ${colors.primary.main};
+
+      transition: width 500ms ease-in-out;
+    `;
+  }}
 `;

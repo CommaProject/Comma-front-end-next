@@ -1,11 +1,6 @@
 import PrevIcon from '@/assets/images/PrevArrow.svg';
 import ProgressBar from '@/components/pages/signup/progress-bar';
-import {
-  BtnContainer,
-  NextBtn,
-  PrevBtn,
-  TopBarContainer,
-} from './TopBar.style';
+import * as style from './TopBar.style';
 
 /**
  * 상단바 관리를 위한 데이타
@@ -26,19 +21,21 @@ const TopBar = ({
   onClickPrev,
   onClickNext,
 }: TopBarProps) => (
-  <TopBarContainer>
-    <BtnContainer>
+  <style.Wrapper>
+    <style.Box>
       {step === 0 ? (
         <div />
       ) : (
-        <PrevBtn onClick={onClickPrev}>
+        <style.Button isNext={false} onClick={onClickPrev}>
           <PrevIcon />
-        </PrevBtn>
+        </style.Button>
       )}
-      <NextBtn onClick={onClickNext}>다음</NextBtn>
-    </BtnContainer>
+      <style.Button isNext onClick={onClickNext}>
+        다음
+      </style.Button>
+    </style.Box>
     <ProgressBar topBarState={topBarState} />
-  </TopBarContainer>
+  </style.Wrapper>
 );
 
 export default TopBar;

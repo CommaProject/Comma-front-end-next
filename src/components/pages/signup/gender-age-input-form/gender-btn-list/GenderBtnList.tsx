@@ -1,7 +1,5 @@
-import { GenderType } from '~/src/constants/types';
-import { SubTextBox } from '~/src/components/pages/signup/text-box';
-import { SelectBtn } from '~/src/components/pages/signup/buttons/Buttons.style';
-import { GenderBtnListContainer, GenderContainer } from './GenderBtnList.style';
+import { GenderType } from '@/constants/types';
+import * as style from './GenderBtnList.style';
 
 const GENDER_LIST: { type: GenderType; value: string }[] = [
   { type: 'm', value: '남' },
@@ -22,18 +20,18 @@ export const GenderBtnList = ({
   gender,
   onChangeSelect,
 }: GenderBtnListProps) => (
-  <GenderBtnListContainer>
-    <SubTextBox>성별</SubTextBox>
-    <GenderContainer>
+  <style.Wrapper>
+    <style.Title>성별</style.Title>
+    <style.Box>
       {GENDER_LIST.map(({ type, value }) => (
-        <SelectBtn
+        <style.Button
           onClick={() => onChangeSelect('gender', type)}
-          disable={gender === type}
+          isActivate={gender === type}
           key={type}
         >
           {value}
-        </SelectBtn>
+        </style.Button>
       ))}
-    </GenderContainer>
-  </GenderBtnListContainer>
+    </style.Box>
+  </style.Wrapper>
 );

@@ -1,12 +1,24 @@
 import { SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation, Scrollbar } from 'swiper';
-import {
-  Container,
-  StyledSwiper,
-  StyledSwiperSlides,
-  SwiperBlock,
-  SwiperContainer,
-} from './TimePicker.style';
+import * as style from './TimePicker.style';
+
+/**
+ * Time Picker form을 관리하기 위한 인터페이스
+ */
+export interface TimePickerProps {
+  /** AM/PM 출력을 위한 데이터 */
+  meridiem: string;
+  /** AM/PM에 대한 change event 함수 */
+  onChangeMeridiem: (text: string) => void;
+  /** 시간 출력을 위한 데이터 */
+  hour: number;
+  /** 시간에 대한 change event 함수 */
+  onChangeHour: (swiper: SwiperCore) => void;
+  /** 분 출력을 위한 데이터 */
+  min: number;
+  /** 분에 대한 change event 함수 */
+  onChangeMin: (swiper: SwiperCore) => void;
+}
 
 SwiperCore.use([Navigation, Scrollbar]);
 
@@ -19,71 +31,58 @@ const MIN_LIST = Array.from(Array(60).keys());
 
 const MeridiemPicker = ({
   meridiem,
-  setMeridiem,
-}: {
-  meridiem: string;
-  setMeridiem: (text: string) => void;
-}) => (
-  <Container>
-    <StyledSwiperSlides
-      onClick={() => setMeridiem('AM')}
-      disable={meridiem === 'AM'}
+  onChangeMeridiem,
+}: Pick<TimePickerProps, 'meridiem' | 'onChangeMeridiem'>) => (
+  <style.Box>
+    <style.Slide
+      onClick={() => onChangeMeridiem('AM')}
+      isActivate={meridiem === 'AM'}
       key="am"
     >
       AM
-    </StyledSwiperSlides>
-    <StyledSwiperSlides disable={false} key="-">
+    </style.Slide>
+    <style.Slide isActivate={false} key="-">
       ---
-    </StyledSwiperSlides>
-    <StyledSwiperSlides
-      onClick={() => setMeridiem('PM')}
-      disable={meridiem === 'PM'}
-      key="pm"
+    </style.Slide>
+    <style.Slide
+      onClick={() => onChangeMeridiem('PM')}
+      isActivate={meridiem === 'PM'}
+      key="AM"
     >
       PM
-    </StyledSwiperSlides>
-  </Container>
+    </style.Slide>
+  </style.Box>
 );
 
 const HourPicker = ({
   hour,
-  setHour,
-}: {
-  hour: number;
-  setHour: (num: number) => void;
-}) => (
-  <Container>
-    <StyledSwiper
+  onChangeHour,
+}: Pick<TimePickerProps, 'hour' | 'onChangeHour'>) => (
+  <style.Box>
+    <style.CustomSwiper
       direction="vertical"
       slidesPerView={3}
       mousewheel
       slideToClickedSlide
       centeredSlides
       loop
-      onSlideChange={(swiper) => {
-        setHour(swiper.realIndex + 1);
-      }}
+      onSlideChange={onChangeHour}
     >
       {HOUR_LIST.map((data) => (
         <SwiperSlide key={data}>
-          <StyledSwiperSlides disable={hour === data}>
-            {data}
-          </StyledSwiperSlides>
+          <style.Slide isActivate={hour === data}>{data}</style.Slide>
         </SwiperSlide>
       ))}
-    </StyledSwiper>
-  </Container>
+    </style.CustomSwiper>
+  </style.Box>
 );
 
 const MinPicker = ({
   min,
-  setMin,
-}: {
-  min: number;
-  setMin: (num: number) => void;
-}) => (
-  <Container>
-    <StyledSwiper
+  onChangeMin,
+}: Pick<TimePickerProps, 'min' | 'onChangeMin'>) => (
+  <style.Box>
+    <style.CustomSwiper
       direction="vertical"
       slidesPerView={3}
       autoHeight
@@ -91,49 +90,30 @@ const MinPicker = ({
       slideToClickedSlide
       centeredSlides
       loop
-      onSlideChange={(swiper) => {
-        setMin(swiper.realIndex);
-      }}
+      onSlideChange={onChangeMin}
     >
       {MIN_LIST.map((data) => (
         <SwiperSlide key={data}>
-          <StyledSwiperSlides disable={data === min}>{data}</StyledSwiperSlides>
+          <style.Slide isActivate={data === min}>{data}</style.Slide>
         </SwiperSlide>
       ))}
-    </StyledSwiper>
-  </Container>
+    </style.CustomSwiper>
+  </style.Box>
 );
 
-/**
- * Time Picker form을 관리하기 위한 인터페이스
- */
-export interface TimePickerProps {
-  /** AM/PM 출력을 위한 데이터 */
-  meridiem: string;
-  /** AM/PM에 대한 change event 함수 */
-  setMeridiem: (text: string) => void;
-  /** 시간 출력을 위한 데이터 */
-  hour: number;
-  /** 시간에 대한 change event 함수 */
-  setHour: (num: number) => void;
-  /** 분 출력을 위한 데이터 */
-  min: number;
-  /** 분에 대한 change event 함수 */
-  setMin: (num: number) => void;
-}
 export const TimePicker = ({
   meridiem,
   hour,
   min,
-  setMeridiem,
-  setHour,
-  setMin,
+  onChangeMeridiem,
+  onChangeHour,
+  onChangeMin,
 }: TimePickerProps) => (
-  <SwiperContainer>
-    <MeridiemPicker meridiem={meridiem} setMeridiem={setMeridiem} />
-    <SwiperBlock>:</SwiperBlock>
-    <HourPicker hour={hour} setHour={setHour} />
-    <SwiperBlock>:</SwiperBlock>
-    <MinPicker min={min} setMin={setMin} />
-  </SwiperContainer>
+  <style.Wrapper>
+    <MeridiemPicker meridiem={meridiem} onChangeMeridiem={onChangeMeridiem} />
+    <style.Text>:</style.Text>
+    <HourPicker hour={hour} onChangeHour={onChangeHour} />
+    <style.Text>:</style.Text>
+    <MinPicker min={min} onChangeMin={onChangeMin} />
+  </style.Wrapper>
 );

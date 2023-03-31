@@ -1,8 +1,19 @@
 import styled, { css } from 'styled-components';
-
 import { Swiper } from 'swiper/react';
 
-export const Container = styled.div`
+interface SlideProps {
+  isActivate: boolean;
+}
+
+export const Wrapper = styled.div`
+  width: 300px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const Box = styled.div`
   ${({ theme }) => {
     const { fonts } = theme;
     return css`
@@ -18,24 +29,14 @@ export const Container = styled.div`
     `;
   }}
 `;
-export const SwiperContainer = styled.div`
-  width: 300px;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-export const StyledSwiper = styled(Swiper)`
+export const CustomSwiper = styled(Swiper)`
   width: 60px;
   height: 65px;
 `;
 
-interface StyledWrapperProps {
-  disable: boolean;
-}
-export const StyledSwiperSlides = styled.div<StyledWrapperProps>`
-  ${({ theme, disable }) => {
+export const Slide = styled.div<Partial<SlideProps>>`
+  ${({ theme, isActivate }) => {
     const { colors } = theme;
     return css`
       height: 21px;
@@ -45,9 +46,9 @@ export const StyledSwiperSlides = styled.div<StyledWrapperProps>`
       justify-content: center;
       align-items: center;
 
-      color: ${disable && '#fff'};
+      color: ${isActivate ? colors.grayscale.white : colors.grayscale.gray300};
 
-      background: ${disable ? '#5A90FF' : 'fff'};
+      background: ${isActivate ? colors.primary.main : colors.grayscale.white};
       border-radius: 20px;
 
       cursor: pointer;
@@ -55,7 +56,7 @@ export const StyledSwiperSlides = styled.div<StyledWrapperProps>`
   }}
 `;
 
-export const SwiperBlock = styled.div`
+export const Text = styled.div`
   ${({ theme }) => {
     const { fonts, colors } = theme;
     return css`

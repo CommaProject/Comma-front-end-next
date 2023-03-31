@@ -1,15 +1,5 @@
-import { theme } from '@/styles/theme';
 import { ChangeEvent } from 'react';
-import NameInput from '~/src/components/pages/signup/inputs';
-import {
-  ExplainTextBox,
-  SubTextBox,
-} from '~/src/components/pages/signup/text-box';
-import {
-  CommonContainer,
-  CommonTextWrapper,
-} from '~/src/components/pages/signup/SignUpCommon.style';
-import { ExplainContainer } from './NameInputForm.style';
+import * as style from './NameInputForm.style';
 
 /**
  * 이름 입력 폼 인터페이스
@@ -21,18 +11,14 @@ interface NameInputFormProps {
   len: number;
 }
 export const NameInputForm = ({ onChange, len }: NameInputFormProps) => (
-  <CommonContainer>
-    <SubTextBox>안녕하세요,</SubTextBox>
+  <style.Wrapper>
+    <style.Text>안녕하세요,</style.Text>
     <div>
-      <CommonTextWrapper>
-        <NameInput maxLength={8} onChange={onChange} />
-        <SubTextBox>님</SubTextBox>
-      </CommonTextWrapper>
-      <ExplainContainer>
-        <ExplainTextBox
-          color={theme.colors.grayscale.gray300}
-        >{`(${len}/8)`}</ExplainTextBox>
-      </ExplainContainer>
+      <style.Box>
+        <style.Input maxLength={8} onChange={onChange} />
+        <style.Text>님</style.Text>
+      </style.Box>
+      <style.Length>{`(${len}/8)`}</style.Length>
     </div>
-  </CommonContainer>
+  </style.Wrapper>
 );

@@ -1,17 +1,17 @@
-import { Background, Container, Progress } from './ProgressBar.style';
+import * as style from './ProgressBar.style';
 
 /**
  * 상단바 관리를 위한 인터페이스
  */
 interface ProgressBarProps {
-  /** 상단바 파란 선 관리용 데이터 */
+  /** 상단바 파란 선 관리 0 ~ 100 */
   topBarState: number;
 }
 const ProgressBar = ({ topBarState }: ProgressBarProps) => (
-  <Container>
-    <Background />
-    <Progress percent={topBarState} />
-  </Container>
+  <style.Wrapper>
+    <style.Background />
+    <style.Progress percent={topBarState} />
+  </style.Wrapper>
 );
 
 export default ProgressBar;

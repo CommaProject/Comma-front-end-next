@@ -1,34 +1,27 @@
-import { theme } from '@/styles/theme';
-import {
-  ExplainTextBox,
-  SubTextBox,
-} from '~/src/components/pages/signup/text-box';
-import TimePicker from '~/src/components/common/time-picker';
+import TimePicker from '@/components/common/time-picker';
 import { TimePickerProps } from '@/components/common/time-picker/TimePicker';
-import { TextWrapper, TimePickerContainer } from './TimePickerForm.style';
+import * as style from './TimePickerForm.style';
 
 export const TimePickerForm = ({
   meridiem,
   hour,
   min,
-  setMeridiem,
-  setHour,
-  setMin,
+  onChangeMeridiem,
+  onChangeHour,
+  onChangeMin,
 }: TimePickerProps) => (
-  <TimePickerContainer>
-    <TextWrapper>
-      <SubTextBox>주로 음악을 듣는 시간대는 언제인가요?</SubTextBox>
-      <ExplainTextBox color={theme.colors.grayscale.gray300}>
-        하루에 한 번 음악을 추천해 드릴게요.
-      </ExplainTextBox>
-    </TextWrapper>
+  <style.Wrapper>
+    <style.Box>
+      <style.Title>주로 음악을 듣는 시간대는 언제인가요?</style.Title>
+      <style.Desc>하루에 한 번 음악을 추천해 드릴게요.</style.Desc>
+    </style.Box>
     <TimePicker
       meridiem={meridiem}
-      setMeridiem={setMeridiem}
+      onChangeMeridiem={onChangeMeridiem}
       hour={hour}
-      setHour={setHour}
+      onChangeHour={onChangeHour}
       min={min}
-      setMin={setMin}
+      onChangeMin={onChangeMin}
     />
-  </TimePickerContainer>
+  </style.Wrapper>
 );
