@@ -1,4 +1,16 @@
-import { AgeType, GenderType, TimeType } from './authTypes';
+import { AgeType, GenderType } from './authTypes';
+
+/**
+ * time-picker 정의를 위한 type
+ */
+export interface TimeType {
+  /** AM/PM */
+  meridiem: string;
+  /** 시간 1 ~ 12 */
+  hour: number;
+  /** 분 0 ~ 59 */
+  min: number;
+}
 
 /**
  * 회원가입시 필요한 데이터 타입
