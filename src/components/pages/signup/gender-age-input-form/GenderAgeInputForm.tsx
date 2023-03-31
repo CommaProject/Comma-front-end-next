@@ -1,12 +1,6 @@
-import NameInput from '~/src/components/pages/signup/inputs';
-import { SubTextBox } from '~/src/components/pages/signup/text-box';
-import AgeBtnList from '~/src/components/pages/signup/age-btn-list';
-import GenderBtnList from '~/src/components/pages/signup/gender-btn-list';
-import {
-  CommonContainer,
-  CommonTextWrapper,
-} from '~/src/components/pages/signup/SignUpCommon.style';
-import { FormBox } from './GenderAgeInputForm.style';
+import AgeBtnList from '~/src/components/pages/signup/gender-age-input-form/age-btn-list';
+import GenderBtnList from '~/src/components/pages/signup/gender-age-input-form/gender-btn-list';
+import * as style from './GenderAgeInputForm.style';
 
 /**
  * 성별/연령 form 관리를 위한 인터페이스
@@ -27,15 +21,15 @@ export const GenderAgeInputForm = ({
   age,
   onChageSelect,
 }: GenderAgeInputFormProps) => (
-  <FormBox>
-    <CommonContainer>
-      <CommonTextWrapper>
-        <NameInput disabled maxLength={8} value={name} />
-        <SubTextBox>님</SubTextBox>
-      </CommonTextWrapper>
-      <SubTextBox>반갑습니다</SubTextBox>
-    </CommonContainer>
+  <style.Wrapper>
+    <style.Box>
+      <style.Text>
+        <style.Input disabled maxLength={8} value={name} />
+        <style.Desc>님</style.Desc>
+      </style.Text>
+      <style.Desc>반갑습니다</style.Desc>
+    </style.Box>
     <GenderBtnList gender={gender} onChangeSelect={onChageSelect} />
     <AgeBtnList age={age} onChangeSelect={onChageSelect} />
-  </FormBox>
+  </style.Wrapper>
 );

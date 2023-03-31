@@ -1,6 +1,6 @@
 import DeactivateArrow from '@/assets/images/deactivateArrow.svg';
 import ActivateArrow from '@/assets/images/activateArrow.svg';
-import { NavBtnStyle } from './NavBtn.style';
+import * as style from './NavBtn.style';
 
 /**
  * 회원가입 페이지 Nav button의 상태와, 이벤트 관련 인터페이스
@@ -12,11 +12,11 @@ interface NavBtnProps {
   onClick: () => void;
 }
 export const NavBtn = ({ isActivate, onClick }: NavBtnProps) => (
-  <NavBtnStyle
+  <style.Wrapper
     onClick={() => {
       if (isActivate) onClick();
     }}
   >
     {isActivate ? <ActivateArrow /> : <DeactivateArrow />}
-  </NavBtnStyle>
+  </style.Wrapper>
 );

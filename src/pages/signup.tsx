@@ -1,37 +1,9 @@
 import { ChangeEvent, useCallback, useState } from 'react';
 import { Swiper as SwiperClass } from 'swiper/types';
-import 'swiper/swiper-bundle.min.css';
-import 'swiper/swiper.min.css';
-import TopBar from '~/src/components/pages/signup/top-bar';
-import NavBtn from '~/src/components/pages/signup/buttons/nav-btn';
-import NameInputForm from '~/src/components/pages/signup/name-input-form';
-import GenderAgeInputForm from '~/src/components/pages/signup/gender-age-input-form';
-import TimePickerForm from '~/src/components/pages/signup/time-picker-form';
-import {
-  SignUpContainer,
-  SignUpWrapper,
-  StyledSlide,
-  StyledSwiper,
-} from '~/src/components/pages/signup/SignUpCommon.style';
-import { AgeType, GenderType, TimeType } from '@/constants/types/authTypes';
+import SwiperCore from 'swiper';
+import SignUpTemplate from '@/components/template/signup';
+import { SignUpStateType } from '@/constants/types';
 
-/**
- * 회원가입시 필요한 데이터
- */
-export interface SignUpStateType {
-  /** 이름 */
-  name: string;
-  /** 성별 남/여/x */
-  gender: GenderType;
-  /** 연령 20대 미만/20대/30대/40대/50대 이상/x */
-  age: AgeType;
-  /** 아티스트 선택 리스트 */
-  artist: string[];
-  /** 장르 선택 리스트 */
-  genre: string[];
-  /** 오전/오후 - 시간- 분 */
-  time: TimeType;
-}
 const SignUp = () => {
   const [signUpState, setSignUpState] = useState<SignUpStateType>({
     name: '',
@@ -43,7 +15,7 @@ const SignUp = () => {
   });
   const [swiperRef, setSwiperRef] = useState<SwiperClass>();
   const [slideStep, setSlideStep] = useState(0);
-  const [topBarState, setTopBarState] = useState(0);
+  const [topBarState, setTopBarState] = useState(20);
 
   const handleNext = useCallback(() => {
     swiperRef?.slideNext();
@@ -51,15 +23,39 @@ const SignUp = () => {
   const handlePrev = useCallback(() => {
     swiperRef?.slidePrev();
   }, [swiperRef]);
-
-  const handleNameInput = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
     setSignUpState({ ...signUpState, name: e.target.value });
   };
   const handleSelect = (name: string, value: string) => {
     setSignUpState({ ...signUpState, [name]: value });
   };
+  const handleNavBtn = () => {
+    setTopBarState(topBarState + 20);
+    handleNext();
+  };
+  const handleSwiper = (swiper: SwiperClass) => {
+    setSlideStep(swiper.realIndex);
+  };
+  const handleMeridiem = (text: string) => {
+    setSignUpState({
+      ...signUpState,
+      time: { ...signUpState.time, meridiem: text },
+    });
+  };
+  const handleHour = (swiper: SwiperCore) => {
+    setSignUpState({
+      ...signUpState,
+      time: { ...signUpState.time, hour: swiper.realIndex + 1 },
+    });
+  };
+  const handleMin = (swiper: SwiperCore) => {
+    setSignUpState({
+      ...signUpState,
+      time: { ...signUpState.time, min: swiper.realIndex },
+    });
+  };
 
-  const useCheckSignupStep = () => {
+  const checkSignupStep = () => {
     switch (slideStep) {
       case 0: // 이름
         return signUpState.name.length >= 1;
@@ -75,81 +71,22 @@ const SignUp = () => {
   };
 
   return (
-    <SignUpContainer>
-      <TopBar
-        step={slideStep}
-        topBarState={topBarState}
-        onClickNext={handleNext}
-        onClickPrev={handlePrev}
-      />
-      <SignUpWrapper>
-        <StyledSwiper
-          onSwiper={setSwiperRef}
-          slidesPerView={1}
-          centeredSlides
-          noSwiping
-          mousewheel={false}
-          centerInsufficientSlides
-          allowTouchMove={false}
-          onSlideChange={(swiper) => {
-            setSlideStep(swiper.realIndex);
-          }}
-        >
-          <StyledSlide>
-            <NameInputForm
-              onChange={handleNameInput}
-              len={signUpState.name.length}
-            />
-          </StyledSlide>
-          <StyledSlide>
-            <GenderAgeInputForm
-              name={signUpState.name}
-              gender={signUpState.gender}
-              age={signUpState.age}
-              onChageSelect={handleSelect}
-            />
-          </StyledSlide>
-          <StyledSlide>
-            <div>category</div>
-          </StyledSlide>
-          <StyledSlide>
-            <TimePickerForm
-              meridiem={signUpState.time.meridiem}
-              setMeridiem={(text: string) =>
-                setSignUpState({
-                  ...signUpState,
-                  time: { ...signUpState.time, meridiem: text },
-                })
-              }
-              hour={signUpState.time.hour}
-              setHour={(num: number) =>
-                setSignUpState({
-                  ...signUpState,
-                  time: { ...signUpState.time, hour: num },
-                })
-              }
-              min={signUpState.time.min}
-              setMin={(num: number) =>
-                setSignUpState({
-                  ...signUpState,
-                  time: { ...signUpState.time, min: num },
-                })
-              }
-            />
-          </StyledSlide>
-          <StyledSlide>
-            <div>success</div>
-          </StyledSlide>
-        </StyledSwiper>
-        <NavBtn
-          isActivate={useCheckSignupStep()}
-          onClick={() => {
-            setTopBarState(topBarState + 20);
-            handleNext();
-          }}
-        />
-      </SignUpWrapper>
-    </SignUpContainer>
+    <SignUpTemplate
+      slideStep={slideStep}
+      topBarState={topBarState}
+      signUpState={signUpState}
+      onClickNext={handleNext}
+      onClickPrev={handlePrev}
+      setSwiperRef={setSwiperRef}
+      onSlideChange={handleSwiper}
+      onChageNameInput={handleInput}
+      onChangeSelect={handleSelect}
+      checkSignupStep={checkSignupStep}
+      onClickNavBtn={handleNavBtn}
+      onChangeMeridiem={handleMeridiem}
+      onChangeHour={handleHour}
+      onChangeMin={handleMin}
+    />
   );
 };
 

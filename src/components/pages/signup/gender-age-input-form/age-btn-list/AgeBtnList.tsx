@@ -1,15 +1,6 @@
 import { AgeType } from '@/constants/types/authTypes';
 import { theme } from '@/styles/theme';
-import { SelectBtn } from '~/src/components/pages/signup/buttons/Buttons.style';
-import {
-  ExplainTextBox,
-  SubTextBox,
-} from '~/src/components/pages/signup/text-box';
-import {
-  AgeBtnListContainer,
-  AgeContainer,
-  BtnWrapper,
-} from './AgeBtnList.style';
+import * as style from './AgeBtnList.style';
 
 const AGE_LIST: { type: AgeType; value: string; text: string }[] = [
   { type: '19', value: '20↓', text: '20대 미만' },
@@ -30,18 +21,19 @@ interface AgeBtnListProps {
   onChangeSelect: (name: string, value: string) => void;
 }
 export const AgeBtnList = ({ age, onChangeSelect }: AgeBtnListProps) => (
-  <AgeBtnListContainer>
-    <SubTextBox>연령</SubTextBox>
-    <AgeContainer>
+  <style.Wrapper>
+    <style.Title>연령</style.Title>
+    <style.List>
       {AGE_LIST.map(({ type, value, text }) => (
-        <BtnWrapper key={type}>
-          <SelectBtn
+        <style.Box key={type}>
+          <style.Button
             onClick={() => onChangeSelect('age', type)}
-            disable={age === type}
+            isActivate={age === type}
           >
             {value}
-          </SelectBtn>
-          <ExplainTextBox
+          </style.Button>
+          <style.Desc
+            isActivate={age === type}
             color={
               age === type
                 ? theme.colors.grayscale.dark
@@ -49,9 +41,9 @@ export const AgeBtnList = ({ age, onChangeSelect }: AgeBtnListProps) => (
             }
           >
             {text === ' ' ? <p /> : text}
-          </ExplainTextBox>
-        </BtnWrapper>
+          </style.Desc>
+        </style.Box>
       ))}
-    </AgeContainer>
-  </AgeBtnListContainer>
+    </style.List>
+  </style.Wrapper>
 );
