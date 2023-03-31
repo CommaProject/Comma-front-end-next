@@ -12,9 +12,6 @@ const colors = {
     main: '#5A90FF',
     caption: '#FF6442',
   },
-  common: {
-    black: '#000',
-  },
 };
 
 const fontWeight = {
