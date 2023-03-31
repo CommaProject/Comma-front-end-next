@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-interface StyleProps {
+interface ButtonStateProps {
   isActivate: boolean;
 }
 
@@ -45,7 +45,7 @@ export const Title = styled.div`
   }}
 `;
 
-export const Desc = styled.div<Partial<StyleProps>>`
+export const Desc = styled.div<ButtonStateProps>`
   ${({ theme, isActivate }) => {
     const { fonts } = theme;
     return css`
@@ -61,7 +61,7 @@ export const Desc = styled.div<Partial<StyleProps>>`
   }}
 `;
 
-export const Button = styled.button<Partial<StyleProps>>`
+export const Button = styled.button<ButtonStateProps>`
   ${({ theme, isActivate }) => {
     const { fonts, colors } = theme;
     return css`
@@ -78,8 +78,10 @@ export const Button = styled.button<Partial<StyleProps>>`
 
       border-radius: 50%;
       border: 1px solid;
-      border-color: ${isActivate ? '#5A90FF' : '#9C9C9C'};
-      background: ${isActivate ? '#5A90FF' : 'fff'};
+      border-color: ${isActivate
+        ? colors.primary.main
+        : colors.grayscale.gray300};
+      background: ${isActivate ? colors.primary.main : colors.grayscale.white};
     `;
   }}
 `;

@@ -2,13 +2,18 @@ import { AgeType } from '@/constants/types/authTypes';
 import { theme } from '@/styles/theme';
 import * as style from './AgeBtnList.style';
 
-const AGE_LIST: { type: AgeType; value: string; text: string }[] = [
-  { type: '19', value: '20↓', text: '20대 미만' },
-  { type: '20', value: '20', text: '20대' },
-  { type: '30', value: '30', text: '30대' },
-  { type: '40', value: '40', text: '40대' },
-  { type: '50', value: '50↑', text: '50대 이상' },
-  { type: 'x', value: 'X', text: ' ' },
+interface AgeListType {
+  ageGroup: AgeType;
+  insideText: string;
+  outsideText: string;
+}
+const AGE_LIST: AgeListType[] = [
+  { ageGroup: '19', insideText: '20↓', outsideText: '20대 미만' },
+  { ageGroup: '20', insideText: '20', outsideText: '20대' },
+  { ageGroup: '30', insideText: '30', outsideText: '30대' },
+  { ageGroup: '40', insideText: '40', outsideText: '40대' },
+  { ageGroup: '50', insideText: '50↑', outsideText: '50대 이상' },
+  { ageGroup: 'x', insideText: 'X', outsideText: ' ' },
 ];
 
 /**
@@ -24,23 +29,23 @@ export const AgeBtnList = ({ age, onChangeSelect }: AgeBtnListProps) => (
   <style.Wrapper>
     <style.Title>연령</style.Title>
     <style.List>
-      {AGE_LIST.map(({ type, value, text }) => (
-        <style.Box key={type}>
+      {AGE_LIST.map(({ ageGroup, insideText, outsideText }) => (
+        <style.Box key={ageGroup}>
           <style.Button
-            onClick={() => onChangeSelect('age', type)}
-            isActivate={age === type}
+            onClick={() => onChangeSelect('age', ageGroup)}
+            isActivate={age === ageGroup}
           >
-            {value}
+            {insideText}
           </style.Button>
           <style.Desc
-            isActivate={age === type}
+            isActivate={age === ageGroup}
             color={
-              age === type
+              age === ageGroup
                 ? theme.colors.grayscale.dark
                 : theme.colors.grayscale.gray300
             }
           >
-            {text === ' ' ? <p /> : text}
+            {outsideText === ' ' ? <p /> : outsideText}
           </style.Desc>
         </style.Box>
       ))}

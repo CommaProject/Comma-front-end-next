@@ -1,5 +1,5 @@
-import AgeBtnList from '~/src/components/pages/signup/gender-age-input-form/age-btn-list';
-import GenderBtnList from '~/src/components/pages/signup/gender-age-input-form/gender-btn-list';
+import AgeBtnList from '@/components/pages/signup/gender-age-input-form/age-btn-list';
+import GenderBtnList from '@/components/pages/signup/gender-age-input-form/gender-btn-list';
 import * as style from './GenderAgeInputForm.style';
 
 /**

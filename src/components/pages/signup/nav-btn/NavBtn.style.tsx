@@ -5,4 +5,6 @@ export const Wrapper = styled.div`
   z-index: 1;
   bottom: 59px;
   left: 173px;
+
+  cursor: pointer;
 `;

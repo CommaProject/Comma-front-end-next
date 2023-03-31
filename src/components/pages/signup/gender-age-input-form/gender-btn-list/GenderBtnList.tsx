@@ -1,10 +1,14 @@
 import { GenderType } from '@/constants/types';
 import * as style from './GenderBtnList.style';
 
-const GENDER_LIST: { type: GenderType; value: string }[] = [
-  { type: 'm', value: '남' },
-  { type: 'f', value: '여' },
-  { type: 'x', value: 'X' },
+interface GenderListType {
+  genderGroup: GenderType;
+  insideText: string;
+}
+const GENDER_LIST: GenderListType[] = [
+  { genderGroup: 'm', insideText: '남' },
+  { genderGroup: 'f', insideText: '여' },
+  { genderGroup: 'x', insideText: 'X' },
 ];
 
 /**
@@ -23,13 +27,13 @@ export const GenderBtnList = ({
   <style.Wrapper>
     <style.Title>성별</style.Title>
     <style.Box>
-      {GENDER_LIST.map(({ type, value }) => (
+      {GENDER_LIST.map(({ genderGroup, insideText }) => (
         <style.Button
-          onClick={() => onChangeSelect('gender', type)}
-          isActivate={gender === type}
-          key={type}
+          onClick={() => onChangeSelect('gender', genderGroup)}
+          isActivate={gender === genderGroup}
+          key={genderGroup}
         >
-          {value}
+          {insideText}
         </style.Button>
       ))}
     </style.Box>

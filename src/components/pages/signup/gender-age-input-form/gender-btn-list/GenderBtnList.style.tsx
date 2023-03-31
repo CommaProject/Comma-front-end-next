@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-interface ButtonProps {
+interface ButtonStateProps {
   isActivate: boolean;
 }
 
@@ -33,7 +33,7 @@ export const Title = styled.h2`
   }}
 `;
 
-export const Button = styled.button<Partial<ButtonProps>>`
+export const Button = styled.button<ButtonStateProps>`
   ${({ theme, isActivate }) => {
     const { fonts, colors } = theme;
     return css`

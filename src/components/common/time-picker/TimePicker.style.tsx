@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { Swiper } from 'swiper/react';
 
-interface SlideProps {
+interface SlideStateProps {
   isActivate: boolean;
 }
 
@@ -35,7 +35,7 @@ export const CustomSwiper = styled(Swiper)`
   height: 65px;
 `;
 
-export const Slide = styled.div<Partial<SlideProps>>`
+export const Slide = styled.div<SlideStateProps>`
   ${({ theme, isActivate }) => {
     const { colors } = theme;
     return css`

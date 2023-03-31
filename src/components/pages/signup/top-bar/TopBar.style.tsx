@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-interface ButtonProps {
+interface ButtonStateProps {
   isNext: boolean;
 }
 
@@ -21,9 +21,9 @@ export const Box = styled.div`
   justify-content: space-between;
 `;
 
-export const Button = styled.button<Partial<ButtonProps>>`
+export const Button = styled.button<ButtonStateProps>`
   ${({ theme, isNext }) => {
-    const { fonts, colors } = theme;
+    const { colors } = theme;
     return css`
       width: 45px;
       height: 50px;
