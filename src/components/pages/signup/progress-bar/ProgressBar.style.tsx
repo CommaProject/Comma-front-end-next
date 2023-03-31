@@ -1,9 +1,5 @@
 import styled, { css } from 'styled-components';
 
-interface ProgressProps {
-  percent: number;
-}
-
 export const Wrapper = styled.div`
   width: 100%;
   height: 4px;
@@ -11,7 +7,7 @@ export const Wrapper = styled.div`
   position: relative;
 `;
 
-export const Background = styled.div`
+export const Progress = styled.progress`
   ${({ theme }) => {
     const { colors } = theme;
     return css`
@@ -23,26 +19,15 @@ export const Background = styled.div`
       top: 0;
 
       border-radius: 3px;
-      background: ${colors.grayscale.dark}1a;
-    `;
-  }}
-`;
 
-export const Progress = styled.div<Partial<ProgressProps>>`
-  ${({ theme, percent }) => {
-    const { colors } = theme;
-    return css`
-      width: ${percent}%;
-      height: 100%;
-
-      position: absolute;
-      left: 0;
-      top: 0;
-
-      border-radius: 3px;
-      background: ${colors.primary.main};
-
-      transition: width 500ms ease-in-out;
+      ::-webkit-progress-value {
+        background: ${colors.primary.main};
+        transition: width 500ms ease-in-out;
+      }
+      ::-webkit-progress-bar {
+        background-color: ${colors.grayscale.gray100};
+        width: 100%;
+      }
     `;
   }}
 `;

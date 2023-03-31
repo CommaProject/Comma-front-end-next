@@ -9,8 +9,7 @@ interface ProgressBarProps {
 }
 const ProgressBar = ({ topBarState }: ProgressBarProps) => (
   <style.Wrapper>
-    <style.Background />
-    <style.Progress percent={topBarState} />
+    <style.Progress value={topBarState} max={100} />
   </style.Wrapper>
 );
 
