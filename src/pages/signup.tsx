@@ -4,6 +4,14 @@ import SwiperCore from 'swiper';
 import SignUpTemplate from '@/components/template/signup';
 import { SignUpStateType } from '@/constants/types';
 
+export async function getStaticProps() {
+  return {
+    props: {
+      isNavigationVisible: false,
+    },
+  };
+}
+
 const SignUp = () => {
   const [signUpState, setSignUpState] = useState<SignUpStateType>({
     name: '',

@@ -6,12 +6,13 @@ import * as style from './PageLayout.style';
 
 type PageLayoutProps = {
   children: React.ReactNode;
+  isNavigationVisible: boolean;
 };
 
-const PageLayout = ({ children }: PageLayoutProps) => (
+const PageLayout = ({ children, isNavigationVisible }: PageLayoutProps) => (
   <style.Wrapper>
-    <div className="content">{children}</div>
-    <Navigation />
+    <section className="content">{children}</section>
+    {isNavigationVisible && <Navigation />}
   </style.Wrapper>
 );
 

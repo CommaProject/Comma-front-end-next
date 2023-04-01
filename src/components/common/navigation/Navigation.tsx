@@ -22,29 +22,40 @@ const Navigation = () => {
   const NavigationIcon = [
     {
       path: '',
-      notSelected: <NavigationHomeSvg onClick={() => moveToPage('/')} />,
-      selected: <NavigationHomeSelected />,
+      notSelected: (
+        <NavigationHomeSvg key="Home" onClick={() => moveToPage('/')} />
+      ),
+      selected: <NavigationHomeSelected key="Home" />,
     },
     {
       path: 'playlist',
       notSelected: (
-        <NavigationPlaylistSvg onClick={() => moveToPage('/playlist')} />
+        <NavigationPlaylistSvg
+          key="Playlist"
+          onClick={() => moveToPage('/playlist')}
+        />
       ),
-      selected: <NavigationPlaylistSelected />,
+      selected: <NavigationPlaylistSelected key="Playlist" />,
     },
     {
       path: 'search',
       notSelected: (
-        <NavigationSearchSvg onClick={() => moveToPage('/search')} />
+        <NavigationSearchSvg
+          key="Search"
+          onClick={() => moveToPage('/search')}
+        />
       ),
-      selected: <NavigationSearchSelected />,
+      selected: <NavigationSearchSelected key="Search" />,
     },
     {
       path: 'profile',
       notSelected: (
-        <NavigationProfileSvg onClick={() => moveToPage('/profile')} />
+        <NavigationProfileSvg
+          key="Profile"
+          onClick={() => moveToPage('/profile')}
+        />
       ),
-      selected: <NavigationProfileSelected />,
+      selected: <NavigationProfileSelected key="Profile" />,
     },
   ];
 

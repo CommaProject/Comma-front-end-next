@@ -13,7 +13,11 @@ import PageHead from '@/components/layout/page-head';
 import PageLayout from '@/components/layout/page-layout';
 import ModalPortal from '@/components/common/modal-portal';
 
-const MyApp = ({ Component, pageProps }: AppProps) => {
+interface InitializeAppProps {
+  isNavigationVisible: boolean;
+}
+
+const MyApp = ({ Component, pageProps }: AppProps<InitializeAppProps>) => {
   const [queryClient] = useState(
     () =>
       new QueryClient({
@@ -25,6 +29,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         },
       }),
   );
+  const { isNavigationVisible = true } = pageProps;
   return (
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
@@ -33,7 +38,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         <ThemeProvider theme={theme}>
           <PageHead />
           <ModalPortal />
-          <PageLayout>
+          <PageLayout isNavigationVisible={isNavigationVisible}>
             {/* eslint-disable react/jsx-props-no-spreading */}
             <Component {...pageProps} />
           </PageLayout>
