@@ -1,4 +1,4 @@
-import type { DefaultTheme } from 'styled-components';
+import { DefaultTheme } from 'styled-components';
 
 const colors = {
   grayscale: {
@@ -20,19 +20,14 @@ const fontWeight = {
   bold: 700,
 };
 
-// FIXME: 디자인 시스템 적용 방식 변경 필요
-const fontSize = {
-  sm: '14px',
-  base: '16px',
-  lg: '24px',
-  xl: '32px',
-  xxl: '48px',
-  title: '96px',
+const fontFamily = {
+  noto: 'Noto Sans KR',
+  pre: 'Pretendard',
 };
 
 const fonts = {
   weight: fontWeight,
-  size: fontSize,
+  family: fontFamily,
 };
 
 const devices = {

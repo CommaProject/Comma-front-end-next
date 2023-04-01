@@ -13,3 +13,19 @@
   font-weight: 400;
   src: url('../../assets/fonts/Pretendard-Regular.woff') format('woff');
 }
+
+@font-face {
+  font-family: Noto Sans KR;
+  font-weight: 700;
+  src: url('../../assets/fonts/NotoSans-Bold.woff') format('woff');
+}
+@font-face {
+  font-family: Noto Sans KR;
+  font-weight: 500;
+  src: url('../../assets/fonts/NotoSans-Medium.woff') format('woff');
+}
+@font-face {
+  font-family: Noto Sans KR;
+  font-weight: 400;
+  src: url('../../assets/fonts/NotoSans-Regular.woff') format('woff');
+}

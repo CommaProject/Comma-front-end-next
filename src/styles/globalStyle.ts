@@ -3,12 +3,10 @@ import { createGlobalStyle } from 'styled-components';
 export const GlobalStyle = createGlobalStyle`
     html,
     body {
-    width: 1440px;
+    max-width: 390px;
     padding: 0;
     margin: 0px auto;
-    font-size: 62.5%;
     -webkit-text-size-adjust: none;
-    min-width: 425px;
     }
 
     a {
