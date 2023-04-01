@@ -1,5 +1,4 @@
 import { atom } from 'jotai';
-
 import { ModalStateType, modalStateAtom } from './atoms';
 
 export const handleModalAtom = atom(
