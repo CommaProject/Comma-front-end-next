@@ -3,6 +3,14 @@ import LoginTemplate from '@/components/template/login';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 
+export async function getStaticProps() {
+  return {
+    props: {
+      isNavigationVisible: false,
+    },
+  };
+}
+
 const Login = () => {
   const router = useRouter();
 
