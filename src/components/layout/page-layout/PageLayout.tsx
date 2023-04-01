@@ -11,7 +11,7 @@ type PageLayoutProps = {
 
 const PageLayout = ({ children, isNavigationVisible }: PageLayoutProps) => (
   <style.Wrapper>
-    <div className="content">{children}</div>
+    <section className="content">{children}</section>
     {isNavigationVisible && <Navigation />}
   </style.Wrapper>
 );
