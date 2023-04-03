@@ -12,6 +12,9 @@ export const Wrapper = styled.div`
   flex-direction: column;
   justify-content: end;
   align-items: flex-end;
+
+  position: fixed;
+  z-index: 2;
 `;
 
 export const Box = styled.div`

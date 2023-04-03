@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 export const Wrapper = styled.div`
-  height: 170px;
+  height: 147px;
 
   display: flex;
   flex-direction: column;
@@ -9,7 +9,7 @@ export const Wrapper = styled.div`
 `;
 
 export const Box = styled.div`
-  height: 50px;
+  height: 60px;
 
   display: flex;
   flex-direction: column;
