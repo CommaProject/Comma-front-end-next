@@ -23,7 +23,7 @@ const SignUp = () => {
   });
   const [swiperRef, setSwiperRef] = useState<SwiperClass>();
   const [slideStep, setSlideStep] = useState(0);
-  const [topBarState, setTopBarState] = useState(20);
+  const [categoryTypeState, setcategoryTypeState] = useState('artist');
 
   const handleNext = useCallback(() => {
     swiperRef?.slideNext();
@@ -31,6 +31,7 @@ const SignUp = () => {
   const handlePrev = useCallback(() => {
     swiperRef?.slidePrev();
   }, [swiperRef]);
+
   const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
     setSignUpState({ ...signUpState, name: e.target.value });
   };
@@ -38,16 +39,15 @@ const SignUp = () => {
     setSignUpState({ ...signUpState, [name]: value });
   };
   const handleNavBtn = () => {
-    setTopBarState(topBarState + 20);
     handleNext();
   };
   const handleSwiper = (swiper: SwiperClass) => {
     setSlideStep(swiper.realIndex);
   };
-  const handleMeridiem = (text: string) => {
+  const handleMeridiem = (meridiem: string) => {
     setSignUpState({
       ...signUpState,
-      time: { ...signUpState.time, meridiem: text },
+      time: { ...signUpState.time, meridiem },
     });
   };
   const handleHour = (swiper: SwiperCore) => {
@@ -62,6 +62,15 @@ const SignUp = () => {
       time: { ...signUpState.time, min: swiper.realIndex },
     });
   };
+  const handleCategory = (category: string) => {
+    setcategoryTypeState(category);
+  };
+  const handleArtistSelect = (artist: string) => {
+    setSignUpState({ ...signUpState, artist: [...signUpState.artist, artist] });
+  };
+  const handleGenreSelect = (genre: string) => {
+    setSignUpState({ ...signUpState, genre: [...signUpState.genre, genre] });
+  };
 
   const checkSignupStep = () => {
     switch (slideStep) {
@@ -70,7 +79,7 @@ const SignUp = () => {
       case 1: // 성별 연령
         return signUpState.gender !== 'x' && signUpState.age !== 'x';
       case 2: // 카테고리
-        return true;
+        return signUpState.artist.length >= 3 && signUpState.genre.length >= 3;
       case 3: // 시간
         return true;
       default:
@@ -81,7 +90,6 @@ const SignUp = () => {
   return (
     <SignUpTemplate
       slideStep={slideStep}
-      topBarState={topBarState}
       signUpState={signUpState}
       onClickNext={handleNext}
       onClickPrev={handlePrev}
@@ -94,6 +102,10 @@ const SignUp = () => {
       onChangeMeridiem={handleMeridiem}
       onChangeHour={handleHour}
       onChangeMin={handleMin}
+      categoryTypeState={categoryTypeState}
+      onClickCategory={handleCategory}
+      onClickGenre={handleGenreSelect}
+      onClickArtist={handleArtistSelect}
     />
   );
 };

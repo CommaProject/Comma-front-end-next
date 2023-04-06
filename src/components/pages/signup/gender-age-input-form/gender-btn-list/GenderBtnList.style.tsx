@@ -5,7 +5,8 @@ interface ButtonStateProps {
 }
 
 export const Wrapper = styled.div`
-  width: 170px;
+  width: 162px;
+  height: 90px;
 
   display: flex;
   justify-content: space-around;
@@ -14,8 +15,7 @@ export const Wrapper = styled.div`
 `;
 
 export const Box = styled.div`
-  width: 170px;
-  height: 80px;
+  width: 162px;
 
   display: flex;
   justify-content: space-around;
@@ -26,6 +26,9 @@ export const Title = styled.h2`
   ${({ theme }) => {
     const { fonts } = theme;
     return css`
+      height: 17px;
+      width: 32px;
+
       text-align: center;
       font-size: 17px;
       font-weight: ${fonts.weight.bold};

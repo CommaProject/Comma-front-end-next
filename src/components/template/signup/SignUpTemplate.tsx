@@ -10,10 +10,11 @@ import TimePickerForm from '@/components/pages/signup/time-picker-form';
 import TopBar from '@/components/pages/signup/top-bar';
 import { SignUpStateType } from '@/constants/types';
 import * as style from './SignUpTemplate.style';
+import CategoryForm from '@/components/pages/signup/category-form';
+import SuccessBox from '@/components/pages/signup/success-box';
 
 interface SignUpTemplateProps {
   slideStep: number;
-  topBarState: number;
   signUpState: SignUpStateType;
   onClickNext: () => void;
   onClickPrev: () => void;
@@ -26,10 +27,13 @@ interface SignUpTemplateProps {
   onChangeMeridiem: (text: string) => void;
   onChangeHour: (swiper: SwiperCore) => void;
   onChangeMin: (swiper: SwiperCore) => void;
+  categoryTypeState: string;
+  onClickCategory: (category: string) => void;
+  onClickGenre: (genre: string) => void;
+  onClickArtist: (artist: string) => void;
 }
 const SignUpTemplate = ({
   slideStep,
-  topBarState,
   signUpState,
   onClickNext,
   onClickPrev,
@@ -42,13 +46,17 @@ const SignUpTemplate = ({
   onChangeMeridiem,
   onChangeHour,
   onChangeMin,
+  categoryTypeState,
+  onClickCategory,
+  onClickGenre,
+  onClickArtist,
 }: SignUpTemplateProps) => (
   <style.Wrapper>
     <TopBar
       step={slideStep}
-      topBarState={topBarState}
       onClickNext={onClickNext}
       onClickPrev={onClickPrev}
+      isActivate={checkSignupStep()}
     />
     <style.Box>
       <style.CustomSwiper
@@ -76,7 +84,12 @@ const SignUpTemplate = ({
           />
         </style.Slide>
         <style.Slide>
-          <div>category</div>
+          <CategoryForm
+            categoryTypeState={categoryTypeState}
+            onClickCategory={onClickCategory}
+            onClickGenre={onClickGenre}
+            onClickArtist={onClickArtist}
+          />
         </style.Slide>
         <style.Slide>
           <TimePickerForm
@@ -89,7 +102,7 @@ const SignUpTemplate = ({
           />
         </style.Slide>
         <style.Slide>
-          <div>success</div>
+          <SuccessBox />
         </style.Slide>
       </style.CustomSwiper>
       <NavBtn isActivate={checkSignupStep()} onClick={onClickNavBtn} />
