@@ -6,10 +6,10 @@ import * as style from '@/components/pages/login/find-link-box/FindLinkBox.style
  */
 export const FindLinkBox = () => (
   <style.Wrapper>
-    <Link className="findLink" href="">
+    <Link className="findLink" href="/">
       아이디 찾기
     </Link>
-    <Link className="findLink" href="">
+    <Link className="findLink" href="/">
       비밀번호 찾기
     </Link>
     <style.Box>
