@@ -77,11 +77,14 @@ export const Button = styled.button<ButtonStateProps>`
       color: ${isActivate ? colors.grayscale.white : colors.grayscale.gray300};
 
       border-radius: 50%;
-      border: 1px solid;
-      border-color: ${isActivate
-        ? colors.primary.main
-        : colors.grayscale.gray300};
+      border: 1px solid ${colors.grayscale.gray300};
+      border-width: 1;
       background: ${isActivate ? colors.primary.main : colors.grayscale.white};
+
+      &:focus {
+        border: 1px solid
+          ${isActivate ? colors.primary.main : colors.grayscale.gray300};
+      }
     `;
   }}
 `;
