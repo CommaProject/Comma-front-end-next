@@ -25,9 +25,6 @@ export const Wrapper = styled.div`
   }}
 `;
 
-export const Background = styled.div`
-  width: 50%;
-`;
 export const Box = styled.div<BoxStateProps>`
   ${({ theme, isActivate }) => {
     const { colors } = theme;
