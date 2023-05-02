@@ -1,6 +1,7 @@
 import * as style from './StartEndSelector.style';
 
 interface StartEndSelectorProps {
+  isStartTime: boolean;
   startHour: number;
   startMin: number;
   doneHour: number;
@@ -8,6 +9,7 @@ interface StartEndSelectorProps {
   onChangeIsStart: (isStart: boolean) => void;
 }
 export const StartEndSelector = ({
+  isStartTime,
   startHour,
   startMin,
   doneHour,
@@ -16,6 +18,7 @@ export const StartEndSelector = ({
 }: StartEndSelectorProps) => (
   <style.Wrapper>
     <style.Box
+      isActivate={isStartTime}
       onClick={() => {
         onChangeIsStart(true);
       }}
@@ -24,6 +27,7 @@ export const StartEndSelector = ({
       <style.Time>{`${startHour}:${startMin}`}</style.Time>
     </style.Box>
     <style.Box
+      isActivate={!isStartTime}
       onClick={() => {
         onChangeIsStart(false);
       }}

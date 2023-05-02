@@ -7,9 +7,9 @@ interface ButtonStateProps {
 export const Wrapper = styled.div`
   width: 100%;
   height: 92px;
+  top: 0;
 
   position: sticky;
-  top: 0;
   display: flex;
   justify-content: space-between;
   align-items: end;

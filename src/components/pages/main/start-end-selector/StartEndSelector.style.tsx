@@ -1,5 +1,9 @@
 import styled, { css } from 'styled-components';
 
+interface BoxStateProps {
+  isActivate: boolean;
+}
+
 export const Wrapper = styled.div`
   ${({ theme }) => {
     const { colors, fonts } = theme;
@@ -21,17 +25,34 @@ export const Wrapper = styled.div`
   }}
 `;
 
-export const Box = styled.div`
-  width: 79px;
-  height: 50px;
+export const Background = styled.div`
+  width: 50%;
+`;
+export const Box = styled.div<BoxStateProps>`
+  ${({ theme, isActivate }) => {
+    const { colors } = theme;
+    return css`
+      width: 50%;
+      height: 100%;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      color: ${isActivate ? colors.grayscale.white : colors.primary.main};
+
+      border-radius: 50px;
+      background-color: ${isActivate
+        ? colors.primary.main
+        : colors.grayscale.white};
+    `;
+  }}
 `;
 
 export const Head = styled.div`
+  padding-bottom: 12px;
+
   font-size: 14px;
 `;
 

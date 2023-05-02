@@ -38,6 +38,7 @@ export const ConfigTemplate = ({
     <Header onClickNext={() => {}} onClickPrev={() => {}} />
     <style.Box>
       <StartEndSelector
+        isStartTime={isStartTime}
         startHour={
           configState.startTime.hour +
           (configState.startTime.meridiem === 'PM' ? 12 : 0)
