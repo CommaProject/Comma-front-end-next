@@ -13,6 +13,7 @@ export const Wrapper = styled.div`
   margin-top: 55px;
 
   display: inline-block;
+  flex-direction: row-reverse;
   position: relative;
 `;
 

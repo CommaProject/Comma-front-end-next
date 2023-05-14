@@ -1,74 +1,37 @@
-import * as style from './CategoryForm.style';
+import { MutableRefObject, useEffect, useRef, useState } from 'react';
 import CategoryBtnList from './category-btn-list';
 
-const ARTIST_LIST = [
-  'NCT DREAM',
-  'NewJeans',
-  '지코(ZICO)',
-  'IVE',
-  'NCT DREAM',
-  '(여자)아이들',
-  'LE SSERAFIM',
-  '윤하',
-  'NCT DREAM',
-  '(여자)아이들',
-  'LE SSERAFIM',
-  '윤하',
-  'NCT DREAM',
-  '(여자)아이들',
-  'LE SSERAFIM',
-  '윤하',
-  'NCT DREAM',
-  '(여자)아이들',
-  'LE SSERAFIM',
-  '윤하',
-  'NCT DREAM',
-  '(여자)아이들',
-  'LE SSERAFIM',
-  '윤하',
-];
-
-const GENRE_LIST = [
-  'POP',
-  'LO-fi',
-  'CLASSIC',
-  'INDIE',
-  'FOLK',
-  'TROT',
-  'ROCK',
-  'DISCO',
-  'POP',
-  'LO-fi',
-  'CLASSIC',
-  'INDIE',
-  'FOLK',
-  'TROT',
-  'ROCK',
-  'DISCO',
-  'POP',
-  'LO-fi',
-  'CLASSIC',
-  'INDIE',
-  'FOLK',
-  'TROT',
-  'ROCK',
-  'DISCO',
-];
+import * as style from './CategoryForm.style';
 
 interface CategoryFormProps {
   categoryTypeState: string;
+  artists: string[];
+  genres: string[];
+  artistBox: any;
+  leftBox: any;
+  selectedArtists: string[];
+  selectedGenres: string[];
+  leftRef: MutableRefObject<any>;
+  rightRef: MutableRefObject<any>;
   onClickCategory: (category: string) => void;
   onClickGenre: (genre: string) => void;
   onClickArtist: (artist: string) => void;
 }
 export const CategoryForm = ({
   categoryTypeState,
+  artists,
+  genres,
+  leftBox,
+  artistBox,
+  selectedArtists,
+  selectedGenres,
+  leftRef,
+  rightRef,
   onClickCategory,
   onClickGenre,
   onClickArtist,
 }: CategoryFormProps) => {
   const isActivate = categoryTypeState === 'artist';
-
   return (
     <style.Wrapper>
       <style.Title>어떤 음악 좋아하세요?</style.Title>
@@ -93,49 +56,48 @@ export const CategoryForm = ({
         </style.Button>
       </style.Box>
 
-      {isActivate ? (
-        <style.Slide>
-          {/* <div>
-          left ref div
-          </div> */}
-          {/* 여기에 추가 */}
-          <CategoryBtnList
+      <style.Slide>
+        <div ref={leftRef} />
+        {artistBox.map((artist: any) => {
+          return (
+            <div>
+              <CategoryBtnList
+                key={artist[0]}
+                onClick={onClickArtist}
+                list={artist.slice(0, 8)}
+                selectedList={selectedArtists}
+              />
+            </div>
+          );
+        })}
+        <div ref={rightRef} />
+        {/* {isActivate ? ( */}
+        {/* {artistBox[0] && (
+            <CategoryBtnList
+            key={artistBox[0][0]}
             onClick={onClickArtist}
-            list={ARTIST_LIST.slice(0, 8)}
-          />
-          <CategoryBtnList
-            onClick={onClickArtist}
-            list={ARTIST_LIST.slice(0, 8)}
-          />
-          <CategoryBtnList
-            onClick={onClickArtist}
-            list={ARTIST_LIST.slice(8, 16)}
-          />
-          <CategoryBtnList
-            onClick={onClickArtist}
-            list={ARTIST_LIST.slice(16, 24)}
-          />
-          {/* 여기에 추가 */}
-          {/* <div>
-          right ref div
-          </div> */}
-        </style.Slide>
-      ) : (
-        <style.Slide>
-          <CategoryBtnList
-            onClick={onClickGenre}
-            list={GENRE_LIST.slice(0, 8)}
-          />
-          <CategoryBtnList
-            onClick={onClickGenre}
-            list={GENRE_LIST.slice(8, 16)}
-          />
-          <CategoryBtnList
-            onClick={onClickGenre}
-            list={GENRE_LIST.slice(16, 24)}
-          />
-        </style.Slide>
-      )}
+            list={artistBox[0].slice(0, 8)}
+            selectedList={selectedArtists}
+            />
+            )}
+          <div ref={divRef} /> */}
+
+        {/* <div style={{ display: 'flex' }}>
+        </div> */}
+        {/* <style.FlexBox>
+            {genres.map((genre, idx) => {
+              if (idx % 8 === 0)
+                return (
+                  <CategoryBtnList
+                    onClick={onClickGenre}
+                    list={genres.slice(idx, idx + 8)}
+                    selectedList={selectedGenres}
+                  />
+                );
+            })}
+          </style.FlexBox>
+        )} */}
+      </style.Slide>
     </style.Wrapper>
   );
 };

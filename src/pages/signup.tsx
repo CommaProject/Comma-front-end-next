@@ -1,8 +1,10 @@
-import { ChangeEvent, useCallback, useState } from 'react';
-import { Swiper as SwiperClass } from 'swiper/types';
+import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import SwiperCore from 'swiper';
-import SignUpTemplate from '@/components/template/signup';
+import { Swiper as SwiperClass } from 'swiper/types';
 import { SignUpStateType } from '@/constants/types';
+import SignUpTemplate from '@/components/template/signup';
+import { getAsync } from '@/apis/API';
+import { useGetArtists } from '@/hooks/useGetArtists';
 
 export async function getStaticProps() {
   return {
@@ -17,13 +19,22 @@ const SignUp = () => {
     name: '',
     gender: 'x',
     age: 'x',
-    artist: [],
-    genre: [],
+    artists: [],
+    genres: [],
     time: { meridiem: 'AM', hour: 1, min: 1 },
   });
+  const [genres, setGenres] = useState<string[]>([]);
   const [swiperRef, setSwiperRef] = useState<SwiperClass>();
   const [slideStep, setSlideStep] = useState(0);
   const [categoryTypeState, setcategoryTypeState] = useState('artist');
+
+  const {
+    artists,
+    artistsBox,
+    fetchMoreLeftElement,
+    fetchMoreRightElement,
+    leftBox,
+  } = useGetArtists();
 
   const handleNext = useCallback(() => {
     swiperRef?.slideNext();
@@ -65,11 +76,36 @@ const SignUp = () => {
   const handleCategory = (category: string) => {
     setcategoryTypeState(category);
   };
+
   const handleArtistSelect = (artist: string) => {
-    setSignUpState({ ...signUpState, artist: [...signUpState.artist, artist] });
+    if (!signUpState.artists.includes(artist)) {
+      setSignUpState({
+        ...signUpState,
+        artists: [...signUpState.artists, artist],
+      });
+    } else {
+      const targetIndex = signUpState.artists.findIndex(
+        (state) => state === artist,
+      );
+      const newState = { ...signUpState };
+      newState.artists.splice(targetIndex, 1);
+      setSignUpState({ ...newState });
+    }
   };
   const handleGenreSelect = (genre: string) => {
-    setSignUpState({ ...signUpState, genre: [...signUpState.genre, genre] });
+    if (!signUpState.genres.includes(genre)) {
+      setSignUpState({
+        ...signUpState,
+        genres: [...signUpState.genres, genre],
+      });
+    } else {
+      const targetIndex = signUpState.genres.findIndex(
+        (state) => state === genre,
+      );
+      const newState = { ...signUpState };
+      newState.genres.splice(targetIndex, 1);
+      setSignUpState({ ...newState });
+    }
   };
 
   const checkSignupStep = () => {
@@ -79,7 +115,9 @@ const SignUp = () => {
       case 1: // 성별 연령
         return signUpState.gender !== 'x' && signUpState.age !== 'x';
       case 2: // 카테고리
-        return signUpState.artist.length >= 3 && signUpState.genre.length >= 3;
+        return (
+          signUpState.artists.length >= 3 && signUpState.genres.length >= 3
+        );
       case 3: // 시간
         return true;
       default:
@@ -87,10 +125,29 @@ const SignUp = () => {
     }
   };
 
+  const getGenres = async () => {
+    const result = await getAsync<string[]>('/spotify/genre');
+    if (result.isSuccess && result.result.data) {
+      setGenres([...genres, ...result.result.data]);
+    }
+  };
+
+  useEffect(() => {
+    getGenres();
+  }, []);
+
+  console.log(artistsBox);
   return (
     <SignUpTemplate
       slideStep={slideStep}
+      leftBox={leftBox}
       signUpState={signUpState}
+      categoryTypeState={categoryTypeState}
+      artists={artists}
+      artistBox={artistsBox}
+      genres={genres}
+      leftRef={fetchMoreLeftElement}
+      rightRef={fetchMoreRightElement}
       onClickNext={handleNext}
       onClickPrev={handlePrev}
       setSwiperRef={setSwiperRef}
@@ -102,7 +159,6 @@ const SignUp = () => {
       onChangeMeridiem={handleMeridiem}
       onChangeHour={handleHour}
       onChangeMin={handleMin}
-      categoryTypeState={categoryTypeState}
       onClickCategory={handleCategory}
       onClickGenre={handleGenreSelect}
       onClickArtist={handleArtistSelect}

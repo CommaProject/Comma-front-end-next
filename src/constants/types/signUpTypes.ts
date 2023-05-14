@@ -23,9 +23,9 @@ export interface SignUpStateType {
   /** 연령 20대 미만/20대/30대/40대/50대 이상/x */
   age: AgeType;
   /** 아티스트 선택 리스트 */
-  artist: string[];
+  artists: string[];
   /** 장르 선택 리스트 */
-  genre: string[];
+  genres: string[];
   /** 오전/오후 - 시간- 분 */
   time: TimeType;
 }

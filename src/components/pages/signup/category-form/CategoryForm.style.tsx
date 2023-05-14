@@ -84,6 +84,12 @@ export const Button = styled.button<ButtonStateProps>`
 export const Slide = styled.div`
   width: 390px;
 
+  display: flex;
+
   overflow: auto;
   white-space: nowrap;
+`;
+
+export const FlexBox = styled.div`
+  display: flex;
 `;

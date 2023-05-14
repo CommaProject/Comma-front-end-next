@@ -16,7 +16,7 @@ interface CategoryBtnListProps {
   selectedList: string[];
   onClick: (value: string) => void;
 }
-export const CategoryBtnList = ({
+export const CategoryBtnListReverse = ({
   list,
   selectedList,
   onClick,
@@ -30,7 +30,7 @@ export const CategoryBtnList = ({
           left={Positions[idx].left}
           bottom={Positions[idx].bottom}
           onClick={() => onClick(artist)}
-          key={artist}
+          key={artist.concat(String(idx))}
         >
           {artist}
         </style.Button>
@@ -41,7 +41,7 @@ export const CategoryBtnList = ({
           left={Positions[idx].left}
           bottom={Positions[idx].bottom}
           onClick={() => onClick(artist)}
-          key={artist}
+          key={artist.concat(String(idx))}
         >
           {artist}
         </style.Button>
