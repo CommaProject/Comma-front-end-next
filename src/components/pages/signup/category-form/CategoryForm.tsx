@@ -55,30 +55,28 @@ export const CategoryForm = ({
           {isActivate ? (
             <style.FlexBox>
               {artists.map((artist, idx) => {
-                if (idx % 8 === 0)
-                  return (
-                    <CategoryBtnList
-                      key={artist + idx}
-                      onClick={onClickArtist}
-                      list={artists.slice(idx, idx + 8)}
-                      selectedList={selectedArtists}
-                    />
-                  );
+                return idx % 8 === 0 ? (
+                  <CategoryBtnList
+                    key={artist + idx}
+                    onClick={onClickArtist}
+                    list={artists.slice(idx, idx + 8)}
+                    selectedList={selectedArtists}
+                  />
+                ) : null;
               })}
               <div ref={rightRef} />
             </style.FlexBox>
           ) : (
             <div>
               {genres.map((genre, idx) => {
-                if (idx % 8 === 0)
-                  return (
-                    <CategoryBtnList
-                      key={genre + idx}
-                      onClick={onClickGenre}
-                      list={genres.slice(idx, idx + 8)}
-                      selectedList={selectedGenres}
-                    />
-                  );
+                return idx % 8 === 0 ? (
+                  <CategoryBtnList
+                    key={genre + idx}
+                    onClick={onClickGenre}
+                    list={genres.slice(idx, idx + 8)}
+                    selectedList={selectedGenres}
+                  />
+                ) : null;
               })}
             </div>
           )}

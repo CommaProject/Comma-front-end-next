@@ -8,10 +8,9 @@ interface IsPasswordVisibleIconProps {
 export const IsPasswordVisibleIcon = ({
   isPasswordVisible,
   onClicks,
-}: IsPasswordVisibleIconProps) => {
-  return isPasswordVisible ? (
+}: IsPasswordVisibleIconProps) =>
+  isPasswordVisible ? (
     <style.NowPasswordVisibleIcon onClick={onClicks} />
   ) : (
     <style.NowPasswordInvisibleIcon onClick={onClicks} />
   );
-};
