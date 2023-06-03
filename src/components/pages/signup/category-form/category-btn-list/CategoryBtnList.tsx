@@ -1,6 +1,6 @@
 import * as style from './CategoryBtnList.style';
 
-const Positions = [
+const POSITIONS = [
   { left: 0, bottom: 0 },
   { left: 117, bottom: 65 },
   { left: 203, bottom: 191 },
@@ -27,10 +27,10 @@ export const CategoryBtnList = ({
         <style.Button
           isBig
           isSelected={selectedList.includes(artist)}
-          left={Positions[idx].left}
-          bottom={Positions[idx].bottom}
+          left={POSITIONS[idx].left}
+          bottom={POSITIONS[idx].bottom}
           onClick={() => onClick(artist)}
-          key={artist}
+          key={artist + idx}
         >
           {artist}
         </style.Button>
@@ -38,10 +38,10 @@ export const CategoryBtnList = ({
         <style.Button
           isBig={false}
           isSelected={selectedList.includes(artist)}
-          left={Positions[idx].left}
-          bottom={Positions[idx].bottom}
+          left={POSITIONS[idx].left}
+          bottom={POSITIONS[idx].bottom}
           onClick={() => onClick(artist)}
-          key={artist}
+          key={artist + idx}
         >
           {artist}
         </style.Button>

@@ -1,6 +1,7 @@
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import SwiperCore from 'swiper';
 import { Swiper as SwiperClass } from 'swiper/types';
+
 import { SignUpStateType } from '@/constants/types';
 import SignUpTemplate from '@/components/template/signup';
 import { getAsync } from '@/apis/API';
@@ -28,13 +29,7 @@ const SignUp = () => {
   const [slideStep, setSlideStep] = useState(0);
   const [categoryTypeState, setcategoryTypeState] = useState('artist');
 
-  const {
-    artists,
-    artistsBox,
-    fetchMoreLeftElement,
-    fetchMoreRightElement,
-    leftBox,
-  } = useGetArtists();
+  const { artists, fetchMoreRightElement } = useGetArtists();
 
   const handleNext = useCallback(() => {
     swiperRef?.slideNext();
@@ -136,17 +131,13 @@ const SignUp = () => {
     getGenres();
   }, []);
 
-  console.log(artistsBox);
   return (
     <SignUpTemplate
       slideStep={slideStep}
-      leftBox={leftBox}
       signUpState={signUpState}
       categoryTypeState={categoryTypeState}
       artists={artists}
-      artistBox={artistsBox}
       genres={genres}
-      leftRef={fetchMoreLeftElement}
       rightRef={fetchMoreRightElement}
       onClickNext={handleNext}
       onClickPrev={handlePrev}

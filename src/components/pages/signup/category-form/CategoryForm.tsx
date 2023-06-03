@@ -1,31 +1,25 @@
-import { MutableRefObject, useEffect, useRef, useState } from 'react';
-import CategoryBtnList from './category-btn-list';
+import { MutableRefObject } from 'react';
 
+import CategoryBtnList from './category-btn-list';
 import * as style from './CategoryForm.style';
 
 interface CategoryFormProps {
   categoryTypeState: string;
   artists: string[];
   genres: string[];
-  artistBox: any;
-  leftBox: any;
   selectedArtists: string[];
   selectedGenres: string[];
-  leftRef: MutableRefObject<any>;
   rightRef: MutableRefObject<any>;
   onClickCategory: (category: string) => void;
   onClickGenre: (genre: string) => void;
   onClickArtist: (artist: string) => void;
 }
 export const CategoryForm = ({
-  categoryTypeState,
   artists,
   genres,
-  leftBox,
-  artistBox,
+  categoryTypeState,
   selectedArtists,
   selectedGenres,
-  leftRef,
   rightRef,
   onClickCategory,
   onClickGenre,
@@ -57,46 +51,38 @@ export const CategoryForm = ({
       </style.Box>
 
       <style.Slide>
-        <div ref={leftRef} />
-        {artistBox.map((artist: any) => {
-          return (
+        <style.FlexBox>
+          {isActivate ? (
+            <style.FlexBox>
+              {artists.map((artist, idx) => {
+                if (idx % 8 === 0)
+                  return (
+                    <CategoryBtnList
+                      key={artist + idx}
+                      onClick={onClickArtist}
+                      list={artists.slice(idx, idx + 8)}
+                      selectedList={selectedArtists}
+                    />
+                  );
+              })}
+              <div ref={rightRef} />
+            </style.FlexBox>
+          ) : (
             <div>
-              <CategoryBtnList
-                key={artist[0]}
-                onClick={onClickArtist}
-                list={artist.slice(0, 8)}
-                selectedList={selectedArtists}
-              />
+              {genres.map((genre, idx) => {
+                if (idx % 8 === 0)
+                  return (
+                    <CategoryBtnList
+                      key={genre + idx}
+                      onClick={onClickGenre}
+                      list={genres.slice(idx, idx + 8)}
+                      selectedList={selectedGenres}
+                    />
+                  );
+              })}
             </div>
-          );
-        })}
-        <div ref={rightRef} />
-        {/* {isActivate ? ( */}
-        {/* {artistBox[0] && (
-            <CategoryBtnList
-            key={artistBox[0][0]}
-            onClick={onClickArtist}
-            list={artistBox[0].slice(0, 8)}
-            selectedList={selectedArtists}
-            />
-            )}
-          <div ref={divRef} /> */}
-
-        {/* <div style={{ display: 'flex' }}>
-        </div> */}
-        {/* <style.FlexBox>
-            {genres.map((genre, idx) => {
-              if (idx % 8 === 0)
-                return (
-                  <CategoryBtnList
-                    onClick={onClickGenre}
-                    list={genres.slice(idx, idx + 8)}
-                    selectedList={selectedGenres}
-                  />
-                );
-            })}
-          </style.FlexBox>
-        )} */}
+          )}
+        </style.FlexBox>
       </style.Slide>
     </style.Wrapper>
   );
