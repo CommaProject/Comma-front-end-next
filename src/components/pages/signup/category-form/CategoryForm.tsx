@@ -67,7 +67,7 @@ export const CategoryForm = ({
               <div ref={rightRef} />
             </style.FlexBox>
           ) : (
-            <div>
+            <style.FlexBox>
               {genres.map((genre, idx) => {
                 return idx % 8 === 0 ? (
                   <CategoryBtnList
@@ -78,7 +78,7 @@ export const CategoryForm = ({
                   />
                 ) : null;
               })}
-            </div>
+            </style.FlexBox>
           )}
         </style.FlexBox>
       </style.Slide>

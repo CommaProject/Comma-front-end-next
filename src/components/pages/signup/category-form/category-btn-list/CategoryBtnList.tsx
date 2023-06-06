@@ -30,7 +30,7 @@ export const CategoryBtnList = ({
           left={POSITIONS[idx].left}
           bottom={POSITIONS[idx].bottom}
           onClick={() => onClick(artist)}
-          key={artist + idx}
+          key={artist + idx.toString()}
         >
           {artist}
         </style.Button>
@@ -41,7 +41,7 @@ export const CategoryBtnList = ({
           left={POSITIONS[idx].left}
           bottom={POSITIONS[idx].bottom}
           onClick={() => onClick(artist)}
-          key={artist + idx}
+          key={artist + idx.toString()}
         >
           {artist}
         </style.Button>

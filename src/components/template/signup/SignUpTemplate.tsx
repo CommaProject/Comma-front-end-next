@@ -26,7 +26,7 @@ interface SignUpTemplateProps {
   setSwiperRef: Dispatch<SetStateAction<SwiperClass | undefined>>;
   onSlideChange: (swiper: any) => void;
   onChageNameInput: (e: ChangeEvent<HTMLInputElement>) => void;
-  onChangeSelect: (name: string, value: string) => void;
+  onChangeSelect: (name: string, value: string | number) => void;
   checkSignupStep: () => boolean;
   onClickNavBtn: () => void;
   onChangeMeridiem: (text: string) => void;
@@ -79,13 +79,13 @@ const SignUpTemplate = ({
         <style.Slide>
           <NameInputForm
             onChange={onChageNameInput}
-            len={signUpState.name.length}
+            len={signUpState.nickName.length}
           />
         </style.Slide>
         <style.Slide>
           <GenderAgeInputForm
-            name={signUpState.name}
-            gender={signUpState.gender}
+            name={signUpState.nickName}
+            gender={signUpState.sex}
             age={signUpState.age}
             onChageSelect={onChangeSelect}
           />
@@ -95,7 +95,7 @@ const SignUpTemplate = ({
             categoryTypeState={categoryTypeState}
             artists={artists}
             genres={genres}
-            selectedArtists={signUpState.artists}
+            selectedArtists={signUpState.artistNames}
             selectedGenres={signUpState.genres}
             rightRef={rightRef}
             onClickCategory={onClickCategory}
@@ -105,11 +105,11 @@ const SignUpTemplate = ({
         </style.Slide>
         <style.Slide>
           <TimePickerForm
-            meridiem={signUpState.time.meridiem}
+            meridiem={signUpState.recommendTime.meridiem}
             onChangeMeridiem={onChangeMeridiem}
-            hour={signUpState.time.hour}
+            hour={signUpState.recommendTime.hour}
             onChangeHour={onChangeHour}
-            min={signUpState.time.min}
+            min={signUpState.recommendTime.min}
             onChangeMin={onChangeMin}
           />
         </style.Slide>
@@ -117,7 +117,9 @@ const SignUpTemplate = ({
           <SuccessBox />
         </style.Slide>
       </style.CustomSwiper>
-      <NavBtn isActivate={checkSignupStep()} onClick={onClickNavBtn} />
+      {slideStep === 4 ? null : (
+        <NavBtn isActivate={checkSignupStep()} onClick={onClickNavBtn} />
+      )}
     </style.Box>
   </style.Wrapper>
 );

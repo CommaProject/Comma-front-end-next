@@ -6,8 +6,8 @@ interface GenderListType {
   insideText: string;
 }
 const GENDER_LIST: GenderListType[] = [
-  { genderGroup: 'm', insideText: '남' },
-  { genderGroup: 'f', insideText: '여' },
+  { genderGroup: 'male', insideText: '남' },
+  { genderGroup: 'female', insideText: '여' },
   { genderGroup: 'x', insideText: 'X' },
 ];
 
@@ -29,7 +29,7 @@ export const GenderBtnList = ({
     <style.Box>
       {GENDER_LIST.map(({ genderGroup, insideText }) => (
         <style.Button
-          onClick={() => onChangeSelect('gender', genderGroup)}
+          onClick={() => onChangeSelect('sex', genderGroup)}
           isActivate={gender === genderGroup}
           key={genderGroup}
         >
