@@ -1,3 +1,8 @@
+/**
+ * meridiem, hour, min을 "시:분:초" 형식으로 변환하기 위한 util 함수
+ * @param time 오전 오후, 시간, 분을 나타내는 객체
+ * @returns "시:분:초" 형식의 string
+ */
 export const formatTime = (time: {
   meridiem: string;
   hour: number;
