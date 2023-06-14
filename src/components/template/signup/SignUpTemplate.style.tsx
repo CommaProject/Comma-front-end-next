@@ -4,16 +4,16 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 export const Wrapper = styled.div`
   width: 100%;
   height: 100%;
-
-  position: relative;
 `;
 
 export const Box = styled.div`
-  height: 550px;
+  height: 100%;
 
   display: flex;
   justify-content: center;
   align-items: center;
+
+  position: relative;
 `;
 
 export const Slide = styled(SwiperSlide)`
@@ -26,5 +26,5 @@ export const Slide = styled(SwiperSlide)`
 `;
 
 export const CustomSwiper = styled(Swiper)`
-  height: 600px;
+  height: 100%;
 `;

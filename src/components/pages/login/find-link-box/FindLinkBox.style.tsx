@@ -66,7 +66,7 @@ export const Box = styled.div`
 
 export const Text = styled.span`
   ${({ theme }) => {
-    const { colors, fonts } = theme;
+    const { fonts } = theme;
     return css`
       padding-left: 5px;
 

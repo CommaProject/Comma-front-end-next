@@ -1,8 +1,10 @@
-import { ChangeEvent, useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Swiper as SwiperClass } from 'swiper/types';
-import SwiperCore from 'swiper';
+
 import SignUpTemplate from '@/components/template/signup';
-import { SignUpStateType } from '@/constants/types';
+import { useGetArtists } from '@/hooks/useGetArtists';
+import { useGetGenres } from '@/hooks/useGetGenres';
+import { useRegister } from '@/hooks/useSignUp';
 
 export async function getStaticProps() {
   return {
@@ -13,17 +15,23 @@ export async function getStaticProps() {
 }
 
 const SignUp = () => {
-  const [signUpState, setSignUpState] = useState<SignUpStateType>({
-    name: '',
-    gender: 'x',
-    age: 'x',
-    artist: [],
-    genre: [],
-    time: { meridiem: 'AM', hour: 1, min: 1 },
-  });
-  const [swiperRef, setSwiperRef] = useState<SwiperClass>();
+  const {
+    signUpState,
+    handleNickNameInput,
+    handleSelect,
+    handleMeridiem,
+    handleHour,
+    handleMin,
+    handleGenreSelect,
+    handleArtistSelect,
+    handleRegister,
+  } = useRegister();
   const [slideStep, setSlideStep] = useState(0);
-  const [topBarState, setTopBarState] = useState(20);
+  const [swiperRef, setSwiperRef] = useState<SwiperClass>();
+  const [categoryTypeState, setcategoryTypeState] = useState('artist');
+
+  const { artists, fetchMoreRightElement } = useGetArtists();
+  const { genres } = useGetGenres();
 
   const handleNext = useCallback(() => {
     swiperRef?.slideNext();
@@ -31,46 +39,29 @@ const SignUp = () => {
   const handlePrev = useCallback(() => {
     swiperRef?.slidePrev();
   }, [swiperRef]);
-  const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
-    setSignUpState({ ...signUpState, name: e.target.value });
+
+  const handleNavBtn = () => handleNext();
+  const handleCategory = (category: string) => {
+    setcategoryTypeState(category);
   };
-  const handleSelect = (name: string, value: string) => {
-    setSignUpState({ ...signUpState, [name]: value });
-  };
-  const handleNavBtn = () => {
-    setTopBarState(topBarState + 20);
-    handleNext();
-  };
+
   const handleSwiper = (swiper: SwiperClass) => {
     setSlideStep(swiper.realIndex);
-  };
-  const handleMeridiem = (text: string) => {
-    setSignUpState({
-      ...signUpState,
-      time: { ...signUpState.time, meridiem: text },
-    });
-  };
-  const handleHour = (swiper: SwiperCore) => {
-    setSignUpState({
-      ...signUpState,
-      time: { ...signUpState.time, hour: swiper.realIndex + 1 },
-    });
-  };
-  const handleMin = (swiper: SwiperCore) => {
-    setSignUpState({
-      ...signUpState,
-      time: { ...signUpState.time, min: swiper.realIndex },
-    });
+    if (slideStep === 3) {
+      handleRegister();
+    }
   };
 
   const checkSignupStep = () => {
     switch (slideStep) {
       case 0: // 이름
-        return signUpState.name.length >= 1;
+        return signUpState.nickName.length >= 1;
       case 1: // 성별 연령
-        return signUpState.gender !== 'x' && signUpState.age !== 'x';
+        return signUpState.sex !== 'x' && signUpState.age !== 0;
       case 2: // 카테고리
-        return true;
+        return (
+          signUpState.artistNames.length >= 3 && signUpState.genres.length >= 3
+        );
       case 3: // 시간
         return true;
       default:
@@ -81,19 +72,25 @@ const SignUp = () => {
   return (
     <SignUpTemplate
       slideStep={slideStep}
-      topBarState={topBarState}
       signUpState={signUpState}
+      categoryTypeState={categoryTypeState}
+      artists={artists}
+      genres={genres}
+      rightRef={fetchMoreRightElement}
       onClickNext={handleNext}
       onClickPrev={handlePrev}
       setSwiperRef={setSwiperRef}
       onSlideChange={handleSwiper}
-      onChageNameInput={handleInput}
+      onChageNameInput={handleNickNameInput}
       onChangeSelect={handleSelect}
       checkSignupStep={checkSignupStep}
       onClickNavBtn={handleNavBtn}
       onChangeMeridiem={handleMeridiem}
       onChangeHour={handleHour}
       onChangeMin={handleMin}
+      onClickCategory={handleCategory}
+      onClickGenre={handleGenreSelect}
+      onClickArtist={handleArtistSelect}
     />
   );
 };

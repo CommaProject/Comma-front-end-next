@@ -8,12 +8,12 @@ interface AgeListType {
   outsideText: string;
 }
 const AGE_LIST: AgeListType[] = [
-  { ageGroup: '19', insideText: '20↓', outsideText: '20대 미만' },
-  { ageGroup: '20', insideText: '20', outsideText: '20대' },
-  { ageGroup: '30', insideText: '30', outsideText: '30대' },
-  { ageGroup: '40', insideText: '40', outsideText: '40대' },
-  { ageGroup: '50', insideText: '50↑', outsideText: '50대 이상' },
-  { ageGroup: 'x', insideText: 'X', outsideText: ' ' },
+  { ageGroup: 19, insideText: '20↓', outsideText: '20대 미만' },
+  { ageGroup: 20, insideText: '20', outsideText: '20대' },
+  { ageGroup: 30, insideText: '30', outsideText: '30대' },
+  { ageGroup: 40, insideText: '40', outsideText: '40대' },
+  { ageGroup: 50, insideText: '50↑', outsideText: '50대 이상' },
+  { ageGroup: 0, insideText: 'X', outsideText: ' ' },
 ];
 
 /**
@@ -21,9 +21,9 @@ const AGE_LIST: AgeListType[] = [
  */
 interface AgeBtnListProps {
   /** 연령 값 */
-  age: string;
+  age: number;
   /** 연령 값 change event 함수 */
-  onChangeSelect: (name: string, value: string) => void;
+  onChangeSelect: (name: string, value: string | number) => void;
 }
 export const AgeBtnList = ({ age, onChangeSelect }: AgeBtnListProps) => (
   <style.Wrapper>

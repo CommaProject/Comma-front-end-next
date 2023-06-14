@@ -11,9 +11,9 @@ interface GenderAgeInputFormProps {
   /** 성별 */
   gender: string;
   /** 연령 */
-  age: string;
+  age: number;
   /** 성별 연령 change event 함수 */
-  onChageSelect: (name: string, value: string) => void;
+  onChageSelect: (name: string, value: string | number) => void;
 }
 export const GenderAgeInputForm = ({
   name,
