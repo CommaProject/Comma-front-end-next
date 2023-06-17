@@ -1,4 +1,3 @@
-import { SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation, Scrollbar } from 'swiper';
 import * as style from './TimePicker.style';
 
@@ -69,9 +68,9 @@ const HourPicker = ({
       onSlideChange={onChangeHour}
     >
       {HOUR_LIST.map((data) => (
-        <SwiperSlide key={data}>
+        <style.CustomSwiperSlide key={data}>
           <style.Slide isActivate={hour === data}>{data}</style.Slide>
-        </SwiperSlide>
+        </style.CustomSwiperSlide>
       ))}
     </style.CustomSwiper>
   </style.Box>
@@ -93,9 +92,9 @@ const MinPicker = ({
       onSlideChange={onChangeMin}
     >
       {MIN_LIST.map((data) => (
-        <SwiperSlide key={data}>
+        <style.CustomSwiperSlide key={data}>
           <style.Slide isActivate={data === min}>{data}</style.Slide>
-        </SwiperSlide>
+        </style.CustomSwiperSlide>
       ))}
     </style.CustomSwiper>
   </style.Box>

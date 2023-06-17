@@ -1,8 +1,7 @@
 import styled, { css } from 'styled-components';
 
 export const Wrapper = styled.div`
-  height: 75%;
-  padding-top: 30px;
+  height: 410px;
 
   display: flex;
   flex-direction: column;
@@ -10,7 +9,7 @@ export const Wrapper = styled.div`
 `;
 
 export const Box = styled.div`
-  height: 61px;
+  height: 53px;
 
   display: flex;
   flex-direction: column;

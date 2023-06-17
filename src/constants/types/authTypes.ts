@@ -4,9 +4,9 @@ export interface LoginInputsType {
 }
 
 /** 남성/ 여성/ 선택 안함 */
-export type GenderType = 'm' | 'f' | 'x';
+export type GenderType = 'male' | 'female' | 'x';
 /** 20대 미만/ 20대/ 30대/ 40대/ 50대 이상/ 선택안함 */
-export type AgeType = '19' | '20' | '30' | '40' | '50' | 'x';
+export type AgeType = 19 | 20 | 30 | 40 | 50 | 0;
 
 export type DuplicateOptionType = 'email' | 'nickname';
 

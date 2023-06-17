@@ -17,15 +17,24 @@ export interface TimeType {
  */
 export interface SignUpStateType {
   /** 이름 */
-  name: string;
+  nickName: string;
   /** 성별 남/여/x */
-  gender: GenderType;
+  sex: GenderType;
   /** 연령 20대 미만/20대/30대/40대/50대 이상/x */
   age: AgeType;
   /** 아티스트 선택 리스트 */
-  artist: string[];
+  artistNames: string[];
   /** 장르 선택 리스트 */
-  genre: string[];
+  genres: string[];
   /** 오전/오후 - 시간- 분 */
-  time: TimeType;
+  recommendTime: TimeType;
+}
+
+export interface SignUpInputType {
+  nickName: string;
+  sex: GenderType;
+  age: AgeType;
+  artistNames: string[];
+  genres: string[];
+  recommendTime: string;
 }

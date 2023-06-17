@@ -1,15 +1,12 @@
 import styled, { css } from 'styled-components';
 
 export const Wrapper = styled.div`
-  height: 170px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  height: 197px;
 `;
 
 export const Box = styled.div`
-  height: 50px;
+  height: 60px;
+  margin-bottom: 52px;
 
   display: flex;
   flex-direction: column;
@@ -20,6 +17,8 @@ export const Title = styled.div`
   ${({ theme }) => {
     const { fonts } = theme;
     return css`
+      padding-bottom: 23px;
+
       text-align: center;
       font-size: 17px;
       font-weight: ${fonts.weight.bold};
