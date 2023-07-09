@@ -1,0 +1,17 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /home/ec2-user/next
+    overwrite: yes
+permissions:
+  - object: /home/ec2-user/next
+    owner: root
+    group: root
+    mode: 755
+
+hooks:
+  AfterInstall:
+    - location: deploy.sh
+      timeout: 1000
+      runas: ec2-user

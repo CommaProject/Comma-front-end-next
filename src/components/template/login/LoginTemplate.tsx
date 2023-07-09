@@ -1,9 +1,9 @@
-import * as style from './LoginTemplate.style';
-import { ChangeEvent } from 'react';
+import React, { ChangeEvent } from 'react';
 import FindLinkBox from '@/components/pages/login/find-link-box';
 import SnsLoginBox from '@/components/pages/login/sns-login-box';
 import { LoginInputForm } from '@/components/pages/login/login-input-form/LoginInputForm';
 import IsPasswordVisibleIcon from '@/components/pages/login/login-input-form/is-password-visible-icon';
+import * as style from './LoginTemplate.style';
 
 interface LoginTemplateProps {
   inputId: string;
@@ -11,7 +11,7 @@ interface LoginTemplateProps {
   inputPw: string;
   onChangeInputPw: (event: ChangeEvent<HTMLInputElement>) => void;
   isPasswordVisible: boolean;
-  setIsPasswordVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  // setIsPasswordVisible: React.Dispatch<React.SetStateAction<boolean>>;
   onClickIsPasswordVisible: () => void;
   onClickLoginLogic: () => void;
 }
@@ -35,7 +35,7 @@ export const LoginTemplate = ({
         isPasswordVisible={isPasswordVisible}
       />
       <LoginInputForm
-        isPassword={true}
+        isPassword={false}
         input={inputPw}
         onChange={onChangeInputPw}
         isPasswordVisible={isPasswordVisible}

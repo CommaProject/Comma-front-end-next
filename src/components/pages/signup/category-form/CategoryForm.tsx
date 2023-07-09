@@ -54,30 +54,30 @@ export const CategoryForm = ({
         <style.FlexBox>
           {isActivate ? (
             <style.FlexBox>
-              {artists.map((artist, idx) => {
-                return idx % 8 === 0 ? (
+              {artists.map((artist, idx) =>
+                idx % 8 === 0 ? (
                   <CategoryBtnList
-                    key={artist + idx}
+                    // key={artist + idx}
                     onClick={onClickArtist}
                     list={artists.slice(idx, idx + 8)}
                     selectedList={selectedArtists}
                   />
-                ) : null;
-              })}
+                ) : null,
+              )}
               <div ref={rightRef} />
             </style.FlexBox>
           ) : (
             <style.FlexBox>
-              {genres.map((genre, idx) => {
-                return idx % 8 === 0 ? (
+              {genres.map((genre, idx) =>
+                idx % 8 === 0 ? (
                   <CategoryBtnList
-                    key={genre + idx}
+                    // key={genre + idx}
                     onClick={onClickGenre}
                     list={genres.slice(idx, idx + 8)}
                     selectedList={selectedGenres}
                   />
-                ) : null;
-              })}
+                ) : null,
+              )}
             </style.FlexBox>
           )}
         </style.FlexBox>
