@@ -8,6 +8,7 @@ import {
 } from '@/constants/types';
 import { getAsync, postAsync } from './API';
 import { getCookie, setCookie } from '../utils/cookies';
+import { API_URL } from '../constants/apis';
 
 /**
  * 신규 유저의 회원가입을 처리하는 함수 registerAsync
@@ -73,15 +74,26 @@ export async function checkDuplicateAsync(
  */
 
 export async function userInfomationAsync(): ApiResponse<UserInfomationOutputsType> {
-  setCookie(
-    'accessToken',
-    'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJod2FuanUxNTk2QGtha2FvLmNvbSIsInJvbGVzIjoiVVNFUiIsImlhdCI6MTY4OTQxMzk2OSwiZXhwIjoxNjg5NDE1NzY5fQ.z3HahIh1C1-6HX0p_b976K25jd0stzTHwebFFhmKeag',
-  );
-
   const response = await getAsync<UserInfomationOutputsType>(
     `/user/information`,
-    {},
+    {
+      // header: {
+      //   Authorization: 'Bearer ' + accessToken, // AccessToken을 헤더에 포함시킴
+      //   'Content-Type': 'application/json',
+      //   Accept: 'application/json',
+      //   Cookie: document.cookie,
+      // },
+      // credentials: 'include',
+    },
   );
+
+  return response;
+}
+
+export async function getRedirectionURLCookie() {
+  const REDIRECTION_URL = `${API_URL}/login/oauth2/code/kakao`;
+
+  const response = await getAsync<any>(REDIRECTION_URL, {});
 
   return response;
 }
