@@ -1,5 +1,13 @@
-import { ApiResponse, GenderType, DuplicateOptionType, LoginAsyncInput, LoginAsyncOutput } from '@/constants/types';
-import { postAsync } from './API';
+import {
+  ApiResponse,
+  GenderType,
+  DuplicateOptionType,
+  LoginAsyncInput,
+  LoginAsyncOutput,
+  UserInfomationOutputsType,
+} from '@/constants/types';
+import { getAsync, postAsync } from './API';
+import { getCookie, setCookie } from '../utils/cookies';
 
 /**
  * 신규 유저의 회원가입을 처리하는 함수 registerAsync
@@ -12,17 +20,17 @@ import { postAsync } from './API';
  * @returns 가입 성공 시 201, 실패 시 에러 반환 (1001, 500 등)
  */
 export async function registerAsync(
-    email: string,
-    password: string,
-    name: string,
-    nickname: string,
-    age: number,
-    gender: GenderType
+  email: string,
+  password: string,
+  name: string,
+  nickname: string,
+  age: number,
+  gender: GenderType,
 ): ApiResponse<undefined> {
-    const response = await postAsync<undefined, any>('/auth/sign-up', undefined, {
-        params: { email, password, name, nickname, age, gender },
-    });
-    return response;
+  const response = await postAsync<undefined, any>('/register', undefined, {
+    params: { email, password, name, nickname, age, gender },
+  });
+  return response;
 }
 
 /**
@@ -31,9 +39,15 @@ export async function registerAsync(
  * @param password 유저의 비밀번호
  * @returns 성공 시 JWT 액세스 토큰 인계, 실패 시 에러 객체 반환
  */
-export async function loginAsync(email: string, password: string): ApiResponse<LoginAsyncOutput> {
-    const response = await postAsync<LoginAsyncOutput, LoginAsyncInput>('/auth/sign-in', { email, password });
-    return response;
+export async function loginAsync(
+  email: string,
+  password: string,
+): ApiResponse<LoginAsyncOutput> {
+  const response = await postAsync<LoginAsyncOutput, LoginAsyncInput>(
+    '/auth/sign-in',
+    { email, password },
+  );
+  return response;
 }
 
 /**
@@ -42,10 +56,32 @@ export async function loginAsync(email: string, password: string): ApiResponse<L
  * @param value 중복 여부를 확인할 데이터
  * @returns 중복일 경우 409 에러 반환, 미중복일 경우 200
  */
-export async function checkDuplicateAsync(option: DuplicateOptionType, value: string): ApiResponse<undefined> {
-    // TO-DO : request data 에 any type 강제 해결 필요
-    const response = await postAsync<undefined, any>(`/auth/check-${option}`, {
-        [option]: value,
-    });
-    return response;
+export async function checkDuplicateAsync(
+  option: DuplicateOptionType,
+  value: string,
+): ApiResponse<undefined> {
+  // TO-DO : request data 에 any type 강제 해결 필요
+  const response = await postAsync<undefined, any>(`/auth/check-${option}`, {
+    [option]: value,
+  });
+  return response;
+}
+
+/**
+ * 유저정보가져오기 userInfomationAsync
+ * @returns 중복일 경우 409 에러 반환, 미중복일 경우 200
+ */
+
+export async function userInfomationAsync(): ApiResponse<UserInfomationOutputsType> {
+  setCookie(
+    'accessToken',
+    'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJod2FuanUxNTk2QGtha2FvLmNvbSIsInJvbGVzIjoiVVNFUiIsImlhdCI6MTY4OTQxMzk2OSwiZXhwIjoxNjg5NDE1NzY5fQ.z3HahIh1C1-6HX0p_b976K25jd0stzTHwebFFhmKeag',
+  );
+
+  const response = await getAsync<UserInfomationOutputsType>(
+    `/user/information`,
+    {},
+  );
+
+  return response;
 }

@@ -12,6 +12,7 @@ import '@/assets/fonts/font.css';
 import PageHead from '@/components/layout/page-head';
 import PageLayout from '@/components/layout/page-layout';
 import ModalPortal from '@/components/common/modal-portal';
+import { CookiesProvider } from 'react-cookie';
 
 interface InitializeAppProps {
   isNavigationVisible: boolean;
@@ -34,15 +35,17 @@ const MyApp = ({ Component, pageProps }: AppProps<InitializeAppProps>) => {
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
       <Provider>
-        <GlobalStyle />
-        <ThemeProvider theme={theme}>
-          <PageHead />
-          <ModalPortal />
-          <PageLayout isNavigationVisible={isNavigationVisible}>
-            {/* eslint-disable react/jsx-props-no-spreading */}
-            <Component {...pageProps} />
-          </PageLayout>
-        </ThemeProvider>
+        <CookiesProvider>
+          <GlobalStyle />
+          <ThemeProvider theme={theme}>
+            <PageHead />
+            <ModalPortal />
+            <PageLayout isNavigationVisible={isNavigationVisible}>
+              {/* eslint-disable react/jsx-props-no-spreading */}
+              <Component {...pageProps} />
+            </PageLayout>
+          </ThemeProvider>
+        </CookiesProvider>
       </Provider>
     </QueryClientProvider>
   );

@@ -28,4 +28,10 @@ export interface LoginAsyncOutput {
   token: string;
 }
 
+export interface UserInfomationOutputsType {
+  userId: number;
+  email: string;
+  data: RegisterInputsType;
+}
+
 export type InputNameType = keyof RegisterInputsType;
