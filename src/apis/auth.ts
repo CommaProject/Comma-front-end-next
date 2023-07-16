@@ -82,6 +82,7 @@ export async function userInfomationAsync(): ApiResponse<UserInfomationOutputsTy
         Accept: 'application/json',
         Cookie: document.cookie,
       },
+      withCredentials: true,
     },
   );
 
@@ -97,6 +98,7 @@ export async function getRedirectionURLCookie() {
       Accept: 'application/json',
       Cookie: document.cookie,
     },
+    withCredentials: true,
   });
 
   return response;
