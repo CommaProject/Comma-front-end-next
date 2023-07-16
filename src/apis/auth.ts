@@ -77,13 +77,11 @@ export async function userInfomationAsync(): ApiResponse<UserInfomationOutputsTy
   const response = await getAsync<UserInfomationOutputsType>(
     `/user/information`,
     {
-      // header: {
-      //   Authorization: 'Bearer ' + accessToken, // AccessToken을 헤더에 포함시킴
-      //   'Content-Type': 'application/json',
-      //   Accept: 'application/json',
-      //   Cookie: document.cookie,
-      // },
-      // credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Cookie: document.cookie,
+      },
     },
   );
 
