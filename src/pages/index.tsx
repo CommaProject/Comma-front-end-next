@@ -1,6 +1,10 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { getRedirectionURLCookie, userInfomationAsync } from '../apis/auth';
+import {
+  getRedirectionURLCookie,
+  userInfomationAsync,
+  userInfomationAsync2,
+} from '../apis/auth';
 import { Button } from '../components/template/login/LoginTemplate.style';
 
 const Home = () => {
@@ -25,6 +29,11 @@ const Home = () => {
         <Button
           onClick={() => {
             userInfomationAsync();
+          }}
+        />
+        <Button
+          onClick={() => {
+            userInfomationAsync2();
           }}
         />
         <p>Get started by editing</p>

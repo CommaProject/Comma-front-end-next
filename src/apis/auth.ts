@@ -100,6 +100,18 @@ export async function getRedirectionURLCookie() {
     },
     withCredentials: true,
   });
+}
+export async function userInfomationAsync2(): ApiResponse<UserInfomationOutputsType> {
+  const response = await getAsync<UserInfomationOutputsType>(
+    `/user/information`,
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      withCredentials: true,
+    },
+  );
 
   return response;
 }
