@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 import { getRedirectionURLCookie, userInfomationAsync } from '../apis/auth';
-import { setCookie } from '../utils/cookies';
 import { Button } from '../components/template/login/LoginTemplate.style';
-import { API_URL } from '../constants/apis';
 
 const Home = () => {
-  const currentURL = window.location.href;
+  const router = useRouter();
+  const currentURL = router.asPath;
   const REDIRECTION_URL = `http://43.201.239.102:3000/`;
 
   useEffect(() => {
