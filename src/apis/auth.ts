@@ -91,7 +91,13 @@ export async function userInfomationAsync(): ApiResponse<UserInfomationOutputsTy
 export async function getRedirectionURLCookie() {
   const REDIRECTION_URL = `${API_URL}/login/oauth2/code/kakao`;
 
-  const response = await getAsync<any>(REDIRECTION_URL, {});
+  const response = await getAsync<any>(REDIRECTION_URL, {
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      Cookie: document.cookie,
+    },
+  });
 
   return response;
 }
