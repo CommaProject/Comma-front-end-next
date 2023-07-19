@@ -1,41 +1,32 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import {
-  getRedirectionURLCookie,
-  userInfomationAsync,
-  userInfomationAsync2,
-} from '../apis/auth';
-import { Button } from '../components/template/login/LoginTemplate.style';
+import { userInfomationAsync } from '../apis/auth';
 
 const Home = () => {
   const router = useRouter();
-  const currentURL = `http://43.201.239.102:3000${router.asPath}`;
-  const REDIRECTION_URL = `http://43.201.239.102:3000/`;
-  console.log('currentURL', currentURL);
-  if (currentURL === REDIRECTION_URL) {
-    // Redirection URL에 도달한 경우 처리 로직 작성
-
-    const CookieResponse = getRedirectionURLCookie();
-    console.log('CookieResponse', CookieResponse);
-  }
 
   useEffect(() => {
-    console.log('userInfomationAsync', userInfomationAsync());
-  }, [currentURL, REDIRECTION_URL]);
+    const userInfo = userInfomationAsync();
+
+    userInfo
+      .then((response) => {
+        const { isSuccess, result } = response;
+        if (isSuccess) {
+          const { code, msg, data } = result;
+          console.log('Data:'); // 여기서 데이터에 접근할 수 있습니다.
+          if (data?.data.nickname == null) {
+            router.push('/signup');
+          }
+        }
+      })
+      .catch((error) => {
+        console.error('오류:', error);
+      });
+  }, []);
 
   return (
     <main>
       <div>
-        <Button
-          onClick={() => {
-            userInfomationAsync();
-          }}
-        />
-        <Button
-          onClick={() => {
-            userInfomationAsync2();
-          }}
-        />
         <p>Get started by editing</p>
       </div>
     </main>

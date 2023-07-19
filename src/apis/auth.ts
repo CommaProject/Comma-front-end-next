@@ -7,8 +7,6 @@ import {
   UserInfomationOutputsType,
 } from '@/constants/types';
 import { getAsync, postAsync } from './API';
-import { getCookie, setCookie } from '../utils/cookies';
-import { API_URL } from '../constants/apis';
 
 /**
  * 신규 유저의 회원가입을 처리하는 함수 registerAsync
@@ -70,47 +68,13 @@ export async function checkDuplicateAsync(
 
 /**
  * 유저정보가져오기 userInfomationAsync
- * @returns 중복일 경우 409 에러 반환, 미중복일 경우 200
+ * @returns AccessToken이 만료되었거나 없으면 400에러 반환, DB에 데이터가 존재하지 않으면 null 이나 0을 넣으며 200 반환
  */
 
 export async function userInfomationAsync(): ApiResponse<UserInfomationOutputsType> {
   const response = await getAsync<UserInfomationOutputsType>(
     `/user/information`,
-    {
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-        Cookie: document.cookie,
-      },
-      withCredentials: true,
-    },
-  );
-
-  return response;
-}
-
-export async function getRedirectionURLCookie() {
-  const REDIRECTION_URL = `${API_URL}/login/oauth2/code/kakao`;
-
-  const response = await getAsync<any>(REDIRECTION_URL, {
-    headers: {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-      Cookie: document.cookie,
-    },
-    withCredentials: true,
-  });
-}
-export async function userInfomationAsync2(): ApiResponse<UserInfomationOutputsType> {
-  const response = await getAsync<UserInfomationOutputsType>(
-    `/user/information`,
-    {
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
-      withCredentials: true,
-    },
+    { withCredentials: true },
   );
 
   return response;
