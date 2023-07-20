@@ -8,20 +8,19 @@ const Home = () => {
   useEffect(() => {
     const userInfo = userInfomationAsync();
 
-    userInfo
-      .then((response) => {
-        const { isSuccess, result } = response;
-        if (isSuccess) {
-          const { code, msg, data } = result;
-          console.log('Data:'); // 여기서 데이터에 접근할 수 있습니다.
-          if (data?.data.nickname == null) {
-            router.push('/signup');
-          }
+    console.log(userInfo);
+    console.log(userInfo.then());
+
+    userInfo.then((response) => {
+      const { isSuccess, result } = response;
+      if (isSuccess) {
+        const { code, msg, data } = result;
+        console.log('Data: ', data);
+        if (data?.data.nickname == null) {
+          router.push('/signup');
         }
-      })
-      .catch((error) => {
-        console.error('오류:', error);
-      });
+      }
+    });
   }, []);
 
   return (
