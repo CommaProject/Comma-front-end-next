@@ -6,7 +6,7 @@ import { LoginInputsType } from '@/constants/types';
 import { postAsync } from '@/apis/API';
 
 const logIn = async (props: LoginInputsType) => {
-  const { isSuccess, result } = await postAsync('/login', props);
+  const { isSuccess, result } = await postAsync<any, any>('/login', props);
 
   return { isSuccess, result };
 };
@@ -14,12 +14,16 @@ const logIn = async (props: LoginInputsType) => {
 export const useLogIn = () => {
   const router = useRouter();
 
-  const [enteredInputId, setEnteredInputId] = useState('');
-  const [enteredInputPw, setEnteredInputPw] = useState('');
+  const [enteredInputId, setEnteredInputId] = useState('testEmail');
+  const [enteredInputPw, setEnteredInputPw] = useState('password');
 
   const { mutate } = useMutation(['login'], logIn, {
-    onSuccess: () => {
-      router.push('/signup');
+    onSuccess: (response) => {
+      if (response.isSuccess && response.result.data) {
+        console.log(response);
+        if (response.result.data.name == null) router.push('/signup');
+        else router.push('/');
+      }
     },
   });
 
