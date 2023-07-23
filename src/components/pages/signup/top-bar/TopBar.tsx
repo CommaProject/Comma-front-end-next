@@ -16,7 +16,7 @@ const TopBar = ({
 }: TopBarProps) => (
   <style.Wrapper>
     <style.Box>
-      {step === 0 || step === 4 ? (
+      {step === 4 ? (
         <div />
       ) : (
         <style.Button isNext={false} onClick={onClickPrev}>
