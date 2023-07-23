@@ -14,8 +14,8 @@ const logIn = async (props: LoginInputsType) => {
 export const useLogIn = () => {
   const router = useRouter();
 
-  const [enteredInputId, setEnteredInputId] = useState('testEmail');
-  const [enteredInputPw, setEnteredInputPw] = useState('password');
+  const [enteredInputId, setEnteredInputId] = useState('');
+  const [enteredInputPw, setEnteredInputPw] = useState('');
 
   const { mutate } = useMutation(['login'], logIn, {
     onSuccess: (response) => {
