@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from 'react';
-import FindLinkBox from '@/components/pages/login/find-link-box';
+// import FindLinkBox from '@/components/pages/login/find-link-box';
 import SnsLoginBox from '@/components/pages/login/sns-login-box';
 import { LoginInputForm } from '@/components/pages/login/login-input-form/LoginInputForm';
 import IsPasswordVisibleIcon from '@/components/pages/login/login-input-form/is-password-visible-icon';
@@ -35,7 +35,7 @@ export const LoginTemplate = ({
         isPasswordVisible={isPasswordVisible}
       />
       <LoginInputForm
-        isPassword={false}
+        isPassword // true
         input={inputPw}
         onChange={onChangeInputPw}
         isPasswordVisible={isPasswordVisible}
@@ -45,7 +45,7 @@ export const LoginTemplate = ({
         onClicks={onClickIsPasswordVisible}
       />
       <style.Button onClick={onClickLoginLogic}>로그인</style.Button>
-      <FindLinkBox />
+      {/* <FindLinkBox /> */}
       <SnsLoginBox />
     </style.Box>
   </style.Wrapper>

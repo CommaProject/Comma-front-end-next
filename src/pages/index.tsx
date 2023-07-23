@@ -4,24 +4,35 @@ import { userInfomationAsync } from '../apis/auth';
 
 const Home = () => {
   const router = useRouter();
+  const userInfo = userInfomationAsync();
 
-  useEffect(() => {
-    const userInfo = userInfomationAsync();
+  // console.log(userInfo);
 
-    console.log(userInfo);
-    console.log(userInfo.then());
+  // userInfo.then((response) => {
+  //   const { isSuccess, result } = response;
+  //   if (isSuccess) {
+  //     const { code, msg, data } = result;
+  //     console.log('Data1: ', data);
+  //     if (data?.data.nickname == null) {
+  //       router.push('/signup');
+  //     }
+  //   }
+  // });
 
-    userInfo.then((response) => {
-      const { isSuccess, result } = response;
-      if (isSuccess) {
-        const { code, msg, data } = result;
-        console.log('Data: ', data);
-        if (data?.data.nickname == null) {
-          router.push('/signup');
-        }
-      }
-    });
-  }, []);
+  // useEffect(() => {
+  //   console.log(userInfo);
+
+  //   userInfo.then((response) => {
+  //     const { isSuccess, result } = response;
+  //     if (isSuccess) {
+  //       const { code, msg, data } = result;
+  //       console.log('Data2: ', data);
+  //       if (data?.data.nickname == null) {
+  //         router.push('/signup');
+  //       }
+  //     }
+  //   });
+  // }, []);
 
   return (
     <main>
