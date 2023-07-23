@@ -9,7 +9,7 @@ on:
 env:
   S3_BUCKET_NAME: comma-webserver
   CODE_DEPLOY_APPLICATION_NAME: Web-CodeDeploy
-  CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: Comma-API
+  CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: Comma-front
 
 jobs:
   build:
