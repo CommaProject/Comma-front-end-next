@@ -9,7 +9,9 @@ import { SignUpStateType } from '@/constants/types';
 import { SignUpInputType } from '@/constants/types/signUpTypes';
 
 const signUp = async (props: SignUpInputType) => {
-  const { isSuccess, result } = await postAsync('/private-information', props);
+  const { isSuccess, result } = await postAsync('/private-information', props, {
+    withCredentials: true,
+  });
 
   return { isSuccess, result };
 };
@@ -31,7 +33,8 @@ export const useRegister = () => {
     recommendTime: formatTime(signUpState.recommendTime),
   };
   const { mutate } = useMutation(['register'], signUp, {
-    onSuccess: () => {
+    onSuccess: (response) => {
+      console.log(response);
       router.push('/');
     },
   });
