@@ -11,7 +11,6 @@ interface LoginTemplateProps {
   inputPw: string;
   onChangeInputPw: (event: ChangeEvent<HTMLInputElement>) => void;
   isPasswordVisible: boolean;
-  // setIsPasswordVisible: React.Dispatch<React.SetStateAction<boolean>>;
   onClickIsPasswordVisible: () => void;
   onClickLoginLogic: () => void;
 }
@@ -33,12 +32,14 @@ export const LoginTemplate = ({
         input={inputId}
         onChange={onChangeInputId}
         isPasswordVisible={isPasswordVisible}
+        onClickLoginLogic={onClickLoginLogic}
       />
       <LoginInputForm
         isPassword // true
         input={inputPw}
         onChange={onChangeInputPw}
         isPasswordVisible={isPasswordVisible}
+        onClickLoginLogic={onClickLoginLogic}
       />
       <IsPasswordVisibleIcon
         isPasswordVisible={isPasswordVisible}
