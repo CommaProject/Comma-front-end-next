@@ -74,6 +74,8 @@ export const Text = styled.span`
 
       font-weight: ${fonts.weight.bold};
       text-decoration: underline;
+
+      cursor: pointer;
     `;
   }}
 `;
