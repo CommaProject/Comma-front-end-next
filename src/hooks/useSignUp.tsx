@@ -9,9 +9,11 @@ import { SignUpStateType } from '@/constants/types';
 import { SignUpInputType } from '@/constants/types/signUpTypes';
 
 const signUp = async (props: SignUpInputType) => {
-  const { isSuccess, result } = await postAsync('/private-information', props, {
-    withCredentials: true,
-  });
+  const { isSuccess, result } = await postAsync(
+    '/private-information',
+    props,
+    {},
+  );
 
   return { isSuccess, result };
 };
@@ -34,7 +36,6 @@ export const useRegister = () => {
   };
   const { mutate } = useMutation(['register'], signUp, {
     onSuccess: (response) => {
-      console.log(response);
       router.push('/');
     },
   });

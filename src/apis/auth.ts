@@ -74,7 +74,7 @@ export async function checkDuplicateAsync(
 export async function userInfomationAsync(): ApiResponse<UserInfomationOutputsType> {
   const response = await getAsync<UserInfomationOutputsType>(
     `/user/information`,
-    { withCredentials: true },
+    {},
   );
 
   return response;
