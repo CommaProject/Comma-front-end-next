@@ -7,6 +7,7 @@ import {
   UserInfomationOutputsType,
 } from '@/constants/types';
 import { getAsync, postAsync } from './API';
+import { getCookie, setCookie } from '../utils/cookies';
 
 /**
  * 신규 유저의 회원가입을 처리하는 함수 registerAsync
