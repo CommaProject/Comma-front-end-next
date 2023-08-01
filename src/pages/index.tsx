@@ -1,38 +1,13 @@
+import router from 'next/router';
 import { useEffect } from 'react';
-import { useRouter } from 'next/router';
 import { userInfomationAsync } from '../apis/auth';
 
-const Home = () => {
-  const router = useRouter();
-  const userInfo = userInfomationAsync();
-
-  // console.log(userInfo);
-
-  // userInfo.then((response) => {
-  //   const { isSuccess, result } = response;
-  //   if (isSuccess) {
-  //     const { code, msg, data } = result;
-  //     console.log('Data1: ', data);
-  //     if (data?.data.nickname == null) {
-  //       router.push('/signup');
-  //     }
-  //   }
-  // });
-
-  // useEffect(() => {
-  //   console.log(userInfo);
-
-  //   userInfo.then((response) => {
-  //     const { isSuccess, result } = response;
-  //     if (isSuccess) {
-  //       const { code, msg, data } = result;
-  //       console.log('Data2: ', data);
-  //       if (data?.data.nickname == null) {
-  //         router.push('/signup');
-  //       }
-  //     }
-  //   });
-  // }, []);
+const Home = (isUserVaild: boolean) => {
+  useEffect(() => {
+    if (isUserVaild === false) {
+      router.replace('/login');
+    }
+  }, []);
 
   return (
     <main>
@@ -44,3 +19,19 @@ const Home = () => {
 };
 
 export default Home;
+export async function getServerSideProps() {
+  const result = await userInfomationAsync();
+  let isUserVaildResult = false;
+
+  if (!result.isSuccess && result.result.code === -4) {
+    isUserVaildResult = false;
+  } else {
+    isUserVaildResult = true;
+  }
+
+  return {
+    props: {
+      isUserVaild: isUserVaildResult,
+    },
+  };
+}
