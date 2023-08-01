@@ -8,6 +8,7 @@ import {
 } from '@/constants/types';
 import { getAsync, postAsync } from './API';
 
+
 /**
  * 신규 유저의 회원가입을 처리하는 함수 registerAsync
  * @param email 유저의 이메일

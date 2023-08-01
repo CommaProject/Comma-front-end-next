@@ -1,6 +1,6 @@
 import router from 'next/router';
 import { useEffect } from 'react';
-import { userInfomationAsync } from '../apis/auth';
+import { userInfomationAsync } from '@/apis/auth';
 
 const Home = (isUserVaild: boolean) => {
   useEffect(() => {
