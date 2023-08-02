@@ -2,10 +2,10 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /home/ec2-user/next
+    destination: /home/ec2-user/deploy/web-build
     overwrite: yes
 permissions:
-  - object: /home/ec2-user/next
+  - object: /home/ec2-user/deploy/web-build
     owner: root
     group: root
     mode: 755

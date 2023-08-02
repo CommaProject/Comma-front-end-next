@@ -7,7 +7,7 @@ import {
   UserInfomationOutputsType,
 } from '@/constants/types';
 import { getAsync, postAsync } from './API';
-import { getCookie, setCookie } from '../utils/cookies';
+
 
 /**
  * 신규 유저의 회원가입을 처리하는 함수 registerAsync
@@ -69,15 +69,10 @@ export async function checkDuplicateAsync(
 
 /**
  * 유저정보가져오기 userInfomationAsync
- * @returns 중복일 경우 409 에러 반환, 미중복일 경우 200
+ * @returns AccessToken이 만료되었거나 없으면 400에러 반환, DB에 데이터가 존재하지 않으면 null 이나 0을 넣으며 200 반환
  */
 
 export async function userInfomationAsync(): ApiResponse<UserInfomationOutputsType> {
-  setCookie(
-    'accessToken',
-    'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJod2FuanUxNTk2QGtha2FvLmNvbSIsInJvbGVzIjoiVVNFUiIsImlhdCI6MTY4OTQxMzk2OSwiZXhwIjoxNjg5NDE1NzY5fQ.z3HahIh1C1-6HX0p_b976K25jd0stzTHwebFFhmKeag',
-  );
-
   const response = await getAsync<UserInfomationOutputsType>(
     `/user/information`,
     {},

@@ -1,20 +1,17 @@
+import router from 'next/router';
 import { useEffect } from 'react';
-import { userInfomationAsync } from '../apis/auth';
-import { setCookie } from '../utils/cookies';
-import { Button } from '../components/template/login/LoginTemplate.style';
+import { userInfomationAsync } from '@/apis/auth';
 
-const Home = () => {
+const Home = (isUserVaild: boolean) => {
   useEffect(() => {
-    console.log('userInfomationAsync', userInfomationAsync());
+    if (isUserVaild === false) {
+      router.replace('/login');
+    }
   }, []);
+
   return (
     <main>
       <div>
-        <Button
-          onClick={() => {
-            userInfomationAsync();
-          }}
-        />
         <p>Get started by editing</p>
       </div>
     </main>
@@ -22,3 +19,19 @@ const Home = () => {
 };
 
 export default Home;
+export async function getServerSideProps() {
+  const result = await userInfomationAsync();
+  let isUserVaildResult = false;
+
+  if (!result.isSuccess && result.result.code === -4) {
+    isUserVaildResult = false;
+  } else {
+    isUserVaildResult = true;
+  }
+
+  return {
+    props: {
+      isUserVaild: isUserVaildResult,
+    },
+  };
+}

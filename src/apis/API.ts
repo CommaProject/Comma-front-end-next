@@ -10,6 +10,7 @@ import { API_URL } from '@/constants/apis';
 const API = axios.create({
   baseURL: API_URL,
   responseType: 'json',
+  withCredentials: true,
 });
 
 /**

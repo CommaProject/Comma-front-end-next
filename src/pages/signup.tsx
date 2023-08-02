@@ -37,6 +37,9 @@ const SignUp = () => {
     swiperRef?.slideNext();
   }, [swiperRef]);
   const handlePrev = useCallback(() => {
+    if (swiperRef?.activeIndex === 0) {
+      window.history.back();
+    }
     swiperRef?.slidePrev();
   }, [swiperRef]);
 

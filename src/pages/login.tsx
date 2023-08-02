@@ -28,7 +28,6 @@ const Login = () => {
   return (
     <LoginTemplate
       inputId={enteredInputId}
-      // setIsPasswordVisible={setIsPasswordVisible}
       onChangeInputId={handleInputId}
       inputPw={enteredInputPw}
       onChangeInputPw={handleInputPw}
