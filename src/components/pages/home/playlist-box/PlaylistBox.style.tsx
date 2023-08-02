@@ -52,19 +52,15 @@ export const Button = styled.button<ButtonProps>`
   }}
 `;
 
-//SVG
-
 export const MovePlaylistIcon = styled(MovePlaylistSvg)<WrapperProps>`
-  ${({ isPlaylistSelected }) => {
-    return css`
-      display: ${isPlaylistSelected ? '' : 'none'};
+  ${({ isPlaylistSelected }) => css`
+    display: ${isPlaylistSelected ? '' : 'none'};
 
-      position: absolute;
-      right: 15px;
+    position: absolute;
+    right: 15px;
 
-      cursor: pointer;
-    `;
-  }}
+    cursor: pointer;
+  `}
 `;
 
 // SVG
