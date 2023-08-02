@@ -12,6 +12,7 @@ interface PlaylistBoxProps {
   playlistImageSources: string[];
   isAlarmSelected: boolean;
 }
+
 export const PlaylistBox = ({
   isPlaylistSelected,
   whenPlaylistWillPlay,
@@ -20,6 +21,12 @@ export const PlaylistBox = ({
   playlistImageSources,
   isAlarmSelected,
 }: PlaylistBoxProps) => {
+  const alarmIcon = isAlarmSelected ? (
+    <style.ActivateAlarmIcon onClick={() => {}} />
+  ) : (
+    <style.DeactivateAlarmIcon onClick={() => {}} />
+  );
+  const renderedIcon = isPlaylistSelected ? '' : alarmIcon;
   return (
     <style.Wrapper isPlaylistSelected={isPlaylistSelected}>
       <TimeBadge
@@ -34,15 +41,7 @@ export const PlaylistBox = ({
         whenPlaylistWillPlay={whenPlaylistWillPlay}
       />
       <style.MovePlaylistIcon isPlaylistSelected={isPlaylistSelected} />
-      {!isPlaylistSelected ? (
-        isAlarmSelected ? (
-          <style.ActivateAlarmIcon onClick={() => {}} />
-        ) : (
-          <style.DeactivateAlarmIcon onClick={() => {}} />
-        )
-      ) : (
-        ''
-      )}
+      {renderedIcon}
     </style.Wrapper>
   );
 };

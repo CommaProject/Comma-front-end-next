@@ -13,28 +13,24 @@ export const SmallAlbumImage = ({ imgSources }: SmallAlbumImageProps) => {
   if (imgSourcesLength > 0) {
     return (
       <style.Wrapper>
-        {imgSources.map((source, index) => {
-          return (
-            // TODO : [need-check] z-index 값을 임의로 10으로 설정 했습니다
-            <style.ImageItem key={index} num={index} zIndex={10 - index}>
-              <style.Img
-                width={widthHeight}
-                height={widthHeight}
-                src={source}
-                layout="fill"
-                objectFit="cover"
-                objectPosition="center"
-                alt="image"
-              />
-              <style.Span>
-                {index == 0 ? imgSourcesLength + '+' : ''}
-              </style.Span>
-            </style.ImageItem>
-          );
-        })}
+        {imgSources.map((source, index) => (
+          // TODO : [need-check] z-index 값을 임의로 10으로 설정 했습니다
+          <style.ImageItem key={source} num={index} zIndex={10 - index}>
+            <style.Img
+              width={widthHeight}
+              height={widthHeight}
+              src={source}
+              layout="fill"
+              objectFit="cover"
+              objectPosition="center"
+              alt="image"
+            />
+            <style.Span>{index === 0 ? `${imgSourcesLength}+` : ''}</style.Span>
+          </style.ImageItem>
+        ))}
       </style.Wrapper>
     );
-  } else {
-    return <></>;
   }
+
+  return null;
 };

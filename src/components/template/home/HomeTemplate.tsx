@@ -17,17 +17,15 @@ export const HomeTemplate = ({
   isEditSelected,
   playlistImageSources,
   isAlarmSelected,
-}: HomeTemplateProps) => {
-  return (
-    <style.Container>
-      <PlaylistBox
-        isPlaylistSelected={isPlaylistSelected}
-        whenPlaylistWillPlay={whenPlaylistWillPlay}
-        isTimeBadgeVisible={isTimeBadgeVisible}
-        isEditSelected={isEditSelected}
-        playlistImageSources={playlistImageSources}
-        isAlarmSelected={isAlarmSelected}
-      />
-    </style.Container>
-  );
-};
+}: HomeTemplateProps) => (
+  <style.Container>
+    <PlaylistBox
+      isPlaylistSelected={isPlaylistSelected}
+      whenPlaylistWillPlay={whenPlaylistWillPlay}
+      isTimeBadgeVisible={isTimeBadgeVisible}
+      isEditSelected={isEditSelected}
+      playlistImageSources={playlistImageSources}
+      isAlarmSelected={isAlarmSelected}
+    />
+  </style.Container>
+);
