@@ -11,14 +11,16 @@ interface PlaylistBoxProps {
   isEditSelected: boolean;
   playlistImageSources: string[];
   isAlarmSelected: boolean;
+  isEditMode:boolean;
 }
 export const PlaylistBox = ({
   isPlaylistSelected,
   whenPlaylistWillPlay,
   isTimeBadgeVisible,
   isEditSelected,
-  playlistImageSources,
+  playlistImageSources, 
   isAlarmSelected,
+  isEditMode
 }: PlaylistBoxProps) => {
   return (
     <style.Wrapper isPlaylistSelected={isPlaylistSelected}>
@@ -26,7 +28,7 @@ export const PlaylistBox = ({
         whenPlaylistWillPlay={whenPlaylistWillPlay}
         isTimeBadgeVisible={isTimeBadgeVisible}
       />
-      <style.Button isEditSelected={isEditSelected} />
+      {isEditMode? <style.Button isEditSelected={isEditSelected} /> : <div></div>}
       <BigAlbumImage imgSource={playlistImageSources[0]} />
       <SmallAlbumImage imgSources={playlistImageSources} />
       <PlaylistTexts
@@ -34,7 +36,8 @@ export const PlaylistBox = ({
         whenPlaylistWillPlay={whenPlaylistWillPlay}
       />
       <style.MovePlaylistIcon isPlaylistSelected={isPlaylistSelected} />
-      {!isPlaylistSelected ? (
+      { !isEditMode?
+      (!isPlaylistSelected ? (
         isAlarmSelected ? (
           <style.ActivateAlarmIcon onClick={() => {}} />
         ) : (
@@ -42,7 +45,7 @@ export const PlaylistBox = ({
         )
       ) : (
         ''
-      )}
+      )) : ''}
     </style.Wrapper>
   );
 };
