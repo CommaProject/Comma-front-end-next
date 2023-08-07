@@ -3,10 +3,11 @@ import * as style from './PlaylistTexts.style';
 interface PlaylistTextsProps {
   isPlaylistSelected: boolean;
   whenPlaylistWillPlay: string;
+  isEditMode: boolean;
 }
-export const PlaylistTexts = ({ isPlaylistSelected }: PlaylistTextsProps) => {
+export const PlaylistTexts = ({ isPlaylistSelected }: PlaylistTextsProps, {isEditMode}: PlaylistTextsProps) => {
   return (
-    <style.Wrapper isPlaylistSelected={isPlaylistSelected}>
+    <style.Wrapper isEditMode={isEditMode} isPlaylistSelected={isPlaylistSelected}>
       <style.Text
         isFontBoldElseRegular={true}
         isFontNotoElsePre={false}

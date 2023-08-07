@@ -1,28 +1,46 @@
 import HomeTemplate from '@/components/template/home';
 import { useState } from 'react';
 
+
+let TestPlayListData= [ {
+  "playlistId" : 123,
+  "playlistTitle" : "test111 playlist",
+  "alarmFlag" : true,
+  "alarmStartTime" : "11:11:11.159451735",
+  "repAlbumImageUrl" : "data:image/jpeg;base64,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",
+  "trackCount" : 3
+}, {
+  "playlistId" : 123,
+  "playlistTitle" : "test222 playlist",
+  "alarmFlag" : true,
+  "alarmStartTime" : "22:22:22.159619119",
+  "repAlbumImageUrl" : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAaVBMVEX///8AAAD+/v7c3Nze3t7r6+siIiLx8fH29vZWVlarq6u4uLji4uIQEBDV1dX7+/uRkZEeHh5lZWXn5+fOz85MTEyamppfX19GRkY6OjorKysTExOIiIg4ODgbGxtcXFx1dXV7fXzGxsbOxIOhAAAC2klEQVR4nO3dcU/iMACG8dIx4RBWBc7jTgX1+3/I6waGaO5msnbt3vo8xv2hQfaj60aATbNvmqYquMZUpuwqMzfW2YJrhR6Y+4Eescp/eV/uB3qkPOy8lRY+hgjVQ6gfQv0Q6odQP4T6IdQPoX4I9UOoH0L9EOqHUD+E+iHUD6F+CPVDqB9C/RDqh1A/hPoh1A+hfgj1Q6hfiNBeF+M2AeG45RMm27yD7iZsHtpFvUiQtS6XcPlzlqDN2rjhoxgo/JFCeLMOmYoIESLUFlqECBEiRIgQIUKECBEiFBPmeZ0mlXAz3THc3K2itMz1auLXwmjXoJrsGDbDVyxaCPtCiDBNCPtCiDBNCPtCiDBNCPtCiDBNCPtCiDBNCPtCiDBNCPtCiDBNCPtCiDBNCPtCGEuY8+y8RGMYRBQRFv9ZjFznH34tfLiN0nKyYxireenC7/HZxOKFmc6SZQwRIkSIMFxY/pnOCPWFfh6eShe6X2ULDUKEkxd+hyP+4lC20Jr6d9lCY9Z/yhXa7rt5TCQMKGwM31IA850l62+1SiYcDAwSGvOUSJjpLFl/q20iYZY9TZv738Hi8SZi98+ZtlJnzfr4EXY8nF4ebqt6GbnhvBCh/bSjud+u5ruFu/wuaJ3+dW/Dbxo0htdpeFjtuhWxZ11cYtAbpEFH/OX78f616VbDOtv9rfgXbs0jtJfj/fGufv9B4GcKxilgHppX73t+2pnzO0P28kxuagUcD5vZbLuvu32OG2HnEqsA4cts5ZfOufMFqadKHCDsOM7sT/VYKxW1QWPop5yz80W7HGetYhb0rM24yW6b14ZspX7y+d2ndakuWB4W/zlAP4T6IdQPoX4I9UOoH0L9EOqHUD+E+iHUD6F+CPVDqB9C/RDqh1A/hPoh1A+hfgj1Q6gfQv0Q6odQP4T6IdTvLMy9FmPVjl0nFDgvZGitsCp4DNtaYcFD6Jubpt7t6oJr/gK1rFFg1m2RrwAAAABJRU5ErkJggg==",
+  "trackCount" : 3
+} ]
+
+
 const Home = () => {
   
-    //테스트 용 데이터
-    whenPlaylistWillPlay : '20:50:12'
-   playlistImageSources :
-    [
-      'http://news.samsungdisplay.com/wp-content/uploads/2018/08/8.jpg',
-     'https://cdn.travie.com/news/photo/first/201710/img_19975_1.jpg',
-    ]
-   
   
-  const [isPlaylistSelected] = useState(false);
+  const [isPlaylistSelected,setIsPlaylistSelected] = useState(false);
   const [whenPlaylistWillPlay] = useState('12:00:00');
   const [isTimeBadgeVisible] = useState(true);
-  const [isEditSelected] = useState(true);
+  const [isEditSelected,setIsEditSelected] = useState(true);
   const [playlistImageSources] = useState([]);
-  const [isAlarmSelected] = useState(true);
-  const [isPlaylistAvailable] = useState(false);
+  const [isAlarmSelected,setIsAlarmSelected] = useState(true);
+  const [isPlaylistAvailable] = useState(true);
   const [isEditMode,setIsEditMode] = useState(false);
 
   const onClickIsEditMode = () => {
     setIsEditMode(!isEditMode);
+  }
+  const onClickAlarmButton = () =>{
+    setIsAlarmSelected(!isAlarmSelected);
+  }
+  const onClickPlaylistSelectButton = () => {
+    setIsPlaylistSelected(!isPlaylistSelected);
+    console.log(isPlaylistSelected);
+    
   }
 
   return (
@@ -36,6 +54,9 @@ const Home = () => {
       isPlaylistAvailable = {isPlaylistAvailable}
       isEditMode= {isEditMode}
       onClickIsEditMode ={onClickIsEditMode}
+      onClickAlarmButton={onClickAlarmButton}
+      onClickPlaylistSelectButton={onClickPlaylistSelectButton}
+      TestPlayListData ={TestPlayListData}
     />
   );
 };

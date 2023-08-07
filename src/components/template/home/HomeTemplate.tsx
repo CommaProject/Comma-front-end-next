@@ -12,6 +12,9 @@ interface HomeTemplateProps {
   isPlaylistAvailable: boolean;
   isEditMode: boolean;
   onClickIsEditMode : () => void;
+  onClickAlarmButton : () => void;
+  onClickPlaylistSelectButton: () => void;
+  TestPlayListData : any;
 }
 
 export const HomeTemplate = ({
@@ -23,14 +26,19 @@ export const HomeTemplate = ({
   isAlarmSelected,
   isPlaylistAvailable,
   isEditMode,
-  onClickIsEditMode
+  onClickIsEditMode,
+  onClickAlarmButton,
+  onClickPlaylistSelectButton,
+  TestPlayListData
 }: HomeTemplateProps) => {
   
   return (
     <style.Container>
+
      { isPlaylistAvailable? 
      <style.ShowPlaylist>
       <style.MainIcon/>
+      <style.EditDiv>
       { !isEditMode?
       <style.Button
        onClick = {onClickIsEditMode}
@@ -38,6 +46,7 @@ export const HomeTemplate = ({
       <style.Button
        onClick = {onClickIsEditMode}
       >취소</style.Button> }
+      </style.EditDiv>
       <PlaylistBox
         isPlaylistSelected={isPlaylistSelected}
         whenPlaylistWillPlay={whenPlaylistWillPlay}
@@ -46,6 +55,22 @@ export const HomeTemplate = ({
         playlistImageSources={playlistImageSources}
         isAlarmSelected={isAlarmSelected}
         isEditMode ={isEditMode}
+        TestPlayListData={TestPlayListData}
+        onClickAlarmButton ={onClickAlarmButton}
+        onClickPlaylistSelectButton ={onClickPlaylistSelectButton}
+      /> 
+      {/* 테스트용 */}
+      <PlaylistBox
+        isPlaylistSelected={isPlaylistSelected}
+        whenPlaylistWillPlay={whenPlaylistWillPlay}
+        isTimeBadgeVisible={isTimeBadgeVisible}
+        isEditSelected={isEditSelected}
+        playlistImageSources={playlistImageSources}
+        isAlarmSelected={isAlarmSelected}
+        isEditMode ={isEditMode}
+        TestPlayListData={TestPlayListData}
+        onClickAlarmButton ={onClickAlarmButton}
+        onClickPlaylistSelectButton ={onClickPlaylistSelectButton}
       /> 
       </style.ShowPlaylist>
       : 

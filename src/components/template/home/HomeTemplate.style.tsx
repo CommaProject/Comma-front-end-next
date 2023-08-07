@@ -4,10 +4,10 @@ import addPlaylist from '@/assets/images/addPlaylist.svg';
 
 export const Container = styled.div`
   width: 100%;
-  height: 100% ;
+  //height: 100% ;
   display:flex;
   flex-direction: column;
-  align-items: flex-end;
+  
   position: absolute;
   top: 0;
   left: 0;
@@ -48,6 +48,23 @@ ${({ theme }) => {
  
 `
 
+export const ShowPlaylist = styled.div`
+display:flex;
+justify-content: flex-start;
+flex-direction: column;
+
+`
+
+export const EditDiv =styled.div`
+  
+  display:flex;
+  justify-content: flex-end;
+  margin-bottom: 15px;
+  
+
+
+`
+
 export const AddPlaylistButton = styled(addPlaylist)`
   
   margin: 10px 20px 10px 10px;
@@ -56,9 +73,7 @@ export const AddPlaylistButton = styled(addPlaylist)`
   
 `;
 
-export const ShowPlaylist = styled.div`
 
-`
 
 
 
@@ -68,7 +83,7 @@ ${({ theme }) => {
   return css`
     width: 38px;
     height: 12px;
-    margin: 3px 3px 3px 3px;
+    margin: 5px 5px 5px 5px;
 
 
     color: ${colors.grayscale.dark};
@@ -86,7 +101,8 @@ ${({ theme }) => {
 // SVG
 export const MainIcon = styled(CommaIcon)`
   
-  margin: 134px auto 85.01px;
+  margin: 80px auto 85.01px;
+  margin-to
   position: relative;
 
   display: flex;

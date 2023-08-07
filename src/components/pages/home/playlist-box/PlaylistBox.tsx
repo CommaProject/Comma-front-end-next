@@ -12,6 +12,9 @@ interface PlaylistBoxProps {
   playlistImageSources: string[];
   isAlarmSelected: boolean;
   isEditMode:boolean;
+  TestPlayListData: any;
+  onClickAlarmButton : () => void;
+  onClickPlaylistSelectButton: () => void;
 }
 export const PlaylistBox = ({
   isPlaylistSelected,
@@ -20,32 +23,42 @@ export const PlaylistBox = ({
   isEditSelected,
   playlistImageSources, 
   isAlarmSelected,
-  isEditMode
+  isEditMode,
+  TestPlayListData,
+  onClickAlarmButton,
+  onClickPlaylistSelectButton
 }: PlaylistBoxProps) => {
   return (
-    <style.Wrapper isPlaylistSelected={isPlaylistSelected}>
+    <style.Wrapper isPlaylistSelected={isPlaylistSelected} >
       <TimeBadge
         whenPlaylistWillPlay={whenPlaylistWillPlay}
         isTimeBadgeVisible={isTimeBadgeVisible}
       />
-      {isEditMode? <style.Button isEditSelected={isEditSelected} /> : <div></div>}
-      <BigAlbumImage imgSource={playlistImageSources[0]} />
-      <SmallAlbumImage imgSources={playlistImageSources} />
-      <PlaylistTexts
+      
+      <style.PlaylistInfoBox isEditMode ={isEditMode} isPlaylistSelected={isPlaylistSelected} >
+      { isEditMode? <style.Button isPlaylistSelected={isPlaylistSelected} onClick={onClickPlaylistSelectButton}/> :'' }
+        <style.ImagesBox isEditMode ={isEditMode }>
+          <BigAlbumImage imgSource={playlistImageSources[0]} />
+          <SmallAlbumImage imgSources={playlistImageSources} />
+          </style.ImagesBox>
+      <PlaylistTexts 
         isPlaylistSelected={isPlaylistSelected}
         whenPlaylistWillPlay={whenPlaylistWillPlay}
+        isEditMode ={isEditMode }
       />
-      <style.MovePlaylistIcon isPlaylistSelected={isPlaylistSelected} />
+      {/* <style.MovePlaylistIcon isPlaylistSelected={isPlaylistSelected} /> */}
+      </style.PlaylistInfoBox>
       { !isEditMode?
       (!isPlaylistSelected ? (
         isAlarmSelected ? (
-          <style.ActivateAlarmIcon onClick={() => {}} />
+          <style.ActivateAlarmIcon onClick={onClickAlarmButton } />
         ) : (
-          <style.DeactivateAlarmIcon onClick={() => {}} />
+          <style.DeactivateAlarmIcon onClick={onClickAlarmButton} />
         )
       ) : (
         ''
       )) : ''}
+      
     </style.Wrapper>
   );
 };

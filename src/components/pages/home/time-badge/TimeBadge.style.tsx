@@ -9,14 +9,16 @@ export const Badge = styled.div<TimeBadgeStyleProps>`
     return css`
       width: 57px;
       height: 21px;
+      margin-bottom:10px;
+      
 
       display: ${isTimeBadgeVisible ? 'flex' : 'none'};
       align-items: center;
       justify-content: center;
 
-      position: absolute;
-      top: -35px;
-      left: 0;
+      // position: absolute;
+      // top: -35px;
+      // left: 0;
 
       color: ${colors.primary.main};
       font-family: ${fonts.family.pre};

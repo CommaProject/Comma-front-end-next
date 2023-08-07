@@ -8,21 +8,23 @@ interface PlaylistTextsStyleProps {
 
 interface WrapperProps {
   isPlaylistSelected: boolean;
+  isEditMode: boolean; 
 }
 
 export const Wrapper = styled.div<WrapperProps>`
-  ${({ theme, isPlaylistSelected }) => {
+  ${({ theme, isPlaylistSelected,isEditMode }) => {
     const { colors } = theme;
     return css`
-      margin-left: 24.1px;
-
+      width:200px;
+      margin-left: 17.1px;
       position: relative;
+      
 
       & > p {
         color: ${isPlaylistSelected
           ? colors.grayscale.white
           : colors.grayscale.dark};
-
+  
         :first-child {
           color: ${isPlaylistSelected
             ? colors.grayscale.white
