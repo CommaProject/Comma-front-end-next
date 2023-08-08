@@ -8,6 +8,7 @@ export const Wrapper = styled.div`
 `;
 
 export const SongName = styled.text`
+  margin-top: 5px;
   color: #0f0f0f;
   text-align: center;
   font-family: Pretendard;
