@@ -21,7 +21,7 @@ export const Wrapper = styled.div<WrapperProps>`
       
 
       & > p {
-        color: ${isPlaylistSelected
+        color: ${isPlaylistSelected && isEditMode
           ? colors.grayscale.white
           : colors.grayscale.dark};
   

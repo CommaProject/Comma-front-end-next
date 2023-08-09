@@ -2,6 +2,7 @@ import HomeTemplate from '@/components/template/home';
 import { useState } from 'react';
 
 
+
 let TestPlayListData= [ {
   "playlistId" : 123,
   "playlistTitle" : "test111 playlist",
@@ -22,40 +23,30 @@ let TestPlayListData= [ {
 const Home = () => {
   
   
-  const [isPlaylistSelected,setIsPlaylistSelected] = useState(false);
   const [whenPlaylistWillPlay] = useState('12:00:00');
   const [isTimeBadgeVisible] = useState(true);
   const [isEditSelected,setIsEditSelected] = useState(true);
   const [playlistImageSources] = useState([]);
-  const [isAlarmSelected,setIsAlarmSelected] = useState(true);
+  
   const [isPlaylistAvailable] = useState(true);
   const [isEditMode,setIsEditMode] = useState(false);
 
   const onClickIsEditMode = () => {
     setIsEditMode(!isEditMode);
-  }
-  const onClickAlarmButton = () =>{
-    setIsAlarmSelected(!isAlarmSelected);
-  }
-  const onClickPlaylistSelectButton = () => {
-    setIsPlaylistSelected(!isPlaylistSelected);
-    console.log(isPlaylistSelected);
     
   }
-
+  // const HandleEditModeChange = () => {
+  // 편집 -> 일반 모드로 변할때 isPlaylistSelected(State)를 
+  // 모두 false로 변경해주는 함수
+  // }
   return (
     <HomeTemplate
-      isPlaylistSelected={isPlaylistSelected}
       whenPlaylistWillPlay={whenPlaylistWillPlay}
       isTimeBadgeVisible={isTimeBadgeVisible}
-      isEditSelected={isEditSelected}
       playlistImageSources={playlistImageSources}
-      isAlarmSelected={isAlarmSelected}
       isPlaylistAvailable = {isPlaylistAvailable}
       isEditMode= {isEditMode}
       onClickIsEditMode ={onClickIsEditMode}
-      onClickAlarmButton={onClickAlarmButton}
-      onClickPlaylistSelectButton={onClickPlaylistSelectButton}
       TestPlayListData ={TestPlayListData}
     />
   );

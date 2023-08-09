@@ -3,31 +3,41 @@ import TimeBadge from '@/components/pages/home/time-badge';
 import BigAlbumImage from '@/components/pages/home/album-image/big-album-image';
 import SmallAlbumImage from '@/components/pages/home/album-image/small-album-image';
 import { PlaylistTexts } from '@/components/pages/home/playlist-texts/PlaylistTexts';
+import { useState } from 'react';
 
 interface PlaylistBoxProps {
-  isPlaylistSelected: boolean;
+  // isPlaylistSelected: boolean;
   whenPlaylistWillPlay: string;
   isTimeBadgeVisible: boolean;
-  isEditSelected: boolean;
+  //isEditSelected: boolean;
   playlistImageSources: string[];
-  isAlarmSelected: boolean;
+  //isAlarmSelected: boolean;
   isEditMode:boolean;
   TestPlayListData: any;
-  onClickAlarmButton : () => void;
-  onClickPlaylistSelectButton: () => void;
+  //onClickAlarmButton : () => void;
+  //onClickPlaylistSelectButton: () => void;
 }
 export const PlaylistBox = ({
-  isPlaylistSelected,
+
   whenPlaylistWillPlay,
   isTimeBadgeVisible,
-  isEditSelected,
   playlistImageSources, 
-  isAlarmSelected,
   isEditMode,
   TestPlayListData,
-  onClickAlarmButton,
-  onClickPlaylistSelectButton
+ 
 }: PlaylistBoxProps) => {
+
+  const [isAlarmSelected,setIsAlarmSelected] = useState(true);
+  const [isPlaylistSelected,setIsPlaylistSelected] = useState(false);
+
+  const onClickAlarmButton = () =>{
+    setIsAlarmSelected(!isAlarmSelected);
+  }
+  const onClickPlaylistSelectButton = () => {
+    setIsPlaylistSelected(!isPlaylistSelected);
+    
+  }
+
   return (
     <style.Wrapper isPlaylistSelected={isPlaylistSelected} >
       <TimeBadge

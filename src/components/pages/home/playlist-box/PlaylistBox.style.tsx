@@ -53,11 +53,11 @@ ${({ theme, isPlaylistSelected, isEditMode }) => {
     position: relative;
     left: ${isEditMode ? '50px' : 0};
 
-    background-color: ${isPlaylistSelected
+    background-color: ${isPlaylistSelected && isEditMode
       ? colors.primary.main
       : colors.grayscale.white};
     border-radius: 19px 0 0 19px;
-    border: 1px solid;
+    
    
   `;
 }}

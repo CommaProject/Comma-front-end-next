@@ -1,10 +1,13 @@
 import styled, { css } from 'styled-components';
 import CommaIcon from '@/assets/images/commaIconWithoutText.svg';
 import addPlaylist from '@/assets/images/addPlaylist.svg';
-
+import deletePlaylist from '@/assets/images/removeSongAndList.svg';
+interface ButtonProps {
+  isEditMode:boolean;
+}
 export const Container = styled.div`
   width: 100%;
-  //height: 100% ;
+  height: 100% ;
   display:flex;
   flex-direction: column;
   
@@ -13,28 +16,18 @@ export const Container = styled.div`
   left: 0;
 
 `
-export const SuggestBox = styled.div`
-  width:100%;
-  height: 90%;
-  display:flex;
-  flex-direction: column;
-  align-items: flex-end;
-  
 
-`
 export const SuggestAddPlaylist = styled.div`
 ${({ theme }) => {
   const { fonts, colors } = theme;
   return css`
-    width: 100%;
-    height: 90%;
-    margin-bottom:10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    //width: 100%;
+    //height: 90%;
+    margin-top:95%;
+    
+    
     text-align: center;
-    overflow: hidden;
-
+    
     color: ${colors.grayscale.dark};
     font-size: 15px;
     font-family: ${fonts.family.noto};
@@ -68,17 +61,26 @@ export const EditDiv =styled.div`
 export const AddPlaylistButton = styled(addPlaylist)`
   
   margin: 10px 20px 10px 10px;
-  
+  position: fixed;
+  top:82%;
+  left: 82%;  
   
   
 `;
 
+export const DeletePlaylistButton = styled(deletePlaylist)`
+
+  margin: 10px 20px 10px 10px;
+  position: fixed;
+  top:80%;
+  left: 80%;  
+
+`
 
 
 
-
-export const Button = styled.button`
-${({ theme }) => {
+export const Button = styled.button<ButtonProps>`
+${({ theme,isEditMode }) => {
   const { colors, fonts } = theme;
   return css`
     width: 38px;
@@ -86,7 +88,8 @@ ${({ theme }) => {
     margin: 5px 5px 5px 5px;
 
 
-    color: ${colors.grayscale.dark};
+    color: ${ !isEditMode? 
+      colors.grayscale.dark : colors.primary.caption};
     font-size: 12px;
     font-family: ${fonts.family.noto};
     font-weight: ${fonts.weight.medium};
