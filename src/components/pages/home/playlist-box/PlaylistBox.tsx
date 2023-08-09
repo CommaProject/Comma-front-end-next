@@ -37,9 +37,9 @@ export const PlaylistBox = ({
     setIsPlaylistSelected(!isPlaylistSelected);
     
   }
-
+  
   return (
-    <style.Wrapper isPlaylistSelected={isPlaylistSelected} >
+    <style.Wrapper isPlaylistSelected={isPlaylistSelected}  >
       <TimeBadge
         whenPlaylistWillPlay={whenPlaylistWillPlay}
         isTimeBadgeVisible={isTimeBadgeVisible}
