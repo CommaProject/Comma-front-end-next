@@ -8,21 +8,31 @@ export const Wrapper = styled.div`
 `;
 
 export const SongName = styled.text`
-  margin-top: 5px;
-  color: #0f0f0f;
-  text-align: center;
-  font-family: Pretendard;
-  font-size: 13px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 13px; /* 100% */
+  ${({ theme }) => {
+    const { colors, fonts } = theme;
+    return css`
+      margin-top: 5px;
+      color: ${colors.grayscale.dark};
+      text-align: center;
+      font-family: ${fonts.family.pre};
+      font-size: 13px;
+      font-style: normal;
+      font-weight: ${fonts.weight.bold};
+      line-height: 13px;
+    `;
+  }}
 `;
 
 export const SingerName = styled.text`
-  color: #666;
-  font-family: Pretendard;
-  font-size: 13px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 13px;
+  ${({ theme }) => {
+    const { colors, fonts } = theme;
+    return css`
+      color: ${colors.grayscale.gray500};
+      font-family: ${fonts.family.pre};
+      font-size: 13px;
+      font-style: normal;
+      font-weight: ${fonts.weight.medium};
+      line-height: 13px;
+    `;
+  }}
 `;

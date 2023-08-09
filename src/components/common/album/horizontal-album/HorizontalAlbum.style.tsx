@@ -12,23 +12,33 @@ export const TextContainer = styled.div`
   margin-left: 15px;
 `;
 
-export const SongName = styled.span`
-  color: #0f0f0f;
-  font-family: Pretendard;
-  font-size: 13px;
-  font-weight: 700;
-  line-height: 16px;
+export const SongName = styled.text`
+  ${({ theme }) => {
+    const { colors, fonts } = theme;
+    return css`
+      color: ${colors.grayscale.dark};
+      font-family: ${fonts.family.pre};
+      font-size: 13px;
+      font-weight: ${fonts.weight.regular};
+      line-height: 16px;
+    `;
+  }}
 `;
 
-export const SingerName = styled.span`
-  color: #9c9c9c;
-  font-family: Pretendard;
-  font-size: 13px;
-  font-weight: 500;
-  line-height: 16px;
+export const SingerName = styled.text`
+  ${({ theme }) => {
+    const { colors, fonts } = theme;
+    return css`
+      color: ${colors.grayscale.gray300};
+      font-family: ${fonts.family.pre};
+      font-size: 13px;
+      font-weight: ${fonts.weight.medium};
+      line-height: 16px;
+    `;
+  }}
 `;
 
-export const Timer = styled.span`
+export const Timer = styled.text`
   color: #666;
   font-family: Pretendard;
   font-size: 12px;
