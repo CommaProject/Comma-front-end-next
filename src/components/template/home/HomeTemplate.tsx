@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router';
+
 import * as style from '@/components/template/home/HomeTemplate.style';
 import PlaylistBox from '@/components/pages/home/playlist-box';
 import { useState } from 'react';
@@ -10,6 +12,7 @@ interface HomeTemplateProps {
   isEditMode: boolean;
   onClickIsEditMode : () => void;
   TestPlayListData : any;
+  
 }
 
 
@@ -20,10 +23,15 @@ export const HomeTemplate = ({
   isPlaylistAvailable,
   isEditMode,
   onClickIsEditMode,
-  TestPlayListData
+  TestPlayListData,
 }: HomeTemplateProps) => {
   
-  
+  const router = useRouter();
+  const currentFirstPath = router.pathname.split('/')[1];
+  const onClickAddPlaylistButton = () => {
+  console.log("애드버튼 누름",currentFirstPath); 
+  router.push(`${currentFirstPath}/timesetting`);
+  }
   return (
     <style.Container>
 
@@ -54,7 +62,7 @@ export const HomeTemplate = ({
        <style.SuggestAddPlaylist>콤마 플레이리스트가 없어요.</style.SuggestAddPlaylist>
       }
       { !isEditMode?
-      <style.AddPlaylistButton/> : <style.DeletePlaylistButton/>
+      <style.AddPlaylistButton onClick ={onClickAddPlaylistButton}/> : <style.DeletePlaylistButton/>
       }
       
     </style.Container>

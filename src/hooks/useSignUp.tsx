@@ -25,7 +25,7 @@ export const useRegister = () => {
     nickName: '',
     sex: 'x',
     age: 0,
-    recommendTime: { meridiem: 'AM', hour: 1, min: 1 },
+    recommendTime: { meridiem: 'AM', hour: 1, min: 0 },
     genres: [],
     artistNames: [],
   });

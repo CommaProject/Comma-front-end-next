@@ -41,12 +41,14 @@ export const CustomSwiper = styled(Swiper)`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  
 `;
 
 export const CustomSwiperSlide = styled(SwiperSlide)`
   display: flex;
   justify-content: center;
   align-items: center;
+  
 `;
 
 export const Slide = styled.div<SlideStateProps>`
@@ -64,7 +66,7 @@ export const Slide = styled.div<SlideStateProps>`
 
       background: ${isActivate ? colors.primary.main : colors.grayscale.white};
       border-radius: 20px;
-
+      
       cursor: pointer;
     `;
   }}
