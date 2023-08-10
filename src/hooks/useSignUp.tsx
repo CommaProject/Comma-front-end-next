@@ -70,8 +70,9 @@ export const useRegister = () => {
   const handleMin = (swiper: SwiperCore) => {
     setSignUpState({
       ...signUpState,
-      recommendTime: { ...signUpState.recommendTime, min: swiper.realIndex },
+      recommendTime: { ...signUpState.recommendTime, min: swiper.realIndex*10 },
     });
+    
   };
   const handleArtistSelect = (artist: string) => {
     if (!signUpState.artistNames.includes(artist)) {
