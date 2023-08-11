@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import ActivateAlarmSvg from '@/assets/images/activateAlarm.svg';
 import DeactivateAlarmSvg from '@/assets/images/deactivateAlarm.svg';
-import MovePlaylistSvg from '@/assets/images/movePlaylist.svg';
+//import MovePlaylistSvg from '@/assets/images/movePlaylist.svg';
 
 interface WrapperProps {
   isPlaylistSelected: boolean;
