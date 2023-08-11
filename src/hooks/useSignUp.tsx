@@ -57,7 +57,7 @@ export const useRegister = () => {
       ...signUpState,
       recommendTime: { ...signUpState.recommendTime, meridiem },
     });
-  };
+  }; 
   const handleHour = (swiper: SwiperCore) => {
     setSignUpState({
       ...signUpState,
