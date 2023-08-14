@@ -20,23 +20,21 @@ export const Wrapper = styled.div`
 `;
 
 export const ImageItem = styled.div<ImageItemProps>`
-  ${({ num, zIndex }) => {
-    return css`
-      width: 32.76px;
-      height: 32.76px;
+  ${({ num, zIndex }) => css`
+    width: 32.76px;
+    height: 32.76px;
 
-      position: absolute;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-      &:nth-child(n) {
-        left: calc(58px - ${num} * 8.86px);
+    &:nth-child(n) {
+      left: calc(58px - ${num} * 8.86px);
 
-        z-index: ${zIndex};
-      }
-    `;
-  }}
+      z-index: ${zIndex};
+    }
+  `}
 `;
 
 export const Span = styled.div`

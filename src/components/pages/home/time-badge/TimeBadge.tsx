@@ -17,12 +17,12 @@ export const TimeBadge = ({
     if (!time.includes(':')) return '-- --:--';
 
     const splitArr = time.split(':');
-    let hour = parseInt(splitArr[0]);
+    let hour = parseInt(splitArr[0], 10);
     const ampm = hour >= 12 ? 'PM' : 'AM';
     hour = hour % 12 ? hour % 12 : 12; // 0시일 때 12시로 변경
     const minute = splitArr[1];
 
-    return ampm + ' ' + hour + ':' + minute;
+    return `${ampm} ${hour}:${minute}`;
   }
 
   return (

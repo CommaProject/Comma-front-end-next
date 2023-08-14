@@ -20,8 +20,7 @@ export const useLogIn = () => {
   const { mutate } = useMutation(['login'], logIn, {
     onSuccess: (response) => {
       if (response.isSuccess && response.result.data) {
-        console.log(response);
-        if (response.result.data.name == null) router.push('/signup');
+        if (response.result.data.nickName == null) router.push('/signup');
         else router.push('/');
       }
     },

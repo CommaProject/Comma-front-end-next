@@ -25,7 +25,7 @@
       "@/pages/*": ["./src/pages/*"],
       "@/styles/*": ["./src/styles/*"],
       "@/stores/*": ["./src/stores/*"],
-      "@/types/*": ["./src/types/*"],
+      "@/types/*": ["./src/constants/types/*"],
       "@/utils/*": ["./src/utils/*"]
     },
     "incremental": true

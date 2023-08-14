@@ -17,6 +17,7 @@ interface PlaylistBoxProps {
   //onClickAlarmButton : () => void;
   //onClickPlaylistSelectButton: () => void;
 }
+
 export const PlaylistBox = ({
 
   whenPlaylistWillPlay,

@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import ActivateAlarmSvg from '@/assets/images/activateAlarm.svg';
 import DeactivateAlarmSvg from '@/assets/images/deactivateAlarm.svg';
-//import MovePlaylistSvg from '@/assets/images/movePlaylist.svg';
+import MovePlaylistSvg from '@/assets/images/movePlaylist.svg';
 
 interface WrapperProps {
   isPlaylistSelected: boolean;
@@ -94,19 +94,19 @@ ${({ theme, isPlaylistSelected }) => {
 `;
 
 //SVG
-//플레이리스트 위치는 옮기지 못해서 우선 주석처리 해두었습니다
-// export const MovePlaylistIcon = styled(MovePlaylistSvg)<WrapperProps>`
-//   ${({ isPlaylistSelected }) => {
-//     return css`
-//       display: ${isPlaylistSelected ? '' : 'none'};
 
-//       position: absolute;
-//       right: 15px;
+export const MovePlaylistIcon = styled(MovePlaylistSvg)<WrapperProps>`
+  ${({ isPlaylistSelected }) => {
+    return css`
+      display: ${isPlaylistSelected ? '' : 'none'};
 
-//       cursor: pointer;
-//     `;
-//   }}
-// `;
+      position: absolute;
+      right: 15px;
+
+      cursor: pointer;
+    `;
+  }}
+`;
 
 // SVG
 export const ActivateAlarmIcon = styled(ActivateAlarmSvg)`
