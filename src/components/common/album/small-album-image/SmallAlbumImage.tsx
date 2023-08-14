@@ -10,7 +10,7 @@ export const SmallAlbumImage = ({ imgSources }: SmallAlbumImageProps) => {
    */
   const widthHeight = '32.76px';
   const imgSourcesLength = imgSources.length - 1;
-  if (imgSourcesLength > 0) {
+  if (imgSourcesLength > 0 && imgSourcesLength<=2) {
     return (
       <style.Wrapper>
         {imgSources.map((source, index) => (
@@ -30,7 +30,26 @@ export const SmallAlbumImage = ({ imgSources }: SmallAlbumImageProps) => {
         ))}
       </style.Wrapper>
     );
+  }else if (imgSourcesLength >=3){
+    return (
+      <style.Wrapper>
+        {imgSources.slice(0, 3).map((source, index) => (
+          <style.ImageItem key={source} num={index} zIndex={10 - index}>
+            <style.Img
+              width={widthHeight}
+              height={widthHeight}
+              src={source}
+              layout="fill"
+              objectFit="cover"
+              objectPosition="center"
+              alt="image"
+            />
+            <style.Span>{index === 0 ? `${imgSourcesLength - 3}+` : ''}</style.Span>
+          </style.ImageItem>
+        ))}
+      </style.Wrapper>
+    );
+  } else {
+    return null;
   }
-
-  return null;
 };

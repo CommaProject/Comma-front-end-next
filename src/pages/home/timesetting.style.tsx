@@ -107,7 +107,7 @@ ${({ theme }) => {
 export const MyPlaylistBox =styled.div`
 
     width: 100%;
-    margin: 25px 0 0 5px;
+    margin: 20px 0 0 5px;
 
     display: flex;
     overflow-x: scroll;

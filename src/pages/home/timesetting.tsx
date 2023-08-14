@@ -11,6 +11,7 @@ import SwiperCore from 'swiper';
 import MusicPlay from '@/components/common/music-play';
 import { PlayListSettingType } from '@/constants/types/playlistSettingTypes';
 import { start } from 'repl';
+import { Album } from '~/src/components/common/album/Album';
 
 
 
@@ -129,7 +130,7 @@ const TimeSetting = ({
                 <style.MyPlaylistBox>
                     {playlists.map(({playlistId,repAlbumImageUrl,playlistTitle}) => (
                         <style.PlaylistInfo  onClick = {() => {console.log(playlistTitle)}}>
-                            <style.AlbumImg src={repAlbumImageUrl}/>
+                            <Album url={repAlbumImageUrl} size={81.5} />
                             <style.PlaylistTitle>{playlistTitle}</style.PlaylistTitle>
                         </style.PlaylistInfo>
             ))}

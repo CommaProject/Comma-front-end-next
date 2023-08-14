@@ -1,9 +1,10 @@
 import * as style from '@/components/pages/home/playlist-box/PlaylistBox.style';
 import TimeBadge from '@/components/pages/home/time-badge';
 import BigAlbumImage from '@/components/pages/home/album-image/big-album-image';
-import SmallAlbumImage from '@/components/pages/home/album-image/small-album-image';
+import SmallAlbumImage from '~/src/components/common/album/small-album-image';
 import { PlaylistTexts } from '@/components/pages/home/playlist-texts/PlaylistTexts';
 import { useState } from 'react';
+import { Album } from '@/components/common/album/Album';
 
 interface PlaylistBoxProps {
   // isPlaylistSelected: boolean;
@@ -49,7 +50,8 @@ export const PlaylistBox = ({
       <style.PlaylistInfoBox isEditMode ={isEditMode} isPlaylistSelected={isPlaylistSelected} >
       { isEditMode? <style.Button isPlaylistSelected={isPlaylistSelected} onClick={onClickPlaylistSelectButton}/> :'' }
         <style.ImagesBox isEditMode ={isEditMode }>
-          <BigAlbumImage imgSource={playlistImageSources[0]} />
+          
+          <Album url={playlistImageSources[0]} size={81.5} />
           <SmallAlbumImage imgSources={playlistImageSources} />
           </style.ImagesBox>
       <PlaylistTexts 

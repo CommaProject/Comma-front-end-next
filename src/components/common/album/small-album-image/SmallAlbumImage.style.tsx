@@ -9,6 +9,7 @@ export const Img = styled(Image)`
   background: rgba(15, 15, 15, 0.4);
   background-blend-mode: multiply;
   border-radius: 7px;
+  
 `;
 
 export const Wrapper = styled.div`
