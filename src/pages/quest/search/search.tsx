@@ -1,13 +1,25 @@
 import { SearchTemplate } from '@/components/template/quest/search';
+import { useState } from 'react';
+import { getSpotifyArtistNameAsync } from '~/src/apis/search';
+import { useSearch } from '@/hooks/useSearch';
 
-const search = () => {
+const Search = () => {
+  // Music, Artist, CommaUser
+
+  const { mutate } = useSearch();
+
+  const [searchTarget, setSearchTarget] = useState('Music');
+
   const handleOnClickDeleteItem = (idnex: number) => {
     console.log(idnex);
   };
   const handleOnClickSearchItem = (searchItem: string) => {
     console.log(searchItem);
   };
-  const handleEnterKeyPress = () => {};
+  const handleEnterKeyPress = () => {
+    // console.log('getSpotifyArtistNameAsync', getSpotifyArtistNameAsync('IU'));
+    mutate('artistName');
+  };
   const handleOnClickEraseIcon = () => {};
   const handleOnClickCancelIcon = () => {};
 
@@ -25,4 +37,4 @@ const search = () => {
   );
 };
 
-export default search;
+export default Search;
