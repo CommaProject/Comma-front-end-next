@@ -18,7 +18,7 @@ export const Input = styled.input`
       width: 100%;
       height: 100%;
       padding-left: 25px;
-      background-color: black;
+      background-color: ${colors.grayscale.dark};
       border: 0px;
       border-bottom: 2px solid ${colors.grayscale.white};
 
@@ -50,7 +50,7 @@ export const EraseIcon = styled(CancelSVG)`
   ${({ theme }) => {
     const { colors } = theme;
     return `
-      right: 30px; /* Adjust the value as per your requirements */
+      right: 30px; 
       position: absolute;
       cursor: pointer;
     `;

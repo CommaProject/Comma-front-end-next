@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import SearchIconSVG from '@/assets/images/Search.svg';
+import SearchIconSVG from '@/assets/images/search.svg';
 
 export const Wrapper = styled.div`
   position: relative;
