@@ -18,6 +18,7 @@ export const TextList = ({
     <style.SearchItemBox>
       {textMap.map((search, index) => (
         <style.SearchItem
+          // eslint-disable-next-line react/no-array-index-key
           key={index}
           onClick={() => {
             if (onClickSearchItem) {
