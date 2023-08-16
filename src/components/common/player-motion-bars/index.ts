@@ -1,3 +1,3 @@
-import {MusicPlaybar} from './PlayerMotionBars'
+import { PlayerMotionBars } from './PlayerMotionBars';
 
-export {MusicPlaybar}
+export { PlayerMotionBars };
