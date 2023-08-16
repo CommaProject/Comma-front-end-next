@@ -14,7 +14,7 @@ interface HorizontalAlbumWithIconProps extends HorizontalAlbumProps {
   isLike: boolean;
 }
 
-const HorizontalAlbumWithIcon = ({
+export const HorizontalAlbumWithIcon = ({
   imgUrl,
   songName,
   singerName,
@@ -38,5 +38,3 @@ const HorizontalAlbumWithIcon = ({
     </style.ButtonContainer>
   </style.Wrapper>
 );
-
-export default HorizontalAlbumWithIcon;
