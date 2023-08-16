@@ -1,12 +1,16 @@
 import * as style from './RoundInput.style';
 
-export const RoundInput = () => (
+interface RoundInputProps{
+  completedTextValue: string
+  onClickRoundInput: () => void;
+}
+
+export const RoundInput = ({completedTextValue, onClickRoundInput}: RoundInputProps) => (
   <style.Wrapper>
     <style.SearchIcon />
     <style.Input
-      onClick={() => {
-        console.log('input Clicked');
-      }}
+      value={completedTextValue}
+      onClick={() => {onClickRoundInput}}
     />
   </style.Wrapper>
 );

@@ -3,7 +3,7 @@ import SearchIconSVG from '@/assets/images/search.svg';
 
 export const Wrapper = styled.div`
   position: relative;
-  width: 360px;
+  width: 100%;
   height: 32px;
 `;
 
