@@ -1,11 +1,18 @@
 import styled, { css } from 'styled-components';
 import CommaIcon from '@/assets/images/commaIconWithoutText.svg';
+import ArrowIcon from '@/assets/images/arrow.svg';
 import addPlaylist from '@/assets/images/addPlaylist.svg';
 import deletePlaylist from '@/assets/images/removeSongAndList.svg';
 interface ButtonProps {
   isEditMode:boolean;
 }
-export const Container = styled.div`
+interface ContainerProps {
+  isPlaylistAvailable:boolean;
+}
+export const Container = styled.div<ContainerProps>`
+${({ theme ,isPlaylistAvailable}) => {
+  const { fonts, colors } = theme;
+  return css`
   width: 100%;
   height: 100% ;
   display:flex;
@@ -15,7 +22,44 @@ export const Container = styled.div`
   top: 0;
   left: 0;
 
+  color: ${
+    isPlaylistAvailable? 
+    colors.grayscale.dark : colors.grayscale.white};
+  background-color: ${
+    !isPlaylistAvailable? 
+    colors.grayscale.dark : colors.grayscale.white};
+  opacity: ${
+    !isPlaylistAvailable?
+    0.7: 1.0
+  };
+
+  `;
+}}
+ 
+
 `
+export const Box = styled.div`
+  width: 100%;
+  height: 100% ;
+
+  display:flex;
+  flex-direction: column;
+  align-items:center;
+  
+  
+`
+export const Text = styled.div`
+  margin-top:350px;
+`
+export const Arrow = styled(ArrowIcon)`
+  
+  
+  position: relative;
+  top:320px;
+  left:50px;
+  display: flex;
+  justify-content: center;
+`;
 
 export const SuggestAddPlaylist = styled.div`
 ${({ theme }) => {

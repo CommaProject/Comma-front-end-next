@@ -26,8 +26,8 @@ const Home = () => {
   const [isTimeBadgeVisible] = useState(true);
   const [isEditSelected,setIsEditSelected] = useState(true);
   
-  
-  const [isPlaylistAvailable] = useState(true);
+  const [isPlaylistAvailable] = useState(false);
+  const [isCommaPlaylistAvailable] = useState(false);
   const [isEditMode,setIsEditMode] = useState(false);
   const [isTimeSetting,setIsTimeSetting] = useState(false);
 
@@ -44,8 +44,8 @@ const Home = () => {
     <HomeTemplate
       whenPlaylistWillPlay={whenPlaylistWillPlay}
       isTimeBadgeVisible={isTimeBadgeVisible}
-    
-      isPlaylistAvailable = {isPlaylistAvailable}
+      isPlaylistAvailable={isPlaylistAvailable}
+      isCommaPlaylistAvailable = {isCommaPlaylistAvailable}
       isEditMode= {isEditMode}
       onClickIsEditMode ={onClickIsEditMode}
       TestPlayListData ={TestPlayListData}
