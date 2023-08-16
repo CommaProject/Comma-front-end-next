@@ -1,3 +1,3 @@
-import HorizontalAlbumWithIcon from './HorizontalAlbumWithIcon';
+import { HorizontalAlbumWithIcon } from './HorizontalAlbumWithIcon';
 
 export { HorizontalAlbumWithIcon };
