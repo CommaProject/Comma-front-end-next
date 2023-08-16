@@ -4,6 +4,7 @@ interface PlaylistTextsProps {
   isPlaylistSelected: boolean;
   whenPlaylistWillPlay: string;
   isEditMode: boolean;
+  
 }
 export const PlaylistTexts = ({ isPlaylistSelected }: PlaylistTextsProps, {isEditMode}: PlaylistTextsProps) => {
   return (
@@ -14,7 +15,7 @@ export const PlaylistTexts = ({ isPlaylistSelected }: PlaylistTextsProps, {isEdi
         isFontsize15Else12={true}
       >
         {/*  TODO : 이 부분을 Date 자바스크립트 함수로 구현하려했는데 렌더링 쪽 에러가 생겨서 포기했습니다 ㅠ*/}
-        05:34:23
+        
       </style.Text>
       <style.Text
         isFontBoldElseRegular={true}

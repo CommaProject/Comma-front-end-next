@@ -22,5 +22,6 @@ export const HorizontalAlbum = ({
       <style.SingerName>{singerName}</style.SingerName>
       <style.Timer>{timer}</style.Timer>
     </style.TextContainer>
+    
   </style.Wrapper>
 );

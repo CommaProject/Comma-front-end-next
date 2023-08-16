@@ -2,16 +2,16 @@ import { useRouter } from 'next/router';
 
 import * as style from '@/components/template/home/HomeTemplate.style';
 import PlaylistBox from '@/components/pages/home/playlist-box';
-import { useState } from 'react';
+import { PlaylistType } from '~/src/constants/types/playlistTypes';
 
 interface HomeTemplateProps {
   whenPlaylistWillPlay: string;
   isTimeBadgeVisible: boolean;
-  playlistImageSources: string[];
+  
   isPlaylistAvailable: boolean;
   isEditMode: boolean;
   onClickIsEditMode : () => void;
-  TestPlayListData : any;
+  TestPlayListData : PlaylistType[]; //나중에 객체담은 배열로 바꿔야할듯
   
 }
 
@@ -19,7 +19,7 @@ interface HomeTemplateProps {
 export const HomeTemplate = ({
   whenPlaylistWillPlay,
   isTimeBadgeVisible,
-  playlistImageSources,
+  
   isPlaylistAvailable,
   isEditMode,
   onClickIsEditMode,
@@ -29,9 +29,10 @@ export const HomeTemplate = ({
   const router = useRouter();
   const currentFirstPath = router.pathname.split('/')[1];
   const onClickAddPlaylistButton = () => {
-  console.log("애드버튼 누름",currentFirstPath); 
+  console.log("애드버튼 누름",TestPlayListData); 
   router.push(`${currentFirstPath}/timesetting`);
   }
+  
   return (
     <style.Container>
 
@@ -49,14 +50,16 @@ export const HomeTemplate = ({
        isEditMode={isEditMode}
       >취소</style.Button> }
       </style.EditDiv>
+      {TestPlayListData.map((playlist:PlaylistType,index:number) => (
       <PlaylistBox
         whenPlaylistWillPlay={whenPlaylistWillPlay}
         isTimeBadgeVisible={isTimeBadgeVisible}
-        playlistImageSources={playlistImageSources}
         isEditMode ={isEditMode}
-        TestPlayListData={TestPlayListData}
+        key={index}
+        playlist={playlist}
+        
         /> 
-     
+      ))}
       </style.ShowPlaylist>
       : 
        <style.SuggestAddPlaylist>콤마 플레이리스트가 없어요.</style.SuggestAddPlaylist>

@@ -1,31 +1,26 @@
 import * as style from '@/components/pages/home/playlist-box/PlaylistBox.style';
 import TimeBadge from '@/components/pages/home/time-badge';
-import BigAlbumImage from '@/components/pages/home/album-image/big-album-image';
-import SmallAlbumImage from '~/src/components/common/album/small-album-image';
 import { PlaylistTexts } from '@/components/pages/home/playlist-texts/PlaylistTexts';
 import { useState } from 'react';
 import { Album } from '@/components/common/album/Album';
-
+import { PlaylistType } from '~/src/constants/types/playlistTypes';
+import {usePlaylist} from '@/hooks/usePlaylist';
 interface PlaylistBoxProps {
-  // isPlaylistSelected: boolean;
+  
   whenPlaylistWillPlay: string;
   isTimeBadgeVisible: boolean;
-  //isEditSelected: boolean;
-  playlistImageSources: string[];
-  //isAlarmSelected: boolean;
   isEditMode:boolean;
-  TestPlayListData: any;
-  //onClickAlarmButton : () => void;
-  //onClickPlaylistSelectButton: () => void;
+  playlist: PlaylistType;
+  
 }
 
 export const PlaylistBox = ({
 
   whenPlaylistWillPlay,
   isTimeBadgeVisible,
-  playlistImageSources, 
   isEditMode,
-  TestPlayListData,
+  playlist
+ 
  
 }: PlaylistBoxProps) => {
 
@@ -39,25 +34,31 @@ export const PlaylistBox = ({
     setIsPlaylistSelected(!isPlaylistSelected);
     
   }
+  const { navigateToPlaylist } = usePlaylist();
+  
+  const onClickPlaylist = () =>{
+    console.log(playlist.playlistId);
+    navigateToPlaylist(playlist.playlistId);
+  }
   
   return (
-    <style.Wrapper isPlaylistSelected={isPlaylistSelected}  >
+    <style.Wrapper isPlaylistSelected={isPlaylistSelected} onClick={onClickPlaylist} >
       <TimeBadge
         whenPlaylistWillPlay={whenPlaylistWillPlay}
         isTimeBadgeVisible={isTimeBadgeVisible}
       />
-      
       <style.PlaylistInfoBox isEditMode ={isEditMode} isPlaylistSelected={isPlaylistSelected} >
       { isEditMode? <style.Button isPlaylistSelected={isPlaylistSelected} onClick={onClickPlaylistSelectButton}/> :'' }
         <style.ImagesBox isEditMode ={isEditMode }>
           
-          <Album url={playlistImageSources[0]} size={81.5} />
-          <SmallAlbumImage imgSources={playlistImageSources} />
+          <Album url={playlist.repAlbumImageUrl} size={81.5} />
+          {/* <SmallAlbumImage imgSources={playlist.repAlbumImageUrl} /> */}
           </style.ImagesBox>
       <PlaylistTexts 
         isPlaylistSelected={isPlaylistSelected}
         whenPlaylistWillPlay={whenPlaylistWillPlay}
         isEditMode ={isEditMode }
+        
       />
       {/* <style.MovePlaylistIcon isPlaylistSelected={isPlaylistSelected} /> */}
       </style.PlaylistInfoBox>

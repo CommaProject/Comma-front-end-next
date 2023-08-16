@@ -19,7 +19,7 @@ export const SongName = styled.text`
       color: ${colors.grayscale.dark};
       font-family: ${fonts.family.pre};
       font-size: 13px;
-      font-weight: ${fonts.weight.regular};
+      font-weight: ${fonts.weight.bold};
       line-height: 16px;
     `;
   }}

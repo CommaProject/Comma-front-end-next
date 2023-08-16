@@ -15,7 +15,7 @@ export const SmallAlbumImage = ({ imgSources }: SmallAlbumImageProps) => {
       <style.Wrapper>
         {imgSources.map((source, index) => (
           // TODO : [need-check] z-index 값을 임의로 10으로 설정 했습니다
-          <style.ImageItem key={source} num={index} zIndex={10 - index}>
+          <style.ImageItem key={index} num={index} zIndex={10 - index}>
             <style.Img
               width={widthHeight}
               height={widthHeight}
@@ -34,7 +34,7 @@ export const SmallAlbumImage = ({ imgSources }: SmallAlbumImageProps) => {
     return (
       <style.Wrapper>
         {imgSources.slice(0, 3).map((source, index) => (
-          <style.ImageItem key={source} num={index} zIndex={10 - index}>
+          <style.ImageItem key={index} num={index} zIndex={10 - index}>
             <style.Img
               width={widthHeight}
               height={widthHeight}
