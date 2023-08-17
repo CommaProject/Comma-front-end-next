@@ -6,7 +6,7 @@ import { useSearch } from '@/hooks/useSearch';
 const Search = () => {
   // Music, Artist, CommaUser
 
-  const { mutateArtist, mutateCommaUser } = useSearch();
+  const { mutateArtist, mutateTrack, mutateCommaUser } = useSearch();
 
   const [searchTarget, setSearchTarget] = useState('Music');
   const [completedText, setCompletedText] = useState('');
@@ -19,7 +19,8 @@ const Search = () => {
   };
   const handleEnterKeyPress = () => {
     // mutateArtist(completedText);
-    mutateCommaUser(completedText);
+    // mutateCommaUser(completedText);
+    mutateTrack(completedText);
   };
   const handleOnClickEraseIcon = () => {};
   const handleOnClickCancelIcon = () => {};

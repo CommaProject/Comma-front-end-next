@@ -5,14 +5,19 @@ import {
   getSpotifyArtistProps,
   getCommaUserAsync,
   getSpotifyArtistAsync,
+  getTrackAsync,
 } from '@/apis/search';
 
-const getSpotifyArtist = async (artistNames: string) => {
-  const { isSuccess, result } = await getSpotifyArtistAsync(artistNames);
+const getSpotifyArtist = async (artistName: string) => {
+  const { isSuccess, result } = await getSpotifyArtistAsync(artistName);
 
   return { isSuccess, result };
 };
+const getSpotifyTrack = async (trackName: string) => {
+  const { isSuccess, result } = await getTrackAsync(trackName);
 
+  return { isSuccess, result };
+};
 const getCommaUser = async (commaUserName: string) => {
   const { isSuccess, result } = await getCommaUserAsync(commaUserName);
 
@@ -23,19 +28,21 @@ export const useSearch = () => {
   // 검색은 Loading이 있을 수 있으니까 React-Query 사용.
   const [searchedData, setSearchedData] = useState<getSpotifyArtistProps[]>([]);
 
-  const { mutate: mutateArtist } = useMutation(
-    ['artistName'],
-    getSpotifyArtist,
-    {
-      onSuccess: (response) => {
-        if (response.result.data && 'artistId' in response.result.data) {
-          const newArtistData = response.result.data;
-          setSearchedData(() => [newArtistData]);
-          // router.push()
-        }
-      },
+  const { mutate: mutateArtist } = useMutation(['artist'], getSpotifyArtist, {
+    onSuccess: (response) => {
+      if (response.result.data && 'artistId' in response.result.data) {
+        const newArtistData = response.result.data;
+        setSearchedData(() => [newArtistData]);
+        // router.push()
+      }
     },
-  );
+  });
+
+  const { mutate: mutateTrack } = useMutation(['Track'], getSpotifyTrack, {
+    onSuccess: (response) => {
+      console.log(response.result.data);
+    },
+  });
 
   const { mutate: mutateCommaUser } = useMutation(['commaUser'], getCommaUser, {
     onSuccess: (response) => {
@@ -45,6 +52,7 @@ export const useSearch = () => {
 
   return {
     mutateArtist,
+    mutateTrack,
     mutateCommaUser,
   };
 };

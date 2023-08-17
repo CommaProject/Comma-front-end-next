@@ -25,6 +25,36 @@ export interface getCommaUserProps {
   joinDate: string;
   profileImage: string;
 }
+
+export interface getTrackProps {
+  trackId: string;
+  trackName: string;
+  artist: string;
+  artistId: string;
+  albumId: string;
+  previewUrl: string;
+  images: [
+    {
+      height: number;
+      url: string;
+      width: number;
+    },
+    {
+      height: number;
+      url: string;
+      width: number;
+    },
+    {
+      height: number;
+      url: string;
+      width: number;
+    },
+  ];
+  popularity: number;
+  releaseData: string;
+  durationMinute: string;
+  durationSecond: string;
+}
 /**
  * Artist 데이터 가져오기
  * @param artistName 가수 이름
@@ -43,7 +73,7 @@ export async function getSpotifyArtistAsync(
 
 /**
  * CommaUser 데이터 가져오기
- * @param userName 가수 이름
+ * @param userName 이름
  * @returns 성공: 200
  */
 export async function getCommaUserAsync(
@@ -51,6 +81,22 @@ export async function getCommaUserAsync(
 ): ApiResponse<getCommaUserProps> {
   const response = await getAsync<getCommaUserProps>(
     `/search/user?name=${userName}`,
+    {},
+  );
+
+  return response;
+}
+
+/**
+ * Track 데이터 가져오기
+ * @param track 이름
+ * @returns 성공: 200
+ */
+export async function getTrackAsync(
+  trackName: string,
+): ApiResponse<getTrackProps> {
+  const response = await getAsync<getTrackProps>(
+    `/spotify/artist/{${trackName}}`,
     {},
   );
 
