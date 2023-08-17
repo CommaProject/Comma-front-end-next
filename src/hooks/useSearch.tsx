@@ -6,6 +6,8 @@ import {
   getCommaUserAsync,
   getSpotifyArtistAsync,
   getTrackAsync,
+  getCommaUserProps,
+  getTrackProps,
 } from '@/apis/search';
 
 const getSpotifyArtist = async (artistName: string) => {
@@ -26,27 +28,38 @@ const getCommaUser = async (commaUserName: string) => {
 
 export const useSearch = () => {
   // 검색은 Loading이 있을 수 있으니까 React-Query 사용.
-  const [searchedData, setSearchedData] = useState<getSpotifyArtistProps[]>([]);
+  const [spotifyArtistData, setSpotifyArtistData] = useState<
+    getSpotifyArtistProps[]
+  >([]);
+
+  const [spotifyTrackData, setSpotifyTrackData] = useState<getTrackProps[]>([]);
+
+  const [commaUserData, setCommaUserData] = useState<getCommaUserProps[]>([]);
+
+  const { mutate: mutateTrack } = useMutation(['Track'], getSpotifyTrack, {
+    onSuccess: (response) => {
+      if (response.result.data && 'trackId' in response.result.data) {
+        const newTrackData = response.result.data;
+        setSpotifyTrackData(() => [newTrackData]);
+      }
+    },
+  });
 
   const { mutate: mutateArtist } = useMutation(['artist'], getSpotifyArtist, {
     onSuccess: (response) => {
       if (response.result.data && 'artistId' in response.result.data) {
         const newArtistData = response.result.data;
-        setSearchedData(() => [newArtistData]);
-        // router.push()
+        setSpotifyArtistData(() => [newArtistData]);
       }
-    },
-  });
-
-  const { mutate: mutateTrack } = useMutation(['Track'], getSpotifyTrack, {
-    onSuccess: (response) => {
-      console.log(response.result.data);
     },
   });
 
   const { mutate: mutateCommaUser } = useMutation(['commaUser'], getCommaUser, {
     onSuccess: (response) => {
-      console.log(response.result.data);
+      if (response.result.data && 'userId' in response.result.data) {
+        const newCommaUserData = response.result.data;
+        setCommaUserData(() => [newCommaUserData]);
+      }
     },
   });
 
