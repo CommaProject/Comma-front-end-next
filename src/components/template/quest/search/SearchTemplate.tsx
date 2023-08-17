@@ -1,5 +1,6 @@
 import { LineInput } from '@/components/common/line-input';
 import { TextList } from '@/components/pages/quest/search/text-list/TextList';
+import { Dispatch, SetStateAction } from 'react';
 import * as style from './SearchTemplate.style';
 
 interface SearchTemplateProps {
@@ -10,6 +11,7 @@ interface SearchTemplateProps {
   onEnterKeyPress: () => void;
   onClickEraseIcon: () => void;
   onClickCancelKeyPress: () => void;
+  setCompletedText: Dispatch<SetStateAction<string>>;
 }
 
 export const SearchTemplate = ({
@@ -20,9 +22,11 @@ export const SearchTemplate = ({
   onEnterKeyPress,
   onClickEraseIcon,
   onClickCancelKeyPress,
+  setCompletedText,
 }: SearchTemplateProps) => (
   <style.Wrapper>
     <LineInput
+      setCompletedText={setCompletedText}
       handleEnterKeyPress={onEnterKeyPress}
       handleEraseIconClick={onClickEraseIcon}
       handleCancelButtonClick={onClickCancelKeyPress}
