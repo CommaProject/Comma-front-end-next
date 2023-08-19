@@ -22,35 +22,38 @@ export const CompletedSearchTemplate = ({
   children,
 }: CompletedSearchTemplateProps) => (
   <style.Wrapper>
-    <style.TopBox>
-      <PrevIcon />
-      <RoundInput
-        completedTextValue={completedTextValue}
-        onClickRoundInput={onClickRoundInput}
-        handleEraseIconClick={onClickRoundInput}
-        isCompletedSearch
-      />
-    </style.TopBox>
-    <style.ButtonBox>
-      <style.Button
-        isActivate={switchActiveCategory === 0}
-        onClick={() => onClickCategory('music')}
-      >
-        음악
-      </style.Button>
-      <style.Button
-        isActivate={switchActiveCategory === 1}
-        onClick={() => onClickCategory('artist')}
-      >
-        가수
-      </style.Button>
-      <style.Button
-        isActivate={switchActiveCategory === 2}
-        onClick={() => onClickCategory('commaUser')}
-      >
-        사용자
-      </style.Button>
-    </style.ButtonBox>
+    <style.StickySections>
+      <style.TopBox>
+        <PrevIcon />
+        <RoundInput
+          completedTextValue={completedTextValue}
+          onClickRoundInput={onClickRoundInput}
+          handleEraseIconClick={onClickRoundInput}
+          isCompletedSearch
+        />
+      </style.TopBox>
+      <style.ButtonBox>
+        <style.Button
+          isActivate={switchActiveCategory === 0}
+          onClick={() => onClickCategory('music')}
+        >
+          음악
+        </style.Button>
+        <style.Button
+          isActivate={switchActiveCategory === 1}
+          onClick={() => onClickCategory('artist')}
+        >
+          가수
+        </style.Button>
+        <style.Button
+          isActivate={switchActiveCategory === 2}
+          onClick={() => onClickCategory('commaUser')}
+        >
+          사용자
+        </style.Button>
+      </style.ButtonBox>
+    </style.StickySections>
+
     {children}
   </style.Wrapper>
 );

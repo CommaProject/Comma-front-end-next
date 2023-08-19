@@ -28,20 +28,23 @@ const getCommaUser = async (commaUserName: string) => {
 
 export const useSearch = () => {
   // 검색은 Loading이 있을 수 있으니까 React-Query 사용.
-  const [spotifyArtistData, setSpotifyArtistData] = useState<
-    getSpotifyArtistProps[]
-  >([]);
+  const [spotifyArtistData, setSpotifyArtistData] =
+    useState<getSpotifyArtistProps>([]);
 
-  const [spotifyTrackData, setSpotifyTrackData] = useState<getTrackProps[]>([]);
+  const [spotifyTrackData, setSpotifyTrackData] = useState<getTrackProps>([]);
 
-  const [commaUserData, setCommaUserData] = useState<getCommaUserProps[]>([]);
+  const [commaUserData, setCommaUserData] = useState<getCommaUserProps>([]);
 
   const { mutate: mutateTrack } = useMutation(['Track'], getSpotifyTrack, {
     onSuccess: (response) => {
-      if (response.result.data && 'trackId' in response.result.data) {
-        const newTrackData = response.result.data;
-        setSpotifyTrackData(() => [newTrackData]);
-      }
+      if (response.result.data)
+        if ('errors' in response.result.data) {
+          console.log('error:', response.result.data.errors);
+        } else if (response.result.data) {
+          const newTrackData = response.result.data;
+          setSpotifyTrackData(newTrackData);
+          console.log('useSearch', response);
+        }
     },
   });
 
@@ -49,7 +52,7 @@ export const useSearch = () => {
     onSuccess: (response) => {
       if (response.result.data && 'artistId' in response.result.data) {
         const newArtistData = response.result.data;
-        setSpotifyArtistData(() => [newArtistData]);
+        setSpotifyArtistData(newArtistData);
       }
     },
   });
@@ -58,12 +61,15 @@ export const useSearch = () => {
     onSuccess: (response) => {
       if (response.result.data && 'userId' in response.result.data) {
         const newCommaUserData = response.result.data;
-        setCommaUserData(() => [newCommaUserData]);
+        setCommaUserData(newCommaUserData);
       }
     },
   });
 
   return {
+    spotifyArtistData,
+    spotifyTrackData,
+    commaUserData,
     mutateArtist,
     mutateTrack,
     mutateCommaUser,
