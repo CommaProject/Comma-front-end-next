@@ -1,3 +1,3 @@
-import { CompletedSearch } from './CompletedSearch';
+import { CompletedSearch } from './CompletedSearchTemplate';
 
 export { CompletedSearch };

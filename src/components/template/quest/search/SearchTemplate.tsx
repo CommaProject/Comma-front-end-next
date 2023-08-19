@@ -1,4 +1,4 @@
-import { LineInput } from '@/components/common/line-input';
+import { LineInput } from '~/src/components/pages/quest/line-input';
 import { TextList } from '@/components/pages/quest/search/text-list/TextList';
 import { Dispatch, SetStateAction } from 'react';
 import * as style from './SearchTemplate.style';

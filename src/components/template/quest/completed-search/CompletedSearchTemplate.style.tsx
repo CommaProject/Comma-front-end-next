@@ -5,7 +5,12 @@ interface ButtonStateProps {
 }
 
 export const Wrapper = styled.div`
+  width: 100%;
+  height: 100%;
+
   flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 export const Button = styled.button<ButtonStateProps>`
@@ -32,10 +37,10 @@ export const TopBox = styled.div`
   display: flex;
   position: sticky;
   align-items: center;
-  justify-content: space-between; /* Added this to align the children */
+  justify-content: space-between;
   top: 0;
   z-index: 1;
   gap: 15px;
-  background-color: white; /* Added this to ensure the sticky behavior */
-  padding: 10px; /* Added this to provide space around the content */
+  background-color: white;
+  padding: 10px;
 `;

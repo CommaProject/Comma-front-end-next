@@ -1,23 +1,25 @@
 import { RoundInput } from '@/components/common/round-input';
 // eslint-disable-next-line import/no-unresolved
 import PrevIcon from '@/assets/images/PrevArrow.svg';
-import * as style from './CompletedSearch.style';
+import * as style from './CompletedSearchTemplate.style';
 
-interface CompletedSearchProps {
+interface CompletedSearchTemplateProps {
   completedTextValue: string;
   onClickRoundInput: () => void;
 }
 
-export const CompletedSearch = ({
+export const CompletedSearchTemplate = ({
   completedTextValue,
   onClickRoundInput,
-}: CompletedSearchProps) => (
+}: CompletedSearchTemplateProps) => (
   <style.Wrapper>
     <style.TopBox>
       <PrevIcon />
       <RoundInput
         completedTextValue={completedTextValue}
         onClickRoundInput={onClickRoundInput}
+        handleEraseIconClick={onClickRoundInput}
+        isCompletedSearch
       />
     </style.TopBox>
   </style.Wrapper>
