@@ -96,7 +96,7 @@ export async function getTrackAsync(
   trackName: string,
 ): ApiResponse<getTrackProps> {
   const response = await getAsync<getTrackProps>(
-    `/spotify/artist/{${trackName}}`,
+    `/spotify/track/{${trackName}}`,
     {},
   );
 
