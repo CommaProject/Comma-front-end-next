@@ -17,8 +17,8 @@ export const Button = styled.button<ButtonStateProps>`
   ${({ theme, isActivate }) => {
     const { fonts, colors } = theme;
     return css`
-      width: 64px;
-      height: 24px;
+      width: 52px;
+      height: 20px;
 
       font-size: 12px;
       line-height: 12px;
@@ -43,4 +43,13 @@ export const TopBox = styled.div`
   gap: 15px;
   background-color: white;
   padding: 10px;
+`;
+
+export const ButtonBox = styled.div`
+  display: flex;
+  gap: 12px;
+  position: sticky;
+  top: 0; /* Add this line */
+  background-color: white; /* Optional background color */
+  z-index: 2; /* Increase z-index to make sure it's above the content */
 `;
