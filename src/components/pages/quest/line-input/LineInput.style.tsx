@@ -53,6 +53,7 @@ export const EraseIcon = styled(CancelSVG)`
       right: 30px; 
       position: absolute;
       cursor: pointer;
+      margin-right: 9px;
     `;
   }}
 `;
