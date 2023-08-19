@@ -1,14 +1,11 @@
 import { SearchTemplate } from '@/components/template/quest/search';
 import { useState } from 'react';
-import { getSpotifyArtistAsync } from '~/src/apis/search';
-import { useSearch } from '@/hooks/useSearch';
+import { useRouter } from 'next/router';
 
 const Search = () => {
+  const router = useRouter();
   // Music, Artist, CommaUser
 
-  const { mutateArtist, mutateTrack, mutateCommaUser } = useSearch();
-
-  const [searchTarget, setSearchTarget] = useState('Music');
   const [completedText, setCompletedText] = useState('');
 
   const handleOnClickDeleteItem = (idnex: number) => {
@@ -18,9 +15,10 @@ const Search = () => {
     console.log(searchItem);
   };
   const handleEnterKeyPress = () => {
-    // mutateArtist(completedText);
-    // mutateCommaUser(completedText);
-    mutateTrack(completedText);
+    router.push({
+      pathname: '/quest/completedSearch',
+      query: { searchText: completedText },
+    });
   };
   const handleOnClickEraseIcon = () => {};
   const handleOnClickCancelIcon = () => {};
