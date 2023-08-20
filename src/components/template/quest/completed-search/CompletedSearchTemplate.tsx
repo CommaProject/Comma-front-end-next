@@ -9,6 +9,7 @@ import * as style from './CompletedSearchTemplate.style';
 interface CompletedSearchTemplateProps {
   completedTextValue: string;
   onClickRoundInput: () => void;
+  onClickEraseButton: () => void;
   onClickCategory: (category: string) => void;
   switchActiveCategory: number;
   children: React.ReactNode;
@@ -17,6 +18,7 @@ interface CompletedSearchTemplateProps {
 export const CompletedSearchTemplate = ({
   completedTextValue,
   onClickRoundInput,
+  onClickEraseButton,
   onClickCategory,
   switchActiveCategory,
   children,
@@ -28,7 +30,7 @@ export const CompletedSearchTemplate = ({
         <RoundInput
           completedTextValue={completedTextValue}
           onClickRoundInput={onClickRoundInput}
-          handleEraseIconClick={onClickRoundInput}
+          handleEraseIconClick={onClickEraseButton}
           isCompletedSearch
         />
       </style.TopBox>

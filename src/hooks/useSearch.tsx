@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import router from 'next/router';
 import {
   getSpotifyArtistProps,
   getCommaUserAsync,
@@ -27,7 +26,6 @@ const getCommaUser = async (commaUserName: string) => {
 };
 
 export const useSearch = () => {
-  // 검색은 Loading이 있을 수 있으니까 React-Query 사용.
   const [spotifyArtistData, setSpotifyArtistData] =
     useState<getSpotifyArtistProps[]>();
 
@@ -43,7 +41,6 @@ export const useSearch = () => {
         } else if (response.result.data) {
           const newArtistData = response.result.data;
           setSpotifyTrackData(newArtistData);
-          console.log('useSearch', response);
         }
       }
     },
@@ -51,14 +48,12 @@ export const useSearch = () => {
 
   const { mutate: mutateArtist } = useMutation(['artist'], getSpotifyArtist, {
     onSuccess: (response) => {
-      console.log('useSearch2', response);
       if (response.result.data) {
         if ('errors' in response.result.data) {
           console.log('error:', response.result.data.errors);
         } else if (response.result.data) {
           const newArtistData = response.result.data;
           setSpotifyArtistData(newArtistData);
-          console.log('useSearch2', response);
         }
       }
     },
@@ -66,11 +61,13 @@ export const useSearch = () => {
 
   const { mutate: mutateCommaUser } = useMutation(['commaUser'], getCommaUser, {
     onSuccess: (response) => {
-      console.log('useSearch3', response);
-      if (response.result.data && 'userId' in response.result.data) {
-        const newCommaUserData = response.result.data;
-        setCommaUserData(newCommaUserData);
-        console.log('useSearch3', response);
+      if (response.result.data) {
+        if ('errors' in response.result.data) {
+          console.log('error:', response.result.data.errors);
+        } else if (response.result.data) {
+          const newCommaUserData = response.result.data;
+          setCommaUserData(newCommaUserData);
+        }
       }
     },
   });
