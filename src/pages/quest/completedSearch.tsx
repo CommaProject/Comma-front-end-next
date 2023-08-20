@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { CompletedSearchTemplate } from '@/components/template/quest/completed-search';
 import { useRouter } from 'next/router';
 import { useSearch } from '@/hooks/useSearch';
-import { MusicAlbumFrom } from '~/src/components/pages/quest/music-album-form';
+import { MusicAlbumFrom } from '@/components/pages/quest/music-album-form';
+import { ArtistAvataFrom } from '~/src/components/pages/quest/artist-avata-form';
 
 const CompletedSearch = () => {
   const router = useRouter();
@@ -16,7 +17,7 @@ const CompletedSearch = () => {
     mutateTrack,
     mutateCommaUser,
   } = useSearch();
-  console.log('spotifyTrackData', spotifyTrackData);
+
   const handleSwitchActiveCategory = (category: string) => {
     if (category === 'music') setSwitchActiveCategory(0);
     else if (category === 'artist') setSwitchActiveCategory(1);
@@ -44,9 +45,12 @@ const CompletedSearch = () => {
       onClickCategory={handleSwitchActiveCategory}
       switchActiveCategory={switchActiveCategory}
     >
-      {switchActiveCategory === 0 ? (
+      {switchActiveCategory === 0 && (
         <MusicAlbumFrom musicData={spotifyTrackData} />
-      ) : null}
+      )}
+      {switchActiveCategory === 1 && (
+        <ArtistAvataFrom artistData={spotifyArtistData} />
+      )}
     </CompletedSearchTemplate>
   );
 };

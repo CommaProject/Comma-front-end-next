@@ -37,31 +37,40 @@ export const useSearch = () => {
 
   const { mutate: mutateTrack } = useMutation(['Track'], getSpotifyTrack, {
     onSuccess: (response) => {
-      if (response.result.data)
+      if (response.result.data) {
         if ('errors' in response.result.data) {
           console.log('error:', response.result.data.errors);
         } else if (response.result.data) {
-          const newTrackData = response.result.data;
-          setSpotifyTrackData(newTrackData);
+          const newArtistData = response.result.data;
+          setSpotifyTrackData(newArtistData);
           console.log('useSearch', response);
         }
+      }
     },
   });
 
   const { mutate: mutateArtist } = useMutation(['artist'], getSpotifyArtist, {
     onSuccess: (response) => {
-      if (response.result.data && 'artistId' in response.result.data) {
-        const newArtistData = response.result.data;
-        setSpotifyArtistData(newArtistData);
+      console.log('useSearch2', response);
+      if (response.result.data) {
+        if ('errors' in response.result.data) {
+          console.log('error:', response.result.data.errors);
+        } else if (response.result.data) {
+          const newArtistData = response.result.data;
+          setSpotifyArtistData(newArtistData);
+          console.log('useSearch2', response);
+        }
       }
     },
   });
 
   const { mutate: mutateCommaUser } = useMutation(['commaUser'], getCommaUser, {
     onSuccess: (response) => {
+      console.log('useSearch3', response);
       if (response.result.data && 'userId' in response.result.data) {
         const newCommaUserData = response.result.data;
         setCommaUserData(newCommaUserData);
+        console.log('useSearch3', response);
       }
     },
   });

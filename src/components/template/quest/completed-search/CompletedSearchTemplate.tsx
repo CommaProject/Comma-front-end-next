@@ -53,7 +53,6 @@ export const CompletedSearchTemplate = ({
         </style.Button>
       </style.ButtonBox>
     </style.StickySections>
-
     {children}
   </style.Wrapper>
 );
