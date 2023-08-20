@@ -29,11 +29,11 @@ const getCommaUser = async (commaUserName: string) => {
 export const useSearch = () => {
   // 검색은 Loading이 있을 수 있으니까 React-Query 사용.
   const [spotifyArtistData, setSpotifyArtistData] =
-    useState<getSpotifyArtistProps>([]);
+    useState<getSpotifyArtistProps[]>();
 
-  const [spotifyTrackData, setSpotifyTrackData] = useState<getTrackProps>([]);
+  const [spotifyTrackData, setSpotifyTrackData] = useState<getTrackProps[]>();
 
-  const [commaUserData, setCommaUserData] = useState<getCommaUserProps>([]);
+  const [commaUserData, setCommaUserData] = useState<getCommaUserProps[]>();
 
   const { mutate: mutateTrack } = useMutation(['Track'], getSpotifyTrack, {
     onSuccess: (response) => {

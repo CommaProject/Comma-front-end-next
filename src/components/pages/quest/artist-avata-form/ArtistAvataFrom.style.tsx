@@ -15,7 +15,7 @@ export const AvatarBox = styled.div`
   text-align: center;
 `;
 
-export const AvatarArtistName = styled.text`
+export const AvatartName = styled.text`
   ${({ theme }) => {
     const { fonts } = theme;
     return css`

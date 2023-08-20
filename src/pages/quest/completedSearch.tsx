@@ -49,7 +49,10 @@ const CompletedSearch = () => {
         <MusicAlbumFrom musicData={spotifyTrackData} />
       )}
       {switchActiveCategory === 1 && (
-        <ArtistAvataFrom artistData={spotifyArtistData} />
+        <ArtistAvataFrom artistData={spotifyArtistData} commaUserData={[]} />
+      )}
+      {switchActiveCategory === 2 && (
+        <ArtistAvataFrom artistData={[]} commaUserData={commaUserData} />
       )}
     </CompletedSearchTemplate>
   );

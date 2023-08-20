@@ -43,6 +43,7 @@ export const TopBox = styled.div`
 `;
 
 export const ButtonBox = styled.div`
+  padding-left: 35px;
   display: flex;
   gap: 12px;
   top: 0;

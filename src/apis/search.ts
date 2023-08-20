@@ -5,11 +5,23 @@ export interface getSpotifyArtistProps {
   artistId: string;
   artistName: string;
   genres: string[];
-  images: {
-    height: string;
-    url: string;
-    width: string;
-  }[];
+  images: [
+    {
+      height: number;
+      url: string;
+      width: number;
+    },
+    {
+      height: number;
+      url: string;
+      width: number;
+    },
+    {
+      height: number;
+      url: string;
+      width: number;
+    },
+  ];
 }
 
 export interface getCommaUserProps {
@@ -62,8 +74,8 @@ export interface getTrackProps {
  */
 export async function getSpotifyArtistAsync(
   artistName: string,
-): ApiResponse<getSpotifyArtistProps> {
-  const response = await getAsync<getSpotifyArtistProps>(
+): ApiResponse<getSpotifyArtistProps[]> {
+  const response = await getAsync<getSpotifyArtistProps[]>(
     `/spotify/artist/{${artistName}}`,
     {},
   );
@@ -78,8 +90,8 @@ export async function getSpotifyArtistAsync(
  */
 export async function getCommaUserAsync(
   userName: string,
-): ApiResponse<getCommaUserProps> {
-  const response = await getAsync<getCommaUserProps>(
+): ApiResponse<getCommaUserProps[]> {
+  const response = await getAsync<getCommaUserProps[]>(
     `/search/user?name=${userName}`,
     {},
   );
@@ -94,8 +106,8 @@ export async function getCommaUserAsync(
  */
 export async function getTrackAsync(
   trackName: string,
-): ApiResponse<getTrackProps> {
-  const response = await getAsync<getTrackProps>(
+): ApiResponse<getTrackProps[]> {
+  const response = await getAsync<getTrackProps[]>(
     `/spotify/track/{${trackName}}`,
     {},
   );

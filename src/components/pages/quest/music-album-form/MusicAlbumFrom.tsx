@@ -4,7 +4,7 @@ import * as style from './MusicAlbumFrom.style';
 import { HorizontalAlbumWithIcon } from '../horizontal-album-with-icon';
 
 interface MusicAlbumFromProps {
-  musicData: getTrackProps[];
+  musicData: getTrackProps[] | undefined;
   onClickPlusButton: () => void;
   onClickLikeButton: () => void;
   onClick: () => void;
@@ -20,21 +20,22 @@ export const MusicAlbumFrom = ({
 
   return (
     <style.Wrapper>
-      {musicData.map((value) => (
-        <style.AlbumBox>
-          <HorizontalAlbumWithIcon
-            key={value.albumId}
-            isLike={false}
-            timer={`${value.durationMinute}m ${value.durationSecond}s`}
-            imgUrl={value.images ? value.images[2].url : 'undefine'}
-            songName={value.trackName}
-            singerName={value.artist}
-            onClickPlusButton={onClickPlusButton}
-            onClickLikeButton={onClickLikeButton}
-            onClick={onClick}
-          />
-        </style.AlbumBox>
-      ))}
+      {musicData &&
+        musicData.map((value) => (
+          <style.AlbumBox>
+            <HorizontalAlbumWithIcon
+              key={value.albumId}
+              isLike={false}
+              timer={`${value.durationMinute}m ${value.durationSecond}s`}
+              imgUrl={value.images ? value.images[0].url : 'error: undefine'}
+              songName={value.trackName}
+              singerName={value.artist}
+              onClickPlusButton={onClickPlusButton}
+              onClickLikeButton={onClickLikeButton}
+              onClick={onClick}
+            />
+          </style.AlbumBox>
+        ))}
     </style.Wrapper>
   );
 };
