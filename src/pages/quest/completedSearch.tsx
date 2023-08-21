@@ -3,7 +3,8 @@ import { CompletedSearchTemplate } from '@/components/template/quest/completed-s
 import { useRouter } from 'next/router';
 import { useSearch } from '@/hooks/useSearch';
 import { MusicAlbumFrom } from '@/components/pages/quest/music-album-form';
-import { ArtistAvataFrom } from '~/src/components/pages/quest/artist-avata-form';
+import { ArtistAvataFrom } from '@/components/pages/quest/artist-avata-form';
+import { useUserInformation } from '~/src/hooks/useUserInformation';
 
 const CompletedSearch = () => {
   const router = useRouter();
@@ -17,6 +18,7 @@ const CompletedSearch = () => {
     mutateTrack,
     mutateCommaUser,
   } = useSearch();
+  const { mutateSetTrackLike, getUserTrackLike } = useUserInformation();
 
   const handleSwitchActiveCategory = (category: string) => {
     if (category === 'music') setSwitchActiveCategory(0);
@@ -38,15 +40,33 @@ const CompletedSearch = () => {
 
   return (
     <CompletedSearchTemplate
-      completedTextValue="test"
+      completedTextValue={
+        typeof searchText === 'string' ? searchText : 'undefined'
+      }
       onClickRoundInput={() => {
+        router.push('/quest/search');
+      }}
+      onClickEraseButton={() => {
         router.push('/quest/search');
       }}
       onClickCategory={handleSwitchActiveCategory}
       switchActiveCategory={switchActiveCategory}
     >
       {switchActiveCategory === 0 && (
-        <MusicAlbumFrom musicData={spotifyTrackData} />
+        <MusicAlbumFrom
+          musicData={spotifyTrackData?.map((value) => ({
+            ...value,
+            isLike:
+              getUserTrackLike === false
+                ? getUserTrackLike // .trackArtistList.includes(value.trackId)
+                : getUserTrackLike,
+          }))}
+          onClickPlusButton={() => {}}
+          onClickLikeButton={(trackId: string) => {
+            mutateSetTrackLike(trackId);
+          }}
+          onClick={() => {}}
+        />
       )}
       {switchActiveCategory === 1 && (
         <ArtistAvataFrom artistData={spotifyArtistData} commaUserData={[]} />

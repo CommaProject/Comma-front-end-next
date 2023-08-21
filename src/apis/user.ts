@@ -22,7 +22,7 @@ export async function setUserTrackLikeAsync(trackId: string): ApiResponse<any> {
   return response;
 }
 
-export async function getUserTrackLikeAsync(): ApiResponse<UserFavorites> {
+export async function getUserFavoritesAsync(): ApiResponse<UserFavorites> {
   const response = await getAsync<UserFavorites>('/tracks/users/favorites', {});
 
   return response;

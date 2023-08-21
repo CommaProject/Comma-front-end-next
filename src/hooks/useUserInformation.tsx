@@ -1,5 +1,5 @@
-import { getUserTrackLikeAsync, setUserTrackLikeAsync } from '@/apis/user';
-import { useMutation } from '@tanstack/react-query';
+import { getUserFavoritesAsync, setUserTrackLikeAsync } from '@/apis/user';
+import { useMutation, useQueries, useQuery } from '@tanstack/react-query';
 
 // setUserTrackLikeAsync;
 
@@ -9,11 +9,18 @@ const setUserTrackLike = async (trackId: string) => {
   return { isSuccess, result };
 };
 
+const getUserFavorites = async () => {
+  const { isSuccess, result } = await getUserFavoritesAsync();
+
+  return { isSuccess, result };
+};
+
 export const useUserInformation = () => {
   const { mutate: mutateSetTrackLike } = useMutation(
     ['TrackLike'],
     setUserTrackLike,
     {
+      onMutate: () => {},
       onSuccess: (response) => {
         if (response.result.data) {
           console.log(response.result.data);
@@ -22,15 +29,14 @@ export const useUserInformation = () => {
     },
   );
 
-  const getUserTrackLike = async () => {
-    const { isSuccess, result } = await getUserTrackLikeAsync();
-
-    if (isSuccess) {
-      return { result };
-    }
-
-    return false;
-  };
-
-  return { mutateSetTrackLike, getUserTrackLike };
+  const {
+    isLoading,
+    error,
+    data: getUserFavoritesData,
+    isFetching,
+  } = useQuery({
+    queryKey: ['repoData'],
+    queryFn: getUserFavorites,
+  });
+  return { mutateSetTrackLike, getUserFavoritesData };
 };
