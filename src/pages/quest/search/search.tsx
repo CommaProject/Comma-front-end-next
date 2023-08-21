@@ -8,8 +8,10 @@ const Search = () => {
 
   const [completedText, setCompletedText] = useState('');
   const [historyArray_, setHistoryArray_] = useState<string[]>();
-  const getHistoryArrayLocalState = localStorage.getItem('recentSearchHistory');
   useEffect(() => {
+    const getHistoryArrayLocalState = localStorage.getItem(
+      'recentSearchHistory',
+    );
     setHistoryArray_(
       getHistoryArrayLocalState ? JSON.parse(getHistoryArrayLocalState) : [],
     );
