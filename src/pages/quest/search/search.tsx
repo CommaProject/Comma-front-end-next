@@ -17,8 +17,14 @@ const Search = () => {
     );
   }, []);
 
-  const handleOnClickDeleteItem = (idnex: number) => {
-    console.log(idnex);
+  const handleOnClickDeleteItem = (index: number) => {
+    if (historyArray_ && index >= 0 && index < historyArray_.length) {
+      const newArray = [...historyArray_];
+      newArray.splice(index, 1);
+      setHistoryArray_(newArray);
+    } else {
+      console.error('Invalid index');
+    }
   };
   const handleOnClickSearchItem = (searchItem: string) => {
     console.log(searchItem);
