@@ -6,6 +6,7 @@ interface LineInputProps {
   handleEraseIconClick: (event: any) => void;
   handleCancelButtonClick: (event: any) => void;
   setCompletedText: Dispatch<SetStateAction<string>>;
+  completedText: string;
 }
 
 export const LineInput = ({
@@ -13,11 +14,13 @@ export const LineInput = ({
   handleEraseIconClick,
   handleCancelButtonClick,
   setCompletedText,
+  completedText,
 }: LineInputProps) => (
   <style.Wrapper>
     <style.SearchIcon />
     <style.Input
       type="text"
+      value={completedText}
       onChange={(e) => setCompletedText(e.target.value)}
       onKeyDown={(e) => {
         if (e.key === 'Enter') {

@@ -12,6 +12,7 @@ interface SearchTemplateProps {
   onClickEraseIcon: () => void;
   onClickCancelKeyPress: () => void;
   setCompletedText: Dispatch<SetStateAction<string>>;
+  completedText: string;
 }
 
 export const SearchTemplate = ({
@@ -23,6 +24,7 @@ export const SearchTemplate = ({
   onClickEraseIcon,
   onClickCancelKeyPress,
   setCompletedText,
+  completedText,
 }: SearchTemplateProps) => (
   <style.Wrapper>
     <LineInput
@@ -30,6 +32,7 @@ export const SearchTemplate = ({
       handleEnterKeyPress={onEnterKeyPress}
       handleEraseIconClick={onClickEraseIcon}
       handleCancelButtonClick={onClickCancelKeyPress}
+      completedText={completedText}
     />
     <TextList
       isAutoComplete={isAutocomplete_}

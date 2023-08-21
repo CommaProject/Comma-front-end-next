@@ -1,5 +1,5 @@
 import { SearchTemplate } from '@/components/template/quest/search';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
 const Search = () => {
@@ -7,6 +7,13 @@ const Search = () => {
   // Music, Artist, CommaUser
 
   const [completedText, setCompletedText] = useState('');
+  const [historyArray_, setHistoryArray_] = useState<string[]>();
+  const getHistoryArrayLocalState = localStorage.getItem('recentSearchHistory');
+  useEffect(() => {
+    setHistoryArray_(
+      getHistoryArrayLocalState ? JSON.parse(getHistoryArrayLocalState) : [],
+    );
+  }, []);
 
   const handleOnClickDeleteItem = (idnex: number) => {
     console.log(idnex);
@@ -15,24 +22,35 @@ const Search = () => {
     console.log(searchItem);
   };
   const handleEnterKeyPress = () => {
+    // 최근 기록
+    const existingHistory = localStorage.getItem('recentSearchHistory');
+    const historyArray = existingHistory ? JSON.parse(existingHistory) : [];
+
+    historyArray.push(completedText);
+    localStorage.setItem('recentSearchHistory', JSON.stringify(historyArray));
+    setHistoryArray_(historyArray);
     router.push({
       pathname: '/quest/completedSearch',
       query: { searchText: completedText },
     });
   };
-  const handleOnClickEraseIcon = () => {};
+  const handleOnClickEraseIcon = () => {
+    setCompletedText(() => '');
+  };
+
   const handleOnClickCancelIcon = () => {};
 
   return (
     <SearchTemplate
       key="SearchTemplate"
-      textList={['Item 1', 'Item 2', 'Item 3']}
+      textList={historyArray_ || []}
       isAutocomplete_={false}
       onClickDeleteItem={handleOnClickDeleteItem}
       onClickSearchItem={handleOnClickSearchItem}
       onEnterKeyPress={handleEnterKeyPress}
       onClickEraseIcon={handleOnClickEraseIcon}
       onClickCancelKeyPress={handleOnClickCancelIcon}
+      completedText={completedText}
       setCompletedText={setCompletedText}
     />
   );

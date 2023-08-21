@@ -18,7 +18,7 @@ const CompletedSearch = () => {
     mutateTrack,
     mutateCommaUser,
   } = useSearch();
-  const { mutateSetTrackLike, getUserTrackLike } = useUserInformation();
+  const { mutateSetTrackLike, getUserFavoritesData } = useUserInformation();
 
   const handleSwitchActiveCategory = (category: string) => {
     if (category === 'music') setSwitchActiveCategory(0);
@@ -56,10 +56,7 @@ const CompletedSearch = () => {
         <MusicAlbumFrom
           musicData={spotifyTrackData?.map((value) => ({
             ...value,
-            isLike:
-              getUserTrackLike === false
-                ? getUserTrackLike // .trackArtistList.includes(value.trackId)
-                : getUserTrackLike,
+            isLike: false,
           }))}
           onClickPlusButton={() => {}}
           onClickLikeButton={(trackId: string) => {
