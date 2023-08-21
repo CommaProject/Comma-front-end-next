@@ -27,7 +27,7 @@ const Search = () => {
     }
   };
   const handleOnClickSearchItem = (searchItem: string) => {
-    console.log(searchItem);
+    setCompletedText(searchItem);
   };
   const handleEnterKeyPress = () => {
     // 최근 기록
