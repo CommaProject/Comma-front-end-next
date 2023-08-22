@@ -2,19 +2,20 @@ import styled, { css } from 'styled-components';
 import heartSVG from '@/assets/images/heart.svg';
 
 export interface LikeButtonProps {
-    isLike: boolean;
-  }
-  
+  isLike: boolean;
+}
+
 export const Wrapper = styled.div`
-display: flex;
-flex-wrap: wrap;
-justify-content: center;
+  height: 100%;
+  // display: flex;
+  // flex-wrap: wrap;
+  justify-content: center;
 `;
 
 export const AvatarBox = styled.div`
-    text-align: center;
-    margin: 150px;
-`
+  text-align: center;
+  margin: 150px;
+`;
 
 export const AvatartName = styled.text`
   ${({ theme }) => {

@@ -1,34 +1,46 @@
-import {Dispatch, SetStateAction} from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import { RoundInput } from '@/components/common/round-input';
 import { Swiper as SwiperClass } from 'swiper/types';
 // eslint-disable-next-line import/no-unresolved
 import PrevIcon from '@/assets/images/PrevArrow.svg';
 import { MusicAlbumFrom } from '@/components/pages/quest/music-album-form';
 import { ArtistAvataFrom } from '@/components/pages/quest/artist-avata-form';
-import { getCommaUserProps, getSpotifyArtistProps, getTrackProps } from '@/apis/search';
+import {
+  getCommaUserProps,
+  getSpotifyArtistProps,
+  getTrackProps,
+} from '@/apis/search';
+import { ArtistDetailForm } from '@/components/pages/quest/artist-detail-from';
 import * as style from './CompletedSearchTemplate.style';
-import { ArtistDetailForm } from '~/src/components/pages/quest/artist-detail-from';
 
 interface CompletedSearchTemplateProps {
+  slideStep: number;
+  onSlideChange: (swiper: any) => void;
   completedTextValue: string;
+  spotifyArtistForDetailArtist: getSpotifyArtistProps | undefined;
   setSwiperRef: Dispatch<SetStateAction<SwiperClass | undefined>>;
   onClickRoundInput: () => void;
   onClickEraseButton: () => void;
   onClickCategory: (category: string) => void;
   onClickAlbumLikeButton: (trackId: string) => void;
+  onClickArtistAvata: (artistData: getSpotifyArtistProps) => void;
   switchActiveCategory: number;
-  spotifyArtistData: getSpotifyArtistProps[] | undefined
-  spotifyTrackData: getTrackProps[] | undefined
-  commaUserData: getCommaUserProps[] | undefined
+  spotifyArtistData: getSpotifyArtistProps[] | undefined;
+  spotifyTrackData: getTrackProps[] | undefined;
+  commaUserData: getCommaUserProps[] | undefined;
 }
 
 export const CompletedSearchTemplate = ({
+  slideStep,
+  onSlideChange,
   completedTextValue,
+  spotifyArtistForDetailArtist,
   setSwiperRef,
   onClickRoundInput,
   onClickEraseButton,
   onClickCategory,
   onClickAlbumLikeButton,
+  onClickArtistAvata,
   switchActiveCategory,
   spotifyArtistData,
   spotifyTrackData,
@@ -72,38 +84,47 @@ export const CompletedSearchTemplate = ({
           ...value,
           isLike: false,
         }))}
-        onClickPlusButton={() => { }}
+        onClickPlusButton={() => {}}
         onClickLikeButton={(trackId: string) => {
-          onClickAlbumLikeButton(trackId)
-        }
-        }
-        onClick={() => { }}
+          onClickAlbumLikeButton(trackId);
+        }}
+        onClick={() => {}}
       />
     )}
     {switchActiveCategory === 1 && (
       <style.CustomSwiper
         onSwiper={setSwiperRef}
-        slidesPerView={1}
         centeredSlides
         noSwiping
         mousewheel={false}
         centerInsufficientSlides
-        allowTouchMove={false}
+        allowTouchMove
+        onSlideChange={onSlideChange}
       >
         <style.Slide>
-          <ArtistAvataFrom artistData={spotifyArtistData} commaUserData={[]} />
+          <ArtistAvataFrom
+            artistData={spotifyArtistData}
+            commaUserData={[]}
+            onArtistAvataClick={(value) => {
+              onClickArtistAvata(value);
+            }}
+          />
         </style.Slide>
         <style.Slide>
-          <ArtistDetailForm 
-          soptifyArtistData={} 
-          spotifyTrackData={[]} 
-          isLike={false} />
+          <ArtistDetailForm
+            soptifyArtistData={spotifyArtistForDetailArtist}
+            spotifyTrackData={[]}
+            isLike={false}
+          />
         </style.Slide>
-        
       </style.CustomSwiper>
     )}
     {switchActiveCategory === 2 && (
-      <ArtistAvataFrom artistData={[]} commaUserData={commaUserData} />
+      <ArtistAvataFrom
+        artistData={[]}
+        commaUserData={commaUserData}
+        onArtistAvataClick={() => {}}
+      />
     )}
   </style.Wrapper>
 );

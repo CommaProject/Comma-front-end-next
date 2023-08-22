@@ -7,7 +7,7 @@ interface ButtonStateProps {
 
 export const Wrapper = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   overflow-y: auto;
 `;
 
@@ -58,7 +58,15 @@ export const StickySections = styled.div`
   top: 0;
   z-index: 2;
 `;
+export const Box = styled.div`
+  height: 100%;
 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: relative;
+`;
 export const CustomSwiper = styled(Swiper)`
   height: 100%;
 `;
