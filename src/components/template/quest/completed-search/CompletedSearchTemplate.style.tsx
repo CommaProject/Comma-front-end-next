@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 interface ButtonStateProps {
   isActivate: boolean;
@@ -56,4 +57,17 @@ export const StickySections = styled.div`
   position: sticky;
   top: 0;
   z-index: 2;
+`;
+
+export const CustomSwiper = styled(Swiper)`
+  height: 100%;
+`;
+
+export const Slide = styled(SwiperSlide)`
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
