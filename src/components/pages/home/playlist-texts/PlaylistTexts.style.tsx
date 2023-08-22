@@ -4,6 +4,7 @@ interface PlaylistTextsStyleProps {
   isFontNotoElsePre: boolean;
   isFontBoldElseRegular: boolean;
   isFontsize15Else12: boolean;
+  
 }
 
 interface WrapperProps {

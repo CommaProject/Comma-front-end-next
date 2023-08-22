@@ -1,39 +1,38 @@
 import { useRouter } from 'next/router';
 
-import * as style from '@/components/template/home/HomeTemplate.style';
+import * as style from '~/src/components/template/home/HomeTemplate.style';
 import PlaylistBox from '@/components/pages/home/playlist-box';
 import { PlaylistType } from '@/constants/types/playlistTypes';
 
 interface HomeTemplateProps {
-  whenPlaylistWillPlay: string;
-  isTimeBadgeVisible: boolean;
+  
   isPlaylistAvailable:boolean;
   isCommaPlaylistAvailable: boolean;
   isEditMode: boolean;
+  setIsEditMode:React.Dispatch<React.SetStateAction<boolean>>;
   onClickIsEditMode : () => void;
-  TestPlayListData : PlaylistType[]; //나중에 객체담은 배열로 바꿔야할듯
+  commaPlaylist: PlaylistType[];
   
 }
 
 
 export const HomeTemplate = ({
-  whenPlaylistWillPlay,
-  isTimeBadgeVisible,
+  
   isPlaylistAvailable,
   isCommaPlaylistAvailable,
   isEditMode,
   onClickIsEditMode,
-  TestPlayListData,
+  commaPlaylist,
 }: HomeTemplateProps) => {
-  
+  //플레이리스트 클릭시, 페이지 이동
   const router = useRouter();
   const currentFirstPath = router.pathname.split('/')[1];
   const onClickAddPlaylistButton = () => {
     if(isPlaylistAvailable){
-  console.log("애드버튼 누름",TestPlayListData); 
+  console.log("애드버튼 누름",commaPlaylist); 
   router.push(`${currentFirstPath}/timesetting`);
   }}
-  
+ 
   return (
    
     <style.Container isPlaylistAvailable={isPlaylistAvailable}>
@@ -58,13 +57,13 @@ export const HomeTemplate = ({
               </style.Button>
             )}
           </style.EditDiv>
-          {TestPlayListData.map((playlist: PlaylistType, index: number) => (
+          { commaPlaylist && commaPlaylist.map((playlist:PlaylistType, index: number) => (
             <PlaylistBox
-              whenPlaylistWillPlay={whenPlaylistWillPlay}
-              isTimeBadgeVisible={isTimeBadgeVisible}
+              
               isEditMode={isEditMode}
               key={index}
               playlist={playlist}
+  
             />
           ))}
         </style.ShowPlaylist>

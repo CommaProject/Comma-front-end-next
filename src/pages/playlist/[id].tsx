@@ -1,11 +1,11 @@
-import * as style from '~/src/pages/playlist.tsx/id.style';
+import * as style from '~/src/pages/playlist/[id].style';
 import PrevIcon from '@/assets/images/PrevArrow.svg';
 import SettingIcon from '@/assets/images/setting.svg';
-import TimeBadge from '../components/pages/home/time-badge';
-import { HorizontalAlbum } from '../components/common/album/horizontal-album';
+import TimeBadge from '@/components/pages/home/time-badge';
+import { HorizontalAlbum } from '@/components/common/album/horizontal-album';
 import { useState } from 'react';
 
-const Pid = () => {
+const Id = () => {
     const [isEditMode,setIsEditMode] = useState(false);
 
     const onClickSetting = () =>{
@@ -27,9 +27,9 @@ const Pid = () => {
                     whenPlaylistWillPlay="12:00"
                     isTimeBadgeVisible= {true}
                 />
-                <style.Text>
+                <style.TimeText>
                     4songs/4h 25m 34s
-                </style.Text>
+                </style.TimeText>
             </style.PlaylistInfoBox>
             <style.AlbumList>
             <HorizontalAlbum
@@ -40,9 +40,9 @@ const Pid = () => {
                 onClick = {onClickAlbum}
             />
             </style.AlbumList>
-            
+
         </style.Wrapper>
     );
 }
 
-export default Pid;
+export default Id;

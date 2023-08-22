@@ -1,10 +1,8 @@
 import styled, { css } from 'styled-components';
 
-interface TimeBadgeStyleProps {
-  isTimeBadgeVisible: boolean;
-}
-export const Badge = styled.div<TimeBadgeStyleProps>`
-  ${({ theme, isTimeBadgeVisible }) => {
+
+export const Badge = styled.div`
+  ${({ theme }) => {
     const { colors, fonts } = theme;
     return css`
       width: 57px;
@@ -12,7 +10,7 @@ export const Badge = styled.div<TimeBadgeStyleProps>`
       margin-bottom:10px;
       
 
-      display: ${isTimeBadgeVisible ? 'flex' : 'none'};
+      display:  flex ;
       align-items: center;
       justify-content: center;
 

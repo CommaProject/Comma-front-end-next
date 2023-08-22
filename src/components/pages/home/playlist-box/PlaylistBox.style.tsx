@@ -75,6 +75,33 @@ ${({ theme, isEditMode }) => {
 }}
   
 `
+export const TrackNumInfo = styled.div`
+${({ theme}) => {
+  const { colors,fonts } = theme;
+  return css`
+    width:30px;
+
+    display:flex;
+    align-items: center;
+    justify-content:center;
+    position: relative;
+    top:-26px;
+    left:49px;
+
+
+    font-size:15px;
+    line-height: 15px;
+    font-weight: ${ fonts.weight.bold};
+    color: ${colors.grayscale.white};
+    background-color: ${colors.grayscale.gray300};
+    border-radius: 19px;
+    border: 1px solid pink;
+   
+  `;
+}}
+
+
+`
 export const Button = styled.button<ButtonProps>`
 ${({ theme, isPlaylistSelected }) => {
   const { colors } = theme;
@@ -110,13 +137,19 @@ export const MovePlaylistIcon = styled(MovePlaylistSvg)<WrapperProps>`
 
 // SVG
 export const ActivateAlarmIcon = styled(ActivateAlarmSvg)`
+  margin:10px;
+
   position: absolute;
   right: 15px;
   bottom: 8px;
+  
 `;
 
 export const DeactivateAlarmIcon = styled(DeactivateAlarmSvg)`
-  position: absolute;
+margin:10px;
+
+position: absolute;
   right: 15px;
   bottom: 8px;
+  
 `;

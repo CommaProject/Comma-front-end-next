@@ -3,12 +3,13 @@ import TimeBadge from '@/components/pages/home/time-badge';
 import { PlaylistTexts } from '@/components/pages/home/playlist-texts/PlaylistTexts';
 import { useState } from 'react';
 import { Album } from '@/components/common/album/Album';
-import { PlaylistType } from '~/src/constants/types/playlistTypes';
+import { PlaylistType } from '@/constants/types/playlistTypes';
 import {usePlaylist} from '@/hooks/usePlaylist';
+import {useGetPlaylistPlayTime} from '@/apis/playlist';
 interface PlaylistBoxProps {
   
-  whenPlaylistWillPlay: string;
-  isTimeBadgeVisible: boolean;
+  //whenPlaylistWillPlay: string;
+  //isTimeBadgeVisible: boolean;
   isEditMode:boolean;
   playlist: PlaylistType;
   
@@ -16,48 +17,51 @@ interface PlaylistBoxProps {
 
 export const PlaylistBox = ({
 
-  whenPlaylistWillPlay,
-  isTimeBadgeVisible,
+  //whenPlaylistWillPlay,
+  //isTimeBadgeVisible,
   isEditMode,
   playlist
  
  
 }: PlaylistBoxProps) => {
 
-  const [isAlarmSelected,setIsAlarmSelected] = useState(true);
+  const [isAlarmSelected,setIsAlarmSelected] = useState(playlist.alarmFlag);
   const [isPlaylistSelected,setIsPlaylistSelected] = useState(false);
-
+  const {playTime} = useGetPlaylistPlayTime(playlist.playlistId);
   const onClickAlarmButton = () =>{
     setIsAlarmSelected(!isAlarmSelected);
   }
   const onClickPlaylistSelectButton = () => {
     setIsPlaylistSelected(!isPlaylistSelected);
+
     
   }
   const { navigateToPlaylist } = usePlaylist();
   
   const onClickPlaylist = () =>{
-    console.log(playlist.playlistId);
-    navigateToPlaylist(playlist.playlistId);
+    if(isEditMode === false){
+    navigateToPlaylist(playlist.playlistId);}
   }
   
   return (
     <style.Wrapper isPlaylistSelected={isPlaylistSelected} onClick={onClickPlaylist} >
       <TimeBadge
-        whenPlaylistWillPlay={whenPlaylistWillPlay}
-        isTimeBadgeVisible={isTimeBadgeVisible}
+        whenPlaylistWillPlay={playlist.alarmStartTime}
+        // isTimeBadgeVisible={isTimeBadgeVisible}
       />
       <style.PlaylistInfoBox isEditMode ={isEditMode} isPlaylistSelected={isPlaylistSelected} >
       { isEditMode? <style.Button isPlaylistSelected={isPlaylistSelected} onClick={onClickPlaylistSelectButton}/> :'' }
         <style.ImagesBox isEditMode ={isEditMode }>
           
           <Album url={playlist.repAlbumImageUrl} size={81.5} />
-          {/* <SmallAlbumImage imgSources={playlist.repAlbumImageUrl} /> */}
+          {playlist.trackCount-1> 0 ? <style.TrackNumInfo>{playlist.trackCount-1}</style.TrackNumInfo>: ''}
           </style.ImagesBox>
       <PlaylistTexts 
         isPlaylistSelected={isPlaylistSelected}
-        whenPlaylistWillPlay={whenPlaylistWillPlay}
+        //whenPlaylistWillPlay={whenPlaylistWillPlay}
         isEditMode ={isEditMode }
+        playlist={playlist}
+        playTime = {playTime}
         
       />
       {/* <style.MovePlaylistIcon isPlaylistSelected={isPlaylistSelected} /> */}

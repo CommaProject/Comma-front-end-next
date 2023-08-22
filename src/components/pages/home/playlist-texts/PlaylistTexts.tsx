@@ -1,12 +1,20 @@
+import { PlaylistType } from '~/src/constants/types/playlistTypes';
 import * as style from './PlaylistTexts.style';
 
 interface PlaylistTextsProps {
   isPlaylistSelected: boolean;
-  whenPlaylistWillPlay: string;
+  //whenPlaylistWillPlay: string;
   isEditMode: boolean;
+  playlist:PlaylistType;
+  playTime :number ;
+
   
 }
-export const PlaylistTexts = ({ isPlaylistSelected }: PlaylistTextsProps, {isEditMode}: PlaylistTextsProps) => {
+export const PlaylistTexts = ({ 
+  isPlaylistSelected,
+  isEditMode,
+  playlist,
+playTime}: PlaylistTextsProps ) => {
   return (
     <style.Wrapper isEditMode={isEditMode} isPlaylistSelected={isPlaylistSelected}>
       <style.Text
@@ -22,15 +30,15 @@ export const PlaylistTexts = ({ isPlaylistSelected }: PlaylistTextsProps, {isEdi
         isFontNotoElsePre={true}
         isFontsize15Else12={true}
       >
-        {/* TODO : API 명세가 나오지 않아서 작업을 하지 못했고, 임의의 데이터 넣어놓음  */}
-        아침에 커피 마시면서,
+        {playlist.playlistTitle}
+        
       </style.Text>
       <style.Text
         isFontBoldElseRegular={false}
         isFontNotoElsePre={false}
         isFontsize15Else12={false}
       >
-        {/*위와 동일 */}4 songs / 15m 23s
+        {playlist.trackCount} songs /{playTime > 360000 ? `${Math.floor((playTime / (1000 * 60)) % 60)}h` : ''} {playTime > 60000 ? `${Math.floor((playTime / (1000 * 60)) % 60)}m` : ''} {Math.floor((playTime / 1000 ) % 60) }s
       </style.Text>
     </style.Wrapper>
   );

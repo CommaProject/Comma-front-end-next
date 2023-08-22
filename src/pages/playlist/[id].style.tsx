@@ -13,7 +13,7 @@ ${({ theme }) => {
     width:100%;
     height: 28px;
 
-    margin:20px 0;
+    margin:20px 0px 30px;
     padding: 0 20px;
 
     display: flex;
@@ -38,7 +38,7 @@ ${({ theme }) => {
     margin: auto 20px 0 ;
   `
 
-  export const Text = styled.div`
+  export const TimeText = styled.div`
   ${({ theme }) => {
     const { colors,fonts } = theme;
     return css`
