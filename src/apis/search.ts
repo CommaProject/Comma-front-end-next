@@ -22,6 +22,7 @@ export interface getSpotifyArtistProps {
       width: number;
     },
   ];
+  popularity: number;
 }
 
 export interface getCommaUserProps {
