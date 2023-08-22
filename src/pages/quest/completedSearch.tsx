@@ -38,18 +38,21 @@ const CompletedSearch = () => {
 
   return (
     <CompletedSearchTemplate
-      completedTextValue={
-        typeof searchText === 'string' ? searchText : 'undefined'
-      }
+      completedTextValue={typeof searchText === 'string' ? searchText : 'undefined'}
       onClickRoundInput={() => {
         router.push('/quest/search');
-      }}
+      } }
       onClickEraseButton={() => {
         router.push('/quest/search');
-      }}
+      } }
       onClickCategory={handleSwitchActiveCategory}
-      switchActiveCategory={switchActiveCategory}
-    />
+      switchActiveCategory={switchActiveCategory} 
+      onClickAlbumLikeButton={(trackId: string) => {
+        mutateSetTrackLike(trackId)
+      }} 
+      spotifyArtistData={spotifyArtistData} 
+      spotifyTrackData={spotifyTrackData} 
+      commaUserData={commaUserData}    />
   );
 };
 
