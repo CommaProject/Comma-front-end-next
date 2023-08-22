@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { CompletedSearchTemplate } from '@/components/template/quest/completed-search';
 import { useRouter } from 'next/router';
 import { useSearch } from '@/hooks/useSearch';
-import { MusicAlbumFrom } from '@/components/pages/quest/music-album-form';
-import { ArtistAvataFrom } from '@/components/pages/quest/artist-avata-form';
 import { useUserInformation } from '~/src/hooks/useUserInformation';
 
 const CompletedSearch = () => {
@@ -51,27 +49,7 @@ const CompletedSearch = () => {
       }}
       onClickCategory={handleSwitchActiveCategory}
       switchActiveCategory={switchActiveCategory}
-    >
-      {switchActiveCategory === 0 && (
-        <MusicAlbumFrom
-          musicData={spotifyTrackData?.map((value) => ({
-            ...value,
-            isLike: false,
-          }))}
-          onClickPlusButton={() => {}}
-          onClickLikeButton={(trackId: string) => {
-            mutateSetTrackLike(trackId);
-          }}
-          onClick={() => {}}
-        />
-      )}
-      {switchActiveCategory === 1 && (
-        <ArtistAvataFrom artistData={spotifyArtistData} commaUserData={[]} />
-      )}
-      {switchActiveCategory === 2 && (
-        <ArtistAvataFrom artistData={[]} commaUserData={commaUserData} />
-      )}
-    </CompletedSearchTemplate>
+    />
   );
 };
 

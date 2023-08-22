@@ -20,7 +20,6 @@ export const MusicAlbumFrom = ({
   onClickLikeButton,
   onClick,
 }: MusicAlbumFromProps) => {
-  console.log('musicData', musicData);
 
   return (
     <style.Wrapper>

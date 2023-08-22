@@ -3,7 +3,8 @@ import { RoundInput } from '@/components/common/round-input';
 // eslint-disable-next-line import/no-unresolved
 import PrevIcon from '@/assets/images/PrevArrow.svg';
 import { MusicAlbumFrom } from '@/components/pages/quest/music-album-form';
-import { getTrackProps } from '@/apis/search';
+import { ArtistAvataFrom } from '@/components/pages/quest/artist-avata-form';
+import { getCommaUserProps, getSpotifyArtistProps, getTrackProps } from '@/apis/search';
 import * as style from './CompletedSearchTemplate.style';
 
 interface CompletedSearchTemplateProps {
@@ -11,8 +12,11 @@ interface CompletedSearchTemplateProps {
   onClickRoundInput: () => void;
   onClickEraseButton: () => void;
   onClickCategory: (category: string) => void;
+  onClickAlbumLikeButton: (trackId: string) => void;
   switchActiveCategory: number;
-  children: React.ReactNode;
+  spotifyArtistData: getSpotifyArtistProps[] | undefined
+  spotifyTrackData:getTrackProps[] | undefined
+  commaUserData:getCommaUserProps[] | undefined
 }
 
 export const CompletedSearchTemplate = ({
@@ -20,8 +24,11 @@ export const CompletedSearchTemplate = ({
   onClickRoundInput,
   onClickEraseButton,
   onClickCategory,
+  onClickAlbumLikeButton,
   switchActiveCategory,
-  children,
+  spotifyArtistData,
+  spotifyTrackData,
+  commaUserData,
 }: CompletedSearchTemplateProps) => (
   <style.Wrapper>
     <style.StickySections>
@@ -55,6 +62,24 @@ export const CompletedSearchTemplate = ({
         </style.Button>
       </style.ButtonBox>
     </style.StickySections>
-    {children}
+    {switchActiveCategory === 0 && (
+        <MusicAlbumFrom
+          musicData={spotifyTrackData?.map((value) => ({
+            ...value,
+            isLike: false,
+          }))}
+          onClickPlusButton={() => {}}
+          onClickLikeButton={ (trackId: string) => {
+            onClickAlbumLikeButton(trackId)}
+          }
+          onClick={() => {}}
+        />
+      )}
+      {switchActiveCategory === 1 && (
+        <ArtistAvataFrom artistData={spotifyArtistData} commaUserData={[]} />
+      )}
+      {switchActiveCategory === 2 && (
+        <ArtistAvataFrom artistData={[]} commaUserData={commaUserData} />
+      )}
   </style.Wrapper>
 );
