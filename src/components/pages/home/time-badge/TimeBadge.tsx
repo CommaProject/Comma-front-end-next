@@ -6,7 +6,6 @@ interface TimeBadgeProps {
    * format : hh:mm:ss, hh:mm 상관없습니다.
    */
   whenPlaylistWillPlay: string;
-  //isTimeBadgeVisible: boolean;
 }
 
 export const TimeBadge = ({

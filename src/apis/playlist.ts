@@ -1,5 +1,5 @@
 import { getAsync } from "@/apis/API";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import {  useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { PlaylistType } from "../constants/types/playlistTypes";
 
@@ -34,7 +34,6 @@ export const useGetMultiplePlaylists = () => {
             }else{
                 setIsPlaylistAvailable(true);
     
-                //console.log('filteredplaylist,',filteredPlaylistsPlaylists);
                  const filteredPlaylists: PlaylistType[] = data.filter(playlist => playlist.alarmFlag === true);
                 setCommaPlaylist(filteredPlaylists);
                 
@@ -43,11 +42,6 @@ export const useGetMultiplePlaylists = () => {
             
         }
 
-        // setIsPlaylistAvailable(multiplePlaylists.length !== 0);
-    
-        // const filteredPlaylists: PlaylistType[] = data.filter(playlist => playlist.alarmFlag === true);
-        // setCommaPlaylist(filteredPlaylists);
-        // setIsCommaPlaylistAvailable(commaPlaylist.length !== 0);
       }, [data]);
       useEffect(() => {
         if (commaPlaylist.length !== 0) {

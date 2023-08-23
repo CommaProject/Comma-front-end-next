@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 
 export const Wrapper = styled.div`
 ${({ theme }) => {
-    const { fonts, colors } = theme;
+    const {  colors } = theme;
     return css`
       width: 100%; //390px
       height: 52px;
@@ -20,7 +20,7 @@ ${({ theme }) => {
 
 export const PlayButton = styled.button`
 ${({ theme }) => {
-    const { colors } = theme;
+ 
     return css`
     width: 18px;
     height: 23px;
@@ -34,7 +34,7 @@ ${({ theme }) => {
 `
 export const PauseButton = styled.button`
 ${({ theme }) => {
-    const { colors } = theme;
+
     return css`
     width: 18px;
     height: 23px;
@@ -48,7 +48,7 @@ ${({ theme }) => {
 
 export const MusicPlayInfo = styled.div`
 ${({ theme }) => {
-    const { fonts, colors } = theme;
+    
     return css`
     width:80%;
     margin-left: 15px;
@@ -70,7 +70,7 @@ ${({ theme }) => {
 `
 export const ProgressBar = styled.input`
 ${({ theme }) => {
-    const { fonts, colors } = theme;
+
     return css`
     width: 100%;
     height: 2px;
@@ -88,7 +88,7 @@ ${({ theme }) => {
 `
 export const Time = styled.div`
 ${({ theme }) => {
-    const { fonts, colors } = theme;
+    const { colors } = theme;
     return css`
     margin-top:5px;
 
@@ -103,23 +103,9 @@ ${({ theme }) => {
 
 `
 export const CurrentTime = styled.div`
-${({ theme }) => {
-    const { fonts, colors } = theme;
-    return css`
-    
-    
-    
-    `;
-  }}
+
 `
   export const DurationTime = styled.div`
-${({ theme }) => {
-    const { fonts, colors } = theme;
-    return css`
 
-    
-    
-    `;
-  }}
 
 `

@@ -3,6 +3,7 @@ import CommaIcon from '@/assets/images/commaIconWithoutText.svg';
 import ArrowIcon from '@/assets/images/arrow.svg';
 import addPlaylist from '@/assets/images/addPlaylist.svg';
 import deletePlaylist from '@/assets/images/removeSongAndList.svg';
+
 interface ButtonProps {
   isEditMode:boolean;
 }
@@ -11,7 +12,7 @@ interface ContainerProps {
 }
 export const Container = styled.div<ContainerProps>`
 ${({ theme ,isPlaylistAvailable}) => {
-  const { fonts, colors } = theme;
+  const { colors } = theme;
   return css`
   width: 100%;
   height: 100% ;

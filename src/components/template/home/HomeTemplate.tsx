@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router';
-
 import * as style from '~/src/components/template/home/HomeTemplate.style';
 import PlaylistBox from '@/components/pages/home/playlist-box';
 import { PlaylistType } from '@/constants/types/playlistTypes';
@@ -24,7 +23,7 @@ export const HomeTemplate = ({
   onClickIsEditMode,
   commaPlaylist,
 }: HomeTemplateProps) => {
-  //플레이리스트 클릭시, 페이지 이동
+  
   const router = useRouter();
   const currentFirstPath = router.pathname.split('/')[1];
   const onClickAddPlaylistButton = () => {
@@ -61,7 +60,7 @@ export const HomeTemplate = ({
             <PlaylistBox
               
               isEditMode={isEditMode}
-              key={index}
+              key={playlist.playlistId}
               playlist={playlist}
   
             />

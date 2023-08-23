@@ -48,7 +48,6 @@ export const SearchIcon = styled(SearchIconSVG)`
 
 export const EraseIcon = styled(CancelSVG)`
   ${({ theme }) => {
-    const { colors } = theme;
     return `
       right: 30px; /* Adjust the value as per your requirements */
       position: absolute;
