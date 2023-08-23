@@ -12,6 +12,7 @@ const CompletedSearch = () => {
   const [switchActiveCategory, setSwitchActiveCategory] = useState(0);
   const [getSpotifyArtistForDetailArtist, setGetSpotifyArtistForDetailArtist] =
     useState<getSpotifyArtistProps>();
+  const [isHidden, setIsHidden] = useState(false); // false: Completed Search true: Detail
   const { searchText } = router.query;
   const {
     spotifyArtistData,
@@ -27,22 +28,31 @@ const CompletedSearch = () => {
   const handleSwiper = (swiper: SwiperClass) => {
     setSlideStep(swiper.realIndex);
   };
+
   const handleSwitchActiveCategory = (category: string) => {
     if (category === 'music') setSwitchActiveCategory(0);
     else if (category === 'artist') setSwitchActiveCategory(1);
     else if (category === 'commaUser') setSwitchActiveCategory(2);
   };
+
   const handleArtistAvata = useCallback(
-    (value: getSpotifyArtistProps) => {
-      setGetSpotifyArtistForDetailArtist(value);
+    (artistData: getSpotifyArtistProps) => {
+      mutateTrack(artistData.artistName);
+      setGetSpotifyArtistForDetailArtist(artistData);
+      setIsHidden(true);
       swiperRef?.slideNext();
     },
     [swiperRef],
   );
-  // const handleArtistAvata = (value: getSpotifyArtistProps) => {
-  //   setGetSpotifyArtistForDetailArtist(value);
-  //   swiperRef?.slideNext();
-  // };
+
+  const handlePrev = useCallback(() => {
+    setIsHidden(false);
+    if (swiperRef?.activeIndex === 0) {
+      window.history.back();
+    } else {
+      swiperRef?.slidePrev();
+    }
+  }, [swiperRef]);
 
   useEffect(() => {
     if (typeof searchText === 'string') {
@@ -58,7 +68,7 @@ const CompletedSearch = () => {
 
   return (
     <CompletedSearchTemplate
-      slideStep={slideStep}
+      onClickPrev={handlePrev}
       onSlideChange={handleSwiper}
       completedTextValue={
         typeof searchText === 'string' ? searchText : 'undefined'
@@ -80,6 +90,7 @@ const CompletedSearch = () => {
       setSwiperRef={setSwiperRef}
       onClickArtistAvata={handleArtistAvata}
       spotifyArtistForDetailArtist={getSpotifyArtistForDetailArtist}
+      isHidden={isHidden}
     />
   );
 };
