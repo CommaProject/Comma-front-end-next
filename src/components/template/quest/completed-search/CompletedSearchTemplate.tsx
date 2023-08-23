@@ -12,6 +12,8 @@ import {
 } from '@/apis/search';
 import { ArtistDetailForm } from '@/components/pages/quest/artist-detail-from';
 import * as style from './CompletedSearchTemplate.style';
+import 'swiper/swiper.min.css';
+import 'swiper/swiper-bundle.min.css';
 
 interface CompletedSearchTemplateProps {
   slideStep: number;
@@ -95,7 +97,7 @@ export const CompletedSearchTemplate = ({
       <style.CustomSwiper
         onSwiper={setSwiperRef}
         centeredSlides
-        noSwiping
+        // noSwiping
         mousewheel={false}
         centerInsufficientSlides
         allowTouchMove
