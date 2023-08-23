@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import heartSVG from '@/assets/images/heart.svg';
+import heartSVG from '@/assets/images/bigHeart.svg';
 
 export interface LikeButtonProps {
   isLike: boolean;
@@ -7,14 +7,15 @@ export interface LikeButtonProps {
 
 export const Wrapper = styled.div`
   height: 100%;
-  // display: flex;
-  // flex-wrap: wrap;
-  justify-content: center;
 `;
 
 export const AvatarBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   text-align: center;
-  margin: 150px;
+  margin-top: 20px;
 `;
 
 export const AvatartName = styled.text`
@@ -26,6 +27,8 @@ export const AvatartName = styled.text`
       font-style: normal;
       font-weight: 500;
       line-height: 16px;
+      margin-top: 5px;
+      margin-bottom: 13px;
     `;
   }}
 `;
@@ -51,6 +54,7 @@ export const LikeButton = styled(heartSVG)<LikeButtonProps>`
     path {
       fill:  ${isLike ? colors.primary.main : null}
     }
+    margin-bottom: 16px;
     `;
   }}
 `;

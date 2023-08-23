@@ -5,7 +5,7 @@ import * as style from './ArtistDetailForm.style';
 
 interface ArtistDetailFormProps {
   soptifyArtistData: getSpotifyArtistProps | undefined;
-  spotifyTrackData: getTrackProps[];
+  spotifyTrackData: getTrackProps[] | undefined;
   isLike: boolean;
 }
 
@@ -24,10 +24,10 @@ export const ArtistDetailForm = ({
           }
           size={89}
         />
-        {/* <style.AvatartName>{soptifyArtistData.artistName}</style.AvatartName> */}
-        <style.AvatarGroupName>test</style.AvatarGroupName>
+        <style.AvatartName>{soptifyArtistData?.artistName}</style.AvatartName>
         <style.LikeButton isLike={isLike} />
       </style.AvatarBox>
+
       <MusicAlbumFrom
         musicData={spotifyTrackData?.map((value) => ({
           ...value,

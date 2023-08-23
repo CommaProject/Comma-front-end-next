@@ -96,11 +96,12 @@ export const CompletedSearchTemplate = ({
     {switchActiveCategory === 1 && (
       <style.CustomSwiper
         onSwiper={setSwiperRef}
+        slidesPerView={1}
         centeredSlides
-        // noSwiping
+        noSwiping
         mousewheel={false}
         centerInsufficientSlides
-        allowTouchMove
+        allowTouchMove={false}
         onSlideChange={onSlideChange}
       >
         <style.Slide>
@@ -115,7 +116,7 @@ export const CompletedSearchTemplate = ({
         <style.Slide>
           <ArtistDetailForm
             soptifyArtistData={spotifyArtistForDetailArtist}
-            spotifyTrackData={[]}
+            spotifyTrackData={spotifyTrackData}
             isLike={false}
           />
         </style.Slide>

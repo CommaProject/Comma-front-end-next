@@ -12,7 +12,7 @@ export const TextContainer = styled.div`
   margin-left: 15px;
 `;
 
-export const SongName = styled.text`
+export const SongName = styled.div`
   ${({ theme }) => {
     const { colors, fonts } = theme;
     return css`
@@ -25,7 +25,7 @@ export const SongName = styled.text`
   }}
 `;
 
-export const SingerName = styled.text`
+export const SingerName = styled.div`
   ${({ theme }) => {
     const { colors, fonts } = theme;
     return css`
@@ -38,7 +38,7 @@ export const SingerName = styled.text`
   }}
 `;
 
-export const Timer = styled.text`
+export const Timer = styled.div`
   color: #666;
   font-family: Pretendard;
   font-size: 12px;
