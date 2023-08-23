@@ -28,6 +28,10 @@ const Search = () => {
   };
   const handleOnClickSearchItem = (searchItem: string) => {
     setCompletedText(searchItem);
+    router.push({
+      pathname: '/quest/completedSearch',
+      query: { searchText: searchItem },
+    });
   };
   const handleEnterKeyPress = () => {
     // 최근 기록
@@ -46,7 +50,9 @@ const Search = () => {
     setCompletedText(() => '');
   };
 
-  const handleOnClickCancelIcon = () => {};
+  const handleOnClickCancelIcon = () => {
+    window.history.back();
+  };
 
   return (
     <SearchTemplate
