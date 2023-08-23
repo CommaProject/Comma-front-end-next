@@ -19,59 +19,39 @@ ${({ theme }) => {
 `;
 
 export const PlayButton = styled.button`
-${({ theme }) => {
- 
-    return css`
+
     width: 18px;
     height: 23px;
     margin: 5px;
 
 
     border: 1px solid white;
-    `;
-  }}
+    
 
 `
 export const PauseButton = styled.button`
-${({ theme }) => {
 
-    return css`
     width: 18px;
     height: 23px;
 
 
     border: 1px solid black;
-    `;
-  }}
+ 
 
 `
 
 export const MusicPlayInfo = styled.div`
-${({ theme }) => {
-    
-    return css`
+
     width:80%;
     margin-left: 15px;
-    
-
 
     line-height: 12px;
 
 
-    
-
-    
-    
-
-
-    `;
-  }}
 
 `
 export const ProgressBar = styled.input`
-${({ theme }) => {
 
-    return css`
     width: 100%;
     height: 2px;
 
@@ -81,9 +61,7 @@ ${({ theme }) => {
         color:pink;
     }
      
-    
-    `;
-  }}
+   
 
 `
 export const Time = styled.div`

@@ -20,7 +20,7 @@ interface InmageBoxProps {
 
 export const Wrapper = styled.div<WrapperProps>`
   ${({ theme, isPlaylistSelected }) => {
-    const { colors } = theme;
+    
     return css`
       //width: ${isPlaylistSelected ? 'calc(100% - 48px)' : '100%'};
       //height: calc(81.9px + 2 * 8px);
@@ -66,7 +66,7 @@ ${({ theme, isPlaylistSelected, isEditMode }) => {
 `
 export const ImagesBox =styled.div<InmageBoxProps>`
 ${({ theme, isEditMode }) => {
-  const { colors } = theme;
+  
   return css`
   width: 81.9px;
   position: relative;
@@ -120,19 +120,14 @@ ${({ theme, isPlaylistSelected }) => {
 }}
 `;
 
-//SVG
 
 export const MovePlaylistIcon = styled(MovePlaylistSvg)<WrapperProps>`
-  ${({ isPlaylistSelected }) => {
-    return css`
-      display: ${isPlaylistSelected ? '' : 'none'};
-
-      position: absolute;
-      right: 15px;
-
-      cursor: pointer;
-    `;
-  }}
+    ${({ isPlaylistSelected }) => css`
+    display: ${isPlaylistSelected ? '' : 'none'};
+    position: absolute;
+    right: 15px;
+    cursor: pointer;
+    `}
 `;
 
 // SVG

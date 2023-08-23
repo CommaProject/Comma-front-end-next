@@ -1,6 +1,6 @@
 import { ArtistType } from "@/constants/types/trackTypes";
 
-/* ms로 주어진 시간을 __ h __ m __ s 문자열로 반환하는 함수*/
+/* ms로 주어진 시간을 __ h __ m __ s 문자열로 반환하는 함수 */
 
 export const HandleMS = (ms:number) =>{
     const seconds = Math.floor(ms / 1000);

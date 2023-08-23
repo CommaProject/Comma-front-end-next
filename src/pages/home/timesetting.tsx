@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import * as style from '@/pages/home/timesetting.style';
 import PrevIcon from '@/assets/images/PrevArrow.svg';
@@ -23,12 +22,7 @@ interface Playlist {
   }
   
 const TimeSetting = ({
-    meridiem,
-    hour,
-    min,
-    onChangeMeridiem,
-    onChangeHour,
-    onChangeMin,
+    
   }: TimePickerProps
   ) => {
     const playlists: Playlist[] = [

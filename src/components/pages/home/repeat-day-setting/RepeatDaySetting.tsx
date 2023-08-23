@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import * as style from './RepeatDaySetting.style';
 
 
 
-export const RepeatDaySetting = () => {
+export const RepeatDaySetting = useCallback(() => {
     const daysOfWeek: string[] = ['월', '화', '수', '목', '금', '토', '일'];
     const [selectedDays, setSelectedDays] = useState<string[]>([]);
     const onClickDay = (day:string) => {
@@ -25,4 +25,4 @@ export const RepeatDaySetting = () => {
             </style.Box>
         </style.Wrapper>
     )
-};
+},[])

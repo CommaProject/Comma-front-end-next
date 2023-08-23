@@ -3,7 +3,6 @@ import * as style from './PlaylistTexts.style';
 
 interface PlaylistTextsProps {
   isPlaylistSelected: boolean;
-  //whenPlaylistWillPlay: string;
   isEditMode: boolean;
   playlist:PlaylistType;
   playTime :number ;
@@ -22,7 +21,6 @@ playTime}: PlaylistTextsProps ) => {
         isFontNotoElsePre={false}
         isFontsize15Else12={true}
       >
-        {/*  TODO : 이 부분을 Date 자바스크립트 함수로 구현하려했는데 렌더링 쪽 에러가 생겨서 포기했습니다 ㅠ*/}
         
       </style.Text>
       <style.Text
