@@ -12,27 +12,26 @@ const getPlaylistTracks = async (
     if (isSuccess && result.data){ 
         console.log('트랙',result.data);
         return result.data
-    }else{
-            console.log('실패함',isSuccess,result.data);
-            return []
-            
-        }
+    }
     
-}
+    return []
+        
+        }
+
 
 export const useGetPlaylistTracks = (playlistId: string) => {
     const[playlistTracks,setPlaylistTracks]= useState<TrackType[]>([]);
     
-    if( typeof(playlistId) === "string"){
+    if( typeof playlistId === "string"){
+        const {isSuccess,data} = useQuery(['playlistTracks'],() => getPlaylistTracks(parseInt(playlistId,10)));
     
-    const {isSuccess,data} = useQuery(['playlistTracks'],() => getPlaylistTracks(parseInt(playlistId)));
     useEffect( ()=>{
     if(isSuccess && data.length !== 0){
-        console.log(playlistId,data);
+
         setPlaylistTracks(data);
         
     }
-    },[data]);
+    },[data,isSuccess,playlistId]);
 
     
     }

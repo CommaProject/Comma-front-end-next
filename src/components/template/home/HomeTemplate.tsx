@@ -2,13 +2,14 @@ import { useRouter } from 'next/router';
 import * as style from '~/src/components/template/home/HomeTemplate.style';
 import PlaylistBox from '@/components/pages/home/playlist-box';
 import { PlaylistType } from '@/constants/types/playlistTypes';
+import React from 'react';
 
 interface HomeTemplateProps {
   
   isPlaylistAvailable:boolean;
   isCommaPlaylistAvailable: boolean;
   isEditMode: boolean;
-  setIsEditMode:React.Dispatch<React.SetStateAction<boolean>>;
+  
   onClickIsEditMode : () => void;
   commaPlaylist: PlaylistType[];
   
@@ -33,16 +34,16 @@ export const HomeTemplate = ({
   }}
  
   return (
-   
     <style.Container isPlaylistAvailable={isPlaylistAvailable}>
-    { !isPlaylistAvailable ? (
-      <style.Box>
-        <style.Text>마이 플레이리스트가 없어요, <br/>
-지금 담으러 가시겠어요?</style.Text>
-        <style.Arrow/>
-      </style.Box>
-    ) : (
-      isCommaPlaylistAvailable ? (
+      {!isPlaylistAvailable ? (
+        <style.Box>
+          <style.Text>
+            마이 플레이리스트가 없어요, <br />
+            지금 담으러 가시겠어요?
+          </style.Text>
+          <style.Arrow />
+        </style.Box>
+      ) : isCommaPlaylistAvailable ? (
         <style.ShowPlaylist>
           <style.MainIcon />
           <style.EditDiv>
@@ -56,25 +57,24 @@ export const HomeTemplate = ({
               </style.Button>
             )}
           </style.EditDiv>
-          { commaPlaylist && commaPlaylist.map((playlist:PlaylistType, index: number) => (
-            <PlaylistBox
-              
-              isEditMode={isEditMode}
-              key={playlist.playlistId}
-              playlist={playlist}
-  
-            />
-          ))}
+          {commaPlaylist &&
+            commaPlaylist.map((playlist: PlaylistType, index: number) => (
+              <PlaylistBox
+                isEditMode={isEditMode}
+                key={playlist.playlistId}
+                playlist={playlist}
+              />
+            ))}
         </style.ShowPlaylist>
       ) : (
         <style.SuggestAddPlaylist>콤마 플레이리스트가 없어요.</style.SuggestAddPlaylist>
-      )
-    )}
-    {!isEditMode ? (
-      <style.AddPlaylistButton onClick={onClickAddPlaylistButton} />
-    ) : (
-      <style.DeletePlaylistButton />
-    )}
-  </style.Container>
+      )}
+      {!isEditMode ? (
+        <style.AddPlaylistButton onClick={onClickAddPlaylistButton} />
+      ) : (
+        <style.DeletePlaylistButton />
+      )}
+    </style.Container>
   );
+  
 };

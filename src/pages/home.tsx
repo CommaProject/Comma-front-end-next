@@ -25,7 +25,6 @@ const Home = () => {
       isPlaylistAvailable={isPlaylistAvailable}
       isCommaPlaylistAvailable = {isCommaPlaylistAvailable}
       isEditMode= {isEditMode}
-      setIsEditMode={setIsEditMode}
       onClickIsEditMode ={onClickIsEditMode}
       commaPlaylist={commaPlaylist}
       

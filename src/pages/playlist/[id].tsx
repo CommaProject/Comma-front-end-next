@@ -15,7 +15,7 @@ const Id = () => {
     const router = useRouter();
     
     const {playlistId} = router.query  ;
-    /*아래 지금은 useState로 해놨는데 api 생기면 바꿀 것임*/
+    /* 아래 지금은 useState로 해놨는데 api 생기면 바꿀 것임 */
     const [nowPlaylist] =useState<PlaylistType>(
        { "playlistId": 33,
         "playlistTitle": "트랙 정보 불러오기 완료, 단일 플리 정보 x",

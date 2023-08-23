@@ -26,7 +26,7 @@ const HOUR_LIST = Array.from(
     .fill(1)
     .map((i, v) => i + v),
 );
-//const MIN_LIST = Array.from(Array(60).keys());
+/* const MIN_LIST = Array.from(Array(60).keys()); */
 const MIN_LIST =  [0, 10, 20, 30, 40, 50];
 const MeridiemPicker = ({
   meridiem,
