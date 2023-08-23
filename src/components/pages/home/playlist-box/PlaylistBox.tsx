@@ -40,11 +40,13 @@ export const PlaylistBox = ({
   
   const onClickPlaylist = () =>{
     if(isEditMode === false){
-    navigateToPlaylist(playlist.playlistId);}
+    navigateToPlaylist(playlist.playlistId,playlist.playlistTitle,playlist.alarmStartTime);}
   }
   
   return (
-    <style.Wrapper isPlaylistSelected={isPlaylistSelected} onClick={onClickPlaylist} >
+    <style.Wrapper 
+    isPlaylistSelected={isPlaylistSelected} 
+    onClick={onClickPlaylist} >
       <TimeBadge
         whenPlaylistWillPlay={playlist.alarmStartTime}
         // isTimeBadgeVisible={isTimeBadgeVisible}
@@ -54,7 +56,7 @@ export const PlaylistBox = ({
         <style.ImagesBox isEditMode ={isEditMode }>
           
           <Album url={playlist.repAlbumImageUrl} size={81.5} />
-          {playlist.trackCount-1> 0 ? <style.TrackNumInfo>{playlist.trackCount-1}</style.TrackNumInfo>: ''}
+          {playlist.trackCount-1> 0 ? <style.TrackNumInfo>+{playlist.trackCount-1}</style.TrackNumInfo>: ''}
           </style.ImagesBox>
       <PlaylistTexts 
         isPlaylistSelected={isPlaylistSelected}

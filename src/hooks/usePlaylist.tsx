@@ -4,8 +4,15 @@ import { useCallback } from 'react';
 export const usePlaylist = () => {
     const router = useRouter();
 
-  const navigateToPlaylist = useCallback((playlistId: number) => {
-    router.replace(`/playlist/${playlistId}`);
+  const navigateToPlaylist = useCallback((playlistId: number,playlistTitle:string, alarmStartTime:string) => {
+    router.push({
+
+      pathname:`/playlist/${playlistId}`,
+      query: {playlistId:playlistId,
+       }
+      
+  });
+
   }, [router]);
 
   return { navigateToPlaylist };

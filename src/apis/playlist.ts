@@ -24,7 +24,7 @@ export const useGetMultiplePlaylists = () => {
     const [isPlaylistAvailable, setIsPlaylistAvailable] = useState<boolean>(false);
     const [isCommaPlaylistAvailable, setIsCommaPlaylistAvailable] = useState<boolean>(false);
     const [commaPlaylist, setCommaPlaylist] = useState<PlaylistType[]>([]);
-    const [multiplePlaylists] = [{}]
+    
     
     useEffect(() => {
         if(isLoading === false){
@@ -59,7 +59,7 @@ export const useGetMultiplePlaylists = () => {
 
     
     return {
-        multiplePlaylists,
+        
         isPlaylistAvailable,
         isCommaPlaylistAvailable,
         commaPlaylist, 

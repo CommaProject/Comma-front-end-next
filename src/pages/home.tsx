@@ -1,6 +1,6 @@
 import HomeTemplate from '@/components/template/home';
 import { useState } from 'react';
-import { useGetMultiplePlaylists } from '~/src/apis/playlist';
+import { useGetMultiplePlaylists } from '@/apis/playlist';
 
 
 
@@ -9,7 +9,7 @@ const Home = () => {
   
   
   const [isEditMode,setIsEditMode] = useState<boolean>(false);
-  const {multiplePlaylists, isPlaylistAvailable, isCommaPlaylistAvailable, commaPlaylist} = useGetMultiplePlaylists();
+  const { isPlaylistAvailable, isCommaPlaylistAvailable, commaPlaylist} = useGetMultiplePlaylists();
   const onClickIsEditMode = () => {
     setIsEditMode(!isEditMode);
     

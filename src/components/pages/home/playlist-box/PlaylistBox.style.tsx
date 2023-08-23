@@ -89,8 +89,8 @@ ${({ theme}) => {
     left:49px;
 
 
-    font-size:15px;
-    line-height: 15px;
+    font-size:12px;
+    line-height: 12px;
     font-weight: ${ fonts.weight.bold};
     color: ${colors.grayscale.white};
     background-color: ${colors.grayscale.gray300};
