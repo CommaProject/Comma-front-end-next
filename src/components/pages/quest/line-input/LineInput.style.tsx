@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import SearchIconSVG from '@/assets/images/search.svg';
+import SearchIconSVG from '@/assets/images/whiteSearch.svg';
 import CancelSVG from '@/assets/images/cancel.svg';
 
 export const Wrapper = styled.div`
@@ -35,13 +35,7 @@ export const SearchIcon = styled(SearchIconSVG)`
     const { colors } = theme;
     return `
       position: absolute;
-      
-      line {
-        stroke: ${colors.grayscale.white};
-      }
-      circle {
-        stroke: ${colors.grayscale.white};
-      }
+  
     `;
   }}
 `;
