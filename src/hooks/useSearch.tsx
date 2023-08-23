@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import {
   getSpotifyArtistProps,
   getCommaUserAsync,
@@ -7,6 +7,7 @@ import {
   getTrackAsync,
   getCommaUserProps,
   getTrackProps,
+  getHistoryAsync,
 } from '@/apis/search';
 
 const getSpotifyArtist = async (artistName: string) => {
@@ -21,6 +22,11 @@ const getSpotifyTrack = async (trackName: string) => {
 };
 const getCommaUser = async (commaUserName: string) => {
   const { isSuccess, result } = await getCommaUserAsync(commaUserName);
+
+  return { isSuccess, result };
+};
+const getHistory = async () => {
+  const { isSuccess, result } = await getHistoryAsync();
 
   return { isSuccess, result };
 };
@@ -72,7 +78,17 @@ export const useSearch = () => {
     },
   });
 
+  const {
+    isLoading,
+    error,
+    data: searchHistory,
+    isFetching,
+  } = useQuery({
+    queryKey: ['repoData'],
+    queryFn: getHistory,
+  });
   return {
+    searchHistory,
     spotifyArtistData,
     spotifyTrackData,
     commaUserData,

@@ -1,5 +1,5 @@
 import { ApiResponse } from '@/constants/types';
-import { getAsync } from './API';
+import { getAsync, postAsync } from './API';
 
 export interface getSpotifyArtistProps {
   artistId: string;
@@ -68,6 +68,15 @@ export interface getTrackProps {
   durationMinute: string;
   durationSecond: string;
 }
+
+export interface getHistoryProps {
+  id: number;
+  searchHistory: string;
+}
+
+export interface setHistoryProps {
+  searchHistory: string;
+}
 /**
  * Artist 데이터 가져오기
  * @param artistName 가수 이름
@@ -114,4 +123,24 @@ export async function getTrackAsync(
   );
 
   return response;
+}
+
+export async function getHistoryAsync(): ApiResponse<getHistoryProps[]> {
+  const response = await getAsync<getHistoryProps[]>('/spotify/histories', {});
+
+  return response;
+}
+
+export async function setHistoryAsync(
+  searchHistory: string,
+): ApiResponse<null> {
+  const response = await postAsync<setHistoryProps, setHistoryProps>(
+    '/spotify/histories',
+    { searchHistory },
+  );
+
+  if (response.isSuccess) {
+    return { isSuccess: true, result: { code: 200, msg: 'Success' } };
+  }
+  return { isSuccess: false, result: response.result };
 }

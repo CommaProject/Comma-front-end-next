@@ -1,11 +1,12 @@
 import { SearchTemplate } from '@/components/template/quest/search';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { useSearch } from '@/hooks/useSearch';
 
 const Search = () => {
   const router = useRouter();
   // Music, Artist, CommaUser
-
+  const { searchHistory } = useSearch();
   const [completedText, setCompletedText] = useState('');
   const [historyArray_, setHistoryArray_] = useState<string[]>();
   useEffect(() => {
@@ -34,6 +35,7 @@ const Search = () => {
     });
   };
   const handleEnterKeyPress = () => {
+    console.log('searchHistory', searchHistory);
     // 최근 기록
     const existingHistory = localStorage.getItem('recentSearchHistory');
     const historyArray = existingHistory ? JSON.parse(existingHistory) : [];
