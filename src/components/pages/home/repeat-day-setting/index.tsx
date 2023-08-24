@@ -1,3 +1,4 @@
-import {RepeatDaySetting} from './RepeatDaySetting';
+
+import { RepeatDaySetting } from "./RepeatDaySetting";
 
 export default RepeatDaySetting;
