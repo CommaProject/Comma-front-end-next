@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import * as style from './RepeatDaySetting.style';
 
-const RepeatDaySetting = () => {
+export const RepeatDaySetting = () => {
     const daysOfWeek: string[] = ['월', '화', '수', '목', '금', '토', '일'];
     const [selectedDays, setSelectedDays] = useState<string[]>([]);
     
@@ -25,5 +25,3 @@ const RepeatDaySetting = () => {
         </style.Wrapper>
     );
 };
-
-export default RepeatDaySetting;
