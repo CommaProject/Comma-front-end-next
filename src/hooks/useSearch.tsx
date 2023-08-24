@@ -5,7 +5,7 @@ import {
   getSpotifyArtistAsync,
   getTrackAsync,
   getHistoryAsync,
-  setHistoryAsync,
+  addHistoryAsync,
 } from '@/apis/search';
 import { CommaUserProps, SpotifyArtistProps, TrackProps } from '@/types/search';
 
@@ -30,7 +30,7 @@ const getHistory = async () => {
   return { isSuccess, result };
 };
 const setHistory = async (history: string) => {
-  const { isSuccess, result } = await setHistoryAsync(history);
+  const { isSuccess, result } = await addHistoryAsync(history);
 
   return { isSuccess, result };
 };

@@ -1,32 +1,21 @@
 import { SearchTemplate } from '@/components/template/quest/search';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import { useSearch } from '@/hooks/useSearch';
+import { deleteHistoryAsync } from '~/src/apis/search';
 
 const Search = () => {
   const router = useRouter();
   // Music, Artist, CommaUser
-  const { searchHistory } = useSearch();
+  const { searchHistory, mutateSearchHistory } = useSearch();
   const [completedText, setCompletedText] = useState('');
   const [historyArray_, setHistoryArray_] = useState<string[]>();
-  useEffect(() => {
-    const getHistoryArrayLocalState = localStorage.getItem(
-      'recentSearchHistory',
-    );
-    setHistoryArray_(
-      getHistoryArrayLocalState ? JSON.parse(getHistoryArrayLocalState) : [],
-    );
-  }, []);
+  useEffect(() => {}, []);
 
   const handleOnClickDeleteItem = (index: number) => {
-    if (historyArray_ && index >= 0 && index < historyArray_.length) {
-      const newArray = [...historyArray_];
-      newArray.splice(index, 1);
-      setHistoryArray_(newArray);
-    } else {
-      console.error('Invalid index');
-    }
+    deleteHistoryAsync(index);
   };
+
   const handleOnClickSearchItem = (searchItem: string) => {
     setCompletedText(searchItem);
     router.push({
@@ -34,20 +23,15 @@ const Search = () => {
       query: { searchText: searchItem },
     });
   };
-  const handleEnterKeyPress = () => {
-    console.log('searchHistory', searchHistory);
-    // 최근 기록
-    const existingHistory = localStorage.getItem('recentSearchHistory');
-    const historyArray = existingHistory ? JSON.parse(existingHistory) : [];
-
-    historyArray.push(completedText);
-    localStorage.setItem('recentSearchHistory', JSON.stringify(historyArray));
-    setHistoryArray_(historyArray);
+  const handleEnterKeyPress = useCallback(() => {
+    // mutateSearchHistory(completedText);
+    console.log('searchHistory', searchHistory?.result.data);
+    // setHistoryArray_(searchHistory);
     router.push({
       pathname: '/quest/completedSearch',
       query: { searchText: completedText },
     });
-  };
+  }, [searchHistory]);
   const handleOnClickEraseIcon = () => {
     setCompletedText(() => '');
   };
@@ -59,7 +43,7 @@ const Search = () => {
   return (
     <SearchTemplate
       key="SearchTemplate"
-      textList={historyArray_ || []}
+      textList={searchHistory?.isSuccess ? searchHistory?.result.data : null}
       isAutocomplete_={false}
       onClickDeleteItem={handleOnClickDeleteItem}
       onClickSearchItem={handleOnClickSearchItem}

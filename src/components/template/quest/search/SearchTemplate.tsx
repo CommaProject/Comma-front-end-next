@@ -1,10 +1,11 @@
 import { LineInput } from '~/src/components/pages/quest/line-input';
 import { TextList } from '@/components/pages/quest/search/text-list/TextList';
 import { Dispatch, SetStateAction } from 'react';
+import { getHistoryProps } from '@/types/search';
 import * as style from './SearchTemplate.style';
 
 interface SearchTemplateProps {
-  textList: string[];
+  textList: getHistoryProps[] | undefined;
   isAutocomplete_: boolean;
   onClickSearchItem: (searchItem: string) => void;
   onClickDeleteItem: (index: number) => void;

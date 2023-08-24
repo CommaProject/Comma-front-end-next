@@ -6,7 +6,7 @@ import {
   getHistoryProps,
   setHistoryProps,
 } from '@/types/search';
-import { getAsync, postAsync } from './API';
+import { deleteAsync, getAsync, postAsync } from './API';
 
 /**
  * Artist 데이터 가져오기
@@ -71,16 +71,36 @@ export async function getHistoryAsync(): ApiResponse<getHistoryProps[]> {
  * @param searchedText 검색된 텍스트
  * @returns 성공: 200
  */
-export async function setHistoryAsync(
+export async function addHistoryAsync(
   searchHistory: string,
 ): ApiResponse<null> {
-  const response = await postAsync<setHistoryProps, setHistoryProps>(
+  const response = await postAsync<null, setHistoryProps>(
     '/spotify/histories',
-    { searchHistory },
+    {
+      searchHistory,
+    },
   );
 
-  if (response.isSuccess) {
-    return { isSuccess: true, result: { code: 200, msg: 'Success' } };
-  }
-  return { isSuccess: false, result: response.result };
+  return response;
+}
+
+/**
+ * Search History 데이터 삭제
+ * @param id getHistoryProps.id
+ * @returns 성공: 200
+ */
+export async function deleteHistoryAsync(id: number): ApiResponse<null> {
+  const response = await deleteAsync<null>(`/spotify/histories/${id}`);
+
+  return response;
+}
+
+/**
+ * Search History 데이터 전체 삭제
+ * @returns 성공: 200
+ */
+export async function deleteAllHistoryAsync(): ApiResponse<null> {
+  const response = await deleteAsync<null>('/spotify/all-histories');
+
+  return response;
 }
