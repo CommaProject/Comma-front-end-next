@@ -1,14 +1,13 @@
 import { useState } from 'react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import {
-  getSpotifyArtistProps,
   getCommaUserAsync,
   getSpotifyArtistAsync,
   getTrackAsync,
-  getCommaUserProps,
-  getTrackProps,
   getHistoryAsync,
+  setHistoryAsync,
 } from '@/apis/search';
+import { CommaUserProps, SpotifyArtistProps, TrackProps } from '@/types/search';
 
 const getSpotifyArtist = async (artistName: string) => {
   const { isSuccess, result } = await getSpotifyArtistAsync(artistName);
@@ -30,14 +29,19 @@ const getHistory = async () => {
 
   return { isSuccess, result };
 };
+const setHistory = async (history: string) => {
+  const { isSuccess, result } = await setHistoryAsync(history);
+
+  return { isSuccess, result };
+};
 
 export const useSearch = () => {
   const [spotifyArtistData, setSpotifyArtistData] =
-    useState<getSpotifyArtistProps[]>();
+    useState<SpotifyArtistProps[]>();
 
-  const [spotifyTrackData, setSpotifyTrackData] = useState<getTrackProps[]>();
+  const [spotifyTrackData, setSpotifyTrackData] = useState<TrackProps[]>();
 
-  const [commaUserData, setCommaUserData] = useState<getCommaUserProps[]>();
+  const [commaUserData, setCommaUserData] = useState<CommaUserProps[]>();
 
   const { mutate: mutateTrack } = useMutation(['Track'], getSpotifyTrack, {
     onSuccess: (response) => {
@@ -45,8 +49,8 @@ export const useSearch = () => {
         if ('errors' in response.result.data) {
           console.log('error:', response.result.data.errors);
         } else if (response.result.data) {
-          const newArtistData = response.result.data;
-          setSpotifyTrackData(newArtistData);
+          const newTrackData = response.result.data;
+          setSpotifyTrackData(newTrackData);
         }
       }
     },
@@ -78,15 +82,32 @@ export const useSearch = () => {
     },
   });
 
+  const { mutate: mutateSearchHistory } = useMutation(
+    ['searchHistory'],
+    setHistory,
+    {
+      onSuccess: (response) => {
+        if (response.result.data) {
+          if ('errors' in response.result.data) {
+            console.log('error:', response.result.data.errors);
+          } else if (response.result.data) {
+            console.log('setSearchHistory success');
+          }
+        }
+      },
+    },
+  );
+
   const {
     isLoading,
     error,
     data: searchHistory,
     isFetching,
   } = useQuery({
-    queryKey: ['repoData'],
+    queryKey: ['searchHistory'],
     queryFn: getHistory,
   });
+
   return {
     searchHistory,
     spotifyArtistData,
@@ -95,5 +116,6 @@ export const useSearch = () => {
     mutateArtist,
     mutateTrack,
     mutateCommaUser,
+    mutateSearchHistory,
   };
 };

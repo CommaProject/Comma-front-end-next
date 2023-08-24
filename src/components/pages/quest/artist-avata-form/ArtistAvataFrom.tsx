@@ -1,12 +1,12 @@
 import React from 'react';
-import { getCommaUserProps, getSpotifyArtistProps } from '@/apis/search';
 import { Avata } from '@/components/common/avata';
+import { CommaUserProps, SpotifyArtistProps } from '@/types/search';
 import * as style from './ArtistAvataFrom.style';
 
 interface ArtistAvataFromProps {
-  artistData: getSpotifyArtistProps[] | undefined;
-  commaUserData: getCommaUserProps[] | undefined;
-  onArtistAvataClick: (value: getSpotifyArtistProps) => void;
+  artistData: SpotifyArtistProps[] | undefined;
+  commaUserData: CommaUserProps[] | undefined;
+  onArtistAvataClick: (value: SpotifyArtistProps) => void;
 }
 
 export const ArtistAvataFrom = ({

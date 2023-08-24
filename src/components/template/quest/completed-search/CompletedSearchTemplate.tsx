@@ -2,13 +2,9 @@ import { Dispatch, SetStateAction } from 'react';
 import { Swiper as SwiperClass } from 'swiper/types';
 import { MusicAlbumFrom } from '@/components/pages/quest/music-album-form';
 import { ArtistAvataFrom } from '@/components/pages/quest/artist-avata-form';
-import {
-  getCommaUserProps,
-  getSpotifyArtistProps,
-  getTrackProps,
-} from '@/apis/search';
 import { ArtistDetailForm } from '@/components/pages/quest/artist-detail-from';
 import { TopBar } from '@/components/pages/quest/top-bar';
+import { CommaUserProps, SpotifyArtistProps, TrackProps } from '@/types/search';
 
 import * as style from './CompletedSearchTemplate.style';
 import 'swiper/swiper.min.css';
@@ -18,18 +14,18 @@ interface CompletedSearchTemplateProps {
   isHidden: boolean;
   onSlideChange: (swiper: any) => void;
   completedTextValue: string;
-  spotifyArtistForDetailArtist: getSpotifyArtistProps | undefined;
+  spotifyArtistForDetailArtist: SpotifyArtistProps | undefined;
   setSwiperRef: Dispatch<SetStateAction<SwiperClass | undefined>>;
   onClickRoundInput: () => void;
   onClickEraseButton: () => void;
   onClickCategory: (category: string) => void;
   onClickAlbumLikeButton: (trackId: string) => void;
-  onClickArtistAvata: (artistData: getSpotifyArtistProps) => void;
+  onClickArtistAvata: (artistData: SpotifyArtistProps) => void;
   onClickPrev: () => void;
   switchActiveCategory: number;
-  spotifyArtistData: getSpotifyArtistProps[] | undefined;
-  spotifyTrackData: getTrackProps[] | undefined;
-  commaUserData: getCommaUserProps[] | undefined;
+  spotifyArtistData: SpotifyArtistProps[] | undefined;
+  spotifyTrackData: TrackProps[] | undefined;
+  commaUserData: CommaUserProps[] | undefined;
 }
 
 export const CompletedSearchTemplate = ({

@@ -4,14 +4,14 @@ import { useRouter } from 'next/router';
 import { useSearch } from '@/hooks/useSearch';
 import { useUserInformation } from '~/src/hooks/useUserInformation';
 import { Swiper as SwiperClass } from 'swiper/types';
-import { getSpotifyArtistProps } from '~/src/apis/search';
+import { SpotifyArtistProps } from '@/types/search';
 
 const CompletedSearch = () => {
   const router = useRouter();
   const [slideStep, setSlideStep] = useState(0);
   const [switchActiveCategory, setSwitchActiveCategory] = useState(0);
   const [getSpotifyArtistForDetailArtist, setGetSpotifyArtistForDetailArtist] =
-    useState<getSpotifyArtistProps>();
+    useState<SpotifyArtistProps>();
   const [isHidden, setIsHidden] = useState(false); // false: Completed Search true: Detail
   const { searchText } = router.query;
   const {
@@ -36,7 +36,7 @@ const CompletedSearch = () => {
   };
 
   const handleArtistAvata = useCallback(
-    (artistData: getSpotifyArtistProps) => {
+    (artistData: SpotifyArtistProps) => {
       mutateTrack(artistData.artistName);
       setGetSpotifyArtistForDetailArtist(artistData);
       setIsHidden(true);

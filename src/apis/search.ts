@@ -1,82 +1,13 @@
 import { ApiResponse } from '@/constants/types';
+import {
+  CommaUserProps,
+  SpotifyArtistProps,
+  TrackProps,
+  getHistoryProps,
+  setHistoryProps,
+} from '@/types/search';
 import { getAsync, postAsync } from './API';
 
-export interface getSpotifyArtistProps {
-  artistId: string;
-  artistName: string;
-  genres: string[];
-  images: [
-    {
-      height: number;
-      url: string;
-      width: number;
-    },
-    {
-      height: number;
-      url: string;
-      width: number;
-    },
-    {
-      height: number;
-      url: string;
-      width: number;
-    },
-  ];
-  popularity: number;
-}
-
-export interface getCommaUserProps {
-  userId: number;
-  email: string;
-  password: string;
-  delFlag: boolean;
-  role: string;
-  name: string;
-  nickName: string;
-  age: number;
-  sex: string;
-  joinDate: string;
-  profileImage: string;
-}
-
-export interface getTrackProps {
-  trackId: string;
-  trackName: string;
-  artist: string;
-  artistId: string;
-  albumId: string;
-  previewUrl: string;
-  images: [
-    {
-      height: number;
-      url: string;
-      width: number;
-    },
-    {
-      height: number;
-      url: string;
-      width: number;
-    },
-    {
-      height: number;
-      url: string;
-      width: number;
-    },
-  ];
-  popularity: number;
-  releaseData: string;
-  durationMinute: string;
-  durationSecond: string;
-}
-
-export interface getHistoryProps {
-  id: number;
-  searchHistory: string;
-}
-
-export interface setHistoryProps {
-  searchHistory: string;
-}
 /**
  * Artist 데이터 가져오기
  * @param artistName 가수 이름
@@ -84,8 +15,8 @@ export interface setHistoryProps {
  */
 export async function getSpotifyArtistAsync(
   artistName: string,
-): ApiResponse<getSpotifyArtistProps[]> {
-  const response = await getAsync<getSpotifyArtistProps[]>(
+): ApiResponse<SpotifyArtistProps[]> {
+  const response = await getAsync<SpotifyArtistProps[]>(
     `/spotify/artist/{${artistName}}`,
     {},
   );
@@ -95,13 +26,13 @@ export async function getSpotifyArtistAsync(
 
 /**
  * CommaUser 데이터 가져오기
- * @param userName 이름
+ * @param userName 유저 이름
  * @returns 성공: 200
  */
 export async function getCommaUserAsync(
   userName: string,
-): ApiResponse<getCommaUserProps[]> {
-  const response = await getAsync<getCommaUserProps[]>(
+): ApiResponse<CommaUserProps[]> {
+  const response = await getAsync<CommaUserProps[]>(
     `/search/user?name=${userName}`,
     {},
   );
@@ -116,8 +47,8 @@ export async function getCommaUserAsync(
  */
 export async function getTrackAsync(
   trackName: string,
-): ApiResponse<getTrackProps[]> {
-  const response = await getAsync<getTrackProps[]>(
+): ApiResponse<TrackProps[]> {
+  const response = await getAsync<TrackProps[]>(
     `/spotify/track/{${trackName}}`,
     {},
   );
@@ -125,12 +56,21 @@ export async function getTrackAsync(
   return response;
 }
 
+/**
+ * Search History 데이터 가져오기
+ * @returns 성공: 200
+ */
 export async function getHistoryAsync(): ApiResponse<getHistoryProps[]> {
   const response = await getAsync<getHistoryProps[]>('/spotify/histories', {});
 
   return response;
 }
 
+/**
+ * Search History 데이터 설정
+ * @param searchedText 검색된 텍스트
+ * @returns 성공: 200
+ */
 export async function setHistoryAsync(
   searchHistory: string,
 ): ApiResponse<null> {

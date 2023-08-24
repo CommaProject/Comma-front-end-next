@@ -1,11 +1,11 @@
 import { Avata } from '@/components/common/avata';
-import { getSpotifyArtistProps, getTrackProps } from '@/apis/search';
+import { SpotifyArtistProps, TrackProps } from '@/types/search';
 import { MusicAlbumFrom } from '../music-album-form';
 import * as style from './ArtistDetailForm.style';
 
 interface ArtistDetailFormProps {
-  soptifyArtistData: getSpotifyArtistProps | undefined;
-  spotifyTrackData: getTrackProps[] | undefined;
+  soptifyArtistData: SpotifyArtistProps | undefined;
+  spotifyTrackData: TrackProps[] | undefined;
   isLike: boolean;
 }
 

@@ -1,14 +1,14 @@
 import React from 'react';
-import { getTrackAsync, getTrackProps } from '@/apis/search';
+import { TrackProps } from '@/types/search';
 import * as style from './MusicAlbumFrom.style';
 import { HorizontalAlbumWithIcon } from '../horizontal-album-with-icon';
 
 type isLike = boolean;
-interface EnhancedGetTrackProps extends getTrackProps {
+interface EnhancedTrackProps extends TrackProps {
   isLike: boolean;
 }
 interface MusicAlbumFromProps {
-  musicData: EnhancedGetTrackProps[] | undefined;
+  musicData: EnhancedTrackProps[] | undefined;
   onClickPlusButton: () => void;
   onClickLikeButton: (trackId: string) => void;
   onClick: () => void;
