@@ -13,23 +13,24 @@ export const PlaylistTexts = ({
   isPlaylistSelected,
   isEditMode,
   playlist,
-playTime}: PlaylistTextsProps ) => {
+  playTime
+}: PlaylistTextsProps ) => {
   return (
-    <style.Wrapper isEditMode={isEditMode} isPlaylistSelected={isPlaylistSelected}>
+    <style.Wrapper 
+    isEditMode={isEditMode} 
+    isPlaylistSelected={isPlaylistSelected}>
       <style.Text
         isFontBoldElseRegular={true}
         isFontNotoElsePre={false}
         isFontsize15Else12={true}
-      >
-        
-      </style.Text>
+      />
+      
       <style.Text
         isFontBoldElseRegular={true}
         isFontNotoElsePre={true}
         isFontsize15Else12={true}
       >
         {playlist.playlistTitle}
-        
       </style.Text>
       <style.Text
         isFontBoldElseRegular={false}

@@ -20,10 +20,9 @@ interface InmageBoxProps {
 
 export const Wrapper = styled.div<WrapperProps>`
   ${({ theme, isPlaylistSelected }) => {
-    
     return css`
-      //width: ${isPlaylistSelected ? 'calc(100% - 48px)' : '100%'};
-      //height: calc(81.9px + 2 * 8px);
+      // width: ${isPlaylistSelected ? 'calc(100% - 48px)' : '100%'};
+      // height: calc(81.9px + 2 * 8px);
       margin-bottom :43px;
       padding-left:15px;
 
@@ -41,6 +40,7 @@ export const PlaylistInfoBox = styled.div<PlaylistInfoBoxProps>`
 ${({ theme, isPlaylistSelected, isEditMode }) => {
   const { colors } = theme;
   return css`
+  
     width:100%;
     width: ${isEditMode ? 'calc(100% - 50px)': '100%'};
     height: calc(81.9px + 2 * 8px);
@@ -66,8 +66,8 @@ ${({ theme, isPlaylistSelected, isEditMode }) => {
 `
 export const ImagesBox =styled.div<InmageBoxProps>`
 ${({ theme, isEditMode }) => {
-  
   return css`
+
   width: 81.9px;
   position: relative;
   // left: ${isEditMode ? '-34px' : 0};

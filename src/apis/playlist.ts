@@ -2,7 +2,7 @@ import { getAsync } from "@/apis/API";
 import {  useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { PlaylistType } from "../constants/types/playlistTypes";
-import { platform } from "os";
+
 
 // 플레이리스트 조회
 const getMultiplePlaylists = async () => {

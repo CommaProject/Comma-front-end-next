@@ -4,8 +4,6 @@ import PrevIcon from '@/assets/images/PrevArrow.svg';
 import RepeatDaySetting from '@/components/pages/home/repeat-day-setting';
 import { TimeType } from '@/constants/types/signUpTypes';
 import TimePicker from '@/components/common/time-picker';
-import { TimePickerProps } from '@/components/common/time-picker/TimePicker';
-
 import SwiperCore from 'swiper';
 import { Album } from '~/src/components/common/album/Album';
 
@@ -28,7 +26,7 @@ const TimeSetting = () => {
       });
 
       const [renderingStartTime] = useState("01:00");
-    const handleMeridiem = (meridiem: string) => {
+    function handleMeridiem(meridiem: string):void {
         
         setAlarmTime({
             ...alarmTime,

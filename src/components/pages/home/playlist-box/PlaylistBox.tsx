@@ -6,6 +6,7 @@ import { Album } from '@/components/common/album/Album';
 import { PlaylistType } from '@/constants/types/playlistTypes';
 import {usePlaylist} from '@/hooks/usePlaylist';
 import {useGetPlaylistPlayTime} from '@/apis/playlist';
+
 interface PlaylistBoxProps {
   
   isEditMode:boolean;
@@ -64,16 +65,13 @@ export const PlaylistBox = ({
       />
       {/* <style.MovePlaylistIcon isPlaylistSelected={isPlaylistSelected} /> */}
       </style.PlaylistInfoBox>
-      { !isEditMode?
-      (!isPlaylistSelected ? (
-        isAlarmSelected ? (
-          <style.ActivateAlarmIcon onClick={onClickAlarmButton } />
-        ) : (
-          <style.DeactivateAlarmIcon onClick={onClickAlarmButton} />
-        )
-      ) : (
-        null
-      )) : null}
+      {!isEditMode && !isPlaylistSelected && (
+  isAlarmSelected ? (
+    <style.ActivateAlarmIcon onClick={onClickAlarmButton} />
+  ) : (
+    <style.DeactivateAlarmIcon onClick={onClickAlarmButton} />
+  )
+)}
       
     </style.Wrapper>
   );
