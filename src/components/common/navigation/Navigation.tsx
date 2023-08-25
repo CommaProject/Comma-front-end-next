@@ -21,9 +21,9 @@ const Navigation = () => {
 
   const NavigationIcon = [
     {
-      path: '',
+      path: 'home',
       notSelected: (
-        <NavigationHomeSvg key="Home" onClick={() => moveToPage('/')} />
+        <NavigationHomeSvg key="Home" onClick={() => moveToPage('/home')} />
       ),
       selected: <NavigationHomeSelected key="Home" />,
     },

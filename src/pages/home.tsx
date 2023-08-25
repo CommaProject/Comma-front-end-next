@@ -1,31 +1,34 @@
 import HomeTemplate from '@/components/template/home';
 import { useState } from 'react';
+import { useGetMultiplePlaylists } from '@/apis/playlist';
+
+
 
 const Home = () => {
-  /**
-   * 테스트 용 데이터
-   * whenPlaylistWillPlay : '20:50:12'
-   * playlistImageSources :
-   * [
-   *   'http://news.samsungdisplay.com/wp-content/uploads/2018/08/8.jpg',
-   *   'https://cdn.travie.com/news/photo/first/201710/img_19975_1.jpg',
-   * ]
-   */
-  const [isPlaylistSelected] = useState(false);
-  const [whenPlaylistWillPlay] = useState('12:00:00');
-  const [isTimeBadgeVisible] = useState(false);
-  const [isEditSelected] = useState(false);
-  const [playlistImageSources] = useState([]);
-  const [isAlarmSelected] = useState(false);
+  
+  
+  
+  const [isEditMode,setIsEditMode] = useState<boolean>(false);
+  const { isPlaylistAvailable, isCommaPlaylistAvailable, commaPlaylist} = useGetMultiplePlaylists();
+  const onClickIsEditMode = () => {
+    setIsEditMode(!isEditMode);
+    
+  }
+  // const HandleEditModeChange = () => {
+  // 편집 -> 일반 모드로 변할때 isPlaylistSelected(State)를 
+  // 모두 false로 변경해주는 함수
+  // }
 
   return (
     <HomeTemplate
-      isPlaylistSelected={isPlaylistSelected}
-      whenPlaylistWillPlay={whenPlaylistWillPlay}
-      isTimeBadgeVisible={isTimeBadgeVisible}
-      isEditSelected={isEditSelected}
-      playlistImageSources={playlistImageSources}
-      isAlarmSelected={isAlarmSelected}
+      
+      isPlaylistAvailable={isPlaylistAvailable}
+      isCommaPlaylistAvailable = {isCommaPlaylistAvailable}
+      isEditMode= {isEditMode}
+      onClickIsEditMode ={onClickIsEditMode}
+      commaPlaylist={commaPlaylist}
+      
+     
     />
   );
 };

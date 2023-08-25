@@ -8,7 +8,7 @@ export interface TimeType {
   meridiem: string;
   /** 시간 1 ~ 12 */
   hour: number;
-  /** 분 0 ~ 59 */
+  /** 분 0,10,20,30,40,50 */
   min: number;
 }
 

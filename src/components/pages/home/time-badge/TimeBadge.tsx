@@ -6,12 +6,11 @@ interface TimeBadgeProps {
    * format : hh:mm:ss, hh:mm 상관없습니다.
    */
   whenPlaylistWillPlay: string;
-  isTimeBadgeVisible: boolean;
 }
 
 export const TimeBadge = ({
   whenPlaylistWillPlay,
-  isTimeBadgeVisible,
+ // isTimeBadgeVisible,
 }: TimeBadgeProps) => {
   function convertTimeToAMPM(time: string = '12:00') {
     if (!time.includes(':')) return '-- --:--';
@@ -26,7 +25,7 @@ export const TimeBadge = ({
   }
 
   return (
-    <styles.Badge isTimeBadgeVisible={isTimeBadgeVisible}>
+    <styles.Badge >
       {convertTimeToAMPM(whenPlaylistWillPlay)}
     </styles.Badge>
   );

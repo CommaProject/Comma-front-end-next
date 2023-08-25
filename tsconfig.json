@@ -25,11 +25,11 @@
       "@/pages/*": ["./src/pages/*"],
       "@/styles/*": ["./src/styles/*"],
       "@/stores/*": ["./src/stores/*"],
-      "@/types/*": ["./src/types/*"],
+      "@/types/*": ["./src/constants/types/*"],
       "@/utils/*": ["./src/utils/*"]
     },
     "incremental": true
   },
-  "include": ["global.d.ts", "next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["global.d.ts", "next-env.d.ts", "**/*.ts", "**/*.tsx", "src/pages/playlist"],
   "exclude": ["node_modules"]
 }
