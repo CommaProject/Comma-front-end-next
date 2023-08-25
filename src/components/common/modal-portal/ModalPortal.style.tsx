@@ -8,4 +8,6 @@ export const Container = styled.div`
   left: 0;
   overflow-y: scroll;
   z-index: 999;
+  background-color : #0F0F0F;
+
 `;

@@ -25,7 +25,7 @@ export const useRegister = () => {
     nickName: '',
     sex: 'x',
     age: 0,
-    recommendTime: { meridiem: 'AM', hour: 1, min: 1 },
+    recommendTime: { meridiem: 'AM', hour: 1, min: 0 },
     genres: [],
     artistNames: [],
   });
@@ -57,7 +57,7 @@ export const useRegister = () => {
       ...signUpState,
       recommendTime: { ...signUpState.recommendTime, meridiem },
     });
-  };
+  }; 
   const handleHour = (swiper: SwiperCore) => {
     setSignUpState({
       ...signUpState,
@@ -70,8 +70,9 @@ export const useRegister = () => {
   const handleMin = (swiper: SwiperCore) => {
     setSignUpState({
       ...signUpState,
-      recommendTime: { ...signUpState.recommendTime, min: swiper.realIndex },
+      recommendTime: { ...signUpState.recommendTime, min: swiper.realIndex*10 },
     });
+    
   };
   const handleArtistSelect = (artist: string) => {
     if (!signUpState.artistNames.includes(artist)) {

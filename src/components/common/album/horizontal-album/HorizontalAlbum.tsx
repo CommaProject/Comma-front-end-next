@@ -3,6 +3,7 @@ import { AlbumProps } from '@/types/albumTypes';
 import * as style from './HorizontalAlbum.style';
 import { Album } from '../Album';
 
+
 export interface HorizontalAlbumProps extends AlbumProps {
   timer: string;
   onClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
