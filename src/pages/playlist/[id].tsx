@@ -1,4 +1,4 @@
-import * as style from '@/pages/playlist/[id].style';
+import * as style from '~/src/styles/[id].style';
 import PrevIcon from '@/assets/images/PrevArrow.svg';
 import SettingIcon from '@/assets/images/setting.svg';
 import TimeBadge from '@/components/pages/home/time-badge';

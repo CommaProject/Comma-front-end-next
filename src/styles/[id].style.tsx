@@ -61,6 +61,7 @@ ${({ theme }) => {
     `;
   }}
   `;
+  
   export const AlbumList = styled.div`
 
   margin: auto 20px 0 ;
