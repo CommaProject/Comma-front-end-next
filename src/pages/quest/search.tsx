@@ -3,18 +3,30 @@ import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import { useSearch } from '@/hooks/useSearch';
 import { deleteHistoryAsync } from '~/src/apis/search';
+import { useQueryClient } from '@tanstack/react-query';
+import { getHistoryProps } from '@/types/search';
 
 const Search = () => {
   const router = useRouter();
+  const queryClient = useQueryClient();
   // Music, Artist, CommaUser
   const { searchHistory, mutateSearchHistory } = useSearch();
   const [completedText, setCompletedText] = useState('');
-  const [historyArray_, setHistoryArray_] = useState<string[]>();
-  useEffect(() => {}, []);
-
+  const [historyTextArray, setHistoryTextArray] = useState<getHistoryProps[]>();
   const handleOnClickDeleteItem = (index: number) => {
+    console.log(index);
     deleteHistoryAsync(index);
+    queryClient.invalidateQueries(['searchHistory']);
   };
+  useEffect(() => {
+    if (
+      searchHistory?.isSuccess &&
+      searchHistory.result.data &&
+      !('errors' in searchHistory.result.data)
+    ) {
+      setHistoryTextArray(searchHistory.result.data);
+    }
+  }, []);
 
   const handleOnClickSearchItem = (searchItem: string) => {
     setCompletedText(searchItem);
@@ -24,14 +36,19 @@ const Search = () => {
     });
   };
   const handleEnterKeyPress = useCallback(() => {
-    // mutateSearchHistory(completedText);
-    console.log('searchHistory', searchHistory?.result.data);
-    // setHistoryArray_(searchHistory);
+    mutateSearchHistory(completedText);
+    if (
+      searchHistory?.isSuccess &&
+      searchHistory.result.data &&
+      !('errors' in searchHistory.result.data)
+    ) {
+      setHistoryTextArray(searchHistory?.result.data);
+    }
     router.push({
       pathname: '/quest/completedSearch',
       query: { searchText: completedText },
     });
-  }, [searchHistory]);
+  }, [searchHistory, completedText]);
   const handleOnClickEraseIcon = () => {
     setCompletedText(() => '');
   };
@@ -43,7 +60,7 @@ const Search = () => {
   return (
     <SearchTemplate
       key="SearchTemplate"
-      textList={searchHistory?.isSuccess ? searchHistory?.result.data : null}
+      textList={historyTextArray}
       isAutocomplete_={false}
       onClickDeleteItem={handleOnClickDeleteItem}
       onClickSearchItem={handleOnClickSearchItem}
