@@ -30,3 +30,4 @@ export const Image = styled.img<ImageProps>`
     height: 100%;
     border-radius: ${radius}px;
   `}
+`;
