@@ -54,7 +54,7 @@ export const HomeTemplate = ({
           </style.Button>
         </style.EditDiv>
         {commaPlaylist &&
-          commaPlaylist.map((playlist: PlaylistType, index: number) => (
+          commaPlaylist.map((playlist: PlaylistType) => (
             <PlaylistBox
               isEditMode={isEditMode}
               key={playlist.playlistId}

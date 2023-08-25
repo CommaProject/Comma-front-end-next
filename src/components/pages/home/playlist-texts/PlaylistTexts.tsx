@@ -20,15 +20,15 @@ export const PlaylistTexts = ({
     isEditMode={isEditMode} 
     isPlaylistSelected={isPlaylistSelected}>
       <style.Text
-        isFontBoldElseRegular={true}
+        isFontBoldElseRegular
         isFontNotoElsePre={false}
-        isFontsize15Else12={true}
+        isFontsize15Else12
       />
       
       <style.Text
-        isFontBoldElseRegular={true}
-        isFontNotoElsePre={true}
-        isFontsize15Else12={true}
+        isFontBoldElseRegular
+        isFontNotoElsePre
+        isFontsize15Else12
       >
         {playlist.playlistTitle}
       </style.Text>

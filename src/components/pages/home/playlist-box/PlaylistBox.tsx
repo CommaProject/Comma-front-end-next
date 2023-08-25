@@ -38,7 +38,7 @@ export const PlaylistBox = ({
   
   const onClickPlaylist = () =>{
     if(isEditMode === false){
-    navigateToPlaylist(playlist.playlistId,playlist.playlistTitle,playlist.alarmStartTime);}
+    navigateToPlaylist(playlist.playlistId);}
   }
   
   return (

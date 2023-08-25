@@ -19,21 +19,17 @@ interface InmageBoxProps {
 }
 
 export const Wrapper = styled.div<WrapperProps>`
-  ${({ theme, isPlaylistSelected }) => {
-    return css`
+  ${({ isPlaylistSelected }) =>
+    css`
       // width: ${isPlaylistSelected ? 'calc(100% - 48px)' : '100%'};
       // height: calc(81.9px + 2 * 8px);
-      margin-bottom :43px;
-      padding-left:15px;
+      margin-bottom: 43px;
+      padding-left: 15px;
 
       display: flex;
       flex-direction: column;
       position: relative;
-      
-
-
-    `;
-  }}
+    `};
 `;
 
 export const PlaylistInfoBox = styled.div<PlaylistInfoBoxProps>`
@@ -64,17 +60,15 @@ ${({ theme, isPlaylistSelected, isEditMode }) => {
 
 
 `
-export const ImagesBox =styled.div<InmageBoxProps>`
-${({ theme, isEditMode }) => {
-  return css`
+export const ImagesBox = styled.div<InmageBoxProps>`
+  ${({ isEditMode }) =>
+    css`
+      width: 81.9px;
+      position: relative;
+      // left: ${isEditMode ? '-34px' : 0};
+    `};
+`;
 
-  width: 81.9px;
-  position: relative;
-  // left: ${isEditMode ? '-34px' : 0};
-  `;
-}}
-  
-`
 export const TrackNumInfo = styled.div`
 ${({ theme}) => {
   const { colors,fonts } = theme;
@@ -85,7 +79,7 @@ ${({ theme}) => {
     align-items: center;
     justify-content:center;
     position: relative;
-    top:-26px;
+    top:-22px;
     left:49px;
 
 
@@ -95,7 +89,7 @@ ${({ theme}) => {
     color: ${colors.grayscale.white};
     background-color: ${colors.grayscale.gray300};
     border-radius: 19px;
-    border: 1px solid pink;
+    
    
   `;
 }}

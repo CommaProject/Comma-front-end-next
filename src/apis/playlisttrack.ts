@@ -19,12 +19,12 @@ const getPlaylistTracks = async (
         }
 
 
-export const useGetPlaylistTracks = (playlistId: string) => {
+export const useGetPlaylistTracks = (playlistId: string | string[]| undefined) => {
     const[playlistTracks,setPlaylistTracks]= useState<TrackType[]>([]);
     
     const { isSuccess, data } = useQuery(
         ['playlistTracks'],
-        () => getPlaylistTracks(parseInt(playlistId, 10)),
+        () => getPlaylistTracks(parseInt(playlistId as string, 10)),
         {
           enabled: typeof playlistId === "string", // 조건에 따라 훅 사용 여부 결정
         }

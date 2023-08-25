@@ -5,7 +5,7 @@ import RepeatDaySetting from '@/components/pages/home/repeat-day-setting';
 import { TimeType } from '@/constants/types/signUpTypes';
 import TimePicker from '@/components/common/time-picker';
 import SwiperCore from 'swiper';
-import { Album } from '~/src/components/common/album/Album';
+import  { Album }  from '~/src/components/common/album/Album';
 
 
 
@@ -28,9 +28,7 @@ const TimeSetting = () => {
       const [renderingStartTime] = useState("01:00");
     function handleMeridiem(meridiem: string):void {
         
-        setAlarmTime({
-            ...alarmTime,
-            meridiem:meridiem ,
+        setAlarmTime({...alarmTime,meridiem
           });
         
       };
@@ -71,11 +69,11 @@ const TimeSetting = () => {
             <style.TimePickerBox>
                 <TimePicker
                 meridiem={alarmTime.meridiem}
-                onChangeMeridiem={handleMeridiem}
+                onChangeMeridiem={()=> handleMeridiem}
                 hour={alarmTime.hour}
-                onChangeHour={handleHour}
+                onChangeHour={()=> handleHour}
                 min={alarmTime.min}
-                onChangeMin={handleMin}
+                onChangeMin={()=> handleMin}
                 />
             </style.TimePickerBox>   
             <RepeatDaySetting/>
@@ -84,8 +82,7 @@ const TimeSetting = () => {
                 <style.MyPlaylistBox>
                     {playlists.map(({playlistId,repAlbumImageUrl,playlistTitle}) => (
                         <style.PlaylistInfo  
-                          key={playlistId}
-                          onClick = {() => {console.log(playlistTitle)}}>
+                          key={playlistId}>
                             <Album url={repAlbumImageUrl} size={81} />
                             <style.PlaylistTitle>{playlistTitle}</style.PlaylistTitle>
                         </style.PlaylistInfo>

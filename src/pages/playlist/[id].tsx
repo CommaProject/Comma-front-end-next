@@ -10,11 +10,12 @@ import { HandleMS,HandleSingerName } from '@/hooks/usePlaylistTrack';
 import { PlaylistType } from '~/src/constants/types/playlistTypes';
 import { useGetPlaylistPlayTime } from '~/src/apis/playlist';
 
+
 const Id = () => {
     const [isEditMode,setIsEditMode] = useState(false);
     const router = useRouter();
     
-    const {playlistId} = router.query  ;
+    const {playlistId} = router.query ;
     /* 아래 지금은 useState로 해놨는데 api 생기면 바꿀 것임 */
     const [nowPlaylist] =useState<PlaylistType>(
        { "playlistId": 33,
@@ -25,7 +26,7 @@ const Id = () => {
         "trackCount": 3
     }
     );
-    const{playlistTracks} = useGetPlaylistTracks("1");
+    const{playlistTracks} = useGetPlaylistTracks(playlistId);
     const{nowPlaylistPlayTIme} :any = useGetPlaylistPlayTime(1);
     const onClickSetting = () =>{
         setIsEditMode(!isEditMode);

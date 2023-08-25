@@ -1,5 +1,3 @@
-import { TimeType } from "./signUpTypes";
-/* api 연결하면서 playlistTypes.ts 와 합칠 예정 */
 
 export interface PlayListSettingType {
     /* 플리 제목 */
