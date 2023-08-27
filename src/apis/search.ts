@@ -1,11 +1,11 @@
 import { ApiResponse } from '@/constants/types';
 import {
-  CommaUserProps,
   SpotifyArtistProps,
-  TrackProps,
   getHistoryProps,
   setHistoryProps,
-} from '@/types/search';
+} from '@/types/searchTypes';
+import { TrackType } from '@/types/trackTypes';
+import { CommaUserType } from '@/types/authTypes';
 import { deleteAsync, getAsync, postAsync } from './API';
 
 /**
@@ -31,8 +31,8 @@ export async function getSpotifyArtistAsync(
  */
 export async function getCommaUserAsync(
   userName: string,
-): ApiResponse<CommaUserProps[]> {
-  const response = await getAsync<CommaUserProps[]>(
+): ApiResponse<CommaUserType[]> {
+  const response = await getAsync<CommaUserType[]>(
     `/search/user?name=${userName}`,
     {},
   );
@@ -47,8 +47,8 @@ export async function getCommaUserAsync(
  */
 export async function getTrackAsync(
   trackName: string,
-): ApiResponse<TrackProps[]> {
-  const response = await getAsync<TrackProps[]>(
+): ApiResponse<TrackType[]> {
+  const response = await getAsync<TrackType[]>(
     `/spotify/track/{${trackName}}`,
     {},
   );

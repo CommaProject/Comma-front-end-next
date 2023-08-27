@@ -1,5 +1,5 @@
 import React from 'react';
-import { getHistoryProps } from '@/types/search';
+import { getHistoryProps } from '@/types/searchTypes';
 import * as style from './TextList.style';
 
 interface TextListProps {
