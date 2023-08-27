@@ -25,6 +25,6 @@ export interface TrackType {
   }>;
   popularity: number;
   releaseDate: string;
-  durationMinute: string;
-  durationSecond: string;
+  durationMinute: number;
+  durationSecond: number;
 }
