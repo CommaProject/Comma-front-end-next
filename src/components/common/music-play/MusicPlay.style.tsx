@@ -1,4 +1,6 @@
 import styled, { css } from 'styled-components';
+import PlaySVG from '@/assets/images/play.svg';
+import PauseSVG from '@/assets/images/pause.svg';
 
 export const Wrapper = styled.div`
   ${({ theme }) => {
@@ -21,29 +23,16 @@ export const Wrapper = styled.div`
   }}
 `;
 
-export const PlayButton = styled.button`
-  width: 18px;
-  height: 23px;
-  margin: 5px;
-
-  border: 1px solid white;
+export const PlayButton = styled(PlaySVG)`
+  width: 20px;
 `;
-export const PauseButton = styled.button`
-  width: 18px;
-  height: 23px;
-
-  border: 1px solid black;
+export const PauseButton = styled(PauseSVG)`
+  width: 20px;
 `;
 export const ProgressBarContainer = styled.div`
   width: 80%;
 `;
 
-export const CustomProgressBar = styled.input`
-  width: 100%;
-  height: 2px;
-  border: none;
-  background-color: pink;
-`;
 export const AudioContainer = styled.div`
   width: 80%;
   margin-left: 15px;
