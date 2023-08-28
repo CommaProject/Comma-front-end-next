@@ -3,13 +3,10 @@ import { useAtom } from 'jotai';
 import { musicStateAtom } from '@/stores/music';
 import * as style from './MusicPlay.style';
 
-const MusicPlay = () => {
+const MusicPlay = (audioUrl: string) => {
   const [musicState, setMusicState] = useAtom(musicStateAtom);
   const [currentTime, setCurrentTime] = useState(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
-
-  const audioUrl =
-    'https://p.scdn.co/mp3-preview/41ca116da4133de4e1bbd8bfd18de9e1273b455a?cid=f6d89d8d397049678cbbf45f829dd85a';
 
   const currentMinutes = Math.floor(currentTime / 60);
   const currentSeconds = Math.floor(currentTime % 60);
