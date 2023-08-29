@@ -1,12 +1,12 @@
 import { Avata } from '@/components/common/avata';
-import { SpotifyArtistProps, TrackProps } from '@/types/search';
-import noImage from '~/src/assets/images/noImage.png';
+import { SpotifyArtistProps } from '@/types/searchTypes';
+import { TrackType } from '@/types/trackTypes';
 import { MusicAlbumFrom } from '../music-album-form';
 import * as style from './ArtistDetailForm.style';
 
 interface ArtistDetailFormProps {
   soptifyArtistData: SpotifyArtistProps | undefined;
-  spotifyTrackData: TrackProps[] | undefined;
+  spotifyTrackData: TrackType[] | undefined;
   isLike: boolean;
 }
 
@@ -24,6 +24,7 @@ export const ArtistDetailForm = ({
             soptifyArtistData && soptifyArtistData.images[2] !== undefined
               ? soptifyArtistData.images[2].url
               : '~/src/assets/images/noImage.png'
+
           }
           size={89}
         />

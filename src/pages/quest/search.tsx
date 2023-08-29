@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { useSearch } from '@/hooks/useSearch';
 import { deleteHistoryAsync } from '~/src/apis/search';
 import { useQueryClient } from '@tanstack/react-query';
-import { getHistoryProps } from '@/types/search';
+import { getHistoryProps } from '~/src/constants/types/searchTypes';
 
 const Search = () => {
   const router = useRouter();

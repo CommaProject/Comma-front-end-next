@@ -7,7 +7,9 @@ import {
   getHistoryAsync,
   addHistoryAsync,
 } from '@/apis/search';
-import { CommaUserProps, SpotifyArtistProps, TrackProps } from '@/types/search';
+import { SpotifyArtistProps } from '~/src/constants/types/searchTypes';
+import { TrackType } from '@/types/trackTypes';
+import { CommaUserType } from '@/types/authTypes';
 
 const getSpotifyArtist = async (artistName: string) => {
   const { isSuccess, result } = await getSpotifyArtistAsync(artistName);
@@ -38,10 +40,8 @@ const setHistory = async (history: string) => {
 export const useSearch = () => {
   const [spotifyArtistData, setSpotifyArtistData] =
     useState<SpotifyArtistProps[]>();
-
-  const [spotifyTrackData, setSpotifyTrackData] = useState<TrackProps[]>();
-
-  const [commaUserData, setCommaUserData] = useState<CommaUserProps[]>();
+  const [spotifyTrackData, setSpotifyTrackData] = useState<TrackType[]>();
+  const [commaUserData, setCommaUserData] = useState<CommaUserType[]>();
 
   const { mutate: mutateTrack } = useMutation(['Track'], getSpotifyTrack, {
     onSuccess: (response) => {

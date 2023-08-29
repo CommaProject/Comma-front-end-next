@@ -4,8 +4,9 @@ import { MusicAlbumFrom } from '@/components/pages/quest/music-album-form';
 import { ArtistAvataFrom } from '@/components/pages/quest/artist-avata-form';
 import { ArtistDetailForm } from '@/components/pages/quest/artist-detail-from';
 import { TopBar } from '@/components/pages/quest/top-bar';
-import { CommaUserProps, SpotifyArtistProps, TrackProps } from '@/types/search';
-
+import { SpotifyArtistProps } from '@/types/searchTypes';
+import { TrackType } from '@/types/trackTypes';
+import { CommaUserType } from '@/types/authTypes';
 import * as style from './CompletedSearchTemplate.style';
 import 'swiper/swiper.min.css';
 import 'swiper/swiper-bundle.min.css';
@@ -24,8 +25,8 @@ interface CompletedSearchTemplateProps {
   onClickPrev: () => void;
   switchActiveCategory: number;
   spotifyArtistData: SpotifyArtistProps[] | undefined;
-  spotifyTrackData: TrackProps[] | undefined;
-  commaUserData: CommaUserProps[] | undefined;
+  spotifyTrackData: TrackType[] | undefined;
+  commaUserData: CommaUserType[] | undefined;
 }
 
 export const CompletedSearchTemplate = ({

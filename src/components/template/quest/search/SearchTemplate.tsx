@@ -1,7 +1,7 @@
 import { LineInput } from '~/src/components/pages/quest/line-input';
 import { TextList } from '@/components/pages/quest/search/text-list/TextList';
 import { Dispatch, SetStateAction } from 'react';
-import { getHistoryProps } from '@/types/search';
+import { getHistoryProps } from '@/types/searchTypes';
 import * as style from './SearchTemplate.style';
 
 interface SearchTemplateProps {

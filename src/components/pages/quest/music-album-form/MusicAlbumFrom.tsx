@@ -1,5 +1,5 @@
 import React from 'react';
-import { TrackProps } from '@/types/search';
+import { TrackType } from '@/types/trackTypes';
 import * as style from './MusicAlbumFrom.style';
 import { HorizontalAlbumWithIcon } from '../horizontal-album-with-icon';
 
