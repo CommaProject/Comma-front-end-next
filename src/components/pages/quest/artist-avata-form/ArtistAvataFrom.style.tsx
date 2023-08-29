@@ -22,7 +22,7 @@ export const AvatartName = styled.text`
       font-family: ${fonts.family.noto}
       font-size: 12px;
       font-style: normal;
-      font-weight: ${fonts.fontWeight.medium};
+      font-weight: ${fonts.weight.medium};
       line-height: 16px;
     `;
   }}
@@ -36,7 +36,7 @@ export const AvatarGroupName = styled.text`
       font-family: ${fonts.family.noto}
       font-size: 12px;
       font-style: normal;
-      font-weight: ${fonts.fontWeight.medium};
+      font-weight: ${fonts.weight.medium};
       line-height: 16px;
     `;
   }}
