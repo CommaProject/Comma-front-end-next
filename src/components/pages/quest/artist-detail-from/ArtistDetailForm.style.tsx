@@ -18,7 +18,7 @@ export const AvatarBox = styled.div`
   margin-top: 20px;
 `;
 
-export const AvatartName = styled.text`
+export const AvatartName = styled.div`
   ${({ theme }) => {
     const { fonts } = theme;
     return css`
@@ -33,7 +33,7 @@ export const AvatartName = styled.text`
   }}
 `;
 
-export const AvatarGroupName = styled.text`
+export const AvatarGroupName = styled.div`
   ${({ theme }) => {
     const { colors, fonts } = theme;
     return css`

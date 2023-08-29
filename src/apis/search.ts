@@ -6,6 +6,7 @@ import {
 } from '@/types/searchTypes';
 import { TrackType } from '@/types/trackTypes';
 import { CommaUserType } from '@/types/authTypes';
+
 import { deleteAsync, getAsync, postAsync } from './API';
 
 /**
@@ -33,6 +34,7 @@ export async function getCommaUserAsync(
   userName: string,
 ): ApiResponse<CommaUserType[]> {
   const response = await getAsync<CommaUserType[]>(
+
     `/search/user?name=${userName}`,
     {},
   );
@@ -49,6 +51,7 @@ export async function getTrackAsync(
   trackName: string,
 ): ApiResponse<TrackType[]> {
   const response = await getAsync<TrackType[]>(
+
     `/spotify/track/{${trackName}}`,
     {},
   );

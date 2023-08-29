@@ -12,11 +12,16 @@ export const CustomSwiper = styled(Swiper)`
 `;
 
 export const CardSwiperSlide = styled(SwiperSlide)`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 18px;
-  font-size: 22px;
-  font-weight: bold;
-  color: #000;
+  ${({ theme }) => {
+    const { fonts, colors } = theme;
+    return css`
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 18px;
+      font-size: 22px;
+      font-weight: ${fonts.weight.medium};
+      color: ${colors.grayscale.white};
+    `;
+  }}
 `;

@@ -17,7 +17,7 @@ export const RoundInput = ({
 }: RoundInputProps) => (
   <style.Wrapper hidden={isHidden}>
     <style.SearchIcon />
-    <style.Input value={completedTextValue} onClick={onClickRoundInput} />
+    <style.Input value={completedTextValue} onClick={onClickRoundInput} readOnly/>
     {isCompletedSearch ? (
       <style.EraseIcon onClick={handleEraseIconClick} />
     ) : null}

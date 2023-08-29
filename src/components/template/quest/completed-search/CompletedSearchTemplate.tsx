@@ -7,7 +7,6 @@ import { TopBar } from '@/components/pages/quest/top-bar';
 import { SpotifyArtistProps } from '@/types/searchTypes';
 import { TrackType } from '@/types/trackTypes';
 import { CommaUserType } from '@/types/authTypes';
-
 import * as style from './CompletedSearchTemplate.style';
 import 'swiper/swiper.min.css';
 import 'swiper/swiper-bundle.min.css';

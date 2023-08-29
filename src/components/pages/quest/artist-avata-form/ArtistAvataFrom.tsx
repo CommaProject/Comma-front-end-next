@@ -2,6 +2,7 @@ import React from 'react';
 import { Avata } from '@/components/common/avata';
 import { SpotifyArtistProps } from '~/src/constants/types/searchTypes';
 import { CommaUserType } from '@/types/authTypes';
+
 import * as style from './ArtistAvataFrom.style';
 
 interface ArtistAvataFromProps {

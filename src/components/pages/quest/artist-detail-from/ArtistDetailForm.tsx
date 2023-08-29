@@ -21,7 +21,10 @@ export const ArtistDetailForm = ({
       <style.AvatarBox>
         <Avata
           url={
-            soptifyArtistData ? soptifyArtistData.images[2].url : 'undefined'
+            soptifyArtistData && soptifyArtistData.images[2] !== undefined
+              ? soptifyArtistData.images[2].url
+              : '~/src/assets/images/noImage.png'
+
           }
           size={89}
         />

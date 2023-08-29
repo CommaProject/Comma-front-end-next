@@ -4,11 +4,11 @@ import * as style from './MusicAlbumFrom.style';
 import { HorizontalAlbumWithIcon } from '../horizontal-album-with-icon';
 
 type isLike = boolean;
-interface EnhancedTrackType extends TrackType {
+interface EnhancedTrackProps extends TrackProps {
   isLike: boolean;
 }
 interface MusicAlbumFromProps {
-  musicData: EnhancedTrackType[] | undefined;
+  musicData: EnhancedTrackProps[] | undefined;
   onClickPlusButton: () => void;
   onClickLikeButton: (trackId: string) => void;
   onClick: () => void;
