@@ -1,20 +1,10 @@
 import React from 'react';
 import * as style from './Avata.style';
 
-export const Avata = ({
-  url,
-  singerName,
-  singerSubName,
-}: {
-  url: string;
-  singerName: string;
-  singerSubName: string;
-}) => (
+export const Avata = ({ url, size }: { url: string; size: number }) => (
   <style.Wrapper>
-    <style.ImgBox>
-      <style.Image src={url} />
+    <style.ImgBox width={size} height={size}>
+      <style.Image src={url} radius={size} />
     </style.ImgBox>
-    <style.SingerName>{singerName}</style.SingerName>
-    <style.SingerSubName>{singerSubName}</style.SingerSubName>
   </style.Wrapper>
 );

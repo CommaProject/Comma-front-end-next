@@ -143,12 +143,13 @@ export async function deleteAsync<T>(
   config?: AxiosRequestConfig,
 ): ApiResponse<T> {
   try {
-    const response = await API.patch<T, AxiosResponse<ApiSuccess<T>, any>, any>(
-      url,
-      {
-        ...config,
-      },
-    );
+    const response = await API.delete<
+      T,
+      AxiosResponse<ApiSuccess<T>, any>,
+      any
+    >(url, {
+      ...config,
+    });
     return { isSuccess: true, result: response.data };
   } catch (err) {
     return { isSuccess: false, result: handleApiError(err) };

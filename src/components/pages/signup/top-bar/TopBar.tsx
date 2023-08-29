@@ -1,4 +1,4 @@
-import PrevIcon from '@/assets/images/PrevArrow.svg';
+import PrevIcon from '@/assets/images/prevArrow.svg';
 import ProgressBar from '@/components/pages/signup/progress-bar';
 import * as style from './TopBar.style';
 

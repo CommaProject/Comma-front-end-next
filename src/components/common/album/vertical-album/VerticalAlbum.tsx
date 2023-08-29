@@ -3,7 +3,7 @@ import { AlbumProps } from '@/types/albumTypes';
 import * as style from './VerticalAlbum.style';
 import { Album } from '../Album';
 
-interface VerticalAlbumProps extends AlbumProps {
+export interface VerticalAlbumProps extends AlbumProps {
   onClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
 
