@@ -14,14 +14,14 @@ export const Container = styled.div<ContainerProps>`
 ${({ theme ,isPlaylistAvailable}) => {
   const { colors } = theme;
   return css`
-  width: 100%;
-  height: 100% ;
+  width: 390px;
+  height: calc(100vh - 79px);
   display:flex;
   flex-direction: column;
   
-  position: absolute;
+  position: fixed; /* Fix the container to the top */
   top: 0;
-  left: 0;
+  
 
   color: ${
     isPlaylistAvailable? 
@@ -46,7 +46,7 @@ export const Box = styled.div`
   display:flex;
   flex-direction: column;
   align-items:center;
-  
+  border: 2px solid red;
   
 `
 export const Text = styled.div`
@@ -56,7 +56,7 @@ export const Arrow = styled(ArrowIcon)`
   
   
   position: relative;
-  top:320px;
+  bottom:-410px;
   left:50px;
   display: flex;
   justify-content: center;
@@ -107,8 +107,8 @@ export const AddPlaylistButton = styled(addPlaylist)`
   
   margin: 10px 20px 10px 10px;
   position: fixed;
-  top:82%;
-  left: 82%;  
+  bottom: 110px;
+  right: 270px;  
   
   
 `;

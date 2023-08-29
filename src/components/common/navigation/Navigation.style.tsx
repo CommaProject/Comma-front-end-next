@@ -14,7 +14,7 @@ export const Wrapper = styled.nav`
       align-items: center;
 
       position: sticky;
-      bottom: 0;
+      bottom: 12px;
 
       background-color: ${colors.grayscale.white};
       box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.18);

@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import * as style from '~/src/components/template/home/HomeTemplate.style';
+import * as style from '@/components/template/home/HomeTemplate.style';
 import PlaylistBox from '@/components/pages/home/playlist-box';
 import { PlaylistType } from '@/constants/types/playlistTypes';
 import React from 'react';
