@@ -35,7 +35,7 @@ const CompletedSearch = () => {
     else if (category === 'commaUser') setSwitchActiveCategory(2);
   };
 
-  const handleArtistAvata = useCallback(
+  const handleArtistAvata = useCallback(  // Detail Artist
     (artistData: SpotifyArtistProps) => {
       mutateTrack(artistData.artistName);
       setGetSpotifyArtistForDetailArtist(artistData);
@@ -45,7 +45,7 @@ const CompletedSearch = () => {
     [swiperRef],
   );
 
-  const handlePrev = useCallback(() => {
+  const handlePrev = useCallback(() => { 
     setIsHidden(false);
     if (swiperRef?.activeIndex === 0) {
       window.history.back();
@@ -56,11 +56,11 @@ const CompletedSearch = () => {
 
   useEffect(() => {
     if (typeof searchText === 'string') {
-      if (switchActiveCategory === 0) {
+      if (switchActiveCategory === 0) { // Music
         mutateTrack(searchText);
-      } else if (switchActiveCategory === 1) {
+      } else if (switchActiveCategory === 1) { // Artist
         mutateArtist(searchText);
-      } else if (switchActiveCategory === 2) {
+      } else if (switchActiveCategory === 2) { // CommaUser
         mutateCommaUser(searchText);
       }
     }
