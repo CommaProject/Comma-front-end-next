@@ -8,7 +8,6 @@ export const TopBox = styled.div`
   display: flex;
   align-items: center;
   top: 0;
-  z-index: 1;
   gap: 15px;
   background-color: white;
   padding: 10px;
