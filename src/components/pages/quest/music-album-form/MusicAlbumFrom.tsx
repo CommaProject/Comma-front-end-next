@@ -4,7 +4,7 @@ import * as style from './MusicAlbumFrom.style';
 import { HorizontalAlbumWithIcon } from '../horizontal-album-with-icon';
 
 type isLike = boolean;
-interface EnhancedTrackProps extends TrackProps {
+interface EnhancedTrackProps extends TrackType {
   isLike: boolean;
 }
 interface MusicAlbumFromProps {

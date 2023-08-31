@@ -1,5 +1,5 @@
 import React from 'react';
-import { Avata } from '@/components/common/avata';
+import { Avata, VerticalAvata } from '@/components/common/avata';
 import { SpotifyArtistProps } from '~/src/constants/types/searchTypes';
 import { CommaUserType } from '@/types/authTypes';
 
@@ -19,29 +19,24 @@ export const ArtistAvataFrom = ({
   <style.Wrapper>
     {artistData &&
       artistData.map((value) => (
-        <style.AvatarBox
+        <VerticalAvata
           key={value.artistId}
           onClick={() => {
             onArtistAvataClick(value);
           }}
-        >
-          <Avata
-            url={value.images ? value.images[2]?.url : 'error: undefined'}
-            size={89}
-          />
-          <style.AvatartName>{value.artistName}</style.AvatartName>
-        </style.AvatarBox>
+          avatarImage={value.images[2].url}
+          avartarName={value.artistName}
+        />
       ))}
 
     {commaUserData &&
       commaUserData.map((value) => (
-        <style.AvatarBox key={value.userId}>
-          <Avata
-            url={value.profileImage ? value.profileImage : 'error: undefined'}
-            size={89}
-          />
-          <style.AvatartName>{value.nickName}</style.AvatartName>
-        </style.AvatarBox>
+        <VerticalAvata
+          key={value.userId}
+          avatarImage={value.profileImage}
+          avartarName={value.nickName}
+          onClick={() => {}}
+        />
       ))}
   </style.Wrapper>
 );
