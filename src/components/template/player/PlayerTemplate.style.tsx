@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import MinimizationIcon from '@/assets/images/minimization.svg';
 
 export const Wrapper = styled.div`
   ${({ theme }) => {
@@ -15,9 +16,8 @@ export const Wrapper = styled.div`
     `;
   }}
 `;
-export const CloseButton = styled.button`
+export const CloseButton = styled(MinimizationIcon)`
   top: 10px;
   right: 10px;
   cursor: pointer;
-  z-index: 2;
 `;
