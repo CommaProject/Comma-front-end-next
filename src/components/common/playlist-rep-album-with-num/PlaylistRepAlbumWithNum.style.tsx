@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 
 
 export const Container = styled.div`
-width: 81.9px;
+width: 90px;
 position: relative;
 margin-right: 15px;
 `
@@ -15,9 +15,9 @@ ${({ theme}) => {
     display:flex;
     align-items: center;
     justify-content:center;
-    position: relative;
-    top:-22px;
-    left:49px;
+    position: absolute;
+    top: 60px;
+    right:0px;
 
 
     font-size:12px;

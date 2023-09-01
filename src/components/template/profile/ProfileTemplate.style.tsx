@@ -4,15 +4,14 @@ import EmptyProfile from '@/assets/images/profileImage.svg';
 import Setting from '@/assets/images/setting.svg';
 export const Wrapper = styled.div`
   width: 390px;
-  height: calc(100vh - 79px);
+  // height: calc(100vh - 79px);
+  height: 97%;
   display: flex;
   flex-direction: column;
   padding-left: 15px;
 
-  position: fixed; /* Fix the container to the top */
-  top: 0;
-
   border: 1px solid red;
+  overflow: scroll;
 `;
 
 export const TopBar = styled.div`
@@ -38,13 +37,35 @@ export const Profile = styled(EmptyProfile)`
   height: 70px;
   margin: 10px;
 `;
+interface FollowButtonProps {
+  isFollow : boolean
+}
+export const FollowButton = styled.div<FollowButtonProps>`
+  ${({ theme,isFollow }) => {
+    const { fonts, colors } = theme;
+    return css`
+      width: 71px;
+      height: 30px;
+      margin:5px;
+      border-radius: 30px;
+      background-color: ${
+        isFollow? colors.grayscale.gray300:colors.primary.main};
+      color: ${colors.grayscale.white};
+      font-size: 15px;
+      font-family: ${fonts.family.noto};
+      font-weight: ${fonts.weight.regular};
+      line-height: 30px;
+      text-align:center;
+      `;
+  }}
+`;
 export const FollowInfo = styled.div`
   ${({ theme }) => {
     const { fonts, colors } = theme;
     return css`
       width: 186px;
       height: 76px;
-      margin: 5px;
+      margin: 15px;
       padding: 10px 25px;
       display: flex;
       flex-direction: column;
@@ -64,11 +85,9 @@ export const FollowInfo = styled.div`
 `;
 
 export const FollowContainer = styled.div`
-  
-padding-top: 5px;
-display: flex;  
-  align-items:center;
-
+  padding-top: 5px;
+  display: flex;
+  align-items: center;
 `;
 export const FollowNum = styled.div`
   ${({ theme }) => {
@@ -80,13 +99,13 @@ export const FollowNum = styled.div`
       display: flex;
       flex-direction: column;
       justify-content: center;
-     
+
       color: ${colors.grayscale.dark};
       font-size: 15px;
       font-family: ${fonts.family.pre};
       font-weight: ${fonts.weight.medium};
       line-height: 15px;
-      text-align:center;
+      text-align: center;
     `;
   }}
 `;
@@ -103,6 +122,7 @@ export const Title = styled.div`
       line-height: 17px;
 
       border-radius: 34px;
+      cursor:pointer;
     `;
   }}
 `;

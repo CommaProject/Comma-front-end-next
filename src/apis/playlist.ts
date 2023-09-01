@@ -18,14 +18,40 @@ const getMultiplePlaylists = async () => {
         
     
   };
+  export const useGetMultiplePlaylists = () => {
 
-export const useGetMultiplePlaylists = () => {
+    const {isLoading,data=[]} = useQuery(['multiplePlaylists'],getMultiplePlaylists);
+   
+    const [playlist,setPlaylist] = useState<PlaylistType[]>([]);
+    
+    useEffect(() => {
+        if(isLoading === false){
+            console.log('isloading후',data);
+            
+            if(data.length !== 0){
+                setPlaylist(data);
+                
+            }
+            
+        }
+
+      }, [isLoading,data]);
+
+      
+    return {
+        playlist
+      };
+
+}
+
+  // 콤마 플레이리스트 가져오기
+export const useGetCommaPlaylists = () => {
 
     const {isLoading,data=[]} = useQuery(['multiplePlaylists'],getMultiplePlaylists);
     const [isPlaylistAvailable, setIsPlaylistAvailable] = useState<boolean>(false);
     const [isCommaPlaylistAvailable, setIsCommaPlaylistAvailable] = useState<boolean>(false);
     const [commaPlaylist, setCommaPlaylist] = useState<PlaylistType[]>([]);
-    
+    const [playlist,setPlaylist] = useState<PlaylistType[]>([]);
     
     useEffect(() => {
         if(isLoading === false){
@@ -37,6 +63,7 @@ export const useGetMultiplePlaylists = () => {
     
                  const filteredPlaylists: PlaylistType[] = data.filter(playlist => playlist.alarmFlag === true);
                 setCommaPlaylist(filteredPlaylists);
+                setPlaylist(data);
                 
                 
             }
@@ -58,7 +85,7 @@ export const useGetMultiplePlaylists = () => {
         
         isPlaylistAvailable,
         isCommaPlaylistAvailable,
-        commaPlaylist, 
+        commaPlaylist
       };
 
 }

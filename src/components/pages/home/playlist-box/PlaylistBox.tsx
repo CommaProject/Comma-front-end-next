@@ -8,7 +8,8 @@ import {usePlaylist} from '@/hooks/usePlaylist';
 import {useGetPlaylistPlayTime} from '@/apis/playlist';
 
 interface PlaylistBoxProps {
-  
+  showTimeBadge : boolean;
+  showAlarmButton :boolean;
   isEditMode:boolean;
   playlist: PlaylistType;
   
@@ -16,7 +17,8 @@ interface PlaylistBoxProps {
 
 export const PlaylistBox = ({
 
- 
+  showTimeBadge,
+  showAlarmButton,
   isEditMode,
   playlist
  
@@ -45,9 +47,9 @@ export const PlaylistBox = ({
     <style.Wrapper 
     isPlaylistSelected={isPlaylistSelected} 
     onClick={onClickPlaylist} >
-      <TimeBadge
+      {showTimeBadge ? <TimeBadge
         whenPlaylistWillPlay={playlist.alarmStartTime}
-      />
+      /> : " "}
       <style.PlaylistInfoBox isEditMode ={isEditMode} isPlaylistSelected={isPlaylistSelected} >
       { isEditMode? <style.Button isPlaylistSelected={isPlaylistSelected} onClick={onClickPlaylistSelectButton}/> :'' }
         <style.ImagesBox isEditMode ={isEditMode }>
@@ -65,7 +67,7 @@ export const PlaylistBox = ({
       />
       {/* <style.MovePlaylistIcon isPlaylistSelected={isPlaylistSelected} /> */}
       </style.PlaylistInfoBox>
-      {!isEditMode && !isPlaylistSelected && (
+      {showAlarmButton && !isEditMode && !isPlaylistSelected && (
   isAlarmSelected ? (
     <style.ActivateAlarmIcon onClick={onClickAlarmButton} />
   ) : (
