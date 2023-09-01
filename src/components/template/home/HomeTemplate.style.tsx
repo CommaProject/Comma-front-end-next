@@ -46,7 +46,11 @@ export const Box = styled.div`
   display:flex;
   flex-direction: column;
   align-items:center;
+<<<<<<< HEAD
   border: 2px solid red;
+=======
+  
+>>>>>>> e400ef7476ba4e2fbd93256b06938783f6475778
   
 `
 export const Text = styled.div`
@@ -56,7 +60,11 @@ export const Arrow = styled(ArrowIcon)`
   
   
   position: relative;
+<<<<<<< HEAD
   bottom:-410px;
+=======
+  top:320px;
+>>>>>>> e400ef7476ba4e2fbd93256b06938783f6475778
   left:50px;
   display: flex;
   justify-content: center;
@@ -107,8 +115,13 @@ export const AddPlaylistButton = styled(addPlaylist)`
   
   margin: 10px 20px 10px 10px;
   position: fixed;
+<<<<<<< HEAD
   bottom: 110px;
   right: 270px;  
+=======
+  top:82%;
+  left: 82%;  
+>>>>>>> e400ef7476ba4e2fbd93256b06938783f6475778
   
   
 `;

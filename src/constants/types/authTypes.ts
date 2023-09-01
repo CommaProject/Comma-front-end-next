@@ -34,4 +34,18 @@ export interface UserInfomationOutputsType {
   data: RegisterInputsType;
 }
 
+export interface CommaUserType {
+  userId: number;
+  email: string;
+  password: string;
+  delFlag: boolean;
+  role: string;
+  name: string;
+  nickName: string;
+  age: number;
+  sex: string;
+  joinDate: string;
+  profileImage: string;
+}
+
 export type InputNameType = keyof RegisterInputsType;

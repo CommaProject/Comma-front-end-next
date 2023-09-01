@@ -1,6 +1,7 @@
 import router from 'next/router';
 import { useEffect } from 'react';
 import { userInfomationAsync } from '@/apis/auth';
+import { RandomAlbumLocation } from '../components/common/random-album-location';
 
 const Home = (isUserVaild: boolean) => {
   useEffect(() => {
@@ -12,7 +13,7 @@ const Home = (isUserVaild: boolean) => {
   return (
     <main>
       <div>
-        <p>Get started by editing</p>
+        <RandomAlbumLocation/>
       </div>
     </main>
   );

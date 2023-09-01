@@ -1,3 +1,3 @@
-import MusicPlay from "./MusicPlay";
+import MusicPlay from './MusicPlay';
 
 export default MusicPlay;

@@ -38,14 +38,11 @@ const Navigation = () => {
       selected: <NavigationPlaylistSelected key="Playlist" />,
     },
     {
-      path: 'search',
+      path: 'quest',
       notSelected: (
-        <NavigationSearchSvg
-          key="Search"
-          onClick={() => moveToPage('/search')}
-        />
+        <NavigationSearchSvg key="Quest" onClick={() => moveToPage('/quest')} />
       ),
-      selected: <NavigationSearchSelected key="Search" />,
+      selected: <NavigationSearchSelected key="Quest" />,
     },
     {
       path: 'profile',
