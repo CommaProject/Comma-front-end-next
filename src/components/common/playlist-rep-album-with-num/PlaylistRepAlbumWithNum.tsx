@@ -8,7 +8,7 @@ const PlaylistRepAlbumWithNum = () => {
     }
     return (
         <style.Container>
-             <Album url={""} size={81.5} />
+             <Album url={playlist.url} size={81.5} />
              {playlist.trackCount-1> 0 ? <style.TrackNumInfo>+{playlist.trackCount-1}</style.TrackNumInfo>: ''}
 
         </style.Container>

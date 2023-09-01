@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components';
 export const Container = styled.div`
 width: 81.9px;
 position: relative;
+margin-right: 15px;
 `
 export const TrackNumInfo = styled.div`
 ${({ theme}) => {
