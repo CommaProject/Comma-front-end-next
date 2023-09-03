@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { useGetMultiplePlaylists } from '../apis/playlist';
 import { PlaylistType } from '../constants/types/playlistTypes';
 import { PlaylistBox } from '../components/pages/home/playlist-box/PlaylistBox';
+import { useState } from 'react';
 
 const MyPlaylists = () => {
   const router = useRouter();
@@ -10,15 +11,21 @@ const MyPlaylists = () => {
   const onClickPrevButton = () => {
     router.back();
   };
-  const onClickSetting = () => {};
+  const [isEditMode,setIsEditMode] = useState<boolean>(false);
+  const onClickIsEditMode = () => {
+    setIsEditMode(!isEditMode);
+    
+  }
   // playlist api
   const { playlist } = useGetMultiplePlaylists();
+
+  
   return (
     <style.Wrapper>
       <style.TopBar>
         <style.PrevButton onClick={onClickPrevButton} />
         My playlist
-        <style.SettingButton onClick={onClickSetting} />
+        <style.SettingButton onClick={onClickIsEditMode} />
       </style.TopBar>
       <style.PlaylistContainer>
         {playlist &&
@@ -26,12 +33,15 @@ const MyPlaylists = () => {
             <PlaylistBox
               showTimeBadge = {false}
               showAlarmButton = {false}
-              isEditMode={false}
+              isEditMode={isEditMode}
               key={playlist.playlistId}
               playlist={playlist}
             />
           ))}
       </style.PlaylistContainer>
+      {!isEditMode?
+       <style.AddPlaylistButton/> : <style.DeletePlaylistButton/>
+       }
     </style.Wrapper>
   );
 };

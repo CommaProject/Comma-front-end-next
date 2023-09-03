@@ -49,7 +49,7 @@ const Navigation = () => {
       notSelected: (
         <NavigationProfileSvg
           key="Profile"
-          onClick={() => moveToPage('/profile')}
+          onClick={() => moveToPage('/myprofile')}
         />
       ),
       selected: <NavigationProfileSelected key="Profile" />,

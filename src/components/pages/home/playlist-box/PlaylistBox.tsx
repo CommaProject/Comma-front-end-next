@@ -6,6 +6,7 @@ import { Album } from '@/components/common/album/Album';
 import { PlaylistType } from '@/constants/types/playlistTypes';
 import {usePlaylist} from '@/hooks/usePlaylist';
 import {useGetPlaylistPlayTime} from '@/apis/playlist';
+import { PlaylistRepAlbumWithNum } from '~/src/components/common/playlist-rep-album-with-num';
 
 interface PlaylistBoxProps {
   showTimeBadge : boolean;
@@ -53,9 +54,12 @@ export const PlaylistBox = ({
       <style.PlaylistInfoBox isEditMode ={isEditMode} isPlaylistSelected={isPlaylistSelected} >
       { isEditMode? <style.Button isPlaylistSelected={isPlaylistSelected} onClick={onClickPlaylistSelectButton}/> :'' }
         <style.ImagesBox isEditMode ={isEditMode }>
-          
-          <Album url={playlist.repAlbumImageUrl} size={81.5} />
-          {playlist.trackCount-1> 0 ? <style.TrackNumInfo>+{playlist.trackCount-1}</style.TrackNumInfo>: ''}
+          <PlaylistRepAlbumWithNum 
+          key = {playlist.playlistId}
+          playlistId = {playlist.playlistId}
+          repAlbumImageUrl = {playlist.repAlbumImageUrl}
+          trackCount = {playlist.trackCount}/>
+      
           </style.ImagesBox>
       <PlaylistTexts 
         isPlaylistSelected={isPlaylistSelected}

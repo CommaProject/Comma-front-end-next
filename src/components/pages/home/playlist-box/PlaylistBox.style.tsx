@@ -23,7 +23,7 @@ export const Wrapper = styled.div<WrapperProps>`
     css`
       // width: ${isPlaylistSelected ? 'calc(100% - 48px)' : '100%'};
       // height: calc(81.9px + 2 * 8px);
-      margin-bottom: 43px;
+      margin-bottom: 23px;
       padding-left: 15px;
 
       display: flex;

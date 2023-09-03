@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import PrevIcon from '@/assets/images/prevArrow.svg';
 import SettingIcon from '@/assets/images/setting.svg';
-import addPlaylist from '@/assets/images/plus.svg';
+import addPlaylist from '@/assets/images/addPlaylist.svg';
 import deletePlaylist from '@/assets/images/removeSongAndList.svg';
 
 export const Wrapper = styled.div`
@@ -10,6 +10,7 @@ export const Wrapper = styled.div`
 
   display: flex;
   flex-direction: column;
+ 
 `;
 
 export const TopBar = styled.div`
@@ -51,9 +52,8 @@ export const PlaylistContainer = styled.div`
 export const AddPlaylistButton = styled(addPlaylist)`
   
   margin: 10px 20px 10px 10px;
-  position: fixed;
-  top:82%;
-  right: 28%;  
+  
+   
   
   
 `;
@@ -61,7 +61,8 @@ export const DeletePlaylistButton = styled(deletePlaylist)`
 
   margin: 10px 20px 10px 10px;
   position: fixed;
-  top:80%;
-  left: 80%;  
+  bottom:13%;
+  left: 62%;  
+   
 
 `
