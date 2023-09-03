@@ -1,4 +1,5 @@
 import { Swiper as SwiperClass } from 'swiper/types';
+import { PlayerControl } from '@/components/common/player';
 
 import * as style from './PlayerTemplate.style';
 import 'swiper/swiper.min.css';
@@ -6,22 +7,25 @@ import 'swiper/swiper-bundle.min.css';
 
 interface PlayerTemplateProps {
   onClickMinimize: () => void;
-  handleSwiperSwipe: (swiper: SwiperClass) => void;
+  title: string;
+  date: string;
+  // handleSwiperSwipe: (swiper: SwiperClass) => void;
 }
 
 export const PlayerTemplate = ({
   onClickMinimize,
-  handleSwiperSwipe,
+  title,
+  date,
 }: PlayerTemplateProps) => (
-  <style.CustomSwiper
-    onSwiper={(swiper) => {
-      swiper.on('slideChange', () => handleSwiperSwipe(swiper));
-    }}
-  >
-    <style.Slide>
-      <style.SlideWrapper>
-        <style.CloseButton onClick={onClickMinimize} />
-      </style.SlideWrapper>
-    </style.Slide>
-  </style.CustomSwiper>
+  <style.Wrapper>
+    <style.TopBar>
+      <style.CloseButton onClick={onClickMinimize} />
+      <style.WriteButton onClick={onClickMinimize} />
+    </style.TopBar>
+    <style.TitleBox>
+      <style.Title>title</style.Title>
+      <style.Date>2023-03-20 13:22:00</style.Date>
+    </style.TitleBox>
+    <PlayerControl />
+  </style.Wrapper>
 );
