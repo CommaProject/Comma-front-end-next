@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 import addPlaylist from '@/assets/images/addPlaylist.svg';
 import EmptyProfile from '@/assets/images/profileImage.svg';
 import Setting from '@/assets/images/setting.svg';
+
 export const Wrapper = styled.div`
   width: 390px;
   // height: calc(100vh - 79px);

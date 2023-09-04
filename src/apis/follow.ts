@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { getAsync } from "./API";
 import { useEffect, useState } from "react";
+import { getAsync } from "./API";
 import { FollowInfoType } from "../constants/types/followTypes";
 
 const getFollowInfo  = async () => {

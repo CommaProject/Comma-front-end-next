@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import * as style from '~/src/styles/pages-styles/timesetting.style';
-import PrevIcon from '@/assets/images/PrevArrow.svg';
+import PrevIcon from '@/assets/images/prevArrow.svg';
 import RepeatDaySetting from '@/components/pages/home/repeat-day-setting';
 import { TimeType } from '@/constants/types/signUpTypes';
 import TimePicker from '@/components/common/time-picker';

@@ -1,16 +1,16 @@
 import * as style from '@/components/template/profile/ProfileTemplate.style';
-import { PlaylistRepAlbumWithNum } from '../../common/playlist-rep-album-with-num';
-import { VerticalAlbum } from '../../common/album/vertical-album';
-import { VerticalAvata } from '../../common/avata';
 import { useState } from 'react';
 import { useAllPlaylists } from '@/hooks/usePlaylist';
 import { PlaylistType } from '@/constants/types/playlistTypes';
 import { FavoriteArtistType } from '~/src/constants/types/artistTypes';
 import { TrackFavoritesType } from '~/src/constants/types/trackTypes';
+import { VerticalAvata } from '../../common/avata';
+import { VerticalAlbum } from '../../common/album/vertical-album';
+import { PlaylistRepAlbumWithNum } from '../../common/playlist-rep-album-with-num';
 
 interface ProfileTemplateProps {
   isProfileMine: boolean;
-  playlist: PlaylistType[];
+  myPlaylist: PlaylistType[];
   favoriteArtist: FavoriteArtistType[];
   favoriteTrack: TrackFavoritesType[];
   followersInfo: number;
@@ -18,7 +18,7 @@ interface ProfileTemplateProps {
 }
 export const ProfileTemplate = ({
   isProfileMine,
-  playlist,
+  myPlaylist,
   favoriteArtist,
   favoriteTrack,
   followersInfo,
@@ -73,8 +73,8 @@ export const ProfileTemplate = ({
       <style.MyPlaylist>
         <style.Title onClick={onClickMyPlaylist}>My Playlist</style.Title>
         <style.ListContainer>
-          {playlist &&
-            playlist.map((playlist: PlaylistType) => (
+          {myPlaylist &&
+            myPlaylist.map((playlist: PlaylistType) => (
               <PlaylistRepAlbumWithNum
                 key={playlist.playlistId}
                 playlistId={playlist.playlistId}

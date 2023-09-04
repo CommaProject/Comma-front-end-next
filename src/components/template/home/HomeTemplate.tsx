@@ -56,8 +56,8 @@ export const HomeTemplate = ({
         {commaPlaylist &&
           commaPlaylist.map((playlist: PlaylistType) => (
             <PlaylistBox
-              showTimeBadge = {true}
-              showAlarmButton = {true}
+              showTimeBadge 
+              showAlarmButton 
               isEditMode={isEditMode}
               key={playlist.playlistId}
               playlist={playlist}

@@ -18,18 +18,18 @@ const getMultiplePlaylists = async () => {
         
     
   };
-  export const useGetMultiplePlaylists = () => {
+  export const useGetMyPlaylists = () => {
 
-    const {isLoading,data=[]} = useQuery(['multiplePlaylists'],getMultiplePlaylists);
+    const {isLoading,data=[]} = useQuery(['MyPlaylists'],getMultiplePlaylists);
    
-    const [playlist,setPlaylist] = useState<PlaylistType[]>([]);
+    const [myPlaylist,setMyPlaylist] = useState<PlaylistType[]>([]);
     
     useEffect(() => {
         if(isLoading === false){
             console.log('isloading후',data);
             
             if(data.length !== 0){
-                setPlaylist(data);
+                setMyPlaylist(data);
                 
             }
             
@@ -39,7 +39,7 @@ const getMultiplePlaylists = async () => {
 
       
     return {
-        playlist
+        myPlaylist
       };
 
 }
@@ -61,7 +61,7 @@ export const useGetCommaPlaylists = () => {
             }else{
                 setIsPlaylistAvailable(true);
     
-                 const filteredPlaylists: PlaylistType[] = data.filter(playlist => playlist.alarmFlag === true);
+                 const filteredPlaylists: PlaylistType[] = data.filter(onePlaylist => onePlaylist.alarmFlag === true);
                 setCommaPlaylist(filteredPlaylists);
                 setPlaylist(data);
                 

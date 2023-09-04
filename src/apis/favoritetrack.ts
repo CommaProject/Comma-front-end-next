@@ -1,7 +1,7 @@
 /* 트랙 좋아요 api 관련 파일 */
+import { useQuery } from '@tanstack/react-query';
 import {useEffect,useState } from "react";
 import { getAsync } from "./API";
-import {  useQuery } from "@tanstack/react-query";
 import { TrackFavoritesType } from "../constants/types/trackTypes";
 
 const getFavoriteTrack = async () => {

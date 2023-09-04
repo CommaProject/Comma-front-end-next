@@ -1,6 +1,6 @@
+import { usePlaylist } from '@/hooks/usePlaylist';
 import { Album } from '../album/Album';
 import * as style from './PlaylistRepAlbumWithNum.style';
-import { usePlaylist } from '@/hooks/usePlaylist';
 
 interface PlaylistRepAlbumWithNumProps {
   playlistId: number;
@@ -8,16 +8,14 @@ interface PlaylistRepAlbumWithNumProps {
   trackCount: number;
 }
 const PlaylistRepAlbumWithNum = ({
-    playlistId,
-    repAlbumImageUrl,
-    trackCount
+  playlistId,
+  repAlbumImageUrl,
+  trackCount,
 }: PlaylistRepAlbumWithNumProps) => {
-
   const { navigateToPlaylist } = usePlaylist();
-  const onClickPlaylist = () =>{
-   
-  navigateToPlaylist(playlistId);
-  }
+  const onClickPlaylist = () => {
+    navigateToPlaylist(playlistId);
+  };
 
   return (
     <style.Container onClick={onClickPlaylist}>

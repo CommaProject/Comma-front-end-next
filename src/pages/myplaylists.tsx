@@ -1,9 +1,10 @@
+import { useState } from 'react';
 import * as style from '@/styles/pages-styles/myplaylists.style';
 import { useRouter } from 'next/router';
-import { useGetMultiplePlaylists } from '../apis/playlist';
+import { useGetMyPlaylists } from '../apis/playlist';
 import { PlaylistType } from '../constants/types/playlistTypes';
 import { PlaylistBox } from '../components/pages/home/playlist-box/PlaylistBox';
-import { useState } from 'react';
+
 
 const MyPlaylists = () => {
   const router = useRouter();
@@ -17,7 +18,7 @@ const MyPlaylists = () => {
     
   }
   // playlist api
-  const { playlist } = useGetMultiplePlaylists();
+  const { myPlaylist } = useGetMyPlaylists();
 
   
   return (
@@ -28,8 +29,8 @@ const MyPlaylists = () => {
         <style.SettingButton onClick={onClickIsEditMode} />
       </style.TopBar>
       <style.PlaylistContainer>
-        {playlist &&
-          playlist.map((playlist: PlaylistType) => (
+        {myPlaylist &&
+          myPlaylist.map((playlist: PlaylistType) => (
             <PlaylistBox
               showTimeBadge = {false}
               showAlarmButton = {false}
