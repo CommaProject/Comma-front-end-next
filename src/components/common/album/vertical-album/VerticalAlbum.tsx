@@ -14,7 +14,7 @@ export const VerticalAlbum = ({
   onClick,
 }: VerticalAlbumProps) => (
   <style.Wrapper onClick={onClick}>
-    <Album url={imgUrl} size={90} />
+    <Album url={imgUrl} size={90} borderRadius={15} />
     <style.SongName>{songName}</style.SongName>
     <style.SingerName>{singerName}</style.SingerName>
   </style.Wrapper>

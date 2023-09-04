@@ -73,7 +73,7 @@ const TimeSetting = () => {
         <style.MyPlaylistBox>
           {playlists.map(({ playlistId, repAlbumImageUrl, playlistTitle }) => (
             <style.PlaylistInfo key={playlistId}>
-              <Album url={repAlbumImageUrl} size={81} />
+              <Album url={repAlbumImageUrl} size={81} borderRadius={15} />
               <style.PlaylistTitle>{playlistTitle}</style.PlaylistTitle>
             </style.PlaylistInfo>
           ))}
