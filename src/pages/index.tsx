@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { userInfomationAsync } from '@/apis/auth';
 import { RandomAlbumLocation } from '../components/common/random-album-location';
 import { usePlayer } from '../hooks/usePlayer';
+import { MusicComment } from '../components/common/player';
 
 const Home = (isUserVaild: boolean) => {
   useEffect(() => {
@@ -11,12 +12,12 @@ const Home = (isUserVaild: boolean) => {
     }
   }, []);
 
-  const { modalState, setModalState } = usePlayer();
+  // const { modalState, setModalState } = usePlayer();
 
   return (
     <main>
       <div>
-        <RandomAlbumLocation />
+        <MusicComment />
       </div>
     </main>
   );
