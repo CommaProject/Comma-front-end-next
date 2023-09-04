@@ -1,9 +1,6 @@
 import router from 'next/router';
 import { useEffect } from 'react';
 import { userInfomationAsync } from '@/apis/auth';
-import { RandomAlbumLocation } from '../components/common/random-album-location';
-import { usePlayer } from '../hooks/usePlayer';
-import { MusicComment } from '../components/common/player';
 
 const Home = (isUserVaild: boolean) => {
   useEffect(() => {
@@ -16,9 +13,7 @@ const Home = (isUserVaild: boolean) => {
 
   return (
     <main>
-      <div>
-        <MusicComment />
-      </div>
+      <div>home</div>
     </main>
   );
 };
