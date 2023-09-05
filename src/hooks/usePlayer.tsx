@@ -25,7 +25,8 @@ export const usePlayer = () => {
               console.log('Minimize');
               setModalState({ isOpen: false });
             }}
-            handleSwiperSwipe={handleSwiperSwipe}
+            title="test"
+            date="20230303" // handleSwiperSwipe={handleSwiperSwipe}
           />
         ),
       });

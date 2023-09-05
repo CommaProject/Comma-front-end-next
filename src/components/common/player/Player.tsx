@@ -17,10 +17,10 @@ export const Player = () => {
   };
   const closeModal = () => {};
 
-  return (
-    <PlayerTemplate
-      onClickMinimize={closeModal}
-      handleSwiperSwipe={handleSwiperSwipe}
-    />
-  );
+  // return (
+  //   <PlayerTemplate
+  //     onClickMinimize={closeModal}
+  //     // handleSwiperSwipe={handleSwiperSwipe}
+  //   />
+  // );
 };
