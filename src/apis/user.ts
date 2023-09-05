@@ -16,14 +16,16 @@ export interface UserFavorites {
   }[];
 }
 
-export async function setUserTrackLikeAsync(trackId: string): ApiResponse<any> {
-  const response = await patchAsync<any, any>(`/tracks/${trackId}`, {});
+export async function setUserTrackFavoriteAsync(
+  trackId: string,
+): ApiResponse<any> {
+  const response = await postAsync<any, any>(`/tracks/${trackId}`, {});
 
   return response;
 }
 
 export async function getUserFavoritesAsync(): ApiResponse<UserFavorites> {
-  const response = await getAsync<UserFavorites>('/tracks/users/favorites', {});
+  const response = await getAsync<UserFavorites>('/favorite/tracks', {});
 
   return response;
 }
