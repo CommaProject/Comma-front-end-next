@@ -7,6 +7,7 @@ import { TrackFavoritesType } from '~/src/constants/types/trackTypes';
 import { VerticalAvata } from '../../common/avata';
 import { VerticalAlbum } from '../../common/album/vertical-album';
 import { PlaylistRepAlbumWithNum } from '../../common/playlist-rep-album-with-num';
+import { useRouter } from 'next/router';
 
 interface ProfileTemplateProps {
   isProfileMine: boolean;
@@ -40,6 +41,10 @@ export const ProfileTemplate = ({
     navigateToAllPlaylists();
   };
 
+  const router = useRouter();
+  const onClickFavoriteArtists = () => {
+    router.push(`../myartist`)
+  }
   return (
     <style.Wrapper>
       <style.TopBar>
@@ -89,7 +94,7 @@ export const ProfileTemplate = ({
       <style.Archive>
         <style.Title>Archive</style.Title>
         <style.FavoriteSong>
-          <style.Text> Favorite </style.Text>
+          <style.Text> Favorite Tracks </style.Text>
           <style.ListContainer>
             {favoriteTrack &&
               favoriteTrack.map((track: TrackFavoritesType) => (
@@ -104,7 +109,7 @@ export const ProfileTemplate = ({
           </style.ListContainer>
         </style.FavoriteSong>
         <style.FavoriteSinger>
-          <style.Text> Favorite</style.Text>
+          <style.Text onClick={onClickFavoriteArtists}> Favorite Artists</style.Text>
           <style.ListContainer>
             {favoriteArtist &&
               favoriteArtist.map((artist: FavoriteArtistType) => (

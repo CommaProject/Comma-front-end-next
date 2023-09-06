@@ -5,30 +5,34 @@ import { MusicAlbumFrom } from '../music-album-form';
 import * as style from './ArtistDetailForm.style';
 
 interface ArtistDetailFormProps {
-  soptifyArtistData: SpotifyArtistProps | undefined;
+  
+  artistImage: string;
+  artistName: string;
   spotifyTrackData: TrackType[] | undefined;
   isLike: boolean;
 }
 
 export const ArtistDetailForm = ({
-  soptifyArtistData,
+ 
+  artistImage,
+  artistName,
   spotifyTrackData,
   isLike,
 }: ArtistDetailFormProps) => {
-  console.log('soptifyArtistData', soptifyArtistData);
+  
   return (
     <style.Wrapper>
       <style.AvatarBox>
         <Avata
           url={
-            soptifyArtistData && soptifyArtistData.images[2] !== undefined
-              ? soptifyArtistData.images[2].url
+            artistImage && artistImage !== undefined
+              ? artistImage
               : '~/src/assets/images/noImage.png'
 
           }
           size={89}
         />
-        <style.AvatartName>{soptifyArtistData?.artistName}</style.AvatartName>
+        <style.AvatartName>{artistName}</style.AvatartName>
         <style.LikeButton isLike={isLike} />
       </style.AvatarBox>
 

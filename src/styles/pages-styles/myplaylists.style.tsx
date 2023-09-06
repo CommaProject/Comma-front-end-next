@@ -40,6 +40,7 @@ ${({ theme }) => {
   
   
 export const PrevButton = styled(PrevIcon)`
+  
 
 `
 export const SettingButton = styled(SettingIcon)`

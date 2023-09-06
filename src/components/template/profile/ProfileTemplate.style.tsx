@@ -5,8 +5,8 @@ import Setting from '@/assets/images/setting.svg';
 
 export const Wrapper = styled.div`
   width: 390px;
-  // height: calc(100vh - 79px);
-  height: 97%;
+  
+  height: 100%;
   display: flex;
   flex-direction: column;
   padding-left: 15px;

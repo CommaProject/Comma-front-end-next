@@ -38,8 +38,7 @@ const setHistory = async (history: string) => {
 };
 
 export const useSearch = () => {
-  const [spotifyArtistData, setSpotifyArtistData] =
-    useState<SpotifyArtistProps[]>();
+  const [spotifyArtistData, setSpotifyArtistData] =useState<SpotifyArtistProps[]>();
   const [spotifyTrackData, setSpotifyTrackData] = useState<TrackType[]>();
   const [commaUserData, setCommaUserData] = useState<CommaUserType[]>();
 
