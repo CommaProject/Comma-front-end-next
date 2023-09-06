@@ -25,7 +25,7 @@ export async function setUserTrackFavoriteAsync(
 }
 
 export async function getUserFavoritesAsync(): ApiResponse<UserFavorites> {
-  const response = await getAsync<UserFavorites>('/favorite/tracks', {});
+  const response = await getAsync<UserFavorites>('/favorite/track', {});
 
   return response;
 }

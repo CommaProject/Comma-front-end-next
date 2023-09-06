@@ -22,7 +22,7 @@ const CompletedSearch = () => {
     mutateTrack,
     mutateCommaUser,
   } = useSearch();
-  const { mutateSetTrackLike, getUserFavoritesData } = useUserInformation();
+  const { mutateSetTrackFavorite, getUserFavoritesData } = useUserInformation();
   const [swiperRef, setSwiperRef] = useState<SwiperClass>();
 
   const handleSwiper = (swiper: SwiperClass) => {
@@ -35,7 +35,8 @@ const CompletedSearch = () => {
     else if (category === 'commaUser') setSwitchActiveCategory(2);
   };
 
-  const handleArtistAvata = useCallback(  // Detail Artist
+  const handleArtistAvata = useCallback(
+    // Detail Artist
     (artistData: SpotifyArtistProps) => {
       mutateTrack(artistData.artistName);
       setGetSpotifyArtistForDetailArtist(artistData);
@@ -45,7 +46,7 @@ const CompletedSearch = () => {
     [swiperRef],
   );
 
-  const handlePrev = useCallback(() => { 
+  const handlePrev = useCallback(() => {
     setIsHidden(false);
     if (swiperRef?.activeIndex === 0) {
       window.history.back();
@@ -56,11 +57,14 @@ const CompletedSearch = () => {
 
   useEffect(() => {
     if (typeof searchText === 'string') {
-      if (switchActiveCategory === 0) { // Music
+      if (switchActiveCategory === 0) {
+        // Music
         mutateTrack(searchText);
-      } else if (switchActiveCategory === 1) { // Artist
+      } else if (switchActiveCategory === 1) {
+        // Artist
         mutateArtist(searchText);
-      } else if (switchActiveCategory === 2) { // CommaUser
+      } else if (switchActiveCategory === 2) {
+        // CommaUser
         mutateCommaUser(searchText);
       }
     }
@@ -82,7 +86,7 @@ const CompletedSearch = () => {
       onClickCategory={handleSwitchActiveCategory}
       switchActiveCategory={switchActiveCategory}
       onClickAlbumLikeButton={(trackId: string) => {
-        mutateSetTrackLike(trackId);
+        mutateSetTrackFavorite(trackId);
       }}
       spotifyArtistData={spotifyArtistData}
       spotifyTrackData={spotifyTrackData}
