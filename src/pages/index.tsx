@@ -1,7 +1,6 @@
 import router from 'next/router';
 import { useEffect } from 'react';
 import { userInfomationAsync } from '@/apis/auth';
-import { RandomAlbumLocation } from '../components/common/random-album-location';
 
 const Home = (isUserVaild: boolean) => {
   useEffect(() => {
@@ -10,11 +9,11 @@ const Home = (isUserVaild: boolean) => {
     }
   }, []);
 
+  // const { modalState, setModalState } = usePlayer();
+
   return (
     <main>
-      <div>
-        <RandomAlbumLocation/>
-      </div>
+      <div>home</div>
     </main>
   );
 };

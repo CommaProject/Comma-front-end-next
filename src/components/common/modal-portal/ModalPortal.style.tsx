@@ -1,13 +1,11 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
+  width: 390px;
+  height: 100%;
   position: fixed;
-  top: 0;
-  left: 0;
+
   overflow-y: scroll;
   z-index: 999;
-  background-color : #0F0F0F;
-
+  // background: rgba(15, 15, 15, 0.7);
 `;
