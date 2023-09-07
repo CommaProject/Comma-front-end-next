@@ -2,15 +2,13 @@ import { ApiResponse } from '@/constants/types';
 import { getAsync, patchAsync, postAsync } from './API';
 
 export interface UserFavorites {
-  id: null;
+  favoriteTrackId: number;
+  trackId: number;
   trackTitle: string;
-  durationTimeMs: string;
-  recommendCount: number;
-  albumImageUrl: string;
+  trackAlbumImageUrl: string;
   spotifyTrackId: string;
-  spotifyTrackHref: string;
   trackArtistList: {
-    id: null;
+    artistId: string;
     artistName: string;
     track: null;
   }[];
@@ -19,7 +17,9 @@ export interface UserFavorites {
 export async function setUserTrackFavoriteAsync(
   trackId: string,
 ): ApiResponse<any> {
-  const response = await postAsync<any, any>(`/tracks/${trackId}`, {});
+  const response = await postAsync<any, any>(`/favorite/track`, {
+    spotifyTrackId: trackId,
+  });
 
   return response;
 }

@@ -22,7 +22,7 @@ const CompletedSearch = () => {
     mutateTrack,
     mutateCommaUser,
   } = useSearch();
-  const { mutateSetTrackFavorite, getUserFavoritesData } = useUserInformation();
+  const { getUserFavoritesData } = useUserInformation();
   const [swiperRef, setSwiperRef] = useState<SwiperClass>();
 
   const handleSwiper = (swiper: SwiperClass) => {
@@ -86,7 +86,7 @@ const CompletedSearch = () => {
       onClickCategory={handleSwitchActiveCategory}
       switchActiveCategory={switchActiveCategory}
       onClickAlbumLikeButton={(trackId: string) => {
-        mutateSetTrackFavorite(trackId);
+        // mutateSetTrackFavorite(trackId);
       }}
       spotifyArtistData={spotifyArtistData}
       spotifyTrackData={spotifyTrackData}
