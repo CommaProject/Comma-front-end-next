@@ -6,6 +6,6 @@ export const Container = styled.div`
   position: fixed;
 
   overflow-y: scroll;
-  z-index: 1001;
+  z-index: 999;
   // background: rgba(15, 15, 15, 0.7);
 `;
