@@ -14,19 +14,31 @@ import { FavoriteArtistType } from '../constants/types/artistTypes';
 const MyArtist = () => {
   
   const router = useRouter();
-  const onClickPrevButton = () => {
-    router.back();
-  };
-
-  // 스와이퍼 관련
+  const [isHidden, setIsHidden] = useState(false); // false: Completed Search true: Detail
   const [swiperRef, setSwiperRef] = useState<SwiperClass>();
   const [slideStep, setSlideStep] = useState(0);
   const handleSwiper = (swiper: SwiperClass) => {
     setSlideStep(swiper.realIndex);
   };
-  const [isHidden, setIsHidden] = useState(false); // false: Completed Search true: Detail
   
+  const handlePrev = useCallback(() => { 
+    setIsHidden(false);
+    
+    // swiperRef?.slidePrev();
+    
+  }, [swiperRef]);
+  const onClickPrevButton = () => {
+    if( isHidden === false){
+    router.back();}
+    else{
+      setIsHidden(false);
+      swiperRef?.slidePrev();
+    }
+  };
+
   
+ 
+ 
   const { favoriteArtist } = useGetFavoriteArtist();
   const [clickedArtistDetail, setClickedArtistDetail] = useState<FavoriteArtistType>(
     {

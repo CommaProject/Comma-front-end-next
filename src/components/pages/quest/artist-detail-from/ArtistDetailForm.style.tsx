@@ -7,7 +7,7 @@ export interface LikeButtonProps {
 
 export const Wrapper = styled.div`
   height: 100%;
-  border: 1px solid blue;
+ 
 `;
 
 export const AvatarBox = styled.div`

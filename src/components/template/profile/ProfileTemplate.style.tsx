@@ -11,7 +11,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
   padding-left: 15px;
 
-  border: 1px solid red;
+ 
   overflow: scroll;
 `;
 
@@ -107,6 +107,7 @@ export const FollowNum = styled.div`
       font-weight: ${fonts.weight.medium};
       line-height: 15px;
       text-align: center;
+      cursor:pointer;
     `;
   }}
 `;
@@ -140,6 +141,7 @@ export const AddButton = styled(addPlaylist)`
   width: 24px;
   height: 24px;
   margin: 10px;
+  
 `;
 
 export const FavoriteSinger = styled.div``;

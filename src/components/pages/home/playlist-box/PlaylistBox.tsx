@@ -6,7 +6,7 @@ import { Album } from '@/components/common/album/Album';
 import { PlaylistType } from '@/constants/types/playlistTypes';
 import {usePlaylist} from '@/hooks/usePlaylist';
 import {useGetPlaylistPlayTime} from '@/apis/playlist';
-import { PlaylistRepAlbumWithNum } from '~/src/components/common/playlist-rep-album-with-num';
+import { PlaylistRepAlbumWithNum } from '@/components/common/playlist-rep-album-with-num';
 
 interface PlaylistBoxProps {
   showTimeBadge : boolean;

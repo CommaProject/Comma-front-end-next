@@ -2,8 +2,8 @@ import * as style from '@/components/template/profile/ProfileTemplate.style';
 import { useState } from 'react';
 import { useAllPlaylists } from '@/hooks/usePlaylist';
 import { PlaylistType } from '@/constants/types/playlistTypes';
-import { FavoriteArtistType } from '~/src/constants/types/artistTypes';
-import { TrackFavoritesType } from '~/src/constants/types/trackTypes';
+import { FavoriteArtistType } from '@/constants/types/artistTypes';
+import { TrackFavoritesType } from '@/constants/types/trackTypes';
 import { VerticalAvata } from '../../common/avata';
 import { VerticalAlbum } from '../../common/album/vertical-album';
 import { PlaylistRepAlbumWithNum } from '../../common/playlist-rep-album-with-num';
@@ -45,6 +45,13 @@ export const ProfileTemplate = ({
   const onClickFavoriteArtists = () => {
     router.push(`../myartist`)
   }
+  const onClickFollow = (followingsOrFollower : string) =>{
+    if (followingsOrFollower === "followers"){
+      router.push(`../followers`)
+    }else{
+      router.push(`../following`)
+    }
+  }
   return (
     <style.Wrapper>
       <style.TopBar>
@@ -64,11 +71,11 @@ export const ProfileTemplate = ({
         <style.FollowInfo>
           UserName
           <style.FollowContainer>
-            <style.FollowNum>
+            <style.FollowNum onClick={()=> onClickFollow("following")}>
               {followingInfo} <br />
-              followings
+              following
             </style.FollowNum>
-            <style.FollowNum>
+            <style.FollowNum onClick={()=> onClickFollow("followers")}>
               {followersInfo} <br />
               followers
             </style.FollowNum>
@@ -103,7 +110,7 @@ export const ProfileTemplate = ({
                   imgUrl={track.albumImageUrl}
                   songName={track.trackTitle}
                   singerName={track.trackArtistList[0].artistName}
-                  onClick={() => console.log('d')}
+                  onClick={() => {}}
                 />
               ))}
           </style.ListContainer>
