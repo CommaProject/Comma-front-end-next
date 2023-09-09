@@ -94,6 +94,9 @@ export const CompletedSearchTemplate = ({
           <ArtistDetailForm
             soptifyArtistData={spotifyArtistForDetailArtist}
             spotifyTrackData={spotifyTrackData}
+            onClickFavorite={(trackId: string) => {
+              onClickAlbumLikeButton(trackId);
+            }}
             isLike={false}
           />
         </style.Slide>

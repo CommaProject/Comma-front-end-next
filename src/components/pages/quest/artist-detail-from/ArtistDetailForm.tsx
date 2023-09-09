@@ -7,12 +7,14 @@ import * as style from './ArtistDetailForm.style';
 interface ArtistDetailFormProps {
   soptifyArtistData: SpotifyArtistProps | undefined;
   spotifyTrackData: TrackType[] | undefined;
+  onClickFavorite: (trackId: string) => void;
   isLike: boolean;
 }
 
 export const ArtistDetailForm = ({
   soptifyArtistData,
   spotifyTrackData,
+  onClickFavorite,
   isLike,
 }: ArtistDetailFormProps) => {
   console.log('soptifyArtistData', soptifyArtistData);
@@ -24,7 +26,6 @@ export const ArtistDetailForm = ({
             soptifyArtistData && soptifyArtistData.images[2] !== undefined
               ? soptifyArtistData.images[2].url
               : '~/src/assets/images/noImage.png'
-
           }
           size={89}
         />
@@ -38,7 +39,9 @@ export const ArtistDetailForm = ({
           isLike: false,
         }))}
         onClickPlusButton={() => {}}
-        onClickLikeButton={(trackId: string) => {}}
+        onClickLikeButton={(trackId: string) => {
+          onClickFavorite(trackId);
+        }}
         onClick={() => {}}
       />
     </style.Wrapper>
