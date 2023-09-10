@@ -24,7 +24,7 @@ export const PlayerTemplate = ({
     </style.TopBar>
     <style.TitleBox>
       <style.Title>{title}</style.Title>
-      <style.Date>{date}2023-03-20 13:22:00</style.Date>
+      <style.Date>{date}</style.Date>
     </style.TitleBox>
     <PlayerControl />
   </style.Wrapper>

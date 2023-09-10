@@ -1,13 +1,19 @@
 import React, { useEffect } from 'react';
-import useModal from '../hooks/useModal';
-import { PlayerTemplate } from '../components/template/player';
+import useModal from '@/hooks/useModal';
+import { PlayerTemplate } from '@/components/template/player';
 
 const PlayerSample = () => {
-  const { openPlayerModal } = useModal();
+  const { openPlayerModal, closePlayerModal } = useModal();
 
   useEffect(() => {
     openPlayerModal(
-      <PlayerTemplate onClickMinimize={() => {}} title="333" date="333" />,
+      <PlayerTemplate
+        onClickMinimize={() => {
+          closePlayerModal();
+        }}
+        title="새소녀"
+        date="2023-03-20 13:22:00"
+      />,
     );
   }, []);
 

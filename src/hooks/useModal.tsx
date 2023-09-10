@@ -19,11 +19,11 @@ const useModal = () => {
     setPlayerModalState({ isOpen: true, content: newContent });
   };
 
-  const closePayerModal = () => {
+  const closePlayerModal = () => {
     setPlayerModalState({ isOpen: false, content: null });
   };
 
-  return { openModal, closeModal, openPlayerModal, closePayerModal };
+  return { openModal, closeModal, openPlayerModal, closePlayerModal };
 };
 
 export default useModal;
