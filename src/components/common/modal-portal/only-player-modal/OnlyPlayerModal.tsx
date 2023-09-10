@@ -9,7 +9,7 @@ import * as style from './OnlyPlayerModal.style';
 const OnlyPlayerModal = () => {
   // modal의 Open 상태와 Content의 정보를 담은 atom 호출
   const [{ isOpen, content }] = useAtom(playerModalStateAtom);
-  const { closePayerModal } = useModal();
+  const { closePlayerModal } = useModal();
 
   if (isOpen) {
     // 만약 mount 되기 전이라면, window 객체의 정보가 없으므로 false를 return 하게 됨.
@@ -21,7 +21,7 @@ const OnlyPlayerModal = () => {
     const closeModalByClick = (event: React.MouseEvent<HTMLDivElement>) => {
       const eventTarget = event.target as HTMLElement;
       if (eventTarget.id === 'player_modal_overlay') {
-        closePayerModal();
+        closePlayerModal();
       }
     };
 
