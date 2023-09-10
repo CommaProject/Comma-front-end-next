@@ -23,8 +23,8 @@ export const PlayerTemplate = ({
       <style.WriteButton onClick={onClickMinimize} />
     </style.TopBar>
     <style.TitleBox>
-      <style.Title>title</style.Title>
-      <style.Date>2023-03-20 13:22:00</style.Date>
+      <style.Title>{title}</style.Title>
+      <style.Date>{date}2023-03-20 13:22:00</style.Date>
     </style.TitleBox>
     <PlayerControl />
   </style.Wrapper>

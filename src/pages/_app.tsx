@@ -13,6 +13,7 @@ import PageHead from '@/components/layout/page-head';
 import PageLayout from '@/components/layout/page-layout';
 import ModalPortal from '@/components/common/modal-portal';
 import { CookiesProvider } from 'react-cookie';
+import OnlyPlayerModal from '../components/common/modal-portal/only-player-modal/OnlyPlayerModal';
 
 interface InitializeAppProps {
   isNavigationVisible: boolean;
@@ -40,6 +41,7 @@ const MyApp = ({ Component, pageProps }: AppProps<InitializeAppProps>) => {
           <ThemeProvider theme={theme}>
             <PageHead />
             <ModalPortal />
+            <OnlyPlayerModal />
             <PageLayout isNavigationVisible={isNavigationVisible}>
               {/* eslint-disable react/jsx-props-no-spreading */}
               <Component {...pageProps} />

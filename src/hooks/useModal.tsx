@@ -1,10 +1,11 @@
 import { useAtom } from 'jotai';
 import type { ReactNode } from 'react';
 
-import { handleModalAtom } from '@/stores/actions';
+import { handleModalAtom, handlePlayerModalAtom } from '@/stores/actions';
 
 const useModal = () => {
   const [, setModalState] = useAtom(handleModalAtom);
+  const [, setPlayerModalState] = useAtom(handlePlayerModalAtom);
 
   const openModal = (newContent: ReactNode) => {
     setModalState({ isOpen: true, content: newContent });
@@ -14,7 +15,15 @@ const useModal = () => {
     setModalState({ isOpen: false, content: null });
   };
 
-  return { openModal, closeModal };
+  const openPlayerModal = (newContent: ReactNode) => {
+    setPlayerModalState({ isOpen: true, content: newContent });
+  };
+
+  const closePayerModal = () => {
+    setPlayerModalState({ isOpen: false, content: null });
+  };
+
+  return { openModal, closeModal, openPlayerModal, closePayerModal };
 };
 
 export default useModal;
