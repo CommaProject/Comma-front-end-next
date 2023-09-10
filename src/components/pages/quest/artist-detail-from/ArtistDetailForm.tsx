@@ -8,6 +8,7 @@ interface ArtistDetailFormProps {
   soptifyArtistData: SpotifyArtistProps | undefined;
   spotifyTrackData: TrackType[] | undefined;
   onClickFavorite: (trackId: string) => void;
+  onClickFavoriteArtist: (artistId: string) => void;
   isLike: boolean;
 }
 
@@ -15,6 +16,7 @@ export const ArtistDetailForm = ({
   soptifyArtistData,
   spotifyTrackData,
   onClickFavorite,
+  onClickFavoriteArtist,
   isLike,
 }: ArtistDetailFormProps) => {
   console.log('soptifyArtistData', soptifyArtistData);
@@ -30,7 +32,16 @@ export const ArtistDetailForm = ({
           size={89}
         />
         <style.AvatartName>{soptifyArtistData?.artistName}</style.AvatartName>
-        <style.LikeButton isLike={isLike} />
+        <style.LikeButton
+          isLike={isLike}
+          onClick={() => {
+            onClickFavoriteArtist(
+              soptifyArtistData?.artistId !== undefined
+                ? soptifyArtistData?.artistId
+                : 'artistId is undefined', // error 처리 필요
+            );
+          }}
+        />
       </style.AvatarBox>
 
       <MusicAlbumFrom

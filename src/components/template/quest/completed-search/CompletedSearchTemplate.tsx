@@ -21,6 +21,7 @@ interface CompletedSearchTemplateProps {
   onClickEraseButton: () => void;
   onClickCategory: (category: string) => void;
   onClickAlbumLikeButton: (trackId: string) => void;
+  onClickFavoriteArtist: (artistId: string) => void;
   onClickArtistAvata: (artistData: SpotifyArtistProps) => void;
   onClickPrev: () => void;
   switchActiveCategory: number;
@@ -39,6 +40,7 @@ export const CompletedSearchTemplate = ({
   onClickEraseButton,
   onClickCategory,
   onClickAlbumLikeButton,
+  onClickFavoriteArtist,
   onClickArtistAvata,
   onClickPrev,
   switchActiveCategory,
@@ -92,6 +94,9 @@ export const CompletedSearchTemplate = ({
         </style.Slide>
         <style.Slide>
           <ArtistDetailForm
+            onClickFavoriteArtist={(artistId: string) => {
+              onClickFavoriteArtist(artistId);
+            }}
             soptifyArtistData={spotifyArtistForDetailArtist}
             spotifyTrackData={spotifyTrackData}
             onClickFavorite={(trackId: string) => {

@@ -1,17 +1,33 @@
 import { ApiResponse } from '@/constants/types';
 import { getAsync, patchAsync, postAsync } from './API';
+import { ArtistDetailForm } from '../components/pages/quest/artist-detail-from';
 
-export interface UserFavorites {
+export interface UserFavoriteTrack {
   favoriteTrackId: number;
-  trackId: number;
-  trackTitle: string;
-  trackAlbumImageUrl: string;
-  spotifyTrackId: string;
-  trackArtistList: {
-    artistId: string;
-    artistName: string;
-    track: null;
+  trackArtistResponses: {
+    track: {
+      id: number;
+      trackTitle: string;
+      durationTimeMs: number;
+      recommendCount: number;
+      albumImageUrl: string;
+      spotifyTrackId: string;
+      spotifyTrackHref: string;
+    };
   }[];
+  artists: [
+    {
+      id: number;
+      spotifyArtistId: string;
+      spotifyArtistName: string;
+    },
+  ];
+}
+
+export interface UserFavoritesArtist {
+  favoriteArtistId: number;
+  artistName: string;
+  artistImageUrl: string;
 }
 
 export async function setUserTrackFavoriteAsync(
@@ -24,8 +40,24 @@ export async function setUserTrackFavoriteAsync(
   return response;
 }
 
-export async function getUserFavoritesAsync(): ApiResponse<UserFavorites> {
-  const response = await getAsync<UserFavorites>('/favorite/track', {});
+export async function getUserFavoriteTracksAsync(): ApiResponse<UserFavoriteTrack> {
+  const response = await getAsync<UserFavoriteTrack>('/favorite/track', {});
+
+  return response;
+}
+
+export async function getUserFavoritesArtistAsync(): ApiResponse<UserFavoritesArtist> {
+  const response = await getAsync<UserFavoritesArtist>('/favorite/artist', {});
+
+  return response;
+}
+
+export async function setUserFavoriteArtistAsync(
+  artistId_: string,
+): ApiResponse<any> {
+  const response = await postAsync<any, any>('/favorite/artist', {
+    artistId: artistId_,
+  });
 
   return response;
 }
