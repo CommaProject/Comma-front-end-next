@@ -103,7 +103,7 @@ export const useGetPlaylistPlayTime = (playlistId: number) => {
   );
   useEffect(() => {
     if (isSuccess && data !== 0) {
-      console.log(playlistId, data);
+   
       setPlayTime(data);
     }
   }, [isSuccess, data, playlistId]);
@@ -134,7 +134,13 @@ const getPlaylistDetail = async (playlistId: number) => {
     return result.data;
   }
 
-  return {};
+  return {
+    playlistTitle: '-',
+    alarmFlag: false,
+    alarmStartTime: '--:--:--',
+    trackCount: 0,
+    totalDurationTime: 0,
+  };
 };
 
 export const useGetPlaylistDetail = (playlistId: number) => {

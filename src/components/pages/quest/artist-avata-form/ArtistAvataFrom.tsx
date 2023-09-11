@@ -1,10 +1,10 @@
 import React from 'react';
 import { Avata, VerticalAvata } from '@/components/common/avata';
-import { SpotifyArtistProps } from '~/src/constants/types/searchTypes';
+import { SpotifyArtistProps } from '@/constants/types/searchTypes';
 import { CommaUserType } from '@/types/authTypes';
-
+import { FavoriteArtistType } from '@/constants/types/artistTypes';
 import * as style from './ArtistAvataFrom.style';
-import { FavoriteArtistType } from '~/src/constants/types/artistTypes';
+
 
 interface ArtistAvataFromProps {
   artistData: SpotifyArtistProps[] | undefined;

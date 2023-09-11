@@ -64,9 +64,9 @@ export const ProfileTemplate = ({
         <style.Modal>
           <style.Button onClick={closeModal}/>
           <style.ModalText>
-            <style.Img></style.Img>프로필 편집</style.ModalText>
+            <style.Img/>프로필 편집</style.ModalText>
           <style.ModalText>
-          <style.Img></style.Img>계정</style.ModalText>
+          <style.Img/>계정</style.ModalText>
         </style.Modal>
       </style.ModalContainer>
     );

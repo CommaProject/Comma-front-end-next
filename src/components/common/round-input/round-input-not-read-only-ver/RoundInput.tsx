@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import * as style from './RoundInput.style';
 
 interface RoundInputProps {

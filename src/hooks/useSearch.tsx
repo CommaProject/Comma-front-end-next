@@ -7,7 +7,7 @@ import {
   getHistoryAsync,
   addHistoryAsync,
 } from '@/apis/search';
-import { SpotifyArtistProps } from '~/src/constants/types/searchTypes';
+import { SpotifyArtistProps } from '@/constants/types/searchTypes';
 import { TrackType } from '@/types/trackTypes';
 import { CommaUserType } from '@/types/authTypes';
 

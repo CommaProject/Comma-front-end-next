@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import { getAsync } from "./API";
 import { useEffect, useState } from "react";
 import { UserDetailType } from '@/types/userDetailTypes';
+import { getAsync } from "./API";
 
 const getUserDetail = async () => {
   const { isSuccess, result } = await getAsync<UserDetailType>('/user/information');

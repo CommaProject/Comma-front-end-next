@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import ProfileImg from '@/assets/images/profileImage.svg';
+
 export const AvatarBox = styled.div`
   flex: '0 0 calc(33.33% - 10px)';
   margin: 15px;

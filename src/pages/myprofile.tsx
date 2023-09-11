@@ -5,6 +5,7 @@ import { useGetFavoriteArtist } from '@/apis/favoriteArtists';
 import { useGetFavoriteTrack } from '@/apis/favoritetrack';
 import { useGetFollowInfo } from '@/apis/followInfo';
 import { useGetUserDetail } from '@/apis/profile';
+
 const Profile = () => {
   const { myPlaylist } = useGetMyPlaylists();
   const { favoriteArtist } = useGetFavoriteArtist();

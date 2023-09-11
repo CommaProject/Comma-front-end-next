@@ -1,6 +1,7 @@
 import { FollowUserInfoType } from '@/constants/types/followTypes';
 import { useEffect, useState } from 'react';
-import * as style from '~/src/components/pages/followInfo/user-Info/UserInfo.style';
+import * as style from '@/components/pages/followInfo/user-Info/UserInfo.style';
+
 
 interface UserInfoProps{
     user: FollowUserInfoType,

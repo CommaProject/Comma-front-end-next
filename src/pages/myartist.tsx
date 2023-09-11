@@ -1,12 +1,12 @@
 import { useRouter } from 'next/router';
-import { useGetFavoriteArtist } from '../apis/favoriteArtists';
-import { ArtistAvataFrom } from '../components/pages/quest/artist-avata-form';
 import { Swiper as SwiperClass } from 'swiper/types';
 import * as style from '@/styles/pages-styles/myartist.style';
+import { useCallback, useEffect, useState } from 'react';
+import { useGetFavoriteArtist } from '../apis/favoriteArtists';
+import { ArtistAvataFrom } from '../components/pages/quest/artist-avata-form';
 import 'swiper/swiper.min.css';
 import 'swiper/swiper-bundle.min.css';
 import { ArtistDetailForm } from '../components/pages/quest/artist-detail-from';
-import { useCallback, useEffect, useState } from 'react';
 import { useSearch } from '../hooks/useSearch';
 import { SpotifyArtistProps } from '../constants/types/searchTypes';
 import { FavoriteArtistType } from '../constants/types/artistTypes';

@@ -18,7 +18,7 @@ const Id = () => {
   const parsedPlaylistId =
     typeof playlistId === 'string' ? parseInt(playlistId, 10) : 0;
   const { myPlaylistDetail } = useGetPlaylistDetail(parsedPlaylistId);
-const{playlistTracks} = useGetPlaylistTracks(parsedPlaylistId);
+  const { playlistTracks } = useGetPlaylistTracks(parsedPlaylistId);
 
   const onClickSetting = () => {
     setIsEditMode(!isEditMode);
@@ -28,35 +28,38 @@ const{playlistTracks} = useGetPlaylistTracks(parsedPlaylistId);
   const onClickPrevButton = () => {
     router.back();
   };
- const onClickTimeBadgeEditBtn = () =>{
-  router.push('../home/timesetting');
- }
+  const onClickTimeBadgeEditBtn = () => {
+    router.push('../home/timesetting');
+  };
   return (
     <style.Wrapper>
       <style.TopBar>
         <PrevIcon onClick={onClickPrevButton} />
         <style.Title>
-        {myPlaylistDetail ? myPlaylistDetail.playlistTitle : '-'}
-        {isEditMode? <style.EditBtn />: ""}
+          {myPlaylistDetail ? myPlaylistDetail.playlistTitle : '-'}
+          {isEditMode ? <style.EditBtn /> : ''}
         </style.Title>
         <SettingIcon onClick={onClickSetting} />
       </style.TopBar>
       <style.PlaylistInfoBox>
         <style.TimeInfo>
-        <TimeBadge
-          whenPlaylistWillPlay={
-            myPlaylistDetail ? myPlaylistDetail.alarmStartTime : ''
-          }
-        /> 
-        {isEditMode? <style.EditBtn onClick={onClickTimeBadgeEditBtn}/>: ""}
+          <TimeBadge
+            whenPlaylistWillPlay={
+              myPlaylistDetail ? myPlaylistDetail.alarmStartTime : ''
+            }
+          />
+          {isEditMode ? (
+            <style.EditBtn onClick={onClickTimeBadgeEditBtn} />
+          ) : (
+            ''
+          )}
         </style.TimeInfo>
         <style.TimeText>
           {myPlaylistDetail ? myPlaylistDetail.trackCount : ''}songs/
           {myPlaylistDetail
-            ? HandleMS(parseInt(myPlaylistDetail.totalDurationTime, 10))
+            ? HandleMS(myPlaylistDetail.totalDurationTime)
             : '-'}
         </style.TimeText>
-        
       </style.PlaylistInfoBox>
       <style.AlbumList>
         {playlistTracks &&
@@ -68,12 +71,12 @@ const{playlistTracks} = useGetPlaylistTracks(parsedPlaylistId);
               singerName={HandleSingerName(track.trackArtistList)}
               timer={HandleMS(track.durationTimeMs)}
               onClick={() => {}}
-              onClickMoveButton={()=> {}}
+              onClickMoveButton={() => {}}
               isEditMode={isEditMode}
             />
           ))}
       </style.AlbumList>
-      <style.DeletePlaylistBtn/>
+      <style.DeletePlaylistBtn />
     </style.Wrapper>
   );
 };

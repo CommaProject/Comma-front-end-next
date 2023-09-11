@@ -16,10 +16,9 @@ const getPlaylistTracks = async (playlistId: number) => {
 };
 
 export const useGetPlaylistTracks = (playlistId: number) => {
-  const { isLoading, data } = useQuery(
-    ['playlistTracks'],
-    () => getPlaylistTracks(playlistId),
+  const { isLoading, data } = useQuery(['playlistTracks'], () =>
+    getPlaylistTracks(playlistId),
   );
 
-  return {playlistTracks: data || []}; // 데이터가 없는 경우 빈 배열 반환
+  return { playlistTracks: data || [] }; // 데이터가 없는 경우 빈 배열 반환
 };

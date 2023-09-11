@@ -18,9 +18,7 @@ export const ArtistDetailForm = ({
   artistName,
   spotifyTrackData,
   isLike,
-}: ArtistDetailFormProps) => {
-  
-  return (
+}: ArtistDetailFormProps) =>  (
     <style.Wrapper>
       <style.AvatarBox>
         <Avata
@@ -47,4 +45,4 @@ export const ArtistDetailForm = ({
       />
     </style.Wrapper>
   );
-};
+

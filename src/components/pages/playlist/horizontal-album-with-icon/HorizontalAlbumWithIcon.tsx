@@ -27,7 +27,7 @@ export const HorizontalAlbumWithIcon = ({
     console.log(isTrackSelected);
   };
   return (
-    <style.Wrapper isTrackSelected={isTrackSelected} isEditMode={isEditMode} >
+    <style.Wrapper isTrackSelected={isTrackSelected} isEditMode={isEditMode}>
       {isEditMode ? (
         <style.SelectButton
           isTrackSelected={isTrackSelected}
