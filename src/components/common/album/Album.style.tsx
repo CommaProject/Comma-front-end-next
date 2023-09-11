@@ -1,5 +1,9 @@
 import styled, { css } from 'styled-components';
 
+interface ImageProps {
+  borderRadius: number;
+}
+
 interface ImgBoxProps {
   width: number;
   height: number;
@@ -19,9 +23,11 @@ export const ImgBox = styled.div<ImgBoxProps>`
   `}
 `;
 
-export const Image = styled.img`
-  width: 100%;
-  height: 100%;
-  border-radius: 15px;
-  object-fit: cover;
+export const Image = styled.img<ImageProps>`
+  ${({ borderRadius }) => css`
+    width: 100%;
+    height: 100%;
+    border-radius: ${borderRadius}px;
+    object-fit: cover;
+  `}
 `;

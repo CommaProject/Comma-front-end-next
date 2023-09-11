@@ -13,7 +13,6 @@ interface PlaylistBoxProps {
   showAlarmButton :boolean;
   isEditMode:boolean;
   playlist: PlaylistType;
-  
 }
 
 export const PlaylistBox = ({
@@ -31,20 +30,20 @@ export const PlaylistBox = ({
   const {playTime} = useGetPlaylistPlayTime(playlist.playlistId);
   const onClickAlarmButton = () =>{
     setIsAlarmSelected(!isAlarmSelected);
-  }
+  };
   const onClickPlaylistSelectButton = () => {
     setIsPlaylistSelected(!isPlaylistSelected);
-
-    
-  }
+  };
   const { navigateToPlaylist } = usePlaylist();
-  
-  const onClickPlaylist = () =>{
-    if(isEditMode === false){
-    navigateToPlaylist(playlist.playlistId);}
-  }
-  
+
+  const onClickPlaylist = () => {
+    if (isEditMode === false) {
+      navigateToPlaylist(playlist.playlistId);
+    }
+  };
+
   return (
+
     <style.Wrapper 
     isPlaylistSelected={isPlaylistSelected} 
     onClick={onClickPlaylist} >
@@ -62,15 +61,38 @@ export const PlaylistBox = ({
       
           </style.ImagesBox>
       <PlaylistTexts 
-        isPlaylistSelected={isPlaylistSelected}
 
-        isEditMode ={isEditMode }
-        playlist={playlist}
-        playTime = {playTime}
-        
-      />
-      {/* <style.MovePlaylistIcon isPlaylistSelected={isPlaylistSelected} /> */}
+        isPlaylistSelected={isPlaylistSelected}
+      >
+        {isEditMode ? (
+          <style.Button
+            isPlaylistSelected={isPlaylistSelected}
+            onClick={onClickPlaylistSelectButton}
+          />
+        ) : (
+          ''
+        )}
+        <style.ImagesBox isEditMode={isEditMode}>
+          <Album
+            url={playlist.repAlbumImageUrl}
+            size={81.5}
+            borderRadius={15}
+          />
+          {playlist.trackCount - 1 > 0 ? (
+            <style.TrackNumInfo>+{playlist.trackCount - 1}</style.TrackNumInfo>
+          ) : (
+            ''
+          )}
+        </style.ImagesBox>
+        <PlaylistTexts
+          isPlaylistSelected={isPlaylistSelected}
+          isEditMode={isEditMode}
+          playlist={playlist}
+          playTime={playTime}
+        />
+        {/* <style.MovePlaylistIcon isPlaylistSelected={isPlaylistSelected} /> */}
       </style.PlaylistInfoBox>
+
       {showAlarmButton && !isEditMode && !isPlaylistSelected && (
   isAlarmSelected ? (
     <style.ActivateAlarmIcon onClick={onClickAlarmButton} />
@@ -79,6 +101,7 @@ export const PlaylistBox = ({
   )
 )}
       
+
     </style.Wrapper>
   );
 };

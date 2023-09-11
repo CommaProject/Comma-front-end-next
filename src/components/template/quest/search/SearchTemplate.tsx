@@ -1,4 +1,4 @@
-import { LineInput } from '~/src/components/pages/quest/line-input';
+import { LineInput } from '@/components/pages/quest/line-input';
 import { TextList } from '@/components/pages/quest/search/text-list/TextList';
 import { Dispatch, SetStateAction } from 'react';
 import { getHistoryProps } from '@/types/searchTypes';

@@ -24,7 +24,9 @@ export const ArtistAvataFrom = ({
           onClick={() => {
             onArtistAvataClick(value);
           }}
-          avatarImage={value.images[2].url}
+
+          avatarImage={value.images ? value.images[2]?.url : 'error: undefined'}
+
           avartarName={value.artistName}
         />
       ))}
