@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import * as style from '~/src/styles/timesetting.style';
+import * as style from '~/src/styles/pages-styles/timesetting.style';
 import PrevIcon from '@/assets/images/prevArrow.svg';
 import RepeatDaySetting from '@/components/pages/home/repeat-day-setting';
 import { TimeType } from '@/constants/types/signUpTypes';

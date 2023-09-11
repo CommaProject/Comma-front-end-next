@@ -1,9 +1,11 @@
 import styled, { css } from 'styled-components';
 
 export const Wrapper = styled.div`
-  display: flex;
+margin: 10px 0px;  
+display: flex;
   align-items: center;
   position: relative;
+
 `;
 
 export const TextContainer = styled.div`

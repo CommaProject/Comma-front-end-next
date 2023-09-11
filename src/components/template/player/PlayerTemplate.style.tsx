@@ -38,6 +38,7 @@ export const CustomSwiper = styled(Swiper)`
   // align-items: center;
 `;
 
+
 export const Wrapper = styled.div`
   ${({ theme }) => {
     const { colors } = theme;
@@ -119,4 +120,5 @@ export const ProgressBarWrapper = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 200px;
+
 `;

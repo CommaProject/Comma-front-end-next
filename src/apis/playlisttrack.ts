@@ -9,7 +9,7 @@ const getPlaylistTracks = async (playlistId: number) => {
   );
 
   if (isSuccess && result.data) {
-    console.log('트랙', result.data);
+    
     return result.data;
   }
 

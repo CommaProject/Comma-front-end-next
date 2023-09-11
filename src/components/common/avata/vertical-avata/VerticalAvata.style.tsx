@@ -12,7 +12,8 @@ export const AvatartName = styled.div`
   ${({ theme }) => {
     const { fonts } = theme;
     return css`
-      font-family: ${fonts.family.noto}
+
+      font-family: ${fonts.family.noto};
       font-size: 12px;
       font-style: normal;
       font-weight: ${fonts.weight.medium};

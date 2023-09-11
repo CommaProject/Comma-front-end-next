@@ -1,13 +1,14 @@
 import styled, { css } from 'styled-components';
 
 export const Wrapper = styled.div`
+  margin-right: 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
 `;
 
-export const SongName = styled.text`
+export const SongName = styled.div`
   ${({ theme }) => {
     const { colors, fonts } = theme;
     return css`
@@ -23,7 +24,7 @@ export const SongName = styled.text`
   }}
 `;
 
-export const SingerName = styled.text`
+export const SingerName = styled.div`
   ${({ theme }) => {
     const { colors, fonts } = theme;
     return css`
