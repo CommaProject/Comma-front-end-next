@@ -60,10 +60,14 @@ export const PlaylistBox = ({
           trackCount = {playlist.trackCount}/>
       
           </style.ImagesBox>
-      <PlaylistTexts 
-
+          <PlaylistTexts 
         isPlaylistSelected={isPlaylistSelected}
-      >
+
+        isEditMode ={isEditMode }
+        playlist={playlist}
+        playTime = {playTime}
+        
+      />
         {isEditMode ? (
           <style.Button
             isPlaylistSelected={isPlaylistSelected}
