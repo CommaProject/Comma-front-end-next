@@ -19,7 +19,7 @@ const PlaylistRepAlbumWithNum = ({
 
   return (
     <style.Container onClick={onClickPlaylist}>
-      <Album url={repAlbumImageUrl} size={81.5} radius={15}/>
+      <Album url={repAlbumImageUrl} size={81.5} borderRadius={15}/>
       {trackCount - 1 > 0 ? (
         <style.TrackNumInfo>+{trackCount - 1}</style.TrackNumInfo>
       ) : (
