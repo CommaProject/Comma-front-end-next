@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
 `;
 
 export const CustomSwiper = styled(Swiper)`
-  height: 100%;
+  // height: 100%;
 `;
 
 export const Slide = styled(SwiperSlide)`

@@ -24,7 +24,6 @@ export const ArtistDetailForm = ({
             soptifyArtistData && soptifyArtistData.images[2] !== undefined
               ? soptifyArtistData.images[2].url
               : '~/src/assets/images/noImage.png'
-
           }
           size={89}
         />
