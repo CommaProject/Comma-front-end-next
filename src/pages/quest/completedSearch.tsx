@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { CompletedSearchTemplate } from '@/components/template/quest/completed-search';
 import { useRouter } from 'next/router';
 import { useSearch } from '@/hooks/useSearch';
-import { useUserInformation } from '~/src/hooks/useUserInformation';
+import { useUserInformation } from '@/hooks/useUserInformation';
 import { Swiper as SwiperClass } from 'swiper/types';
 import { SpotifyArtistProps } from '@/types/searchTypes';
 

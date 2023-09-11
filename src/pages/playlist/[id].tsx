@@ -7,8 +7,8 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { HandleMS, HandleSingerName } from '@/hooks/usePlaylistTrack';
 import { useGetPlaylistDetail } from '@/apis/playlist';
-import { useGetPlaylistTracks } from '~/src/apis/playlisttrack';
-import { HorizontalAlbumWithIcon } from '~/src/components/pages/playlist/horizontal-album-with-icon';
+import { useGetPlaylistTracks } from '@/apis/playlisttrack';
+import { HorizontalAlbumWithIcon } from '@/components/pages/playlist/horizontal-album-with-icon';
 
 const Id = () => {
   const [isEditMode, setIsEditMode] = useState(false);

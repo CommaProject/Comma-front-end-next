@@ -10,3 +10,8 @@ export const modalStateAtom = atom<ModalStateType>({
   isOpen: false,
   content: null,
 });
+
+export const playerModalStateAtom = atom<ModalStateType>({
+  isOpen: false,
+  content: null,
+});

@@ -12,8 +12,13 @@ export const Wrapper = styled.div`
   flex-direction: column;
   padding-left: 15px;
 
+<<<<<<< HEAD
   overflow: scroll;
 
+=======
+  border: 1px solid red;
+  overflow: scroll;
+>>>>>>> 7f708f55ef153eda30553c9657c58e56d29901b9
 `;
 
 export const TopBar = styled.div`

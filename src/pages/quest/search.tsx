@@ -2,9 +2,9 @@ import { SearchTemplate } from '@/components/template/quest/search';
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import { useSearch } from '@/hooks/useSearch';
-import { deleteHistoryAsync } from '~/src/apis/search';
+import { deleteHistoryAsync } from '@/apis/search';
 import { useQueryClient } from '@tanstack/react-query';
-import { getHistoryProps } from '~/src/constants/types/searchTypes';
+import { getHistoryProps } from '@/constants/types/searchTypes';
 
 const Search = () => {
   const router = useRouter();

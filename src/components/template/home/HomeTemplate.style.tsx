@@ -11,16 +11,15 @@ interface ContainerProps {
   isPlaylistAvailable: boolean;
 }
 export const Container = styled.div<ContainerProps>`
-  ${({ theme, isPlaylistAvailable }) => {
-    const { colors } = theme;
-    return css`
-  width: 390px;
-  
-  height: calc(100vh - 79px);
+${({ theme ,isPlaylistAvailable}) => {
+  const { colors } = theme;
+  return css`
+  width: 100%;
+  height: 100% ;
   display:flex;
   flex-direction: column;
-  position: relative
-  //position: fixed; /* Fix the container to the top */
+  
+  position: absolute;
   top: 0;
   
 
@@ -48,8 +47,8 @@ export const Text = styled.div`
 `;
 export const Arrow = styled(ArrowIcon)`
   position: relative;
-  bottom: -410px;
-  left: 50px;
+  top:320px;
+  left:50px;
   display: flex;
   justify-content: center;
 `;
@@ -91,9 +90,11 @@ export const EditDiv = styled.div`
 
 export const AddPlaylistButton = styled(addPlaylist)`
   margin: 10px 20px 10px 10px;
-  position: absolute;
-  top: 82%;
-  right: 38%;
+  position: fixed;
+  top:82%;
+  left: 82%;  
+  
+  
 `;
 
 export const DeletePlaylistButton = styled(deletePlaylist)`
