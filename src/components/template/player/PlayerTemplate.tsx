@@ -1,15 +1,3 @@
-<<<<<<< HEAD
-import * as style from './PlayerTemplate.style';
-
-interface PlayerTemplateProps {
-  onClickMinimize: () => void;
-}
-
-export const PlayerTemplate = ({ onClickMinimize }: PlayerTemplateProps) => (
-  <style.Wrapper>
-    <style.CloseButton onClick={onClickMinimize} />
-    PlayerTemplate
-=======
 import { Swiper as SwiperClass } from 'swiper/types';
 import { PlayerControl } from '@/components/common/player';
 
@@ -39,6 +27,5 @@ export const PlayerTemplate = ({
       <style.Date>{date}</style.Date>
     </style.TitleBox>
     <PlayerControl />
->>>>>>> 7f708f55ef153eda30553c9657c58e56d29901b9
   </style.Wrapper>
 );

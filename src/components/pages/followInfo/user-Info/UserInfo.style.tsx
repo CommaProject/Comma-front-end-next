@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 import smallProfileImg from '@/assets/images/smallProfileImg.svg';
 import minusImg from '@/assets/images/minusImg.svg';
+
 export const Container = styled.div`
   width: 100%;
   height: 56px;

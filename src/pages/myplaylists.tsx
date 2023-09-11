@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { useEffect, useState } from 'react';
 import * as style from '@/styles/pages-styles/myplaylists.style';
 import { useRouter } from 'next/router';
@@ -6,23 +5,12 @@ import { useGetMyPlaylists, deletePlaylist } from '../apis/playlist';
 import { PlaylistType } from '../constants/types/playlistTypes';
 import { PlaylistBox } from '../components/pages/home/playlist-box/PlaylistBox';
 
-=======
-import { useState } from 'react';
-import * as style from '@/styles/pages-styles/myplaylists.style';
-import { useRouter } from 'next/router';
-import { useGetMyPlaylists } from '../apis/playlist';
-import { PlaylistType } from '../constants/types/playlistTypes';
-import { PlaylistBox } from '../components/pages/home/playlist-box/PlaylistBox';
-
-
->>>>>>> 7f708f55ef153eda30553c9657c58e56d29901b9
 const MyPlaylists = () => {
   const router = useRouter();
   // top bar 버튼 관련 함수
   const onClickPrevButton = () => {
     router.back();
   };
-<<<<<<< HEAD
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
   const onClickIsEditMode = () => {
     setIsEditMode(!isEditMode);
@@ -57,17 +45,6 @@ const MyPlaylists = () => {
     }
   }, [isEditMode]);
 
-=======
-  const [isEditMode,setIsEditMode] = useState<boolean>(false);
-  const onClickIsEditMode = () => {
-    setIsEditMode(!isEditMode);
-    
-  }
-  // playlist api
-  const { myPlaylist } = useGetMyPlaylists();
-
-  
->>>>>>> 7f708f55ef153eda30553c9657c58e56d29901b9
   return (
     <style.Wrapper>
       <style.TopBar>
@@ -79,7 +56,6 @@ const MyPlaylists = () => {
         {myPlaylist &&
           myPlaylist.map((playlist: PlaylistType) => (
             <PlaylistBox
-<<<<<<< HEAD
               showTimeBadge={false}
               showAlarmButton={false}
               isEditMode={isEditMode}
@@ -94,25 +70,8 @@ const MyPlaylists = () => {
       ) : (
         <style.DeletePlaylistButton onClick={onClickDeleteButton} />
       )}
-=======
-              showTimeBadge = {false}
-              showAlarmButton = {false}
-              isEditMode={isEditMode}
-              key={playlist.playlistId}
-              playlist={playlist}
-            />
-          ))}
-      </style.PlaylistContainer>
-      {!isEditMode?
-       <style.AddPlaylistButton/> : <style.DeletePlaylistButton/>
-       }
->>>>>>> 7f708f55ef153eda30553c9657c58e56d29901b9
     </style.Wrapper>
   );
 };
 
-<<<<<<< HEAD
 export default MyPlaylists;
-=======
-export default MyPlaylists;
->>>>>>> 7f708f55ef153eda30553c9657c58e56d29901b9

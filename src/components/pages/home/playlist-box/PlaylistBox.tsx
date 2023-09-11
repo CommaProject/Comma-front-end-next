@@ -13,6 +13,7 @@ interface PlaylistBoxProps {
   showAlarmButton :boolean;
   isEditMode:boolean;
   playlist: PlaylistType;
+  onToggleSelect: (playlistId: number) =>void;
 }
 
 export const PlaylistBox = ({
@@ -20,7 +21,8 @@ export const PlaylistBox = ({
   showTimeBadge,
   showAlarmButton,
   isEditMode,
-  playlist
+  playlist,
+  onToggleSelect
  
  
 }: PlaylistBoxProps) => {

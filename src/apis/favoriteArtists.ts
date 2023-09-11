@@ -1,7 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
-import { getAsync } from './API';
 import { FavoriteArtistType } from '@/types/artistTypes';
+import { getAsync } from './API';
+
 
 const getFavoriteArtist = async () => {
   const { isSuccess, result } = await getAsync<FavoriteArtistType[]>(

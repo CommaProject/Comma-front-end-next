@@ -1,4 +1,6 @@
+import React from 'react';
 import * as style from './RoundInput.style';
+
 
 interface RoundInputProps {
   completedTextValue: string;
@@ -16,8 +18,7 @@ export const RoundInput = ({
   isCompletedSearch,
   isHidden,
   onChange,
-}: RoundInputProps) => {
-  return (
+}: RoundInputProps) => (
     <style.Wrapper hidden={isHidden}>
       <style.SearchIcon />
       <style.Input onClick={onClickRoundInput} onChange={onChange} />
@@ -25,5 +26,4 @@ export const RoundInput = ({
         <style.EraseIcon onClick={handleEraseIconClick} />
       ) : null}
     </style.Wrapper>
-  );
-};
+  )

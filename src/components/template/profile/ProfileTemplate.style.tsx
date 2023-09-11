@@ -4,6 +4,7 @@ import EmptyProfile from '@/assets/images/profileImage.svg';
 import Setting from '@/assets/images/setting.svg';
 import modalSlide from '@/assets/images/modalSlideImg.svg';
 import modalProfileImg from '@/assets/images/modalProfile.svg';
+
 export const Wrapper = styled.div`
   width: 390px;
 
@@ -12,13 +13,8 @@ export const Wrapper = styled.div`
   flex-direction: column;
   padding-left: 15px;
 
-<<<<<<< HEAD
   overflow: scroll;
 
-=======
-  border: 1px solid red;
-  overflow: scroll;
->>>>>>> 7f708f55ef153eda30553c9657c58e56d29901b9
 `;
 
 export const TopBar = styled.div`
@@ -175,7 +171,7 @@ export const ModalContainer = styled.div`
       display: flex;
       flex-direction: column;
       align-items: flex-end;
-     
+
       z-index: 80;
     `;
   }}

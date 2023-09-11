@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { FollowUserInfoType } from '@/constants/types/followTypes';
+import { FollowUserInfoType,FollowInfoType } from '@/constants/types/followTypes';
 import { getAsync } from './API';
-import { FollowInfoType } from '../constants/types/followTypes';
 
 const getFollowingList = async () => {
   const { isSuccess, result } = await getAsync<FollowUserInfoType[]>(

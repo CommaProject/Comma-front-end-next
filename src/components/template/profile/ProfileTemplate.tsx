@@ -4,12 +4,13 @@ import { useAllPlaylists } from '@/hooks/usePlaylist';
 import { PlaylistType } from '@/constants/types/playlistTypes';
 import { FavoriteArtistType } from '@/constants/types/artistTypes';
 import { TrackFavoritesType } from '@/constants/types/trackTypes';
-import { VerticalAvata } from '../../common/avata';
-import { VerticalAlbum } from '../../common/album/vertical-album';
-import { PlaylistRepAlbumWithNum } from '../../common/playlist-rep-album-with-num';
 import { useRouter } from 'next/router';
 import useModal from '@/hooks/useModal';
 import { UserDetailType } from '@/constants/types/userDetailTypes';
+import { VerticalAvata } from '../../common/avata';
+import { VerticalAlbum } from '../../common/album/vertical-album';
+import { PlaylistRepAlbumWithNum } from '../../common/playlist-rep-album-with-num';
+
 
 interface ProfileTemplateProps {
   isProfileMine: boolean;

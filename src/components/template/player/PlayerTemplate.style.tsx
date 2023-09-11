@@ -1,7 +1,4 @@
 import styled, { css } from 'styled-components';
-<<<<<<< HEAD
-import MinimizationIcon from '@/assets/images/minimization.svg';
-=======
 import { Swiper, SwiperSlide } from 'swiper/react';
 import MinimizationIcon from '@/assets/images/minimization.svg';
 import PencilIcon from '@/assets/images/pencil.svg';
@@ -41,7 +38,6 @@ export const CustomSwiper = styled(Swiper)`
   // align-items: center;
 `;
 
->>>>>>> 7f708f55ef153eda30553c9657c58e56d29901b9
 
 export const Wrapper = styled.div`
   ${({ theme }) => {
@@ -58,12 +54,6 @@ export const Wrapper = styled.div`
     `;
   }}
 `;
-<<<<<<< HEAD
-export const CloseButton = styled(MinimizationIcon)`
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
-=======
 
 export const TopBar = styled.div`
   display: flex;
@@ -131,5 +121,4 @@ export const ProgressBarWrapper = styled.div`
   align-items: center;
   margin-top: 200px;
 
->>>>>>> 7f708f55ef153eda30553c9657c58e56d29901b9
 `;
