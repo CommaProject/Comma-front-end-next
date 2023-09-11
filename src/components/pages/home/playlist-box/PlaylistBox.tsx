@@ -70,33 +70,8 @@ export const PlaylistBox = ({
         playTime = {playTime}
         
       />
-        {isEditMode ? (
-          <style.Button
-            isPlaylistSelected={isPlaylistSelected}
-            onClick={onClickPlaylistSelectButton}
-          />
-        ) : (
-          ''
-        )}
-        <style.ImagesBox isEditMode={isEditMode}>
-          <Album
-            url={playlist.repAlbumImageUrl}
-            size={81.5}
-            borderRadius={15}
-          />
-          {playlist.trackCount - 1 > 0 ? (
-            <style.TrackNumInfo>+{playlist.trackCount - 1}</style.TrackNumInfo>
-          ) : (
-            ''
-          )}
-        </style.ImagesBox>
-        <PlaylistTexts
-          isPlaylistSelected={isPlaylistSelected}
-          isEditMode={isEditMode}
-          playlist={playlist}
-          playTime={playTime}
-        />
-        {/* <style.MovePlaylistIcon isPlaylistSelected={isPlaylistSelected} /> */}
+      
+       
       </style.PlaylistInfoBox>
 
       {showAlarmButton && !isEditMode && !isPlaylistSelected && (

@@ -23,7 +23,7 @@ const Navigation = () => {
     {
       path: 'home',
       notSelected: (
-        <NavigationHomeSvg key="Home" onClick={() => moveToPage('/home')} />
+        <NavigationHomeSvg key="Home" onClick={() => moveToPage('')} />
       ),
       selected: <NavigationHomeSelected key="Home" />,
     },

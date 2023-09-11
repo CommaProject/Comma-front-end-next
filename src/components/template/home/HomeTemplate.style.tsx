@@ -19,8 +19,8 @@ ${({ theme ,isPlaylistAvailable}) => {
   display:flex;
   flex-direction: column;
   
-  position: absolute;
-  top: 0;
+  position: relative;
+ 
   
 
   color: ${
@@ -90,7 +90,7 @@ export const EditDiv = styled.div`
 
 export const AddPlaylistButton = styled(addPlaylist)`
   margin: 10px 20px 10px 10px;
-  position: fixed;
+  position: absolute;
   top:82%;
   left: 82%;  
   
@@ -100,8 +100,8 @@ export const AddPlaylistButton = styled(addPlaylist)`
 export const DeletePlaylistButton = styled(deletePlaylist)`
   margin: 10px 20px 10px 10px;
   position: absolute;
-  top: 82%;
-  right: 38%;
+  top:82%;
+  left: 82%; 
 `;
 
 export const Button = styled.button<ButtonProps>`
