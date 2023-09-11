@@ -23,8 +23,8 @@ export const useGetFollowInfo =  () => {
         if(isLoading === false){
             console.log('isloading후',data);
             if(data){
-            setFollowingInfo(data.following);
-            setFollowersInfo(data.follwers);
+            setFollowingInfo(data.followings);
+            setFollowersInfo(data.followers);
 
             };
             
