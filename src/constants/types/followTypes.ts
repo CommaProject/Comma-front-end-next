@@ -1,11 +1,10 @@
-
 export interface FollowInfoType {
-    following: number;
-    follwers: number;
+  followings: number;
+  followers: number;
 }
 
 export interface FollowUserInfoType {
-    "followingId" : number;
-    "userId" : number;
-    "userNickname" : string;
+  followingId: number;
+  userId: number;
+  userNickname: string;
 }

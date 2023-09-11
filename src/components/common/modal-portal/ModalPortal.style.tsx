@@ -7,5 +7,5 @@ export const Container = styled.div`
 
   overflow-y: scroll;
   z-index: 1001;
-  // background: rgba(15, 15, 15, 0.7);
+  background: rgba(15, 15, 15, 0.7);
 `;

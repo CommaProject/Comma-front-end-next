@@ -7,7 +7,7 @@ interface RoundInputProps {
   handleEraseIconClick: (event: any) => void;
   isCompletedSearch: boolean;
   isHidden: boolean;
-  onChange: (e:React.ChangeEvent<HTMLInputElement>) =>void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const RoundInput = ({
@@ -16,9 +16,8 @@ export const RoundInput = ({
   handleEraseIconClick,
   isCompletedSearch,
   isHidden,
-  onChange
+  onChange,
 }: RoundInputProps) => {
-  
   return (
     <style.Wrapper hidden={isHidden}>
       <style.SearchIcon />

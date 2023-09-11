@@ -10,6 +10,7 @@ export const Wrapper = styled.div`
 
   display: flex;
   flex-direction: column;
+  position: relative;
  
 `;
 
@@ -54,16 +55,14 @@ export const AddPlaylistButton = styled(addPlaylist)`
   
   margin: 10px 20px 10px 10px;
   
-   
-  
-  
+  position: absolute;
+  bottom:10%;
+  right: 2%; 
 `;
 export const DeletePlaylistButton = styled(deletePlaylist)`
 
   margin: 10px 20px 10px 10px;
-  position: fixed;
-  bottom:13%;
-  left: 62%;  
-   
-
+  position: absolute;
+  bottom:10%;
+  right: 2%; 
 `

@@ -8,8 +8,12 @@ export interface PlaylistType {
   playlistTitle: string;
   alarmFlag: boolean;
   alarmStartTime: string;
-  repAlbumImageUrl: string;
   trackCount: number;
+  repAlbumImageUrl: string;
+  
 
 }
 
+export interface PlaylistTypeWithTotalTime extends PlaylistType {
+  totalDurationTime: number;
+}

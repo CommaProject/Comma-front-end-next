@@ -8,6 +8,8 @@ import { VerticalAvata } from '../../common/avata';
 import { VerticalAlbum } from '../../common/album/vertical-album';
 import { PlaylistRepAlbumWithNum } from '../../common/playlist-rep-album-with-num';
 import { useRouter } from 'next/router';
+import useModal from '@/hooks/useModal';
+import { UserDetailType } from '@/constants/types/userDetailTypes';
 
 interface ProfileTemplateProps {
   isProfileMine: boolean;
@@ -16,6 +18,7 @@ interface ProfileTemplateProps {
   favoriteTrack: TrackFavoritesType[];
   followersInfo: number;
   followingInfo: number;
+  userNickName: null | string;
 }
 export const ProfileTemplate = ({
   isProfileMine,
@@ -24,6 +27,7 @@ export const ProfileTemplate = ({
   favoriteTrack,
   followersInfo,
   followingInfo,
+  userNickName
 }: ProfileTemplateProps) => {
   // 팔로우,팔로잉 조회 api
 
@@ -43,19 +47,38 @@ export const ProfileTemplate = ({
 
   const router = useRouter();
   const onClickFavoriteArtists = () => {
-    router.push(`../myartist`)
-  }
-  const onClickFollow = (followingsOrFollower : string) =>{
-    if (followingsOrFollower === "followers"){
-      router.push(`../followers`)
-    }else{
-      router.push(`../following`)
+    router.push(`../myartist`);
+  };
+  const onClickFollow = (followingsOrFollower: string) => {
+    if (followingsOrFollower === 'followers') {
+      router.push(`../followers`);
+    } else {
+      router.push(`../following`);
     }
-  }
+  };
+  const { openModal, closeModal } = useModal();
+  const onClickSettingButton = () => {
+    console.log('클릭')
+    openModal(
+      <style.ModalContainer>
+        <style.Modal>
+          <style.Button onClick={closeModal}/>
+          <style.ModalText>
+            <style.Img></style.Img>프로필 편집</style.ModalText>
+          <style.ModalText>
+          <style.Img></style.Img>계정</style.ModalText>
+        </style.Modal>
+      </style.ModalContainer>
+    );
+    }
   return (
     <style.Wrapper>
-      <style.TopBar>
-        {isProfileMine ? <style.SettingButton /> : ''}
+      <style.TopBar >
+        {isProfileMine ? (
+          <style.SettingButton onClick={onClickSettingButton} />
+        ) : (
+          ''
+        )}
       </style.TopBar>
 
       <style.UserInfo>
@@ -69,13 +92,13 @@ export const ProfileTemplate = ({
           ''
         )}
         <style.FollowInfo>
-          UserName
+         {userNickName}
           <style.FollowContainer>
-            <style.FollowNum onClick={()=> onClickFollow("following")}>
+            <style.FollowNum onClick={() => onClickFollow('following')}>
               {followingInfo} <br />
               following
             </style.FollowNum>
-            <style.FollowNum onClick={()=> onClickFollow("followers")}>
+            <style.FollowNum onClick={() => onClickFollow('followers')}>
               {followersInfo} <br />
               followers
             </style.FollowNum>
@@ -116,7 +139,10 @@ export const ProfileTemplate = ({
           </style.ListContainer>
         </style.FavoriteSong>
         <style.FavoriteSinger>
-          <style.Text onClick={onClickFavoriteArtists}> Favorite Artists</style.Text>
+          <style.Text onClick={onClickFavoriteArtists}>
+            {' '}
+            Favorite Artists
+          </style.Text>
           <style.ListContainer>
             {favoriteArtist &&
               favoriteArtist.map((artist: FavoriteArtistType) => (

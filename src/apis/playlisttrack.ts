@@ -5,37 +5,21 @@ import { TrackFavoritesType } from '@/types/trackTypes';
 
 const getPlaylistTracks = async (playlistId: number) => {
   const { isSuccess, result } = await getAsync<TrackFavoritesType[]>(
-    `/playlists/tracks/${playlistId}`,
+    `/playlist/track/${playlistId}`,
   );
 
   if (isSuccess && result.data) {
-    
     return result.data;
   }
 
   return [];
 };
 
-export const useGetPlaylistTracks = (
-  playlistId: string | string[] | undefined,
-) => {
-  const [playlistTracks, setPlaylistTracks] = useState<TrackFavoritesType[]>(
-    [],
-  );
-
-  const { isSuccess, data } = useQuery(
+export const useGetPlaylistTracks = (playlistId: number) => {
+  const { isLoading, data } = useQuery(
     ['playlistTracks'],
-    () => getPlaylistTracks(parseInt(playlistId as string, 10)),
-    {
-      enabled: typeof playlistId === 'string', // 조건에 따라 훅 사용 여부 결정
-    },
+    () => getPlaylistTracks(playlistId),
   );
 
-  useEffect(() => {
-    if (isSuccess && data.length !== 0) {
-      setPlaylistTracks(data);
-    }
-  }, [data, isSuccess, playlistId]);
-
-  return { playlistTracks };
+  return {playlistTracks: data || []}; // 데이터가 없는 경우 빈 배열 반환
 };

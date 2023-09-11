@@ -1,7 +1,7 @@
 import * as style from '@/components/pages/home/playlist-box/PlaylistBox.style';
 import TimeBadge from '@/components/pages/home/time-badge';
 import { PlaylistTexts } from '@/components/pages/home/playlist-texts/PlaylistTexts';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Album } from '@/components/common/album/Album';
 import { PlaylistType } from '@/constants/types/playlistTypes';
 import {usePlaylist} from '@/hooks/usePlaylist';
@@ -13,7 +13,7 @@ interface PlaylistBoxProps {
   showAlarmButton :boolean;
   isEditMode:boolean;
   playlist: PlaylistType;
-  
+  onToggleSelect : (id:number) => void;
 }
 
 export const PlaylistBox = ({
@@ -21,7 +21,8 @@ export const PlaylistBox = ({
   showTimeBadge,
   showAlarmButton,
   isEditMode,
-  playlist
+  playlist,
+  onToggleSelect,
  
  
 }: PlaylistBoxProps) => {
@@ -34,7 +35,7 @@ export const PlaylistBox = ({
   }
   const onClickPlaylistSelectButton = () => {
     setIsPlaylistSelected(!isPlaylistSelected);
-
+    onToggleSelect(playlist.playlistId);
     
   }
   const { navigateToPlaylist } = usePlaylist();
@@ -43,7 +44,11 @@ export const PlaylistBox = ({
     if(isEditMode === false){
     navigateToPlaylist(playlist.playlistId);}
   }
-  
+  useEffect( ()=> {
+    if(!isEditMode){
+      setIsPlaylistSelected(false);
+    }
+  },[isEditMode])
   return (
     <style.Wrapper 
     isPlaylistSelected={isPlaylistSelected} 

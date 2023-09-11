@@ -1,70 +1,79 @@
-import * as style from '~/src/styles/pages-styles/playlist.[id].style';
+import * as style from '@/styles/pages-styles/playlist.[id].style';
 import PrevIcon from '@/assets/images/prevArrow.svg';
 import SettingIcon from '@/assets/images/setting.svg';
 import TimeBadge from '@/components/pages/home/time-badge';
 import { HorizontalAlbum } from '@/components/common/album/horizontal-album';
-import { useState } from 'react';
-import { useGetPlaylistTracks } from '@/apis/playlisttrack';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { HandleMS, HandleSingerName } from '@/hooks/usePlaylistTrack';
-import { PlaylistType } from '~/src/constants/types/playlistTypes';
-import { useGetPlaylistPlayTime } from '~/src/apis/playlist';
+import { useGetPlaylistDetail } from '@/apis/playlist';
+import { useGetPlaylistTracks } from '~/src/apis/playlisttrack';
+import { HorizontalAlbumWithIcon } from '~/src/components/pages/playlist/horizontal-album-with-icon';
 
 const Id = () => {
   const [isEditMode, setIsEditMode] = useState(false);
   const router = useRouter();
 
   const { playlistId } = router.query;
-  /* 아래 지금은 useState로 해놨는데 api 생기면 바꿀 것임 */
-  const [nowPlaylist] = useState<PlaylistType>({
-    playlistId: 33,
-    playlistTitle: '트랙 정보 불러오기 완료, 단일 플리 정보 x',
-    alarmFlag: true,
-    alarmStartTime: '12:33',
-    repAlbumImageUrl: '',
-    trackCount: 3,
-  });
-  const { playlistTracks } = useGetPlaylistTracks(playlistId);
-  const { nowPlaylistPlayTIme }: any = useGetPlaylistPlayTime(1);
+  const parsedPlaylistId =
+    typeof playlistId === 'string' ? parseInt(playlistId, 10) : 0;
+  const { myPlaylistDetail } = useGetPlaylistDetail(parsedPlaylistId);
+const{playlistTracks} = useGetPlaylistTracks(parsedPlaylistId);
+
   const onClickSetting = () => {
     setIsEditMode(!isEditMode);
-    console.log(playlistId, typeof playlistId, nowPlaylistPlayTIme);
+    console.log(playlistTracks);
   };
 
-  const onClickAlbum = () => {
-    console.log('현재 id', playlistId);
-    console.log(playlistTracks[0].trackArtistList);
-  };
   const onClickPrevButton = () => {
-    router.push('/home');
+    router.back();
   };
-
+ const onClickTimeBadgeEditBtn = () =>{
+  router.push('../home/timesetting');
+ }
   return (
     <style.Wrapper>
       <style.TopBar>
         <PrevIcon onClick={onClickPrevButton} />
-        {nowPlaylist.playlistTitle}
+        <style.Title>
+        {myPlaylistDetail ? myPlaylistDetail.playlistTitle : '-'}
+        {isEditMode? <style.EditBtn />: ""}
+        </style.Title>
         <SettingIcon onClick={onClickSetting} />
       </style.TopBar>
       <style.PlaylistInfoBox>
-        <TimeBadge whenPlaylistWillPlay={nowPlaylist.alarmStartTime} />
+        <style.TimeInfo>
+        <TimeBadge
+          whenPlaylistWillPlay={
+            myPlaylistDetail ? myPlaylistDetail.alarmStartTime : ''
+          }
+        /> 
+        {isEditMode? <style.EditBtn onClick={onClickTimeBadgeEditBtn}/>: ""}
+        </style.TimeInfo>
         <style.TimeText>
-          {nowPlaylist.trackCount}songs/{HandleMS(nowPlaylistPlayTIme)}
+          {myPlaylistDetail ? myPlaylistDetail.trackCount : ''}songs/
+          {myPlaylistDetail
+            ? HandleMS(parseInt(myPlaylistDetail.totalDurationTime, 10))
+            : '-'}
         </style.TimeText>
+        
       </style.PlaylistInfoBox>
       <style.AlbumList>
-        {playlistTracks.length >= 1 &&
+        {playlistTracks &&
           playlistTracks.map((track) => (
-            <HorizontalAlbum
+            <HorizontalAlbumWithIcon
               key={track.trackId}
               imgUrl={track.albumImageUrl}
               songName={track.trackTitle}
               singerName={HandleSingerName(track.trackArtistList)}
               timer={HandleMS(track.durationTimeMs)}
-              onClick={onClickAlbum}
+              onClick={() => {}}
+              onClickMoveButton={()=> {}}
+              isEditMode={isEditMode}
             />
           ))}
       </style.AlbumList>
+      <style.DeletePlaylistBtn/>
     </style.Wrapper>
   );
 };
