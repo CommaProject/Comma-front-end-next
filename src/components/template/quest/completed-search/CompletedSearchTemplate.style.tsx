@@ -7,12 +7,14 @@ export const Wrapper = styled.div`
 `;
 
 export const CustomSwiper = styled(Swiper)`
-  // height: 100%;
+  height: auto;
 `;
 
 export const Slide = styled(SwiperSlide)`
   height: 100%;
-  // display: flex;
-  // flex-direction: column;
-  // align-items: center;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
