@@ -4,7 +4,7 @@ import {
   DuplicateOptionType,
   LoginAsyncInput,
   LoginAsyncOutput,
-  UserInfomationOutputsType,
+  UserInformationOutputsType,
 } from '@/constants/types';
 import { getAsync, postAsync } from './API';
 
@@ -68,12 +68,12 @@ export async function checkDuplicateAsync(
 }
 
 /**
- * 유저정보가져오기 userInfomationAsync
+ * 유저정보가져오기 userInformationAsync
  * @returns AccessToken이 만료되었거나 없으면 400에러 반환, DB에 데이터가 존재하지 않으면 null 이나 0을 넣으며 200 반환
  */
 
-export async function userInfomationAsync(): ApiResponse<UserInfomationOutputsType> {
-  const response = await getAsync<UserInfomationOutputsType>(
+export async function userInformationAsync(): ApiResponse<UserInformationOutputsType> {
+  const response = await getAsync<UserInformationOutputsType>(
     `/user/information`,
     {},
   );

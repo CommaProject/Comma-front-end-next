@@ -1,12 +1,9 @@
-import  FollowInfomationTemplate  from '@/components/template/followInfomation';
+import FollowInformationTemplate from '~/src/components/template/followInformation';
 import { useGetFollowingList } from '@/apis/followInfo';
 
 const Following = () => {
-    const {followingList} = useGetFollowingList();
-    return(
-     <FollowInfomationTemplate
-     userList={followingList}/>
-    )
-}
+  const { followingList } = useGetFollowingList();
+  return <FollowInformationTemplate userList={followingList} />;
+};
 
 export default Following;

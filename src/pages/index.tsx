@@ -1,6 +1,6 @@
 import router from 'next/router';
 import { useEffect,useState } from 'react';
-import { userInfomationAsync } from '@/apis/auth';
+import { userInformationAsync } from '@/apis/auth';
 import { useGetCommaPlaylists } from '@/apis/playlist';
 import HomeTemplate from '@/components/template/home';
 
@@ -34,7 +34,7 @@ const Home = (isUserVaild: boolean) => {
 
 export default Home;
 export async function getServerSideProps() {
-  const result = await userInfomationAsync();
+  const result = await userInformationAsync();
   let isUserVaildResult = false;
 
   if (!result.isSuccess && result.result.code === -4) {
