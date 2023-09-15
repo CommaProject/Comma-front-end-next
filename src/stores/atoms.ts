@@ -15,3 +15,13 @@ export const playerModalStateAtom = atom<ModalStateType>({
   isOpen: false,
   content: null,
 });
+
+interface SearchType {
+  category: 'music' | 'artist' | 'commaUser';
+  searchText: string;
+}
+
+export const searchAtom = atom<SearchType>({
+  category: 'music',
+  searchText: '',
+});
