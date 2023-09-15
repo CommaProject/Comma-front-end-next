@@ -31,7 +31,7 @@ export const Button = styled.button<ButtonStateProps>`
       font-weight: ${isActivate ? fonts.weight.bold : fonts.weight.medium};
       color: ${isActivate ? colors.grayscale.white : colors.grayscale.gray300};
 
-      border: ${`1px solid ${colors.grayscale.gray300}`};
+      border: 1px solid ${colors.grayscale.gray300};
       border-radius: 50px;
       background: ${isActivate && colors.grayscale.dark};
       box-shadow: ${isActivate && '0px 2px 4px rgba(0, 0, 0, 0.25)'};

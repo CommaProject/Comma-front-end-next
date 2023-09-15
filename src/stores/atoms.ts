@@ -17,7 +17,7 @@ export const playerModalStateAtom = atom<ModalStateType>({
 });
 
 interface SearchType {
-  category: 'music' | 'artist' | 'commaUser';
+  category: string; // 'music' | 'artist' | 'commaUser';
   searchText: string;
 }
 
