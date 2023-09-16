@@ -5,6 +5,8 @@ import { useSearch } from '@/hooks/useSearch';
 import { useUserInformation } from '~/src/hooks/useUserInformation';
 import { Swiper as SwiperClass } from 'swiper/types';
 import { SpotifyArtistProps } from '@/types/searchTypes';
+import { useAtom } from 'jotai';
+import { searchAtom } from '@/stores/atoms';
 
 const CompletedSearch = () => {
   const router = useRouter();
@@ -14,6 +16,7 @@ const CompletedSearch = () => {
     useState<SpotifyArtistProps>();
   const [isHidden, setIsHidden] = useState(false); // false: Completed Search true: Detail
   const { searchText } = router.query;
+  const [searchItems, setSearchItems] = useAtom(searchAtom);
   const {
     spotifyArtistData,
     spotifyTrackData,
@@ -35,7 +38,8 @@ const CompletedSearch = () => {
     else if (category === 'commaUser') setSwitchActiveCategory(2);
   };
 
-  const handleArtistAvata = useCallback(  // Detail Artist
+  const handleArtistAvata = useCallback(
+    // Detail Artist
     (artistData: SpotifyArtistProps) => {
       mutateTrack(artistData.artistName);
       setGetSpotifyArtistForDetailArtist(artistData);
@@ -45,7 +49,7 @@ const CompletedSearch = () => {
     [swiperRef],
   );
 
-  const handlePrev = useCallback(() => { 
+  const handlePrev = useCallback(() => {
     setIsHidden(false);
     if (swiperRef?.activeIndex === 0) {
       window.history.back();
@@ -55,24 +59,24 @@ const CompletedSearch = () => {
   }, [swiperRef]);
 
   useEffect(() => {
-    if (typeof searchText === 'string') {
-      if (switchActiveCategory === 0) { // Music
-        mutateTrack(searchText);
-      } else if (switchActiveCategory === 1) { // Artist
-        mutateArtist(searchText);
-      } else if (switchActiveCategory === 2) { // CommaUser
-        mutateCommaUser(searchText);
-      }
+    console.log(searchItems.searchText);
+    if (switchActiveCategory === 0) {
+      // Music
+      mutateTrack(searchItems.searchText);
+    } else if (switchActiveCategory === 1) {
+      // Artist
+      mutateArtist(searchItems.searchText);
+    } else if (switchActiveCategory === 2) {
+      // CommaUser
+      mutateCommaUser(searchItems.searchText);
     }
-  }, [searchText, switchActiveCategory]);
+  }, [searchItems.searchText, switchActiveCategory]);
 
   return (
     <CompletedSearchTemplate
       onClickPrev={handlePrev}
       onSlideChange={handleSwiper}
-      completedTextValue={
-        typeof searchText === 'string' ? searchText : 'undefined'
-      }
+      completedTextValue={searchItems.searchText}
       onClickRoundInput={() => {
         router.push('/quest/search');
       }}

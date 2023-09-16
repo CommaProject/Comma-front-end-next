@@ -5,7 +5,7 @@ import { useSearch } from '@/hooks/useSearch';
 import { deleteHistoryAsync } from '@/apis/search';
 import { useQueryClient } from '@tanstack/react-query';
 import { getHistoryProps } from '@/constants/types/searchTypes';
-import { atom, useAtom } from 'jotai';
+import { useAtom } from 'jotai';
 import { searchAtom } from '@/stores/atoms';
 
 const Search = () => {
@@ -14,7 +14,6 @@ const Search = () => {
   // Music, Artist, CommaUser
   const [searchItems, setSearchItems] = useAtom(searchAtom);
   const { searchHistory, mutateSearchHistory } = useSearch();
-  const [completedText, setCompletedText] = useState('');
   const [historyTextArray, setHistoryTextArray] = useState<getHistoryProps[]>();
   const handleOnClickDeleteItem = (index: number) => {
     console.log(index);
@@ -44,17 +43,12 @@ const Search = () => {
       ...prevState,
       searchText: historyItem,
     }));
-    setCompletedText(historyItem);
     router.push({
       pathname: '/quest/completedSearch',
     });
   };
   const handleEnterKeyPress = useCallback(() => {
-    setSearchItems((prevState) => ({
-      ...prevState,
-      searchText: completedText,
-    }));
-    mutateSearchHistory(completedText);
+    mutateSearchHistory(searchItems.searchText);
     if (
       searchHistory?.isSuccess &&
       searchHistory.result.data &&
@@ -65,9 +59,13 @@ const Search = () => {
     router.push({
       pathname: '/quest/completedSearch',
     });
-  }, [searchHistory, completedText]);
+  }, [searchHistory, searchItems.searchText]);
+
   const handleOnClickEraseIcon = () => {
-    setCompletedText(() => '');
+    setSearchItems((prevState) => ({
+      ...prevState,
+      searchText: '',
+    }));
   };
   const handleChangeSearchText = (text: string) => {
     setSearchItems((prevState) => ({
