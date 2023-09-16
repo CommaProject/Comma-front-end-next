@@ -11,11 +11,9 @@ import { searchAtom } from '@/stores/atoms';
 const CompletedSearch = () => {
   const router = useRouter();
   const [slideStep, setSlideStep] = useState(0);
-  const [switchActiveCategory, setSwitchActiveCategory] = useState(0);
   const [getSpotifyArtistForDetailArtist, setGetSpotifyArtistForDetailArtist] =
     useState<SpotifyArtistProps>();
   const [isHidden, setIsHidden] = useState(false); // false: Completed Search true: Detail
-  const { searchText } = router.query;
   const [searchItems, setSearchItems] = useAtom(searchAtom);
   const {
     spotifyArtistData,
@@ -33,9 +31,10 @@ const CompletedSearch = () => {
   };
 
   const handleSwitchActiveCategory = (category: string) => {
-    if (category === 'music') setSwitchActiveCategory(0);
-    else if (category === 'artist') setSwitchActiveCategory(1);
-    else if (category === 'commaUser') setSwitchActiveCategory(2);
+    setSearchItems((prevState) => ({
+      ...prevState,
+      category,
+    }));
   };
 
   const handleArtistAvata = useCallback(
@@ -60,17 +59,17 @@ const CompletedSearch = () => {
 
   useEffect(() => {
     console.log(searchItems.searchText);
-    if (switchActiveCategory === 0) {
+    if (searchItems.searchText === 'music') {
       // Music
       mutateTrack(searchItems.searchText);
-    } else if (switchActiveCategory === 1) {
+    } else if (searchItems.searchText === 'artist') {
       // Artist
       mutateArtist(searchItems.searchText);
-    } else if (switchActiveCategory === 2) {
+    } else if (searchItems.searchText === 'commaUser') {
       // CommaUser
       mutateCommaUser(searchItems.searchText);
     }
-  }, [searchItems.searchText, switchActiveCategory]);
+  }, [searchItems.searchText]);
 
   return (
     <CompletedSearchTemplate
@@ -84,7 +83,7 @@ const CompletedSearch = () => {
         router.push('/quest/search');
       }}
       onClickCategory={handleSwitchActiveCategory}
-      switchActiveCategory={switchActiveCategory}
+      category={searchItems.category}
       onClickAlbumLikeButton={(trackId: string) => {
         mutateSetTrackLike(trackId);
       }}
