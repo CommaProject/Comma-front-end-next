@@ -58,18 +58,14 @@ const CompletedSearch = () => {
   }, [swiperRef]);
 
   useEffect(() => {
-    console.log(searchItems.searchText);
-    if (searchItems.searchText === 'music') {
-      // Music
+    if (searchItems.category === 'music') {
       mutateTrack(searchItems.searchText);
-    } else if (searchItems.searchText === 'artist') {
-      // Artist
+    } else if (searchItems.category === 'artist') {
       mutateArtist(searchItems.searchText);
-    } else if (searchItems.searchText === 'commaUser') {
-      // CommaUser
+    } else if (searchItems.category === 'commaUser') {
       mutateCommaUser(searchItems.searchText);
     }
-  }, [searchItems.searchText]);
+  }, [searchItems.searchText, searchItems.category]);
 
   return (
     <CompletedSearchTemplate
