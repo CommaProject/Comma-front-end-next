@@ -8,7 +8,7 @@ interface TopBarProps {
   onClickEraseButton: () => void;
   onClickCategory: (category: string) => void;
   onClickPrev: () => void;
-  switchActiveCategory: number;
+  category: string;
   isHidden: boolean;
 }
 export const TopBar = ({
@@ -17,7 +17,7 @@ export const TopBar = ({
   onClickEraseButton,
   onClickCategory,
   onClickPrev,
-  switchActiveCategory,
+  category,
   isHidden,
 }: TopBarProps) => (
   <style.StickySections>
@@ -33,19 +33,19 @@ export const TopBar = ({
     </style.TopBox>
     <style.ButtonBox style={{ display: isHidden ? 'none' : 'flex' }}>
       <style.Button
-        isActivate={switchActiveCategory === 0}
+        isActivate={category === 'music'}
         onClick={() => onClickCategory('music')}
       >
         음악
       </style.Button>
       <style.Button
-        isActivate={switchActiveCategory === 1}
+        isActivate={category === 'artist'}
         onClick={() => onClickCategory('artist')}
       >
         가수
       </style.Button>
       <style.Button
-        isActivate={switchActiveCategory === 2}
+        isActivate={category === 'commaUser'}
         onClick={() => onClickCategory('commaUser')}
       >
         사용자

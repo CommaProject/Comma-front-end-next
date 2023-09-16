@@ -5,15 +5,16 @@ import { useSearch } from '@/hooks/useSearch';
 import { useUserInformation } from '@/hooks/useUserInformation';
 import { Swiper as SwiperClass } from 'swiper/types';
 import { SpotifyArtistProps } from '@/types/searchTypes';
+import { useAtom } from 'jotai';
+import { searchAtom } from '@/stores/atoms';
 
 const CompletedSearch = () => {
   const router = useRouter();
   const [slideStep, setSlideStep] = useState(0);
-  const [switchActiveCategory, setSwitchActiveCategory] = useState(0);
   const [getSpotifyArtistForDetailArtist, setGetSpotifyArtistForDetailArtist] =
     useState<SpotifyArtistProps>();
   const [isHidden, setIsHidden] = useState(false); // false: Completed Search true: Detail
-  const { searchText } = router.query;
+  const [searchItems, setSearchItems] = useAtom(searchAtom);
   const {
     spotifyArtistData,
     spotifyTrackData,
@@ -30,9 +31,10 @@ const CompletedSearch = () => {
   };
 
   const handleSwitchActiveCategory = (category: string) => {
-    if (category === 'music') setSwitchActiveCategory(0);
-    else if (category === 'artist') setSwitchActiveCategory(1);
-    else if (category === 'commaUser') setSwitchActiveCategory(2);
+    setSearchItems((prevState) => ({
+      ...prevState,
+      category,
+    }));
   };
 
   const handleArtistAvata = useCallback(
@@ -56,27 +58,20 @@ const CompletedSearch = () => {
   }, [swiperRef]);
 
   useEffect(() => {
-    if (typeof searchText === 'string') {
-      if (switchActiveCategory === 0) {
-        // Music
-        mutateTrack(searchText);
-      } else if (switchActiveCategory === 1) {
-        // Artist
-        mutateArtist(searchText);
-      } else if (switchActiveCategory === 2) {
-        // CommaUser
-        mutateCommaUser(searchText);
-      }
+    if (searchItems.category === 'music') {
+      mutateTrack(searchItems.searchText);
+    } else if (searchItems.category === 'artist') {
+      mutateArtist(searchItems.searchText);
+    } else if (searchItems.category === 'commaUser') {
+      mutateCommaUser(searchItems.searchText);
     }
-  }, [searchText, switchActiveCategory]);
+  }, [searchItems.searchText, searchItems.category]);
 
   return (
     <CompletedSearchTemplate
       onClickPrev={handlePrev}
       onSlideChange={handleSwiper}
-      completedTextValue={
-        typeof searchText === 'string' ? searchText : 'undefined'
-      }
+      completedTextValue={searchItems.searchText}
       onClickRoundInput={() => {
         router.push('/quest/search');
       }}
@@ -84,7 +79,7 @@ const CompletedSearch = () => {
         router.push('/quest/search');
       }}
       onClickCategory={handleSwitchActiveCategory}
-      switchActiveCategory={switchActiveCategory}
+      category={searchItems.category}
       onClickAlbumLikeButton={(trackId: string) => {
         mutateSetTrackLike(trackId);
       }}
