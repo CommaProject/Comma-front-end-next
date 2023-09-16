@@ -47,7 +47,6 @@ const Search = () => {
     setCompletedText(historyItem);
     router.push({
       pathname: '/quest/completedSearch',
-      query: { searchText: historyItem },
     });
   };
   const handleEnterKeyPress = useCallback(() => {
@@ -65,13 +64,17 @@ const Search = () => {
     }
     router.push({
       pathname: '/quest/completedSearch',
-      query: { searchText: completedText },
     });
   }, [searchHistory, completedText]);
   const handleOnClickEraseIcon = () => {
     setCompletedText(() => '');
   };
-
+  const handleChangeSearchText = (text: string) => {
+    setSearchItems((prevState) => ({
+      ...prevState,
+      searchText: text,
+    }));
+  };
   const handleOnClickCancelIcon = () => {
     window.history.back();
   };
@@ -88,8 +91,8 @@ const Search = () => {
       onEnterKeyPress={handleEnterKeyPress}
       onClickEraseIcon={handleOnClickEraseIcon}
       onClickCancelKeyPress={handleOnClickCancelIcon}
-      completedText={completedText}
-      setCompletedText={setCompletedText}
+      completedText={searchItems.searchText}
+      onChangeSearchText={handleChangeSearchText}
     />
   );
 };

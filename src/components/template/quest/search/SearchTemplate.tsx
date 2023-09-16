@@ -16,7 +16,7 @@ interface SearchTemplateProps {
   onEnterKeyPress: () => void;
   onClickEraseIcon: () => void;
   onClickCancelKeyPress: () => void;
-  setCompletedText: Dispatch<SetStateAction<string>>;
+  onChangeSearchText: (text: string) => void;
   completedText: string;
 }
 
@@ -30,12 +30,12 @@ export const SearchTemplate = ({
   onEnterKeyPress,
   onClickEraseIcon,
   onClickCancelKeyPress,
-  setCompletedText,
+  onChangeSearchText,
   completedText,
 }: SearchTemplateProps) => (
   <style.Wrapper>
     <LineInput
-      setCompletedText={setCompletedText}
+      onChangeSearchText={onChangeSearchText}
       handleEnterKeyPress={onEnterKeyPress}
       handleEraseIconClick={onClickEraseIcon}
       handleCancelButtonClick={onClickCancelKeyPress}
