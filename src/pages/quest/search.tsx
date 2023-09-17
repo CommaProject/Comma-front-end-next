@@ -2,7 +2,7 @@ import { SearchTemplate } from '@/components/template/quest/search';
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import { useSearch } from '@/hooks/useSearch';
-import { deleteHistoryAsync } from '@/apis/search';
+import { deleteHistoryAsync, deleteAllHistoryAsync } from '@/apis/search';
 import { useQueryClient } from '@tanstack/react-query';
 import { getHistoryProps } from '@/constants/types/searchTypes';
 import { useAtom } from 'jotai';
@@ -18,7 +18,7 @@ const Search = () => {
   const handleOnClickDeleteItem = (index: number) => {
     console.log(index);
     deleteHistoryAsync(index);
-    queryClient.invalidateQueries(['searchHistory']); // 수정 낙관적
+    // queryClient.invalidateQueries(['searchHistory']); // 수정 낙관적
   };
 
   // 수정 탐색페이지에 들어올 때로 수정
@@ -73,7 +73,9 @@ const Search = () => {
   const handleOnClickCancelIcon = () => {
     window.history.back();
   };
-
+  const handleAllHistoryDelete = () => {
+    deleteAllHistoryAsync();
+  };
   return (
     <SearchTemplate
       key="SearchTemplate"
@@ -82,6 +84,7 @@ const Search = () => {
       category={searchItems.category}
       onClickCategory={handleCategory}
       onClickDeleteItem={handleOnClickDeleteItem}
+      onClickAllHistoryDelete={handleAllHistoryDelete}
       onClickSearchItem={handleOnClickSearchItem}
       onEnterKeyPress={handleEnterKeyPress}
       onClickEraseIcon={handleOnClickEraseIcon}
