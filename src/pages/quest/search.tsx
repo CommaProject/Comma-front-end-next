@@ -29,9 +29,10 @@ const Search = () => {
       searchHistory.result.data &&
       !('errors' in searchHistory.result.data)
     ) {
-      setHistoryTextArray(searchHistory.result.data);
+      setHistoryTextArray(searchHistory.result.data.reverse());
     }
-  }, []);
+  }, [searchHistory]);
+
   const handleCategory = (category: string) => {
     setSearchItems((prevState) => ({
       ...prevState,
