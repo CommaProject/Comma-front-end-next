@@ -37,7 +37,7 @@ const CompletedSearch = () => {
     }));
   };
 
-  const handleArtistAvata = useCallback(
+  const handleArtistDetailTrack = useCallback(
     // Detail Artist
     (artistData: SpotifyArtistProps) => {
       mutateTrack(artistData.artistName);
@@ -58,11 +58,17 @@ const CompletedSearch = () => {
   }, [swiperRef]);
 
   useEffect(() => {
-    if (searchItems.category === 'music') {
+    if (searchItems.category === 'music' && spotifyTrackData === undefined) {
       mutateTrack(searchItems.searchText);
-    } else if (searchItems.category === 'artist') {
+    } else if (
+      searchItems.category === 'artist' &&
+      spotifyArtistData === undefined
+    ) {
       mutateArtist(searchItems.searchText);
-    } else if (searchItems.category === 'commaUser') {
+    } else if (
+      searchItems.category === 'commaUser' &&
+      commaUserData === undefined
+    ) {
       mutateCommaUser(searchItems.searchText);
     }
   }, [searchItems.searchText, searchItems.category]);
@@ -87,7 +93,7 @@ const CompletedSearch = () => {
       spotifyTrackData={spotifyTrackData}
       commaUserData={commaUserData}
       setSwiperRef={setSwiperRef}
-      onClickArtistAvata={handleArtistAvata}
+      onClickArtistAvata={handleArtistDetailTrack}
       spotifyArtistForDetailArtist={getSpotifyArtistForDetailArtist}
       isHidden={isHidden}
     />
