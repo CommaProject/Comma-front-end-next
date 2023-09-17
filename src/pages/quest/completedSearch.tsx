@@ -50,7 +50,7 @@ const CompletedSearch = () => {
 
   const handlePrev = useCallback(() => {
     setIsHidden(false);
-    if (swiperRef?.activeIndex === 0) {
+    if (swiperRef?.activeIndex === 0 || swiperRef?.activeIndex === undefined) {
       window.history.back();
     } else {
       swiperRef?.slidePrev();
