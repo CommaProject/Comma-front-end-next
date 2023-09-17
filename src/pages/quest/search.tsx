@@ -29,7 +29,10 @@ const Search = () => {
       searchHistory.result.data &&
       !('errors' in searchHistory.result.data)
     ) {
-      setHistoryTextArray(searchHistory.result.data.reverse());
+      const reaverseSearchHistory = searchHistory.result.data.sort(
+        (a, b) => b.id - a.id,
+      );
+      setHistoryTextArray(reaverseSearchHistory);
     }
   }, [searchHistory]);
 
@@ -50,17 +53,10 @@ const Search = () => {
   };
   const handleEnterKeyPress = useCallback(() => {
     mutateSearchHistory(searchItems.searchText);
-    if (
-      searchHistory?.isSuccess &&
-      searchHistory.result.data &&
-      !('errors' in searchHistory.result.data)
-    ) {
-      setHistoryTextArray(searchHistory?.result.data);
-    }
     router.push({
       pathname: '/quest/completedSearch',
     });
-  }, [searchHistory, searchItems.searchText]);
+  }, [searchItems.searchText]);
 
   const handleOnClickEraseIcon = () => {
     setSearchItems((prevState) => ({
