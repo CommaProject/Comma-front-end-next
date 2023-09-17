@@ -18,10 +18,13 @@ const CompletedSearch = () => {
   const {
     spotifyArtistData,
     spotifyTrackData,
+    spotifyArtistDetailTrackData,
+    setSpotifyArtistDetailTrackData,
     commaUserData,
     mutateArtist,
     mutateTrack,
     mutateCommaUser,
+    mutateArtistDetailTrack,
   } = useSearch();
   const { mutateSetTrackLike, getUserFavoritesData } = useUserInformation();
   const [swiperRef, setSwiperRef] = useState<SwiperClass>();
@@ -40,7 +43,7 @@ const CompletedSearch = () => {
   const handleArtistDetailTrack = useCallback(
     // Detail Artist
     (artistData: SpotifyArtistProps) => {
-      mutateTrack(artistData.artistName);
+      mutateArtistDetailTrack(artistData.artistName);
       setGetSpotifyArtistForDetailArtist(artistData);
       setIsHidden(true);
       swiperRef?.slideNext();
@@ -54,6 +57,7 @@ const CompletedSearch = () => {
       window.history.back();
     } else {
       swiperRef?.slidePrev();
+      setSpotifyArtistDetailTrackData([]);
     }
   }, [swiperRef]);
 
@@ -91,6 +95,7 @@ const CompletedSearch = () => {
       }}
       spotifyArtistData={spotifyArtistData}
       spotifyTrackData={spotifyTrackData}
+      spotifyArtistDetailTrackData={spotifyArtistDetailTrackData}
       commaUserData={commaUserData}
       setSwiperRef={setSwiperRef}
       onClickArtistAvata={handleArtistDetailTrack}
