@@ -11,19 +11,23 @@ interface MusicAlbumFromProps {
   musicData: EnhancedTrackProps[] | undefined;
   onClickPlusButton: () => void;
   onClickLikeButton: (trackId: string) => void;
-  onClick: () => void;
+  onClickAlbumBox: (previewUrl: string) => void;
 }
 
 export const MusicAlbumFrom = ({
   musicData,
   onClickPlusButton,
   onClickLikeButton,
-  onClick,
+  onClickAlbumBox,
 }: MusicAlbumFromProps) => (
   <style.Wrapper>
     {musicData &&
       musicData.map((value) => (
-        <style.AlbumBox>
+        <style.AlbumBox
+          onClick={() => {
+            onClickAlbumBox(value.previewUrl);
+          }}
+        >
           <HorizontalAlbumWithIcon
             key={value.albumId}
             isLike={value.isLike}
@@ -33,7 +37,7 @@ export const MusicAlbumFrom = ({
             singerName={value.artist}
             onClickPlusButton={onClickPlusButton}
             onClickLikeButton={() => onClickLikeButton(value.trackId)}
-            onClick={onClick}
+            onClick={() => {}}
           />
         </style.AlbumBox>
       ))}

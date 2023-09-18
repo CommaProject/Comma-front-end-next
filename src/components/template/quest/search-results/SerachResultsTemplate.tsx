@@ -24,6 +24,7 @@ interface SearchResultsTemplateProps {
   onClickAlbumLikeButton: (trackId: string) => void;
   onClickArtistAvata: (artistData: SpotifyArtistProps) => void;
   onClickPrev: () => void;
+  onClickAlbumBox: (previewUrl: string) => void;
   spotifyArtistData: SpotifyArtistProps[] | undefined;
   spotifyTrackData: TrackType[] | undefined;
   commaUserData: CommaUserType[] | undefined;
@@ -42,6 +43,7 @@ export const SearchResultsTemplate = ({
   onClickAlbumLikeButton,
   onClickArtistAvata,
   onClickPrev,
+  onClickAlbumBox,
   spotifyArtistData,
   spotifyTrackData,
   commaUserData,
@@ -67,7 +69,7 @@ export const SearchResultsTemplate = ({
         onClickLikeButton={(trackId: string) => {
           onClickAlbumLikeButton(trackId);
         }}
-        onClick={() => {}}
+        onClickAlbumBox={onClickAlbumBox}
       />
     )}
     {category === 'artist' && (

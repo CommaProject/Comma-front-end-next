@@ -57,6 +57,10 @@ const SearchResults = () => {
     }
   }, [swiperRef]);
 
+  const handleOpenMusicPlayer = useCallback((previewUrl: string) => {
+    console.log(previewUrl);
+  }, []);
+
   useEffect(() => {
     if (searchItems.category === 'music') {
       mutateTrack(searchItems.searchText);
@@ -79,6 +83,7 @@ const SearchResults = () => {
         router.push('/quest/search');
       }}
       onClickCategory={handleSwitchActiveCategory}
+      onClickAlbumBox={handleOpenMusicPlayer}
       category={searchItems.category}
       onClickAlbumLikeButton={(trackId: string) => {
         mutateSetTrackLike(trackId);
