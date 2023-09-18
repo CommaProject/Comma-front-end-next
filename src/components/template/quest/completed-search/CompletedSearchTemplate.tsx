@@ -26,6 +26,7 @@ interface CompletedSearchTemplateProps {
   onClickPrev: () => void;
   spotifyArtistData: SpotifyArtistProps[] | undefined;
   spotifyTrackData: TrackType[] | undefined;
+  spotifyArtistDetailTrackData: TrackType[] | undefined;
   commaUserData: CommaUserType[] | undefined;
 }
 
@@ -35,6 +36,7 @@ export const CompletedSearchTemplate = ({
   category,
   completedTextValue,
   spotifyArtistForDetailArtist,
+  spotifyArtistDetailTrackData,
   setSwiperRef,
   onClickRoundInput,
   onClickEraseButton,
@@ -93,7 +95,7 @@ export const CompletedSearchTemplate = ({
         <style.Slide>
           <ArtistDetailForm
             soptifyArtistData={spotifyArtistForDetailArtist}
-            spotifyTrackData={spotifyTrackData}
+            spotifyTrackData={spotifyArtistDetailTrackData}
             isLike={false}
           />
         </style.Slide>

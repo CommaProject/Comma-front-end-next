@@ -41,6 +41,8 @@ export const useSearch = () => {
   const [spotifyArtistData, setSpotifyArtistData] =
     useState<SpotifyArtistProps[]>();
   const [spotifyTrackData, setSpotifyTrackData] = useState<TrackType[]>();
+  const [spotifyArtistDetailTrackData, setSpotifyArtistDetailTrackData] =
+    useState<TrackType[]>();
   const [commaUserData, setCommaUserData] = useState<CommaUserType[]>();
 
   const { mutate: mutateTrack } = useMutation(['Track'], getSpotifyTrack, {
@@ -55,6 +57,23 @@ export const useSearch = () => {
       }
     },
   });
+
+  const { mutate: mutateArtistDetailTrack } = useMutation(
+    ['ArtistDetailTrack'],
+    getSpotifyTrack,
+    {
+      onSuccess: (response) => {
+        if (response.result.data) {
+          if ('errors' in response.result.data) {
+            console.log('error:', response.result.data.errors);
+          } else if (response.result.data) {
+            const newTrackData = response.result.data;
+            setSpotifyArtistDetailTrackData(newTrackData);
+          }
+        }
+      },
+    },
+  );
 
   const { mutate: mutateArtist } = useMutation(['artist'], getSpotifyArtist, {
     onSuccess: (response) => {
@@ -112,10 +131,13 @@ export const useSearch = () => {
     searchHistory,
     spotifyArtistData,
     spotifyTrackData,
+    spotifyArtistDetailTrackData,
+    setSpotifyArtistDetailTrackData,
     commaUserData,
     mutateArtist,
     mutateTrack,
     mutateCommaUser,
     mutateSearchHistory,
+    mutateArtistDetailTrack,
   };
 };
