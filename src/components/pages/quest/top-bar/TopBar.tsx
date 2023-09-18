@@ -27,7 +27,7 @@ export const TopBar = ({
         completedTextValue={completedTextValue}
         onClickRoundInput={onClickRoundInput}
         handleEraseIconClick={onClickEraseButton}
-        isCompletedSearch
+        issearchResults
         isHidden={isHidden}
       />
     </style.TopBox>

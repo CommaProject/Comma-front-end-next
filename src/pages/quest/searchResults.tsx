@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { CompletedSearchTemplate } from '@/components/template/quest/completed-search';
+import { SearchResultsTemplate } from '~/src/components/template/quest/search-results';
 import { useRouter } from 'next/router';
 import { useSearch } from '@/hooks/useSearch';
 import { useUserInformation } from '@/hooks/useUserInformation';
@@ -8,7 +8,7 @@ import { SpotifyArtistProps } from '@/types/searchTypes';
 import { useAtom } from 'jotai';
 import { searchAtom } from '@/stores/atoms';
 
-const CompletedSearch = () => {
+const SearchResults = () => {
   const router = useRouter();
   const [slideStep, setSlideStep] = useState(0);
   const [getSpotifyArtistForDetailArtist, setGetSpotifyArtistForDetailArtist] =
@@ -68,7 +68,7 @@ const CompletedSearch = () => {
   }, [searchItems.searchText, searchItems.category]);
 
   return (
-    <CompletedSearchTemplate
+    <SearchResultsTemplate
       onClickPrev={handlePrev}
       onSlideChange={handleSwiper}
       completedTextValue={searchItems.searchText}
@@ -94,4 +94,4 @@ const CompletedSearch = () => {
   );
 };
 
-export default CompletedSearch;
+export default SearchResults;

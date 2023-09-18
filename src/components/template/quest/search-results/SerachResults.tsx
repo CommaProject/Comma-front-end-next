@@ -7,11 +7,11 @@ import { TopBar } from '@/components/pages/quest/top-bar';
 import { SpotifyArtistProps } from '@/types/searchTypes';
 import { TrackType } from '@/types/trackTypes';
 import { CommaUserType } from '@/types/authTypes';
-import * as style from './CompletedSearchTemplate.style';
+import * as style from './SearchResultsTemplate.style';
 import 'swiper/swiper.min.css';
 import 'swiper/swiper-bundle.min.css';
 
-interface CompletedSearchTemplateProps {
+interface SearchResultsTemplateProps {
   isHidden: boolean;
   onSlideChange: (swiper: any) => void;
   category: string;
@@ -29,7 +29,7 @@ interface CompletedSearchTemplateProps {
   commaUserData: CommaUserType[] | undefined;
 }
 
-export const CompletedSearchTemplate = ({
+export const SearchResultsTemplate = ({
   isHidden,
   onSlideChange,
   category,
@@ -45,7 +45,7 @@ export const CompletedSearchTemplate = ({
   spotifyArtistData,
   spotifyTrackData,
   commaUserData,
-}: CompletedSearchTemplateProps) => (
+}: SearchResultsTemplateProps) => (
   <style.Wrapper>
     <TopBar
       onClickPrev={onClickPrev}

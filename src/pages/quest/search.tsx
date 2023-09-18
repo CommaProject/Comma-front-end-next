@@ -44,7 +44,7 @@ const Search = () => {
       searchText: historyItem,
     }));
     router.push({
-      pathname: '/quest/completedSearch',
+      pathname: '/quest/searchResults',
     });
   };
   const handleEnterKeyPress = useCallback(() => {
@@ -57,7 +57,7 @@ const Search = () => {
       setHistoryTextArray(searchHistory?.result.data);
     }
     router.push({
-      pathname: '/quest/completedSearch',
+      pathname: '/quest/searchResults',
     });
   }, [searchHistory, searchItems.searchText]);
 

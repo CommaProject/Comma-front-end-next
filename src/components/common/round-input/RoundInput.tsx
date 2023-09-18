@@ -4,7 +4,7 @@ interface RoundInputProps {
   completedTextValue: string;
   onClickRoundInput: () => void;
   handleEraseIconClick: (event: any) => void;
-  isCompletedSearch: boolean;
+  issearchResults: boolean;
   isHidden: boolean;
 }
 
@@ -12,7 +12,7 @@ export const RoundInput = ({
   completedTextValue,
   onClickRoundInput,
   handleEraseIconClick,
-  isCompletedSearch,
+  issearchResults,
   isHidden,
 }: RoundInputProps) => (
   <style.Wrapper hidden={isHidden}>
@@ -22,7 +22,7 @@ export const RoundInput = ({
       onClick={onClickRoundInput}
       readOnly
     />
-    {isCompletedSearch ? (
+    {issearchResults ? (
       <style.EraseIcon onClick={handleEraseIconClick} />
     ) : null}
   </style.Wrapper>
