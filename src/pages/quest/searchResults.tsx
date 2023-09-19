@@ -18,10 +18,13 @@ const SearchResults = () => {
   const {
     spotifyArtistData,
     spotifyTrackData,
+    spotifyArtistDetailTrackData,
+    setSpotifyArtistDetailTrackData,
     commaUserData,
     mutateArtist,
     mutateTrack,
     mutateCommaUser,
+    mutateArtistDetailTrack,
   } = useSearch();
   const { mutateSetTrackLike, getUserFavoritesData } = useUserInformation();
   const [swiperRef, setSwiperRef] = useState<SwiperClass>();
@@ -37,10 +40,10 @@ const SearchResults = () => {
     }));
   };
 
-  const handleArtistAvata = useCallback(
+  const handleArtistDetailTrack = useCallback(
     // Detail Artist
     (artistData: SpotifyArtistProps) => {
-      mutateTrack(artistData.artistName);
+      mutateArtistDetailTrack(artistData.artistName);
       setGetSpotifyArtistForDetailArtist(artistData);
       setIsHidden(true);
       swiperRef?.slideNext();
@@ -50,10 +53,11 @@ const SearchResults = () => {
 
   const handlePrev = useCallback(() => {
     setIsHidden(false);
-    if (swiperRef?.activeIndex === 0) {
+    if (swiperRef?.activeIndex === 0 || swiperRef?.activeIndex === undefined) {
       window.history.back();
     } else {
       swiperRef?.slidePrev();
+      setSpotifyArtistDetailTrackData([]);
     }
   }, [swiperRef]);
 
@@ -62,11 +66,17 @@ const SearchResults = () => {
   }, []);
 
   useEffect(() => {
-    if (searchItems.category === 'music') {
+    if (searchItems.category === 'music' && spotifyTrackData === undefined) {
       mutateTrack(searchItems.searchText);
-    } else if (searchItems.category === 'artist') {
+    } else if (
+      searchItems.category === 'artist' &&
+      spotifyArtistData === undefined
+    ) {
       mutateArtist(searchItems.searchText);
-    } else if (searchItems.category === 'commaUser') {
+    } else if (
+      searchItems.category === 'commaUser' &&
+      commaUserData === undefined
+    ) {
       mutateCommaUser(searchItems.searchText);
     }
   }, [searchItems.searchText, searchItems.category]);
@@ -90,9 +100,10 @@ const SearchResults = () => {
       }}
       spotifyArtistData={spotifyArtistData}
       spotifyTrackData={spotifyTrackData}
+      spotifyArtistDetailTrackData={spotifyArtistDetailTrackData}
       commaUserData={commaUserData}
       setSwiperRef={setSwiperRef}
-      onClickArtistAvata={handleArtistAvata}
+      onClickArtistAvata={handleArtistDetailTrack}
       spotifyArtistForDetailArtist={getSpotifyArtistForDetailArtist}
       isHidden={isHidden}
     />

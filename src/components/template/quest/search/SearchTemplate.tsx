@@ -13,6 +13,7 @@ interface SearchTemplateProps {
   onClickCategory: (category: string) => void;
   onClickSearchItem: (searchItem: string) => void;
   onClickDeleteItem: (index: number) => void;
+  onClickAllHistoryDelete: () => void;
   onEnterKeyPress: () => void;
   onClickEraseIcon: () => void;
   onClickCancelKeyPress: () => void;
@@ -31,6 +32,7 @@ export const SearchTemplate = ({
   onClickEraseIcon,
   onClickCancelKeyPress,
   onChangeSearchText,
+  onClickAllHistoryDelete,
   completedText,
 }: SearchTemplateProps) => (
   <style.Wrapper>
@@ -53,6 +55,7 @@ export const SearchTemplate = ({
       textMap={textList}
       onClickSearchItem={onClickSearchItem}
       onClickDeleteItem={onClickDeleteItem}
+      onClickAllHistoryDelete={onClickAllHistoryDelete}
     />
   </style.Wrapper>
 );

@@ -27,6 +27,7 @@ interface SearchResultsTemplateProps {
   onClickAlbumBox: (previewUrl: string) => void;
   spotifyArtistData: SpotifyArtistProps[] | undefined;
   spotifyTrackData: TrackType[] | undefined;
+  spotifyArtistDetailTrackData: TrackType[] | undefined;
   commaUserData: CommaUserType[] | undefined;
 }
 
@@ -36,6 +37,7 @@ export const SearchResultsTemplate = ({
   category,
   completedTextValue,
   spotifyArtistForDetailArtist,
+  spotifyArtistDetailTrackData,
   setSwiperRef,
   onClickRoundInput,
   onClickEraseButton,
@@ -93,7 +95,7 @@ export const SearchResultsTemplate = ({
         <style.Slide>
           <ArtistDetailForm
             soptifyArtistData={spotifyArtistForDetailArtist}
-            spotifyTrackData={spotifyTrackData}
+            spotifyTrackData={spotifyArtistDetailTrackData}
             isLike={false}
           />
         </style.Slide>
