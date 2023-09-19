@@ -57,7 +57,7 @@ const SearchResults = () => {
     }
   }, [swiperRef]);
 
-  const handleOpenMusicPlayer = useCallback((previewUrl: string) => {
+  const handleOpenPreviewMusicPlayer = useCallback((previewUrl: string) => {
     console.log(previewUrl);
   }, []);
 
@@ -83,7 +83,7 @@ const SearchResults = () => {
         router.push('/quest/search');
       }}
       onClickCategory={handleSwitchActiveCategory}
-      onClickAlbumBox={handleOpenMusicPlayer}
+      onClickAlbumBox={handleOpenPreviewMusicPlayer}
       category={searchItems.category}
       onClickAlbumLikeButton={(trackId: string) => {
         mutateSetTrackLike(trackId);

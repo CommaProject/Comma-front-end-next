@@ -64,12 +64,12 @@ export const SearchResultsTemplate = ({
         musicData={spotifyTrackData?.map((value) => ({
           ...value,
           isLike: false,
+          isPreviewMusicPlayerHidden: true,
         }))}
         onClickPlusButton={() => {}}
-        onClickLikeButton={(trackId: string) => {
-          onClickAlbumLikeButton(trackId);
-        }}
+        onClickLikeButton={onClickAlbumLikeButton}
         onClickAlbumBox={onClickAlbumBox}
+        isPreviewMusicPlayerHidden={false}
       />
     )}
     {category === 'artist' && (
@@ -87,9 +87,7 @@ export const SearchResultsTemplate = ({
           <ArtistAvataFrom
             artistData={spotifyArtistData}
             commaUserData={[]}
-            onArtistAvataClick={(value) => {
-              onClickArtistAvata(value);
-            }}
+            onArtistAvataClick={onClickArtistAvata}
           />
         </style.Slide>
         <style.Slide>
