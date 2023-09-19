@@ -3,7 +3,12 @@ import { useAtom } from 'jotai';
 import { musicStateAtom } from '@/stores/music';
 import * as style from './MusicPlay.style';
 
-const MusicPlay = (audioUrl: string) => {
+interface MusicPlayProps {
+  audioUrl: string;
+  isHidden: boolean;
+}
+
+const MusicPlay = ({ audioUrl, isHidden }: MusicPlayProps) => {
   const [musicState, setMusicState] = useAtom(musicStateAtom);
   const [currentTime, setCurrentTime] = useState(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -40,7 +45,6 @@ const MusicPlay = (audioUrl: string) => {
     }
   };
 
-  // current time을 수시로 바꿔줌
   useEffect(() => {
     if (audioRef.current) {
       const updateCurrentTime = () => {
@@ -48,10 +52,11 @@ const MusicPlay = (audioUrl: string) => {
       };
       audioRef.current.addEventListener('timeupdate', updateCurrentTime);
       return () => {
-        audioRef.current!.removeEventListener('timeupdate', updateCurrentTime);
+        if (audioRef.current) {
+          audioRef.current.removeEventListener('timeupdate', updateCurrentTime);
+        }
       };
     }
-
     return undefined;
   }, []);
 
@@ -68,7 +73,7 @@ const MusicPlay = (audioUrl: string) => {
   }, [audioRef.current && audioRef.current.paused]);
 
   return (
-    <style.Wrapper>
+    <style.Wrapper style={{ display: isHidden ? 'none' : '' }}>
       {musicState.isPlaying ? (
         <style.PauseButton onClick={toggleAudio} />
       ) : (

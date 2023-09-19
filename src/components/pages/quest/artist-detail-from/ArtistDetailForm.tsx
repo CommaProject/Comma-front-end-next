@@ -8,12 +8,16 @@ interface ArtistDetailFormProps {
   soptifyArtistData: SpotifyArtistProps | undefined;
   spotifyTrackData: TrackType[] | undefined;
   isLike: boolean;
+  openMusicPlayer: string;
+  onClickAlbumBox: (previewUrl: string, trackId: string) => void;
 }
 
 export const ArtistDetailForm = ({
   soptifyArtistData,
   spotifyTrackData,
   isLike,
+  openMusicPlayer,
+  onClickAlbumBox,
 }: ArtistDetailFormProps) => {
   console.log('soptifyArtistData', soptifyArtistData);
   return (
@@ -32,13 +36,15 @@ export const ArtistDetailForm = ({
       </style.AvatarBox>
 
       <MusicAlbumFrom
+        openMusicPlayer={openMusicPlayer}
         musicData={spotifyTrackData?.map((value) => ({
           ...value,
           isLike: false,
         }))}
         onClickPlusButton={() => {}}
         onClickLikeButton={(trackId: string) => {}}
-        onClick={() => {}}
+        onClickAlbumBox={onClickAlbumBox}
+        isPreviewMusicPlayerHidden={false}
       />
     </style.Wrapper>
   );

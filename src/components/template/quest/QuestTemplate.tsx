@@ -11,7 +11,7 @@ export const QuestTemplate = ({ onClickRoundInput }: QuestTemplateProps) => (
       completedTextValue=""
       onClickRoundInput={onClickRoundInput}
       handleEraseIconClick={() => {}}
-      issearchResults={false}
+      isSearchResults={false}
       isHidden={false}
     />
   </style.Wrapper>

@@ -28,7 +28,7 @@ const SearchResults = () => {
   } = useSearch();
   const { mutateSetTrackLike, getUserFavoritesData } = useUserInformation();
   const [swiperRef, setSwiperRef] = useState<SwiperClass>();
-
+  const [openMusicPlayer, setOpenMusicPlayer] = useState('');
   const handleSwiper = (swiper: SwiperClass) => {
     setSlideStep(swiper.realIndex);
   };
@@ -61,9 +61,13 @@ const SearchResults = () => {
     }
   }, [swiperRef]);
 
-  const handleOpenPreviewMusicPlayer = useCallback((previewUrl: string) => {
-    console.log(previewUrl);
-  }, []);
+  const handleOpenPreviewMusicPlayer = useCallback(
+    (previewUrl: string, trackId: string) => {
+      console.log(previewUrl);
+      setOpenMusicPlayer(trackId);
+    },
+    [],
+  );
 
   useEffect(() => {
     if (searchItems.category === 'music' && spotifyTrackData === undefined) {
@@ -83,6 +87,7 @@ const SearchResults = () => {
 
   return (
     <SearchResultsTemplate
+      openMusicPlayer={openMusicPlayer}
       onClickPrev={handlePrev}
       onSlideChange={handleSwiper}
       completedTextValue={searchItems.searchText}

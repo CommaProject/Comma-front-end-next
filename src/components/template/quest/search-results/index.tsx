@@ -1,3 +1,3 @@
-import { SearchResultsTemplate } from './SerachResultsTemplate';
+import { SearchResultsTemplate } from './SearchResultsTemplate';
 
 export { SearchResultsTemplate };

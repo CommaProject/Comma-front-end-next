@@ -24,11 +24,12 @@ interface SearchResultsTemplateProps {
   onClickAlbumLikeButton: (trackId: string) => void;
   onClickArtistAvata: (artistData: SpotifyArtistProps) => void;
   onClickPrev: () => void;
-  onClickAlbumBox: (previewUrl: string) => void;
+  onClickAlbumBox: (previewUrl: string, trackId: string) => void;
   spotifyArtistData: SpotifyArtistProps[] | undefined;
   spotifyTrackData: TrackType[] | undefined;
   spotifyArtistDetailTrackData: TrackType[] | undefined;
   commaUserData: CommaUserType[] | undefined;
+  openMusicPlayer: string;
 }
 
 export const SearchResultsTemplate = ({
@@ -49,6 +50,7 @@ export const SearchResultsTemplate = ({
   spotifyArtistData,
   spotifyTrackData,
   commaUserData,
+  openMusicPlayer,
 }: SearchResultsTemplateProps) => (
   <style.Wrapper>
     <TopBar
@@ -63,6 +65,7 @@ export const SearchResultsTemplate = ({
 
     {category === 'music' && (
       <MusicAlbumFrom
+        openMusicPlayer={openMusicPlayer}
         musicData={spotifyTrackData?.map((value) => ({
           ...value,
           isLike: false,
@@ -94,6 +97,8 @@ export const SearchResultsTemplate = ({
         </style.Slide>
         <style.Slide>
           <ArtistDetailForm
+            onClickAlbumBox={onClickAlbumBox}
+            openMusicPlayer={openMusicPlayer}
             soptifyArtistData={spotifyArtistForDetailArtist}
             spotifyTrackData={spotifyArtistDetailTrackData}
             isLike={false}
