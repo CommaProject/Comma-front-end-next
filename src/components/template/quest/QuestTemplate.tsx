@@ -1,4 +1,5 @@
 import { RoundInput } from '../../common/round-input';
+import { SwiperAlbum } from '../../pages/quest/swiper-album';
 import * as style from './QuestTemplate.style';
 
 interface QuestTemplateProps {
@@ -14,5 +15,6 @@ export const QuestTemplate = ({ onClickRoundInput }: QuestTemplateProps) => (
       isCompletedSearch={false}
       isHidden={false}
     />
+    <SwiperAlbum />
   </style.Wrapper>
 );
