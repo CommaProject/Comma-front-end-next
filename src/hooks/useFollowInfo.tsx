@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { FollowUserInfoType,FollowInfoType } from '@/constants/types/followTypes';
 import {getFollowingList, getFollowInfo } from '@/apis/followInfo';
+
 export const useGetFollowingList = () => {
     const { isLoading, data = [] } = useQuery(
       ['followingList'],

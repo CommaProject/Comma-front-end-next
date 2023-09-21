@@ -2,7 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { FavoriteArtistType } from '@/types/artistTypes';
 import { TrackFavoritesType } from '@/types/trackTypes';
-import {getFavoriteArtist,getFavoriteTrack} from '@/apis/favorite'
+import {getFavoriteArtist,getFavoriteTrack} from '@/apis/favorite';
+
 export const useGetFavoriteArtist = () => {
     const { isLoading, data = [] } = useQuery(
       ['favoriteArtist'],

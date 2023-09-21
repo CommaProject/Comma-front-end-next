@@ -1,8 +1,7 @@
 import { ProfileTemplate } from '@/components/template/profile/ProfileTemplate';
 import { useState } from 'react';
 import { useGetMyPlaylists } from '@/apis/playlist';
-import { useGetFavoriteArtist } from '@/hooks/useFavorite';
-import { useGetFavoriteTrack } from '@/hooks/useFavorite';
+import { useGetFavoriteArtist,useGetFavoriteTrack } from '@/hooks/useFavorite';
 import { useGetFollowInfo } from '@/hooks/useFollowInfo';
 import { useGetUserDetail } from '@/apis/profile';
 

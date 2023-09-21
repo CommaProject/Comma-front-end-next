@@ -5,9 +5,8 @@ import TimeBadge from '@/components/pages/home/time-badge';
 import { HorizontalAlbum } from '@/components/common/album/horizontal-album';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { HandleMS, HandleSingerName } from '@/hooks/usePlaylistTrack';
+import { HandleMS, HandleSingerName,useGetPlaylistTracks } from '@/hooks/usePlaylistTrack';
 import { useGetPlaylistDetail } from '@/apis/playlist';
-import { useGetPlaylistTracks } from '@/hooks/usePlaylistTrack';
 import { HorizontalAlbumWithIcon } from '@/components/pages/playlist/horizontal-album-with-icon';
 
 const Id = () => {
