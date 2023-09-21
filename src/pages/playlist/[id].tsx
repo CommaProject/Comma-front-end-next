@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { HandleMS, HandleSingerName } from '@/hooks/usePlaylistTrack';
 import { useGetPlaylistDetail } from '@/apis/playlist';
-import { useGetPlaylistTracks } from '@/apis/playlisttrack';
+import { useGetPlaylistTracks } from '@/hooks/usePlaylistTrack';
 import { HorizontalAlbumWithIcon } from '@/components/pages/playlist/horizontal-album-with-icon';
 
 const Id = () => {

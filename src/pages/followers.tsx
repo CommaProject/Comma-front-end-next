@@ -1,5 +1,5 @@
 import FollowInformationTemplate from '~/src/components/template/followInformation';
-import { useGetFollowingList } from '@/apis/followInfo';
+import { useGetFollowingList } from '@/hooks/useFollowInfo';
 
 const Followers = () => {
   const { followingList } = useGetFollowingList();
