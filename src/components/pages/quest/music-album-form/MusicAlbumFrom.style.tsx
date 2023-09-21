@@ -8,4 +8,6 @@ export const Wrapper = styled.div`
 
 export const AlbumBox = styled.div`
   margin-bottom: 13px;
+  margin-left: 15px;
+  margin-right: 15px;
 `;

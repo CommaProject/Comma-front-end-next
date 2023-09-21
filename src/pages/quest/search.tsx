@@ -2,73 +2,87 @@ import { SearchTemplate } from '@/components/template/quest/search';
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import { useSearch } from '@/hooks/useSearch';
-import { deleteHistoryAsync } from '@/apis/search';
-import { useQueryClient } from '@tanstack/react-query';
 import { getHistoryProps } from '@/constants/types/searchTypes';
+import { useAtom } from 'jotai';
+import { searchAtom } from '@/stores/atoms';
 
 const Search = () => {
   const router = useRouter();
-  const queryClient = useQueryClient();
   // Music, Artist, CommaUser
-  const { searchHistory, mutateSearchHistory } = useSearch();
-  const [completedText, setCompletedText] = useState('');
+  const [searchItems, setSearchItems] = useAtom(searchAtom);
+  const {
+    searchHistory,
+    mutateSearchHistory,
+    useMutationDeleteHistory,
+    useMutationDeleteAllHistory,
+  } = useSearch();
   const [historyTextArray, setHistoryTextArray] = useState<getHistoryProps[]>();
   const handleOnClickDeleteItem = (index: number) => {
-    console.log(index);
-    deleteHistoryAsync(index);
-    queryClient.invalidateQueries(['searchHistory']);
+    useMutationDeleteHistory.mutate(index);
   };
-  useEffect(() => {
-    if (
-      searchHistory?.isSuccess &&
-      searchHistory.result.data &&
-      !('errors' in searchHistory.result.data)
-    ) {
-      setHistoryTextArray(searchHistory.result.data);
-    }
-  }, []);
 
-  const handleOnClickSearchItem = (searchItem: string) => {
-    setCompletedText(searchItem);
+  useEffect(() => {
+    if (searchHistory !== undefined) {
+      const reaverseSearchHistory = searchHistory.sort((a, b) => b.id - a.id);
+      setHistoryTextArray(reaverseSearchHistory);
+    }
+  }, [searchHistory]);
+
+  const handleCategory = (category: string) => {
+    setSearchItems((prevState) => ({
+      ...prevState,
+      category,
+    }));
+  };
+  const handleOnClickSearchItem = (historyItem: string) => {
+    setSearchItems((prevState) => ({
+      ...prevState,
+      searchText: historyItem,
+    }));
     router.push({
       pathname: '/quest/completedSearch',
-      query: { searchText: searchItem },
     });
   };
   const handleEnterKeyPress = useCallback(() => {
-    mutateSearchHistory(completedText);
-    if (
-      searchHistory?.isSuccess &&
-      searchHistory.result.data &&
-      !('errors' in searchHistory.result.data)
-    ) {
-      setHistoryTextArray(searchHistory?.result.data);
-    }
+    mutateSearchHistory(searchItems.searchText);
     router.push({
       pathname: '/quest/completedSearch',
-      query: { searchText: completedText },
     });
-  }, [searchHistory, completedText]);
-  const handleOnClickEraseIcon = () => {
-    setCompletedText(() => '');
-  };
+  }, [searchItems.searchText]);
 
+  const handleOnClickEraseIcon = () => {
+    setSearchItems((prevState) => ({
+      ...prevState,
+      searchText: '',
+    }));
+  };
+  const handleChangeSearchText = (text: string) => {
+    setSearchItems((prevState) => ({
+      ...prevState,
+      searchText: text,
+    }));
+  };
   const handleOnClickCancelIcon = () => {
     window.history.back();
   };
-
+  const handleAllHistoryDelete = () => {
+    useMutationDeleteAllHistory.mutate();
+  };
   return (
     <SearchTemplate
       key="SearchTemplate"
       textList={historyTextArray}
       isAutocomplete_={false}
+      category={searchItems.category}
+      onClickCategory={handleCategory}
       onClickDeleteItem={handleOnClickDeleteItem}
+      onClickAllHistoryDelete={handleAllHistoryDelete}
       onClickSearchItem={handleOnClickSearchItem}
       onEnterKeyPress={handleEnterKeyPress}
       onClickEraseIcon={handleOnClickEraseIcon}
       onClickCancelKeyPress={handleOnClickCancelIcon}
-      completedText={completedText}
-      setCompletedText={setCompletedText}
+      completedText={searchItems.searchText}
+      onChangeSearchText={handleChangeSearchText}
     />
   );
 };

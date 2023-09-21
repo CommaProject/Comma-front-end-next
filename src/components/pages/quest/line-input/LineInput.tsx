@@ -5,7 +5,7 @@ interface LineInputProps {
   handleEnterKeyPress: () => void;
   handleEraseIconClick: (event: any) => void;
   handleCancelButtonClick: (event: any) => void;
-  setCompletedText: Dispatch<SetStateAction<string>>;
+  onChangeSearchText: (text: string) => void;
   completedText: string;
 }
 
@@ -13,7 +13,7 @@ export const LineInput = ({
   handleEnterKeyPress,
   handleEraseIconClick,
   handleCancelButtonClick,
-  setCompletedText,
+  onChangeSearchText,
   completedText,
 }: LineInputProps) => (
   <style.Wrapper>
@@ -21,7 +21,7 @@ export const LineInput = ({
     <style.Input
       type="text"
       value={completedText}
-      onChange={(e) => setCompletedText(e.target.value)}
+      onChange={(e) => onChangeSearchText(e.target.value)}
       onKeyDown={(e) => {
         if (e.key === 'Enter') {
           handleEnterKeyPress();

@@ -5,6 +5,7 @@ import * as style from './TextList.style';
 interface TextListProps {
   onClickSearchItem: (searchItem: string) => void;
   onClickDeleteItem: (index: number) => void;
+  onClickAllHistoryDelete: () => void;
   isAutoComplete: boolean;
   textMap: getHistoryProps[] | undefined;
 }
@@ -13,12 +14,15 @@ export const TextList = ({
   isAutoComplete,
   textMap,
   onClickSearchItem,
+  onClickAllHistoryDelete,
   onClickDeleteItem,
 }: TextListProps) => (
   <style.Wrapper>
     <style.AllDeleteSearchBox>
       <style.RecentText>최근검색어</style.RecentText>
-      <style.AllDeleteSearchText>전체삭제</style.AllDeleteSearchText>
+      <style.AllDeleteSearchText onClick={onClickAllHistoryDelete}>
+        전체삭제
+      </style.AllDeleteSearchText>
     </style.AllDeleteSearchBox>
 
     <style.SearchItemBox>
