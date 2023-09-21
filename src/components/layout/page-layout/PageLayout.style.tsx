@@ -4,7 +4,7 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   & > .content {
-    height: 100vh;
+    height: calc(100vh - 79px);
     display: flex;
     flex-direction: column;
     justify-content: center;

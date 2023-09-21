@@ -14,6 +14,7 @@ import 'swiper/swiper-bundle.min.css';
 interface CompletedSearchTemplateProps {
   isHidden: boolean;
   onSlideChange: (swiper: any) => void;
+  category: string;
   completedTextValue: string;
   spotifyArtistForDetailArtist: SpotifyArtistProps | undefined;
   setSwiperRef: Dispatch<SetStateAction<SwiperClass | undefined>>;
@@ -23,17 +24,19 @@ interface CompletedSearchTemplateProps {
   onClickAlbumLikeButton: (trackId: string) => void;
   onClickArtistAvata: (artistData: SpotifyArtistProps) => void;
   onClickPrev: () => void;
-  switchActiveCategory: number;
   spotifyArtistData: SpotifyArtistProps[] | undefined;
   spotifyTrackData: TrackType[] | undefined;
+  spotifyArtistDetailTrackData: TrackType[] | undefined;
   commaUserData: CommaUserType[] | undefined;
 }
 
 export const CompletedSearchTemplate = ({
   isHidden,
   onSlideChange,
+  category,
   completedTextValue,
   spotifyArtistForDetailArtist,
+  spotifyArtistDetailTrackData,
   setSwiperRef,
   onClickRoundInput,
   onClickEraseButton,
@@ -41,7 +44,6 @@ export const CompletedSearchTemplate = ({
   onClickAlbumLikeButton,
   onClickArtistAvata,
   onClickPrev,
-  switchActiveCategory,
   spotifyArtistData,
   spotifyTrackData,
   commaUserData,
@@ -53,11 +55,11 @@ export const CompletedSearchTemplate = ({
       onClickRoundInput={onClickRoundInput}
       onClickEraseButton={onClickEraseButton}
       onClickCategory={onClickCategory}
-      switchActiveCategory={switchActiveCategory}
+      category={category}
       isHidden={isHidden}
     />
 
-    {switchActiveCategory === 0 && (
+    {category === 'music' && (
       <MusicAlbumFrom
         musicData={spotifyTrackData?.map((value) => ({
           ...value,
@@ -70,7 +72,7 @@ export const CompletedSearchTemplate = ({
         onClick={() => {}}
       />
     )}
-    {switchActiveCategory === 1 && (
+    {category === 'artist' && (
       <style.CustomSwiper
         onSwiper={setSwiperRef}
         slidesPerView={1}
@@ -105,12 +107,12 @@ export const CompletedSearchTemplate = ({
                 : ''
             }
             spotifyTrackData={spotifyTrackData}
-            isLike={false}
+
           />
         </style.Slide>
       </style.CustomSwiper>
     )}
-    {switchActiveCategory === 2 && (
+    {category === 'commaUser' && (
       <ArtistAvataFrom
         artistData={[]}
         commaUserData={commaUserData}

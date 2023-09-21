@@ -5,22 +5,26 @@ import { useSearch } from '@/hooks/useSearch';
 import { useUserInformation } from '@/hooks/useUserInformation';
 import { Swiper as SwiperClass } from 'swiper/types';
 import { SpotifyArtistProps } from '@/types/searchTypes';
+import { useAtom } from 'jotai';
+import { searchAtom } from '@/stores/atoms';
 
 const CompletedSearch = () => {
   const router = useRouter();
   const [slideStep, setSlideStep] = useState(0);
-  const [switchActiveCategory, setSwitchActiveCategory] = useState(0);
   const [getSpotifyArtistForDetailArtist, setGetSpotifyArtistForDetailArtist] =
     useState<SpotifyArtistProps>();
   const [isHidden, setIsHidden] = useState(false); // false: Completed Search true: Detail
-  const { searchText } = router.query;
+  const [searchItems, setSearchItems] = useAtom(searchAtom);
   const {
     spotifyArtistData,
     spotifyTrackData,
+    spotifyArtistDetailTrackData,
+    setSpotifyArtistDetailTrackData,
     commaUserData,
     mutateArtist,
     mutateTrack,
     mutateCommaUser,
+    mutateArtistDetailTrack,
   } = useSearch();
   const { mutateSetTrackLike, getUserFavoritesData } = useUserInformation();
   const [swiperRef, setSwiperRef] = useState<SwiperClass>();
@@ -30,14 +34,16 @@ const CompletedSearch = () => {
   };
 
   const handleSwitchActiveCategory = (category: string) => {
-    if (category === 'music') setSwitchActiveCategory(0);
-    else if (category === 'artist') setSwitchActiveCategory(1);
-    else if (category === 'commaUser') setSwitchActiveCategory(2);
+    setSearchItems((prevState) => ({
+      ...prevState,
+      category,
+    }));
   };
 
-  const handleArtistAvata = useCallback(  // Detail Artist
+  const handleArtistDetailTrack = useCallback(
+    // Detail Artist
     (artistData: SpotifyArtistProps) => {
-      mutateTrack(artistData.artistName);
+      mutateArtistDetailTrack(artistData.artistName);
       setGetSpotifyArtistForDetailArtist(artistData);
       setIsHidden(true);
       swiperRef?.slideNext();
@@ -45,34 +51,37 @@ const CompletedSearch = () => {
     [swiperRef],
   );
 
-  const handlePrev = useCallback(() => { 
+  const handlePrev = useCallback(() => {
     setIsHidden(false);
-    if (swiperRef?.activeIndex === 0) {
+    if (swiperRef?.activeIndex === 0 || swiperRef?.activeIndex === undefined) {
       window.history.back();
     } else {
       swiperRef?.slidePrev();
+      setSpotifyArtistDetailTrackData([]);
     }
   }, [swiperRef]);
 
   useEffect(() => {
-    if (typeof searchText === 'string') {
-      if (switchActiveCategory === 0) { // Music
-        mutateTrack(searchText);
-      } else if (switchActiveCategory === 1) { // Artist
-        mutateArtist(searchText);
-      } else if (switchActiveCategory === 2) { // CommaUser
-        mutateCommaUser(searchText);
-      }
+    if (searchItems.category === 'music' && spotifyTrackData === undefined) {
+      mutateTrack(searchItems.searchText);
+    } else if (
+      searchItems.category === 'artist' &&
+      spotifyArtistData === undefined
+    ) {
+      mutateArtist(searchItems.searchText);
+    } else if (
+      searchItems.category === 'commaUser' &&
+      commaUserData === undefined
+    ) {
+      mutateCommaUser(searchItems.searchText);
     }
-  }, [searchText, switchActiveCategory]);
+  }, [searchItems.searchText, searchItems.category]);
 
   return (
     <CompletedSearchTemplate
       onClickPrev={handlePrev}
       onSlideChange={handleSwiper}
-      completedTextValue={
-        typeof searchText === 'string' ? searchText : 'undefined'
-      }
+      completedTextValue={searchItems.searchText}
       onClickRoundInput={() => {
         router.push('/quest/search');
       }}
@@ -80,15 +89,16 @@ const CompletedSearch = () => {
         router.push('/quest/search');
       }}
       onClickCategory={handleSwitchActiveCategory}
-      switchActiveCategory={switchActiveCategory}
+      category={searchItems.category}
       onClickAlbumLikeButton={(trackId: string) => {
         mutateSetTrackLike(trackId);
       }}
       spotifyArtistData={spotifyArtistData}
       spotifyTrackData={spotifyTrackData}
+      spotifyArtistDetailTrackData={spotifyArtistDetailTrackData}
       commaUserData={commaUserData}
       setSwiperRef={setSwiperRef}
-      onClickArtistAvata={handleArtistAvata}
+      onClickArtistAvata={handleArtistDetailTrack}
       spotifyArtistForDetailArtist={getSpotifyArtistForDetailArtist}
       isHidden={isHidden}
     />
