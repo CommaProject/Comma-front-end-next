@@ -107,7 +107,7 @@ export const CompletedSearchTemplate = ({
                 : ''
             }
             spotifyTrackData={spotifyTrackData}
-
+            isLike
           />
         </style.Slide>
       </style.CustomSwiper>
