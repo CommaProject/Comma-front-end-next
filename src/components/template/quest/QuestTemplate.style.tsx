@@ -1,6 +1,8 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Wrapper = styled.div`
-  width: 100%;
+  margin-left: 15px;
+  margin-right: 15px;
+  width: auto;
   height: 100%;
 `;

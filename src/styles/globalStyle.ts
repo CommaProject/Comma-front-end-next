@@ -42,7 +42,7 @@ export const GlobalStyle = createGlobalStyle`
       }
 
       title {
-        display: inline;
+        display: flex;
         color: ${colors.grayscale.dark};
         text-align: center;
         font-family: ${fonts.family.noto};

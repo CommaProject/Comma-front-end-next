@@ -9,7 +9,14 @@ const Quest = () => {
     router.push('/quest/search');
   };
 
-  return <QuestTemplate onClickRoundInput={handleRoundInput} />;
+  return (
+    <QuestTemplate
+      onClickRoundInput={handleRoundInput}
+      myMostListenedSongNode={undefined}
+      myLikedSongsNode={undefined}
+      highlyRecommendedSongNode={undefined}
+    />
+  );
 };
 
 export default Quest;

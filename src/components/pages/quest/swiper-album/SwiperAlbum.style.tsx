@@ -8,8 +8,8 @@ export const Wrapper = styled.div`
 `;
 
 export const CustomSwiper = styled(Swiper)`
-  width: 240px;
-  height: 320px;
+  width: 250px;
+  height: 248px;
 `;
 
 export const CardSwiperSlide = styled(SwiperSlide)<{
