@@ -49,8 +49,7 @@ const deleteAllHistory = async () => {
   return { isSuccess, result };
 };
 export const useSearch = () => {
-  const [spotifyArtistData, setSpotifyArtistData] =
-    useState<SpotifyArtistProps[]>();
+  const [spotifyArtistData, setSpotifyArtistData] =useState<SpotifyArtistProps[]>();
   const [spotifyTrackData, setSpotifyTrackData] = useState<TrackType[]>();
   const [spotifyArtistDetailTrackData, setSpotifyArtistDetailTrackData] =
     useState<TrackType[]>();

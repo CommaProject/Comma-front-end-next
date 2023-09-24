@@ -87,16 +87,27 @@ export const CompletedSearchTemplate = ({
           <ArtistAvataFrom
             artistData={spotifyArtistData}
             commaUserData={[]}
+            favoriteArtistData={[]}
             onArtistAvataClick={(value) => {
               onClickArtistAvata(value);
             }}
+            onClickFavoriteArtistDetail={() => {}}
           />
         </style.Slide>
         <style.Slide>
           <ArtistDetailForm
-            soptifyArtistData={spotifyArtistForDetailArtist}
-            spotifyTrackData={spotifyArtistDetailTrackData}
-            isLike={false}
+            artistImage={
+              spotifyArtistForDetailArtist
+                ? spotifyArtistForDetailArtist.images[2].url
+                : ''
+            }
+            artistName={
+              spotifyArtistForDetailArtist
+                ? spotifyArtistForDetailArtist.artistName
+                : ''
+            }
+            spotifyTrackData={spotifyTrackData}
+            isLike
           />
         </style.Slide>
       </style.CustomSwiper>
@@ -105,7 +116,9 @@ export const CompletedSearchTemplate = ({
       <ArtistAvataFrom
         artistData={[]}
         commaUserData={commaUserData}
+        favoriteArtistData={[]}
         onArtistAvataClick={() => {}}
+        onClickFavoriteArtistDetail={() => {}}
       />
     )}
   </style.Wrapper>

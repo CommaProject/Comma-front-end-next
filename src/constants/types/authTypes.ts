@@ -28,7 +28,7 @@ export interface LoginAsyncOutput {
   token: string;
 }
 
-export interface UserInfomationOutputsType {
+export interface UserInformationOutputsType {
   userId: number;
   email: string;
   data: RegisterInputsType;

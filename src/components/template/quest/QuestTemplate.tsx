@@ -24,6 +24,7 @@ export const QuestTemplate = ({
       handleEraseIconClick={() => {}}
       isCompletedSearch={false}
       isHidden={false}
+  
     />
     <title style={{ marginTop: 15, marginBottom: 10 }}>
       친구가 가장 많이 들은 곡

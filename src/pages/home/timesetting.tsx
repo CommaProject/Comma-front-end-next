@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import * as style from '~/src/styles/pages-styles/timesetting.style';
+import * as style from '@/styles/pages-styles/timesetting.style';
 import PrevIcon from '@/assets/images/prevArrow.svg';
 import RepeatDaySetting from '@/components/pages/home/repeat-day-setting';
 import { TimeType } from '@/constants/types/signUpTypes';
 import TimePicker from '@/components/common/time-picker';
 import SwiperCore from 'swiper';
-import { Album } from '~/src/components/common/album/Album';
+import { Album } from '@/components/common/album/Album';
 
 interface Playlist {
   repAlbumImageUrl: string;

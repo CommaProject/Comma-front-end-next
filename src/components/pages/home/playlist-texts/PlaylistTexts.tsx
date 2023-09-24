@@ -1,4 +1,4 @@
-import { PlaylistType } from '~/src/constants/types/playlistTypes';
+import { PlaylistType } from '@/constants/types/playlistTypes';
 import * as style from './PlaylistTexts.style';
 
 interface PlaylistTextsProps {
