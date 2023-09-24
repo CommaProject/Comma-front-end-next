@@ -28,3 +28,16 @@ export interface TrackType {
   durationMinute: number;
   durationSecond: number;
 }
+
+export interface TrackPlayCountType {
+  playCount: number;
+  track: {
+    id: number;
+    trackTitle: string;
+    durationTimeMs: number;
+    recommendCount: number;
+    albumImageUrl: string;
+    spotifyTrackId: string;
+    spotifyTrackHref: string;
+  };
+}
