@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import React, { ChangeEvent } from 'react';
-import { QuestTemplate } from '~/src/components/template/quest/QuestTemplate';
+import { QuestTemplate } from '@/components/template/quest/QuestTemplate';
 
 const Quest = () => {
   const router = useRouter();

@@ -2,17 +2,19 @@ import styled, { css } from 'styled-components';
 import addPlaylist from '@/assets/images/addPlaylist.svg';
 import EmptyProfile from '@/assets/images/profileImage.svg';
 import Setting from '@/assets/images/setting.svg';
+import modalSlide from '@/assets/images/modalSlideImg.svg';
+import modalProfileImg from '@/assets/images/modalProfile.svg';
 
 export const Wrapper = styled.div`
   width: 390px;
-  // height: calc(100vh - 79px);
-  height: 97%;
+
+  height: 100%;
   display: flex;
   flex-direction: column;
   padding-left: 15px;
 
-  border: 1px solid red;
   overflow: scroll;
+
 `;
 
 export const TopBar = styled.div`
@@ -39,25 +41,26 @@ export const Profile = styled(EmptyProfile)`
   margin: 10px;
 `;
 interface FollowButtonProps {
-  isFollow : boolean
+  isFollow: boolean;
 }
 export const FollowButton = styled.div<FollowButtonProps>`
-  ${({ theme,isFollow }) => {
+  ${({ theme, isFollow }) => {
     const { fonts, colors } = theme;
     return css`
       width: 71px;
       height: 30px;
-      margin:5px;
+      margin: 5px;
       border-radius: 30px;
-      background-color: ${
-        isFollow? colors.grayscale.gray300:colors.primary.main};
+      background-color: ${isFollow
+        ? colors.grayscale.gray300
+        : colors.primary.main};
       color: ${colors.grayscale.white};
       font-size: 15px;
       font-family: ${fonts.family.noto};
       font-weight: ${fonts.weight.regular};
       line-height: 30px;
-      text-align:center;
-      `;
+      text-align: center;
+    `;
   }}
 `;
 export const FollowInfo = styled.div`
@@ -107,6 +110,7 @@ export const FollowNum = styled.div`
       font-weight: ${fonts.weight.medium};
       line-height: 15px;
       text-align: center;
+      cursor: pointer;
     `;
   }}
 `;
@@ -123,7 +127,7 @@ export const Title = styled.div`
       line-height: 17px;
 
       border-radius: 34px;
-      cursor:pointer;
+      cursor: pointer;
     `;
   }}
 `;
@@ -157,4 +161,67 @@ export const Text = styled.div`
       line-height: 12px;
     `;
   }}
+`;
+export const ModalContainer = styled.div`
+  ${({ theme }) => {
+    const { colors } = theme;
+    return css`
+      width: 100%;
+
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+
+      z-index: 80;
+    `;
+  }}
+`;
+
+export const Modal = styled.div`
+  ${({ theme }) => {
+    const { colors } = theme;
+    return css`
+      width: 100%;
+      height: 130px;
+
+      position: absolute;
+      bottom: 86px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      margin-bottom: 5px;
+      background-color: ${colors.grayscale.gray500};
+      border-radius: 20px 20px 0 0;
+      z-index: 70;
+    `;
+  }}
+`;
+
+export const ModalText = styled.div`
+  ${({ theme }) => {
+    const { colors, fonts } = theme;
+    return css`
+      width: 100%;
+      height: 130px;
+      margin-left: 10px;
+      display: flex;
+
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+
+      color: ${colors.grayscale.white};
+      font-size: 15px;
+      font-family: ${fonts.family.noto};
+      font-weight: ${fonts.weight.regular};
+      line-height: 15px;
+    `;
+  }}
+`;
+export const Button = styled(modalSlide)`
+  margin: 10px;
+`;
+export const Img = styled(modalProfileImg)`
+  margin: 5px 15px;
 `;

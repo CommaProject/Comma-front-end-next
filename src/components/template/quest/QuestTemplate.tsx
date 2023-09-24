@@ -13,6 +13,7 @@ export const QuestTemplate = ({ onClickRoundInput }: QuestTemplateProps) => (
       handleEraseIconClick={() => {}}
       isCompletedSearch={false}
       isHidden={false}
+  
     />
   </style.Wrapper>
 );

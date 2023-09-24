@@ -2,8 +2,8 @@ import React from 'react';
 import 'swiper/swiper.min.css';
 import 'swiper/swiper-bundle.min.css';
 import FreeMode from 'swiper';
-import NavigationPlaylistSvg from '~/src/assets/icons/NavigationPlaylist.svg';
-import { Avata } from '~/src/components/common/avata';
+import NavigationPlaylistSvg from '@/assets/icons/NavigationPlaylist.svg';
+import { Avata } from '@/components/common/avata';
 import * as style from './SliderFreeMode.style';
 
 // interface SwiperAlbumProps {
