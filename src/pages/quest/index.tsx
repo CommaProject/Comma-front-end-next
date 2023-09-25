@@ -7,11 +7,11 @@ import { useGetFavoriteTrack } from '~/src/hooks/useFavorite';
 
 const Quest = () => {
   const router = useRouter();
-  const { recommendData } = useRecommend();
+  const { tracksRecommendData } = useRecommend();
   const { trackPlayCountData, friendsTrackPlayCountData } = useTrackPlayCount();
   const { favoriteTrack } = useGetFavoriteTrack();
 
-  console.log('RecommendData', recommendData);
+  console.log('tracksRecommendData', tracksRecommendData);
   console.log('trackPlayCountData', trackPlayCountData);
   console.log('friendsTrackPlayCountData', friendsTrackPlayCountData);
   console.log('favoriteTrack', favoriteTrack);

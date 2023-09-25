@@ -18,11 +18,11 @@ interface RecommendItem {
   artists: Artists;
 }
 
-export interface RecommendData {
+export interface TracksRecommendData {
   data: RecommendItem;
 }
 
-export interface RecommendDetailData {
+export interface TrackRecommendDetailData {
   recommendId: number;
   comment: string;
   userNickname: string | null;

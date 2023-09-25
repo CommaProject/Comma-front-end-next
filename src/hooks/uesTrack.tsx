@@ -4,42 +4,31 @@ import { useQuery } from '@tanstack/react-query';
 const getTrackPlayCount = async () => {
   const { isSuccess, result } = await getTrackCountAsync();
 
-  return { isSuccess, result };
+  if (isSuccess && result.data) {
+    return result.data;
+  }
+  return null;
 };
 
 const getFriendsTrackPlayCount = async () => {
   const { isSuccess, result } = await getFriendsTrackCountAsync();
 
-  return { isSuccess, result };
+  if (isSuccess && result.data) {
+    return result.data;
+  }
+  return null;
 };
 
 export const useTrackPlayCount = () => {
   const { data: trackPlayCountData } = useQuery({
-    queryKey: ['Recommend'],
+    queryKey: ['TracksRecommend'],
     queryFn: getTrackPlayCount,
-    onSuccess: (result) => {
-      if (
-        result?.isSuccess &&
-        result.result.data &&
-        !('errors' in result.result.data)
-      ) {
-        console.log('success TrackPlayCountData');
-      }
-    },
   });
 
   const { data: friendsTrackPlayCountData } = useQuery({
-    queryKey: ['Recommend'],
+    queryKey: ['FriendsTracksPlayCount'],
     queryFn: getFriendsTrackPlayCount,
-    onSuccess: (result) => {
-      if (
-        result?.isSuccess &&
-        result.result.data &&
-        !('errors' in result.result.data)
-      ) {
-        console.log('success friendsTrackPlayCountData');
-      }
-    },
   });
+
   return { trackPlayCountData, friendsTrackPlayCountData };
 };

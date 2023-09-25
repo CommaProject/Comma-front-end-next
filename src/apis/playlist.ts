@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { PlaylistType, PlaylistTypeWithTotalTime } from '@/types/playlistTypes';
 import { ApiResponse } from '@/constants/types';
-import { RecommendData } from '@/types/recommendType';
+import { TracksRecommendData } from '@/types/recommendType';
 
 // 플레이리스트 조회
 const getMultiplePlaylists = async () => {
@@ -152,12 +152,17 @@ export const useGetPlaylistDetail = (playlistId: number) => {
 };
 
 /**
- * 추천 리스트 조회 함수 getRecommendAsync
+ * 추천 리스트 조회 함수 getTracksRecommendAsync
  * @need AccessToken
  * @returns 가입 성공 시 209, 실패 시 ...
  */
-export const getRecommendAsync = async (): ApiResponse<RecommendData[]> => {
-  const response = await getAsync<RecommendData[]>('/recommend', {});
+export const getTracksRecommendAsync = async (): ApiResponse<
+  TracksRecommendData[]
+> => {
+  const response = await getAsync<TracksRecommendData[]>(
+    '/tracks/recommend',
+    {},
+  );
 
   return response;
 };
