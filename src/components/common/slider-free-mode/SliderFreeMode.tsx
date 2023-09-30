@@ -1,9 +1,6 @@
 import React from 'react';
 import 'swiper/swiper.min.css';
 import 'swiper/swiper-bundle.min.css';
-import FreeMode from 'swiper';
-import NavigationPlaylistSvg from '@/assets/icons/NavigationPlaylist.svg';
-import { Avata } from '@/components/common/avata';
 import * as style from './SliderFreeMode.style';
 
 // interface SwiperAlbumProps {
@@ -19,7 +16,7 @@ export const SliderFreeMode = ({
   componentGab,
   children,
 }: SliderFreeModeProps) => (
-  <style.CustomSwiper spaceBetween={componentGab} slidesPerView={4.5} freeMode>
+  <style.CustomSwiper spaceBetween={componentGab} slidesPerView={3.5} freeMode>
     {React.Children.map(children, (child, index) => (
       <style.CardSwiperSlide>{child}</style.CardSwiperSlide>
     ))}

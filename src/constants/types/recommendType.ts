@@ -13,13 +13,9 @@ interface Artists {
   spotifyArtistName: string;
 }
 
-interface RecommendItem {
+export interface TracksRecommendData {
   track: Track;
   artists: Artists;
-}
-
-export interface TracksRecommendData {
-  data: RecommendItem;
 }
 
 export interface TrackRecommendDetailData {

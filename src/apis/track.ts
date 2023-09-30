@@ -9,7 +9,10 @@ import { getAsync, postAsync } from './API';
 export const getTrackCountAsync = async (): ApiResponse<
   TrackPlayCountType[]
 > => {
-  const response = await getAsync<TrackPlayCountType[]>('/tracks', {});
+  const response = await getAsync<TrackPlayCountType[]>(
+    '/track/play-count',
+    {},
+  );
 
   return response;
 };
@@ -22,7 +25,10 @@ export const getTrackCountAsync = async (): ApiResponse<
 export const getFriendsTrackCountAsync = async (): ApiResponse<
   TrackPlayCountType[]
 > => {
-  const response = await getAsync<TrackPlayCountType[]>('/tracks/friends', {});
+  const response = await getAsync<TrackPlayCountType[]>(
+    '/track/play-count/friends',
+    {},
+  );
 
   return response;
 };

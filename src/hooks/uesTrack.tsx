@@ -21,7 +21,7 @@ const getFriendsTrackPlayCount = async () => {
 
 export const useTrackPlayCount = () => {
   const { data: trackPlayCountData } = useQuery({
-    queryKey: ['TracksRecommend'],
+    queryKey: ['TrackPlayCount'],
     queryFn: getTrackPlayCount,
   });
 

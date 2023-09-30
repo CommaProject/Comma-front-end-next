@@ -5,7 +5,11 @@ import TimeBadge from '@/components/pages/home/time-badge';
 import { HorizontalAlbum } from '@/components/common/album/horizontal-album';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { HandleMS, HandleSingerName,useGetPlaylistTracks } from '@/hooks/usePlaylistTrack';
+import {
+  HandleMS,
+  HandleSingerName,
+  useGetPlaylistTracks,
+} from '@/hooks/usePlaylistTrack';
 import { useGetPlaylistDetail } from '@/apis/playlist';
 import { HorizontalAlbumWithIcon } from '@/components/pages/playlist/horizontal-album-with-icon';
 
@@ -64,11 +68,13 @@ const Id = () => {
         {playlistTracks &&
           playlistTracks.map((track) => (
             <HorizontalAlbumWithIcon
-              key={track.trackId}
-              imgUrl={track.albumImageUrl}
-              songName={track.trackTitle}
-              singerName={HandleSingerName(track.trackArtistList)}
-              timer={HandleMS(track.durationTimeMs)}
+              key={track.trackArtistResponses[0].track.id}
+              imgUrl={track.trackArtistResponses[0].track.albumImageUrl}
+              songName={track.trackArtistResponses[0].track.trackTitle}
+              singerName={HandleSingerName(track.trackArtistResponses)}
+              timer={HandleMS(
+                track.trackArtistResponses[0].track.durationTimeMs,
+              )}
               onClick={() => {}}
               onClickMoveButton={() => {}}
               isEditMode={isEditMode}

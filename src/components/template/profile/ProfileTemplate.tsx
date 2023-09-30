@@ -11,7 +11,6 @@ import { VerticalAvata } from '../../common/avata';
 import { VerticalAlbum } from '../../common/album/vertical-album';
 import { PlaylistRepAlbumWithNum } from '../../common/playlist-rep-album-with-num';
 
-
 interface ProfileTemplateProps {
   isProfileMine: boolean;
   myPlaylist: PlaylistType[];
@@ -28,7 +27,7 @@ export const ProfileTemplate = ({
   favoriteTrack,
   followersInfo,
   followingInfo,
-  userNickName
+  userNickName,
 }: ProfileTemplateProps) => {
   // 팔로우,팔로잉 조회 api
 
@@ -59,22 +58,26 @@ export const ProfileTemplate = ({
   };
   const { openModal, closeModal } = useModal();
   const onClickSettingButton = () => {
-    console.log('클릭')
+    console.log('클릭');
     openModal(
       <style.ModalContainer>
         <style.Modal>
-          <style.Button onClick={closeModal}/>
+          <style.Button onClick={closeModal} />
           <style.ModalText>
-            <style.Img/>프로필 편집</style.ModalText>
+            <style.Img />
+            프로필 편집
+          </style.ModalText>
           <style.ModalText>
-          <style.Img/>계정</style.ModalText>
+            <style.Img />
+            계정
+          </style.ModalText>
         </style.Modal>
-      </style.ModalContainer>
+      </style.ModalContainer>,
     );
-    }
+  };
   return (
     <style.Wrapper>
-      <style.TopBar >
+      <style.TopBar>
         {isProfileMine ? (
           <style.SettingButton onClick={onClickSettingButton} />
         ) : (
@@ -93,7 +96,7 @@ export const ProfileTemplate = ({
           ''
         )}
         <style.FollowInfo>
-         {userNickName}
+          {userNickName}
           <style.FollowContainer>
             <style.FollowNum onClick={() => onClickFollow('following')}>
               {followingInfo} <br />
@@ -130,10 +133,13 @@ export const ProfileTemplate = ({
             {favoriteTrack &&
               favoriteTrack.map((track: TrackFavoritesType) => (
                 <VerticalAlbum
-                  key={track.trackId}
-                  imgUrl={track.albumImageUrl}
-                  songName={track.trackTitle}
-                  singerName={track.trackArtistList[0].artistName}
+                  key={track.favoriteTrackId}
+                  imgUrl={track.trackArtistResponses[0].track.albumImageUrl}
+                  songName={track.trackArtistResponses[0].track.trackTitle}
+                  singerName={
+                    track.trackArtistResponses[0]?.artist.artistName ||
+                    'undefined'
+                  }
                   onClick={() => {}}
                 />
               ))}
