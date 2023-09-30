@@ -69,7 +69,7 @@ export const QuestTemplate = ({
             onClick={() => {}}
             imgUrl={track.track.albumImageUrl}
             songName={track.track.trackTitle}
-            singerName={track.artists.spotifyArtistName || 'undefined'}
+            singerName={track.artist.artistName || 'undefined'}
           />
         ))
       ) : (

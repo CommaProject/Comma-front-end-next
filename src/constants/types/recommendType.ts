@@ -8,14 +8,14 @@ interface Track {
   spotifyTrackHref: string;
 }
 
-interface Artists {
+interface Artist {
   spotifyArtistId: string;
-  spotifyArtistName: string;
+  artistName: string;
+  artistImageUrl: string;
 }
-
 export interface TracksRecommendData {
   track: Track;
-  artists: Artists;
+  artist: Artist;
 }
 
 export interface TrackRecommendDetailData {
