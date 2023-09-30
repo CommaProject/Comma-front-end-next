@@ -30,11 +30,13 @@ export const QuestTemplate = ({
       isCompletedSearch={false}
       isHidden={false}
     />
-    <title style={{ marginTop: 15 }}>친구가 가장 많이 들은 곡</title>
+    <style.FriendsMostListenedTrackTitle style={{}}>
+      친구가 가장 많이 들은 곡
+    </style.FriendsMostListenedTrackTitle>
     <SwiperAlbum friendsTrackPlayCountData={friendsTrackPlayCountData} />
-    <title style={{ marginTop: 65, marginBottom: 20 }}>
+    <style.MyMostListenedTrackTitle>
       내가 가장 많이 들은 곡
-    </title>
+    </style.MyMostListenedTrackTitle>
     <SliderFreeMode componentGab={0}>
       {myMostListenedTracks?.map((track) => (
         <VerticalAlbum
@@ -46,9 +48,9 @@ export const QuestTemplate = ({
         />
       ))}
     </SliderFreeMode>
-    <title style={{ marginTop: 50, marginBottom: 20 }}>
+    <style.MyFavoriteTracksTitle style={{ marginTop: 50, marginBottom: 20 }}>
       내가 좋아요 표시한 곡
-    </title>
+    </style.MyFavoriteTracksTitle>
     <SliderFreeMode componentGab={0}>
       {myFavoriteTracks.map((track) => (
         <VerticalAlbum
@@ -62,9 +64,11 @@ export const QuestTemplate = ({
         />
       ))}
     </SliderFreeMode>
-    <title style={{ marginTop: 50, marginBottom: 20 }}>
+    <style.HighlyRecommendedTracksTitle
+      style={{ marginTop: 50, marginBottom: 20 }}
+    >
       추천이 가장 많이 된 곡
-    </title>
+    </style.HighlyRecommendedTracksTitle>
     <SliderFreeMode componentGab={0}>
       {highlyRecommendedTracks ? (
         highlyRecommendedTracks.map((track) => (

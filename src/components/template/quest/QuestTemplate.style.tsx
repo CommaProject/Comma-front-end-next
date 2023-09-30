@@ -7,3 +7,19 @@ export const Wrapper = styled.div`
   height: 100%;
   overflow: scroll;
 `;
+
+export const FriendsMostListenedTrackTitle = styled.title`
+  margintop: 15;
+`;
+
+export const MyMostListenedTrackTitle = styled.title`
+marginTop: 65, marginBottom: 20 
+`;
+
+export const MyFavoriteTracksTitle = styled.title`
+marginTop: 50, marginBottom: 20
+`;
+
+export const HighlyRecommendedTracksTitle = styled.title`
+marginTop: 50, marginBottom: 20
+`;
