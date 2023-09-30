@@ -5,4 +5,5 @@ export const Wrapper = styled.div`
   margin-right: 15px;
   // width: auto;
   height: 100%;
+  overflow: scroll;
 `;

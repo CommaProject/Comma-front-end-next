@@ -11,7 +11,7 @@ const Quest = () => {
   const { trackPlayCountData, friendsTrackPlayCountData } = useTrackPlayCount();
   const { favoriteTrack } = useGetFavoriteTrack();
 
-  console.log('tracksRecommendData', tracksRecommendData);
+  // console.log('tracksRecommendData', tracksRecommendData);
   // console.log('trackPlayCountData', trackPlayCountData);
   // console.log('friendsTrackPlayCountData', friendsTrackPlayCountData);
   // console.log('favoriteTrack', favoriteTrack);
