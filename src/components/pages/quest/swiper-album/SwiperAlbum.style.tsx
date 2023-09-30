@@ -1,18 +1,23 @@
 import styled, { css } from 'styled-components';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-// export const Wrapper = styled.div`
-//   display: flex;
-//   align-items: center;
-//   position: relative;
-// `;
-
-export const CustomSwiper = styled(Swiper)`
-  // width: auto;
+export const Wrapper = styled.div`
   display: flex;
   align-items: center;
   position: relative;
 `;
+
+export const CustomSwiper = styled(Swiper)`
+  width: 250px;
+  height: 248px;
+`;
+
+// export const CardSwiperSlide = styled(SwiperSlide)<{
+//   backgroundColor?: string;
+// }>`
+//   background-color: ${(props) => props.backgroundColor || 'white'};
+//   border-radius: 18px;
+// `;
 
 export const CardSwiperSlide = styled(SwiperSlide)`
   ${({ theme }) => {
@@ -24,7 +29,7 @@ export const CardSwiperSlide = styled(SwiperSlide)`
       border-radius: 18px;
       font-size: 22px;
       font-weight: ${fonts.weight.medium};
-      color: ${colors.grayscale.dark};
+      color: ${colors.grayscale.white};
     `;
   }}
 `;

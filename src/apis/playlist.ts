@@ -1,10 +1,9 @@
 import { deleteAsync, getAsync } from '@/apis/API';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
-import {
-  PlaylistType,
-  PlaylistTypeWithTotalTime,
-} from '../constants/types/playlistTypes';
+import { PlaylistType, PlaylistTypeWithTotalTime } from '@/types/playlistTypes';
+import { ApiResponse } from '@/constants/types';
+import { TracksRecommendData } from '@/types/recommendType';
 
 // 플레이리스트 조회
 const getMultiplePlaylists = async () => {
@@ -103,7 +102,6 @@ export const useGetPlaylistPlayTime = (playlistId: number) => {
   );
   useEffect(() => {
     if (isSuccess && data !== 0) {
-   
       setPlayTime(data);
     }
   }, [isSuccess, data, playlistId]);
@@ -116,7 +114,7 @@ export const useGetPlaylistPlayTime = (playlistId: number) => {
 export const deletePlaylist = async (playlistIdArray: number[]) => {
   const response = await deleteAsync<number[]>(`/playlist`, {
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json', // 안 해도 될 것 같은데
     },
     data: playlistIdArray, // 요청 본문에 데이터를 JSON 배열로 넣음
   });
@@ -151,4 +149,20 @@ export const useGetPlaylistDetail = (playlistId: number) => {
   return {
     myPlaylistDetail: data,
   };
+};
+
+/**
+ * 추천 리스트 조회 함수 getTracksRecommendAsync
+ * @need AccessToken
+ * @returns 가입 성공 시 209, 실패 시 ...
+ */
+export const getTracksRecommendAsync = async (): ApiResponse<
+  TracksRecommendData[]
+> => {
+  const response = await getAsync<TracksRecommendData[]>(
+    '/tracks/recommend',
+    {},
+  );
+
+  return response;
 };

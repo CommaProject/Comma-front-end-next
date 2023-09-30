@@ -1,5 +1,7 @@
 import { useRouter } from 'next/router';
 import { useCallback } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { getTracksRecommendAsync } from '@/apis/playlist';
 
 /* 플레이 리스트 상세 정보 조회 페이지로 이동 */
 export const usePlaylist = () => {
@@ -30,4 +32,25 @@ export const useAllPlaylists = () => {
   }, [router]);
 
   return { navigateToAllPlaylists };
+};
+
+// ------------------Reommend------------------//
+const getTracksRecommend = async () => {
+  const { isSuccess, result } = await getTracksRecommendAsync();
+
+  if (isSuccess && result.data) {
+    return result.data;
+  }
+  // return { isSuccess, result };
+  return null;
+};
+
+export const useRecommend = () => {
+  const { data: tracksRecommendData } = useQuery({
+    queryKey: ['TracksRecommend'],
+    queryFn: getTracksRecommend,
+    // onSuccess: (result) => {},
+  });
+
+  return { tracksRecommendData };
 };

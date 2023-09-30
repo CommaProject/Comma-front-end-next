@@ -1,5 +1,5 @@
-import { ArtistType } from '@/constants/types/trackTypes';
 import { useQuery } from '@tanstack/react-query';
+import { TrackArtistResponse } from '@/types/trackTypes';
 import { getPlaylistTracks } from '@/apis/playlisttrack';
 /* ms로 주어진 시간을 __ h __ m __ s 문자열로 반환하는 함수 */
 
@@ -25,8 +25,10 @@ export const HandleMS = (ms: number) => {
 객체 배열로 주어진 artistList 타입에서 artist명만 합쳐서
  __ & __ & ... 형태의 문자열로 반환하는 함수
  */
-export const HandleSingerName = (artistList: ArtistType[]) => {
-  const artistNames = artistList.map((artist) => artist.artistName);
+export const HandleSingerName = (trackArtistList: TrackArtistResponse[]) => {
+  const artistNames = trackArtistList.map(
+    (trackArtist) => trackArtist.artist.artistName,
+  );
   return artistNames.join(' & ');
 };
 
