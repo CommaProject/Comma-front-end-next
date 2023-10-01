@@ -84,12 +84,12 @@ const MyArtist = () => {
           />
         </style.Slide>
         <style.Slide>
-          <ArtistDetailForm
+          {/* <ArtistDetailForm
             artistImage={clickedArtistDetail.artistImageUrl}
             artistName={clickedArtistDetail.artistName}
             spotifyTrackData={spotifyTrackData}
             isLike
-          />
+          /> */}
         </style.Slide>
       </style.CustomSwiper>
     </style.Wrapper>

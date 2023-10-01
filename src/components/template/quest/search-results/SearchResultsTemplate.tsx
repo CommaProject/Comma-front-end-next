@@ -7,6 +7,7 @@ import { TopBar } from '@/components/pages/quest/top-bar';
 import { SpotifyArtistProps } from '@/types/searchTypes';
 import { TrackType } from '@/types/trackTypes';
 import { CommaUserType } from '@/types/authTypes';
+import { FavoriteArtistType } from '@/types/artistTypes';
 import * as style from './SearchResultsTemplate.style';
 import 'swiper/swiper.min.css';
 import 'swiper/swiper-bundle.min.css';
@@ -25,6 +26,7 @@ interface SearchResultsTemplateProps {
   onClickArtistAvata: (artistData: SpotifyArtistProps) => void;
   onClickPrev: () => void;
   onClickAlbumBox: (previewUrl: string, trackId: string) => void;
+  onClickFavoriteArtist: (artistId: string) => void;
   spotifyArtistData: SpotifyArtistProps[] | undefined;
   spotifyTrackData: TrackType[] | undefined;
   spotifyArtistDetailTrackData: TrackType[] | undefined;
@@ -47,6 +49,7 @@ export const SearchResultsTemplate = ({
   onClickArtistAvata,
   onClickPrev,
   onClickAlbumBox,
+  onClickFavoriteArtist,
   spotifyArtistData,
   spotifyTrackData,
   commaUserData,
@@ -93,6 +96,8 @@ export const SearchResultsTemplate = ({
             artistData={spotifyArtistData}
             commaUserData={[]}
             onArtistAvataClick={onClickArtistAvata}
+            onClickFavoriteArtistDetail={() => {}}
+            favoriteArtistData={undefined}
           />
         </style.Slide>
         <style.Slide>
@@ -102,6 +107,8 @@ export const SearchResultsTemplate = ({
             soptifyArtistData={spotifyArtistForDetailArtist}
             spotifyTrackData={spotifyArtistDetailTrackData}
             isLike={false}
+            onClickFavorite={() => {}}
+            onClickFavoriteArtist={onClickFavoriteArtist}
           />
         </style.Slide>
       </style.CustomSwiper>
@@ -111,6 +118,8 @@ export const SearchResultsTemplate = ({
         artistData={[]}
         commaUserData={commaUserData}
         onArtistAvataClick={() => {}}
+        onClickFavoriteArtistDetail={() => {}}
+        favoriteArtistData={undefined}
       />
     )}
   </style.Wrapper>

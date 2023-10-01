@@ -1,28 +1,6 @@
 import { ApiResponse } from '@/constants/types';
 import { getAsync, patchAsync, postAsync } from './API';
-import { ArtistDetailForm } from '../components/pages/quest/artist-detail-from';
-
-export interface UserFavoriteTrack {
-  favoriteTrackId: number;
-  trackArtistResponses: {
-    track: {
-      id: number;
-      trackTitle: string;
-      durationTimeMs: number;
-      recommendCount: number;
-      albumImageUrl: string;
-      spotifyTrackId: string;
-      spotifyTrackHref: string;
-    };
-  }[];
-  artists: [
-    {
-      id: number;
-      spotifyArtistId: string;
-      spotifyArtistName: string;
-    },
-  ];
-}
+import { TrackFavoritesType } from '../constants/types/trackTypes';
 
 export interface UserFavoritesArtist {
   favoriteArtistId: number;
@@ -40,8 +18,8 @@ export async function setUserTrackFavoriteAsync(
   return response;
 }
 
-export async function getUserFavoriteTracksAsync(): ApiResponse<UserFavoriteTrack> {
-  const response = await getAsync<UserFavoriteTrack>('/favorite/track', {});
+export async function getUserFavoriteTracksAsync(): ApiResponse<TrackFavoritesType> {
+  const response = await getAsync<TrackFavoritesType>('/favorite/track', {});
 
   return response;
 }
