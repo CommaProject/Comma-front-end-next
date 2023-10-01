@@ -22,6 +22,7 @@ interface CompletedSearchTemplateProps {
   onClickEraseButton: () => void;
   onClickCategory: (category: string) => void;
   onClickAlbumLikeButton: (trackId: string) => void;
+  onClickFavoriteArtist: (artistId: string) => void;
   onClickArtistAvata: (artistData: SpotifyArtistProps) => void;
   onClickPrev: () => void;
   spotifyArtistData: SpotifyArtistProps[] | undefined;
@@ -42,6 +43,7 @@ export const CompletedSearchTemplate = ({
   onClickEraseButton,
   onClickCategory,
   onClickAlbumLikeButton,
+  onClickFavoriteArtist,
   onClickArtistAvata,
   onClickPrev,
   spotifyArtistData,

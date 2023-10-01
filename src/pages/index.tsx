@@ -1,5 +1,5 @@
 import router from 'next/router';
-import { useEffect,useState } from 'react';
+import { useEffect, useState } from 'react';
 import { userInformationAsync } from '@/apis/auth';
 import { useGetCommaPlaylists } from '@/apis/playlist';
 import HomeTemplate from '@/components/template/home';
@@ -12,23 +12,20 @@ const Home = (isUserVaild: boolean) => {
   }, []);
 
   // const { modalState, setModalState } = usePlayer();
-  const [isEditMode,setIsEditMode] = useState<boolean>(false);
-  const { isPlaylistAvailable, isCommaPlaylistAvailable, commaPlaylist} = useGetCommaPlaylists();
+  const [isEditMode, setIsEditMode] = useState<boolean>(false);
+  const { isPlaylistAvailable, isCommaPlaylistAvailable, commaPlaylist } =
+    useGetCommaPlaylists();
   const onClickIsEditMode = () => {
     setIsEditMode(!isEditMode);
-    
-  }
+  };
   return (
     <HomeTemplate
-      
-    isPlaylistAvailable={isPlaylistAvailable}
-    isCommaPlaylistAvailable = {isCommaPlaylistAvailable}
-    isEditMode= {isEditMode}
-    onClickIsEditMode ={onClickIsEditMode}
-    commaPlaylist={commaPlaylist}
-    
-   
-  />
+      isPlaylistAvailable={isPlaylistAvailable}
+      isCommaPlaylistAvailable={isCommaPlaylistAvailable}
+      isEditMode={isEditMode}
+      onClickIsEditMode={onClickIsEditMode}
+      commaPlaylist={commaPlaylist}
+    />
   );
 };
 

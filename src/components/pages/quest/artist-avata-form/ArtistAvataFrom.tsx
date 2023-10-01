@@ -5,7 +5,6 @@ import { CommaUserType } from '@/types/authTypes';
 import { FavoriteArtistType } from '@/constants/types/artistTypes';
 import * as style from './ArtistAvataFrom.style';
 
-
 interface ArtistAvataFromProps {
   artistData: SpotifyArtistProps[] | undefined;
   commaUserData: CommaUserType[] | undefined;
@@ -29,13 +28,10 @@ export const ArtistAvataFrom = ({
           onClick={() => {
             onArtistAvataClick(value);
           }}
-
           avatarImage={value.images ? value.images[2]?.url : 'error: undefined'}
-
           avartarName={value.artistName}
         />
       ))}
-
     {commaUserData &&
       commaUserData.map((value) => (
         <VerticalAvata
