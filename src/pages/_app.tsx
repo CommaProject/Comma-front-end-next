@@ -37,8 +37,8 @@ const MyApp = ({ Component, pageProps }: AppProps<InitializeAppProps>) => {
       <ReactQueryDevtools initialIsOpen={false} />
       <Provider>
         <CookiesProvider>
-          <GlobalStyle />
           <ThemeProvider theme={theme}>
+            <GlobalStyle />
             <PageHead />
             <ModalPortal />
             <OnlyPlayerModal />

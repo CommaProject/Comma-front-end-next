@@ -6,7 +6,7 @@ import { SignUpStateType } from '@/constants/types';
 import GenderAgeInputForm from '@/components/pages/signup/gender-age-input-form';
 import NameInputForm from '@/components/pages/signup/name-input-form';
 import NavBtn from '@/components/pages/signup/nav-btn';
-import TimePickerForm from '~/src/components/pages/signup/time-picker-form';
+import TimePickerForm from '@/components/pages/signup/time-picker-form';
 import TopBar from '@/components/pages/signup/top-bar';
 import CategoryForm from '@/components/pages/signup/category-form';
 import SuccessBox from '@/components/pages/signup/success-box';

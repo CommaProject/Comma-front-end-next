@@ -2,8 +2,11 @@ import * as style from '@/components/template/profile/ProfileTemplate.style';
 import { useState } from 'react';
 import { useAllPlaylists } from '@/hooks/usePlaylist';
 import { PlaylistType } from '@/constants/types/playlistTypes';
-import { FavoriteArtistType } from '~/src/constants/types/artistTypes';
-import { TrackFavoritesType } from '~/src/constants/types/trackTypes';
+import { FavoriteArtistType } from '@/constants/types/artistTypes';
+import { TrackFavoritesType } from '@/constants/types/trackTypes';
+import { useRouter } from 'next/router';
+import useModal from '@/hooks/useModal';
+import { UserDetailType } from '@/constants/types/userDetailTypes';
 import { VerticalAvata } from '../../common/avata';
 import { VerticalAlbum } from '../../common/album/vertical-album';
 import { PlaylistRepAlbumWithNum } from '../../common/playlist-rep-album-with-num';
@@ -15,6 +18,7 @@ interface ProfileTemplateProps {
   favoriteTrack: TrackFavoritesType[];
   followersInfo: number;
   followingInfo: number;
+  userNickName: null | string;
 }
 export const ProfileTemplate = ({
   isProfileMine,
@@ -23,6 +27,7 @@ export const ProfileTemplate = ({
   favoriteTrack,
   followersInfo,
   followingInfo,
+  userNickName,
 }: ProfileTemplateProps) => {
   // 팔로우,팔로잉 조회 api
 
@@ -40,10 +45,44 @@ export const ProfileTemplate = ({
     navigateToAllPlaylists();
   };
 
+  const router = useRouter();
+  const onClickFavoriteArtists = () => {
+    router.push(`../myartist`);
+  };
+  const onClickFollow = (followingsOrFollower: string) => {
+    if (followingsOrFollower === 'followers') {
+      router.push(`../followers`);
+    } else {
+      router.push(`../following`);
+    }
+  };
+  const { openModal, closeModal } = useModal();
+  const onClickSettingButton = () => {
+    console.log('클릭');
+    openModal(
+      <style.ModalContainer>
+        <style.Modal>
+          <style.Button onClick={closeModal} />
+          <style.ModalText>
+            <style.Img />
+            프로필 편집
+          </style.ModalText>
+          <style.ModalText>
+            <style.Img />
+            계정
+          </style.ModalText>
+        </style.Modal>
+      </style.ModalContainer>,
+    );
+  };
   return (
     <style.Wrapper>
       <style.TopBar>
-        {isProfileMine ? <style.SettingButton /> : ''}
+        {isProfileMine ? (
+          <style.SettingButton onClick={onClickSettingButton} />
+        ) : (
+          ''
+        )}
       </style.TopBar>
 
       <style.UserInfo>
@@ -57,13 +96,13 @@ export const ProfileTemplate = ({
           ''
         )}
         <style.FollowInfo>
-          UserName
+          {userNickName}
           <style.FollowContainer>
-            <style.FollowNum>
+            <style.FollowNum onClick={() => onClickFollow('following')}>
               {followingInfo} <br />
-              followings
+              following
             </style.FollowNum>
-            <style.FollowNum>
+            <style.FollowNum onClick={() => onClickFollow('followers')}>
               {followersInfo} <br />
               followers
             </style.FollowNum>
@@ -89,22 +128,28 @@ export const ProfileTemplate = ({
       <style.Archive>
         <style.Title>Archive</style.Title>
         <style.FavoriteSong>
-          <style.Text> Favorite </style.Text>
+          <style.Text> Favorite Tracks </style.Text>
           <style.ListContainer>
             {favoriteTrack &&
               favoriteTrack.map((track: TrackFavoritesType) => (
                 <VerticalAlbum
-                  key={track.trackId}
-                  imgUrl={track.albumImageUrl}
-                  songName={track.trackTitle}
-                  singerName={track.trackArtistList[0].artistName}
-                  onClick={() => console.log('d')}
+                  key={track.favoriteTrackId}
+                  imgUrl={track.trackArtistResponses[0].track.albumImageUrl}
+                  songName={track.trackArtistResponses[0].track.trackTitle}
+                  singerName={
+                    track.trackArtistResponses[0]?.artist.artistName ||
+                    'undefined'
+                  }
+                  onClick={() => {}}
                 />
               ))}
           </style.ListContainer>
         </style.FavoriteSong>
         <style.FavoriteSinger>
-          <style.Text> Favorite</style.Text>
+          <style.Text onClick={onClickFavoriteArtists}>
+            {' '}
+            Favorite Artists
+          </style.Text>
           <style.ListContainer>
             {favoriteArtist &&
               favoriteArtist.map((artist: FavoriteArtistType) => (

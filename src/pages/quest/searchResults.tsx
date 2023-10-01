@@ -26,7 +26,14 @@ const SearchResults = () => {
     mutateCommaUser,
     mutateArtistDetailTrack,
   } = useSearch();
-  const { mutateSetTrackLike, getUserFavoritesData } = useUserInformation();
+  const {
+    favoriteArtists,
+    favoriteTracks,
+    useMutationUserTrackFavorite,
+    useMutationUserArtistFavorite,
+  } = useUserInformation();
+  console.log('favoriteArtists', favoriteArtists);
+  console.log('favoriteTrack', favoriteTracks);
   const [swiperRef, setSwiperRef] = useState<SwiperClass>();
   const [openMusicPlayer, setOpenMusicPlayer] = useState('');
   const handleSwiper = (swiper: SwiperClass) => {
@@ -101,7 +108,10 @@ const SearchResults = () => {
       onClickAlbumBox={handleOpenPreviewMusicPlayer}
       category={searchItems.category}
       onClickAlbumLikeButton={(trackId: string) => {
-        mutateSetTrackLike(trackId);
+        useMutationUserTrackFavorite.mutate(trackId);
+      }}
+      onClickFavoriteArtist={(artistId) => {
+        useMutationUserArtistFavorite.mutate(artistId);
       }}
       spotifyArtistData={spotifyArtistData}
       spotifyTrackData={spotifyTrackData}

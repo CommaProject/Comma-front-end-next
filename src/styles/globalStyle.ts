@@ -1,39 +1,56 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle, css } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
-    html,
-    body {
-    max-width: 390px;
-    padding: 0;
-    margin: 0px auto;
-    -webkit-text-size-adjust: none;
-    }
+  ${({ theme }) => {
+    const { fonts, colors } = theme;
+    return css`
+      html,
+      body {
+        max-width: 390px;
+        padding: 0;
+        margin: 0 auto;
+        -webkit-text-size-adjust: none;
+      }
 
-    a {
-    color: inherit;
-    text-decoration: none;
-    cursor: pointer;
-    }
+      a {
+        color: inherit;
+        text-decoration: none;
+        cursor: pointer;
+      }
 
-    *,
-    *:before,
-    *:after {
-    font-family: Pretendard;
-    box-sizing: border-box;
-    }
+      *,
+      *:before,
+      *:after {
+        font-family: ${fonts.family.noto};
+        box-sizing: border-box;
+      }
 
-    :focus {
+      :focus {
         outline: none;
         border: none;
-    }
-    ::-webkit-scrollbar {
-        display: none;
-    }
+      }
 
-    button {
+      ::-webkit-scrollbar {
+        display: none;
+      }
+
+      button {
         background: none;
         padding: 0;
         border: none;
         cursor: pointer;
-    }
+      }
+
+      title {
+        display: flex;
+        color: ${colors.grayscale.dark};
+        text-align: center;
+        font-family: ${fonts.family.noto};
+        font-size: 17px;
+        font-style: normal;
+        font-weight: ${fonts.weight.bold};
+        line-height: 17px;
+      }
+    `;
+  }}
 `;

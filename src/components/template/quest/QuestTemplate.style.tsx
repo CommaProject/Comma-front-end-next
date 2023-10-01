@@ -1,6 +1,28 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Wrapper = styled.div`
-  width: 100%;
+  margin-left: 15px;
+  margin-right: 15px;
+  // width: auto;
   height: 100%;
+  overflow: scroll;
+`;
+
+export const FriendsMostListenedTrackTitle = styled.title`
+  margin-top: 15;
+`;
+
+export const MyMostListenedTrackTitle = styled.title`
+  margin-top: 65px;
+  margin-bottom: 20px;
+`;
+
+export const MyFavoriteTracksTitle = styled.title`
+  margin-top: 50px;
+  margin-bottom: 20px;
+`;
+
+export const HighlyRecommendedTracksTitle = styled.title`
+  margin-top: 50px;
+  margin-bottom: 20px;
 `;

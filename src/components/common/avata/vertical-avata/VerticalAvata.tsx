@@ -14,7 +14,11 @@ export const VerticalAvata = ({
   onClick,
 }: VerticalAvataProps) => (
   <style.AvatarBox onClick={onClick}>
-    <Avata url={avatarImage || 'error: undefined'} size={89} />
+    {avatarImage ? (
+      <Avata url={avatarImage || 'error: undefined'} size={89} />
+    ) : (
+      <style.EmptyImage />
+    )}
     <style.AvatartName>{avartarName}</style.AvatartName>
   </style.AvatarBox>
 );

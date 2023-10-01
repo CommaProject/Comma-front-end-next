@@ -19,6 +19,7 @@ export const TopBar = ({
   onClickPrev,
   category,
   isHidden,
+  
 }: TopBarProps) => (
   <style.StickySections>
     <style.TopBox>
@@ -29,6 +30,7 @@ export const TopBar = ({
         handleEraseIconClick={onClickEraseButton}
         isSearchResults
         isHidden={isHidden}
+        
       />
     </style.TopBox>
     <style.ButtonBox style={{ display: isHidden ? 'none' : 'flex' }}>
