@@ -112,6 +112,10 @@ const SearchResults = () => {
     [],
   );
 
+  const handlePlusTrack = useCallback((trackId: string) => {
+    console.log(trackId);
+  }, []);
+
   useEffect(() => {
     if (searchItems.category === 'music' && spotifyTrackData === undefined) {
       mutateTrack(searchItems.searchText);
@@ -150,6 +154,7 @@ const SearchResults = () => {
       onClickFavoriteArtist={(artistId) => {
         useMutationUserArtistFavorite.mutate(artistId);
       }}
+      onClickPlusButton={handlePlusTrack}
       spotifyArtistData={spotifyArtistData}
       spotifyTrackData={spotifyArtistDataWithFavorite}
       spotifyArtistDetailTrackData={spotifyArtistDetailTrackDataWithFavorite}

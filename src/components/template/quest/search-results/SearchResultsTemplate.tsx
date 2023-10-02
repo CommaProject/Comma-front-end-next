@@ -27,6 +27,7 @@ interface SearchResultsTemplateProps {
   onClickPrev: () => void;
   onClickAlbumBox: (previewUrl: string, trackId: string) => void;
   onClickFavoriteArtist: (artistId: string) => void;
+  onClickPlusButton: (trackId: string) => void;
   spotifyArtistData: SpotifyArtistProps[] | undefined;
   spotifyTrackData: EnhancedTrackProps[];
   spotifyArtistDetailTrackData:
@@ -52,6 +53,7 @@ export const SearchResultsTemplate = ({
   onClickPrev,
   onClickAlbumBox,
   onClickFavoriteArtist,
+  onClickPlusButton,
   spotifyArtistData,
   spotifyTrackData,
   commaUserData,
@@ -72,7 +74,7 @@ export const SearchResultsTemplate = ({
       <MusicAlbumFrom
         openMusicPlayer={openMusicPlayer}
         musicData={spotifyTrackData}
-        onClickPlusButton={() => {}}
+        onClickPlusButton={onClickPlusButton}
         onClickFavoriteButton={onClickAlbumLikeButton}
         onClickAlbumBox={onClickAlbumBox}
         isPreviewMusicPlayerHidden={false}

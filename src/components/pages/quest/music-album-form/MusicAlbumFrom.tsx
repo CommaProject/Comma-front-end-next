@@ -6,7 +6,7 @@ import { HorizontalAlbumWithIcon } from '../horizontal-album-with-icon';
 
 interface MusicAlbumFromProps {
   musicData: EnhancedTrackProps[] | undefined;
-  onClickPlusButton: () => void;
+  onClickPlusButton: (trackId: string) => void;
   onClickFavoriteButton: (trackId: string) => void;
   onClickAlbumBox: (previewUrl: string, trackId: string) => void;
   isPreviewMusicPlayerHidden: boolean;
@@ -37,7 +37,7 @@ export const MusicAlbumFrom = ({
               imgUrl={value.images ? value.images[0].url : 'error: undefine'}
               songName={value.trackName}
               singerName={value.artist}
-              onClickPlusButton={onClickPlusButton}
+              onClickPlusButton={() => onClickPlusButton(value.trackId)}
               onClickFavoriteButton={() => onClickFavoriteButton(value.trackId)}
               onClick={() => {}}
             />

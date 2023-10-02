@@ -9,6 +9,7 @@ interface ArtistDetailFormProps {
   spotifyTrackData: EnhancedTrackProps[];
   onClickFavorite: (trackId: string) => void;
   onClickFavoriteArtist: (artistId: string) => void;
+  onClickPlusButton: (trackId: string) => void;
   openMusicPlayer: string;
   onClickAlbumBox: (previewUrl: string, trackId: string) => void;
 }
@@ -18,6 +19,7 @@ export const ArtistDetailForm = ({
   spotifyTrackData,
   onClickFavorite,
   onClickFavoriteArtist,
+  onClickPlusButton,
   openMusicPlayer,
   onClickAlbumBox,
 }: ArtistDetailFormProps) => (
@@ -43,12 +45,11 @@ export const ArtistDetailForm = ({
         }}
       />
     </style.AvatarBox>
-
     <MusicAlbumFrom
       openMusicPlayer={openMusicPlayer}
       musicData={spotifyTrackData}
-      onClickPlusButton={() => {}}
-      onClickFavoriteButton={(trackId: string) => {}}
+      onClickPlusButton={onClickPlusButton}
+      onClickFavoriteButton={onClickFavorite}
       onClickAlbumBox={onClickAlbumBox}
       isPreviewMusicPlayerHidden={false}
     />
