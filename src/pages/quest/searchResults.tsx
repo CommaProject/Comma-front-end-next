@@ -8,7 +8,7 @@ import { SpotifyArtistProps } from '@/types/searchTypes';
 import { useAtom } from 'jotai';
 import { searchAtom } from '@/stores/atoms';
 import { EnhancedTrackProps } from '@/types/trackTypes';
-import { useGetFavoriteTrack } from '@/hooks/useFavorite';
+import { useGetFavoriteArtist, useGetFavoriteTrack } from '@/hooks/useFavorite';
 
 const SearchResults = () => {
   const router = useRouter();
@@ -30,7 +30,8 @@ const SearchResults = () => {
   } = useSearch();
   const { useMutationUserTrackFavorite, useMutationUserArtistFavorite } =
     useUserInformation();
-  const { favoriteTrackIds } = useGetFavoriteTrack();
+  const { favoriteTrackIds, deleteTrackMutate } = useGetFavoriteTrack();
+  const { getFavoriteArtist } = useGetFavoriteArtist();
 
   const [
     spotifyArtistDetailTrackDataWithFavorite,
@@ -40,6 +41,7 @@ const SearchResults = () => {
   const [spotifyArtistDataWithFavorite, setSpotifyArtistDataWithFavorite] =
     useState<EnhancedTrackProps[]>([]);
 
+  // Track Favorite
   useEffect(() => {
     if (spotifyArtistDetailTrackData && favoriteTrackIds) {
       const spotifyArtistDetailTrackDataWithFavorite1 =
@@ -64,6 +66,9 @@ const SearchResults = () => {
       setSpotifyArtistDataWithFavorite(spotifyArtistDataWithFavorite1);
     }
   }, [spotifyTrackData]);
+
+  // Artist Favorite
+  useEffect(() => {});
 
   const [swiperRef, setSwiperRef] = useState<SwiperClass>();
   const [openMusicPlayer, setOpenMusicPlayer] = useState('');
@@ -139,7 +144,8 @@ const SearchResults = () => {
       onClickAlbumBox={handleOpenPreviewMusicPlayer}
       category={searchItems.category}
       onClickAlbumLikeButton={(trackId: string) => {
-        useMutationUserTrackFavorite.mutate(trackId);
+        if (favoriteTrackIds?.includes(trackId)) deleteTrackMutate(trackId);
+        else useMutationUserTrackFavorite.mutate(trackId);
       }}
       onClickFavoriteArtist={(artistId) => {
         useMutationUserArtistFavorite.mutate(artistId);

@@ -1,8 +1,12 @@
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { FavoriteArtistType } from '@/types/artistTypes';
 import { TrackFavoritesType } from '@/types/trackTypes';
-import { getFavoriteArtist, getFavoriteTrack } from '@/apis/favorite';
+import {
+  deleteFavoriteTrack,
+  getFavoriteArtist,
+  getFavoriteTrack,
+} from '@/apis/favorite';
 
 export const useGetFavoriteArtist = () => {
   const { isLoading, data = [] } = useQuery(
@@ -21,7 +25,13 @@ export const useGetFavoriteArtist = () => {
     }
   }, [isLoading, data]);
 
-  return { favoriteArtist };
+  const favoriteArtistIds = data.map(
+    (item) => item.artistResponse.spotifyArtistId,
+  );
+
+  console.log('favoriteArtistIds', favoriteArtistIds);
+
+  return { favoriteArtist, favoriteArtistIds };
 };
 
 export const useGetFavoriteTrack = () => {
@@ -47,5 +57,13 @@ export const useGetFavoriteTrack = () => {
     )
     .flat();
 
-  return { favoriteTrack, favoriteTrackIds };
+  const { mutate: deleteTrackMutate } = useMutation(
+    ['DeleteTrack'],
+    deleteFavoriteTrack,
+    {
+      onSuccess: (response) => {},
+    },
+  );
+
+  return { favoriteTrack, favoriteTrackIds, deleteTrackMutate };
 };
