@@ -7,6 +7,8 @@ import { Swiper as SwiperClass } from 'swiper/types';
 import { SpotifyArtistProps } from '@/types/searchTypes';
 import { useAtom } from 'jotai';
 import { searchAtom } from '@/stores/atoms';
+import { EnhancedTrackProps } from '@/types/trackTypes';
+import { useGetFavoriteTrack } from '@/hooks/useFavorite';
 
 const SearchResults = () => {
   const router = useRouter();
@@ -26,14 +28,29 @@ const SearchResults = () => {
     mutateCommaUser,
     mutateArtistDetailTrack,
   } = useSearch();
-  const {
-    favoriteArtists,
-    favoriteTracks,
-    useMutationUserTrackFavorite,
-    useMutationUserArtistFavorite,
-  } = useUserInformation();
-  console.log('favoriteArtists', favoriteArtists);
-  console.log('favoriteTrack', favoriteTracks);
+  const { useMutationUserTrackFavorite, useMutationUserArtistFavorite } =
+    useUserInformation();
+  const { favoriteTrackIds } = useGetFavoriteTrack();
+
+  const [
+    spotifyArtistDetailTrackDataWithFavorite,
+    setSpotifyArtistDetailTrackDataWithFavorite,
+  ] = useState<EnhancedTrackProps[]>([]);
+
+  useEffect(() => {
+    if (spotifyArtistDetailTrackData && favoriteTrackIds) {
+      const spotifyArtistDetailTrackDataWithFavorite1 =
+        spotifyArtistDetailTrackData.map((track) => ({
+          ...track,
+          isFavorite: favoriteTrackIds?.includes(track.trackId),
+        }));
+
+      setSpotifyArtistDetailTrackDataWithFavorite(
+        spotifyArtistDetailTrackDataWithFavorite1,
+      );
+    }
+  }, [favoriteTrackIds, spotifyArtistDetailTrackData]);
+
   const [swiperRef, setSwiperRef] = useState<SwiperClass>();
   const [openMusicPlayer, setOpenMusicPlayer] = useState('');
   const handleSwiper = (swiper: SwiperClass) => {
@@ -115,7 +132,7 @@ const SearchResults = () => {
       }}
       spotifyArtistData={spotifyArtistData}
       spotifyTrackData={spotifyTrackData}
-      spotifyArtistDetailTrackData={spotifyArtistDetailTrackData}
+      spotifyArtistDetailTrackData={spotifyArtistDetailTrackDataWithFavorite}
       commaUserData={commaUserData}
       setSwiperRef={setSwiperRef}
       onClickArtistAvata={handleArtistDetailTrack}

@@ -5,6 +5,7 @@ import {
   setUserTrackFavoriteAsync,
 } from '@/apis/user';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useState } from 'react';
 // setUserTrackFavoriteAsync;
 
 const setUserFavoriteTrack = async (trackId: string) => {
@@ -16,7 +17,11 @@ const setUserFavoriteTrack = async (trackId: string) => {
 const getUserFavoriteTracks = async () => {
   const { isSuccess, result } = await getUserFavoriteTracksAsync();
 
-  return { isSuccess, result };
+  if (isSuccess && result.data) {
+    return result.data;
+  }
+  // return { isSuccess, result };
+  return null;
 };
 
 const setUserFavoriteArtist = async (trackId: string) => {
@@ -28,7 +33,11 @@ const setUserFavoriteArtist = async (trackId: string) => {
 const getUserFavoriteArtists = async () => {
   const { isSuccess, result } = await getUserFavoritesArtistAsync();
 
-  return { isSuccess, result };
+  if (isSuccess && result.data) {
+    return result.data;
+  }
+  // return { isSuccess, result };
+  return null;
 };
 
 export const useUserInformation = () => {

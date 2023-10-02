@@ -8,10 +8,10 @@ interface HorizontalAlbumWithIconProps extends HorizontalAlbumProps {
   onClickPlusButton: (
     event: React.MouseEvent<SVGSVGElement, MouseEvent>,
   ) => void;
-  onClickLikeButton: (
+  onClickFavoriteButton: (
     event: React.MouseEvent<SVGSVGElement, MouseEvent>,
   ) => void;
-  isLike: boolean;
+  isFavorite: boolean;
 }
 
 export const HorizontalAlbumWithIcon = ({
@@ -21,8 +21,8 @@ export const HorizontalAlbumWithIcon = ({
   onClick,
   timer,
   onClickPlusButton,
-  onClickLikeButton,
-  isLike,
+  onClickFavoriteButton,
+  isFavorite,
 }: HorizontalAlbumWithIconProps) => (
   <style.Wrapper>
     <HorizontalAlbum
@@ -34,7 +34,10 @@ export const HorizontalAlbumWithIcon = ({
     />
     <style.ButtonContainer>
       <style.addPlayListButton onClick={onClickPlusButton} />
-      <style.likeButton isLike={isLike} onClick={onClickLikeButton} />
+      <style.likeButton
+        isFavorite={isFavorite}
+        onClick={onClickFavoriteButton}
+      />
     </style.ButtonContainer>
   </style.Wrapper>
 );

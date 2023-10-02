@@ -1,17 +1,13 @@
 import React from 'react';
-import { TrackType } from '@/types/trackTypes';
+import { EnhancedTrackProps } from '@/types/trackTypes';
 import MusicPlay from '@/components/common/music-play';
 import * as style from './MusicAlbumFrom.style';
 import { HorizontalAlbumWithIcon } from '../horizontal-album-with-icon';
 
-type isLike = boolean;
-interface EnhancedTrackProps extends TrackType {
-  isLike: boolean;
-}
 interface MusicAlbumFromProps {
   musicData: EnhancedTrackProps[] | undefined;
   onClickPlusButton: () => void;
-  onClickLikeButton: (trackId: string) => void;
+  onClickFavoriteButton: (trackId: string) => void;
   onClickAlbumBox: (previewUrl: string, trackId: string) => void;
   isPreviewMusicPlayerHidden: boolean;
   openMusicPlayer: string;
@@ -20,7 +16,7 @@ interface MusicAlbumFromProps {
 export const MusicAlbumFrom = ({
   musicData,
   onClickPlusButton,
-  onClickLikeButton,
+  onClickFavoriteButton,
   onClickAlbumBox,
   isPreviewMusicPlayerHidden,
   openMusicPlayer,
@@ -36,13 +32,13 @@ export const MusicAlbumFrom = ({
           >
             <HorizontalAlbumWithIcon
               key={value.albumId}
-              isLike={value.isLike}
+              isFavorite={value.isFavorite}
               timer={`${value.durationMinute}m ${value.durationSecond}s`}
               imgUrl={value.images ? value.images[0].url : 'error: undefine'}
               songName={value.trackName}
               singerName={value.artist}
               onClickPlusButton={onClickPlusButton}
-              onClickLikeButton={() => onClickLikeButton(value.trackId)}
+              onClickFavoriteButton={() => onClickFavoriteButton(value.trackId)}
               onClick={() => {}}
             />
           </style.AlbumBox>

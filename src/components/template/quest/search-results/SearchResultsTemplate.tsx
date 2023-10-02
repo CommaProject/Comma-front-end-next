@@ -29,7 +29,9 @@ interface SearchResultsTemplateProps {
   onClickFavoriteArtist: (artistId: string) => void;
   spotifyArtistData: SpotifyArtistProps[] | undefined;
   spotifyTrackData: TrackType[] | undefined;
-  spotifyArtistDetailTrackData: TrackType[] | undefined;
+  spotifyArtistDetailTrackData:
+    | (TrackType & { isFavorite: boolean })[]
+    | undefined;
   commaUserData: CommaUserType[] | undefined;
   openMusicPlayer: string;
 }
@@ -71,11 +73,11 @@ export const SearchResultsTemplate = ({
         openMusicPlayer={openMusicPlayer}
         musicData={spotifyTrackData?.map((value) => ({
           ...value,
-          isLike: false,
+          isFavorite: false,
           isPreviewMusicPlayerHidden: true,
         }))}
         onClickPlusButton={() => {}}
-        onClickLikeButton={onClickAlbumLikeButton}
+        onClickFavoriteButton={onClickAlbumLikeButton}
         onClickAlbumBox={onClickAlbumBox}
         isPreviewMusicPlayerHidden={false}
       />
@@ -106,7 +108,7 @@ export const SearchResultsTemplate = ({
             openMusicPlayer={openMusicPlayer}
             soptifyArtistData={spotifyArtistForDetailArtist}
             spotifyTrackData={spotifyArtistDetailTrackData}
-            isLike={false}
+            isFavorite={false}
             onClickFavorite={() => {}}
             onClickFavoriteArtist={onClickFavoriteArtist}
           />

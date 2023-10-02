@@ -88,7 +88,7 @@ const MyArtist = () => {
             artistImage={clickedArtistDetail.artistImageUrl}
             artistName={clickedArtistDetail.artistName}
             spotifyTrackData={spotifyTrackData}
-            isLike
+            isFavorite
           /> */}
         </style.Slide>
       </style.CustomSwiper>

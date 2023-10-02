@@ -1,15 +1,14 @@
 import { Avata } from '@/components/common/avata';
 import { SpotifyArtistProps } from '@/types/searchTypes';
-import { TrackType } from '@/types/trackTypes';
+import { EnhancedTrackProps } from '@/types/trackTypes';
 import { MusicAlbumFrom } from '../music-album-form';
 import * as style from './ArtistDetailForm.style';
 
 interface ArtistDetailFormProps {
   soptifyArtistData: SpotifyArtistProps | undefined;
-  spotifyTrackData: TrackType[] | undefined;
+  spotifyTrackData: EnhancedTrackProps[];
   onClickFavorite: (trackId: string) => void;
   onClickFavoriteArtist: (artistId: string) => void;
-  isLike: boolean;
   openMusicPlayer: string;
   onClickAlbumBox: (previewUrl: string, trackId: string) => void;
 }
@@ -19,7 +18,6 @@ export const ArtistDetailForm = ({
   spotifyTrackData,
   onClickFavorite,
   onClickFavoriteArtist,
-  isLike,
   openMusicPlayer,
   onClickAlbumBox,
 }: ArtistDetailFormProps) => {
@@ -37,7 +35,7 @@ export const ArtistDetailForm = ({
         />
         <style.AvatartName>{soptifyArtistData?.artistName}</style.AvatartName>
         <style.LikeButton
-          isLike={isLike}
+          isFavorite={false} // Avata isFavorite
           onClick={() => {
             onClickFavoriteArtist(
               soptifyArtistData?.artistId !== undefined
@@ -50,12 +48,9 @@ export const ArtistDetailForm = ({
 
       <MusicAlbumFrom
         openMusicPlayer={openMusicPlayer}
-        musicData={spotifyTrackData?.map((value) => ({
-          ...value,
-          isLike: false,
-        }))}
+        musicData={spotifyTrackData}
         onClickPlusButton={() => {}}
-        onClickLikeButton={(trackId: string) => {}}
+        onClickFavoriteButton={(trackId: string) => {}}
         onClickAlbumBox={onClickAlbumBox}
         isPreviewMusicPlayerHidden={false}
       />

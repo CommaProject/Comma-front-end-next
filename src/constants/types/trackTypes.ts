@@ -77,3 +77,7 @@ export interface TrackFavoritesType {
   favoriteTrackId: number;
   trackArtistResponses: TrackArtistResponse[];
 }
+
+export interface EnhancedTrackProps extends TrackType {
+  isFavorite: boolean;
+}
