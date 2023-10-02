@@ -37,6 +37,9 @@ const SearchResults = () => {
     setSpotifyArtistDetailTrackDataWithFavorite,
   ] = useState<EnhancedTrackProps[]>([]);
 
+  const [spotifyArtistDataWithFavorite, setSpotifyArtistDataWithFavorite] =
+    useState<EnhancedTrackProps[]>([]);
+
   useEffect(() => {
     if (spotifyArtistDetailTrackData && favoriteTrackIds) {
       const spotifyArtistDetailTrackDataWithFavorite1 =
@@ -49,7 +52,18 @@ const SearchResults = () => {
         spotifyArtistDetailTrackDataWithFavorite1,
       );
     }
-  }, [favoriteTrackIds, spotifyArtistDetailTrackData]);
+  }, [spotifyArtistDetailTrackData]);
+
+  useEffect(() => {
+    if (spotifyTrackData && favoriteTrackIds) {
+      const spotifyArtistDataWithFavorite1 = spotifyTrackData?.map((track) => ({
+        ...track,
+        isFavorite: favoriteTrackIds?.includes(track.trackId),
+      }));
+
+      setSpotifyArtistDataWithFavorite(spotifyArtistDataWithFavorite1);
+    }
+  }, [spotifyTrackData]);
 
   const [swiperRef, setSwiperRef] = useState<SwiperClass>();
   const [openMusicPlayer, setOpenMusicPlayer] = useState('');
@@ -131,7 +145,7 @@ const SearchResults = () => {
         useMutationUserArtistFavorite.mutate(artistId);
       }}
       spotifyArtistData={spotifyArtistData}
-      spotifyTrackData={spotifyTrackData}
+      spotifyTrackData={spotifyArtistDataWithFavorite}
       spotifyArtistDetailTrackData={spotifyArtistDetailTrackDataWithFavorite}
       commaUserData={commaUserData}
       setSwiperRef={setSwiperRef}

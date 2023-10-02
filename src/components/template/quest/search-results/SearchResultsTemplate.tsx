@@ -5,7 +5,7 @@ import { ArtistAvataFrom } from '@/components/pages/quest/artist-avata-form';
 import { ArtistDetailForm } from '@/components/pages/quest/artist-detail-from';
 import { TopBar } from '@/components/pages/quest/top-bar';
 import { SpotifyArtistProps } from '@/types/searchTypes';
-import { TrackType } from '@/types/trackTypes';
+import { EnhancedTrackProps, TrackType } from '@/types/trackTypes';
 import { CommaUserType } from '@/types/authTypes';
 import { FavoriteArtistType } from '@/types/artistTypes';
 import * as style from './SearchResultsTemplate.style';
@@ -28,7 +28,7 @@ interface SearchResultsTemplateProps {
   onClickAlbumBox: (previewUrl: string, trackId: string) => void;
   onClickFavoriteArtist: (artistId: string) => void;
   spotifyArtistData: SpotifyArtistProps[] | undefined;
-  spotifyTrackData: TrackType[] | undefined;
+  spotifyTrackData: EnhancedTrackProps[];
   spotifyArtistDetailTrackData:
     | (TrackType & { isFavorite: boolean })[]
     | undefined;
@@ -71,11 +71,7 @@ export const SearchResultsTemplate = ({
     {category === 'music' && (
       <MusicAlbumFrom
         openMusicPlayer={openMusicPlayer}
-        musicData={spotifyTrackData?.map((value) => ({
-          ...value,
-          isFavorite: false,
-          isPreviewMusicPlayerHidden: true,
-        }))}
+        musicData={spotifyTrackData}
         onClickPlusButton={() => {}}
         onClickFavoriteButton={onClickAlbumLikeButton}
         onClickAlbumBox={onClickAlbumBox}
