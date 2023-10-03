@@ -1,5 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { SearchResultsTemplate } from '~/src/components/template/quest/search-results';
+import {
+  PlusModal,
+  SearchResultsTemplate,
+} from '@/components/template/quest/search-results';
 import { useRouter } from 'next/router';
 import { useSearch } from '@/hooks/useSearch';
 import { useUserInformation } from '@/hooks/useUserInformation';
@@ -9,6 +12,8 @@ import { useAtom } from 'jotai';
 import { searchAtom } from '@/stores/atoms';
 import { EnhancedTrackProps } from '@/types/trackTypes';
 import { useGetFavoriteArtist, useGetFavoriteTrack } from '@/hooks/useFavorite';
+import useModal from '@/hooks/useModal';
+import { useGetCommaPlaylists, useGetMyPlaylists } from '@/apis/playlist';
 
 const SearchResults = () => {
   const router = useRouter();
@@ -17,6 +22,7 @@ const SearchResults = () => {
     useState<SpotifyArtistProps>();
   const [isHidden, setIsHidden] = useState(false); // false: Completed Search true: Detail
   const [searchItems, setSearchItems] = useAtom(searchAtom);
+  const { openModal, closeModal } = useModal();
   const {
     spotifyArtistData,
     spotifyTrackData,
@@ -31,7 +37,7 @@ const SearchResults = () => {
   const { useMutationUserTrackFavorite, useMutationUserArtistFavorite } =
     useUserInformation();
   const { favoriteTrackIds, deleteTrackMutate } = useGetFavoriteTrack();
-  const { getFavoriteArtist } = useGetFavoriteArtist();
+  // const { getFavoriteArtist } = useGetFavoriteArtist();
 
   const [
     spotifyArtistDetailTrackDataWithFavorite,
@@ -111,10 +117,17 @@ const SearchResults = () => {
     },
     [],
   );
+  const { isPlaylistAvailable, isCommaPlaylistAvailable, commaPlaylist } =
+    useGetCommaPlaylists();
+  const { myPlaylist } = useGetMyPlaylists();
+  const handlePlusTrack = useCallback(
+    (trackId: string) => {
+      console.log(trackId);
 
-  const handlePlusTrack = useCallback((trackId: string) => {
-    console.log(trackId);
-  }, []);
+      openModal(<PlusModal myPlayList={commaPlaylist} />);
+    },
+    [myPlaylist],
+  );
 
   useEffect(() => {
     if (searchItems.category === 'music' && spotifyTrackData === undefined) {

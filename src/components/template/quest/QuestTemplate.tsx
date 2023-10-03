@@ -30,7 +30,7 @@ export const QuestTemplate = ({
       isSearchResults={false}
       isHidden={false}
     />
-    <style.FriendsMostListenedTrackTitle style={{}}>
+    <style.FriendsMostListenedTrackTitle>
       친구가 가장 많이 들은 곡
     </style.FriendsMostListenedTrackTitle>
     <SwiperAlbum friendsTrackPlayCountData={friendsTrackPlayCountData} />
@@ -48,7 +48,7 @@ export const QuestTemplate = ({
         />
       ))}
     </SliderFreeMode>
-    <style.MyFavoriteTracksTitle style={{ marginTop: 50, marginBottom: 20 }}>
+    <style.MyFavoriteTracksTitle>
       내가 좋아요 표시한 곡
     </style.MyFavoriteTracksTitle>
     <SliderFreeMode componentGab={0}>

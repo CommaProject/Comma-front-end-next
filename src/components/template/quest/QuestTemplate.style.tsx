@@ -9,7 +9,7 @@ export const Wrapper = styled.div`
 `;
 
 export const FriendsMostListenedTrackTitle = styled.title`
-  margin-top: 15;
+  margin-top: 33px;
 `;
 
 export const MyMostListenedTrackTitle = styled.title`
