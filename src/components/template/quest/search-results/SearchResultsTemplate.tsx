@@ -22,7 +22,7 @@ interface SearchResultsTemplateProps {
   onClickRoundInput: () => void;
   onClickEraseButton: () => void;
   onClickCategory: (category: string) => void;
-  onClickAlbumLikeButton: (trackId: string) => void;
+  onClickAlbumFavoriteButton: (trackId: string) => void;
   onClickArtistAvata: (artistData: SpotifyArtistProps) => void;
   onClickPrev: () => void;
   onClickAlbumBox: (previewUrl: string, trackId: string) => void;
@@ -30,9 +30,7 @@ interface SearchResultsTemplateProps {
   onClickPlusButton: (trackId: string) => void;
   spotifyArtistData: SpotifyArtistProps[] | undefined;
   spotifyTrackData: EnhancedTrackProps[];
-  spotifyArtistDetailTrackData:
-    | (TrackType & { isFavorite: boolean })[]
-    | undefined;
+  spotifyArtistDetailTrackData: EnhancedTrackProps[];
   commaUserData: CommaUserType[] | undefined;
   openMusicPlayer: string;
 }
@@ -48,7 +46,7 @@ export const SearchResultsTemplate = ({
   onClickRoundInput,
   onClickEraseButton,
   onClickCategory,
-  onClickAlbumLikeButton,
+  onClickAlbumFavoriteButton,
   onClickArtistAvata,
   onClickPrev,
   onClickAlbumBox,
@@ -75,7 +73,7 @@ export const SearchResultsTemplate = ({
         openMusicPlayer={openMusicPlayer}
         musicData={spotifyTrackData}
         onClickPlusButton={onClickPlusButton}
-        onClickFavoriteButton={onClickAlbumLikeButton}
+        onClickFavoriteButton={onClickAlbumFavoriteButton}
         onClickAlbumBox={onClickAlbumBox}
         isPreviewMusicPlayerHidden={false}
       />
@@ -106,9 +104,10 @@ export const SearchResultsTemplate = ({
             openMusicPlayer={openMusicPlayer}
             soptifyArtistData={spotifyArtistForDetailArtist}
             spotifyTrackData={spotifyArtistDetailTrackData}
-            isFavorite={false}
+            // isFavorite={false}
             onClickFavorite={() => {}}
             onClickFavoriteArtist={onClickFavoriteArtist}
+            onClickPlusButton={() => {}}
           />
         </style.Slide>
       </style.CustomSwiper>

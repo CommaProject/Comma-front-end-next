@@ -160,7 +160,7 @@ const SearchResults = () => {
       onClickCategory={handleSwitchActiveCategory}
       onClickAlbumBox={handleOpenPreviewMusicPlayer}
       category={searchItems.category}
-      onClickAlbumLikeButton={(trackId: string) => {
+      onClickAlbumFavoriteButton={(trackId: string) => {
         if (favoriteTrackIds?.includes(trackId)) deleteTrackMutate(trackId);
         else useMutationUserTrackFavorite.mutate(trackId);
       }}
