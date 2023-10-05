@@ -17,17 +17,9 @@ export const Wrapper = styled.div`
   position: absolute;
   bottom: 0;
 `;
-export const CustomSwiper = styled(Swiper)`
-  height: auto;
-`;
-
-export const Slide = styled(SwiperSlide)`
-  height: 100%;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+export const Box = styled.div`
+  margin-top: 32px;
+  margin-left: 25px;
 `;
 
 interface PlusModalProps {
@@ -36,17 +28,18 @@ interface PlusModalProps {
 
 export const PlusModal = ({ myPlayList }: PlusModalProps) => (
   <Wrapper>
-    <SliderFreeMode componentGab={0}>
-      {myPlayList &&
-        myPlayList.map((playlist: PlaylistType) => (
-          <PlaylistAlbumForModal
-            playlistId={playlist.playlistId}
-            repAlbumImageUrl={playlist.repAlbumImageUrl}
-            trackCount={playlist.trackCount}
-            onClickPlaylist={() => {}}
-          />
-        ))}
-      <div>test</div>
-    </SliderFreeMode>
+    <Box>
+      <SliderFreeMode componentGab={-3}>
+        {myPlayList &&
+          myPlayList.map((playlist: PlaylistType) => (
+            <PlaylistAlbumForModal
+              playlistId={playlist.playlistId}
+              repAlbumImageUrl={playlist.repAlbumImageUrl}
+              trackCount={playlist.trackCount}
+              onClickPlaylist={() => {}}
+            />
+          ))}
+      </SliderFreeMode>
+    </Box>
   </Wrapper>
 );
