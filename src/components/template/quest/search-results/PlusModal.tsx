@@ -22,14 +22,14 @@ export const Box = styled.div`
   margin-left: 25px;
 `;
 
-interface PlusModalProps {
+export interface PlusModalProps {
   myPlayList: PlaylistType[];
 }
 
 export const PlusModal = ({ myPlayList }: PlusModalProps) => (
   <Wrapper>
     <Box>
-      <SliderFreeMode componentGab={-3}>
+      <SliderFreeMode componentGab={0}>
         {myPlayList &&
           myPlayList.map((playlist: PlaylistType) => (
             <PlaylistAlbumForModal

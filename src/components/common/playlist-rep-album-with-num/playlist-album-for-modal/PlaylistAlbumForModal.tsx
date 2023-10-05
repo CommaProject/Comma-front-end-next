@@ -30,6 +30,17 @@ const TrackNumInfo = styled.div`
   }}
 `;
 
+export const Overlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 92px;
+  height: 92px;
+  background-color: rgba(104, 154, 255, 0.7);
+  border-radius: 15px;
+  z-index: 0;
+`;
+
 interface PlaylistAlbumForModalProps {
   playlistId: number;
   repAlbumImageUrl: string;
@@ -46,6 +57,7 @@ const PlaylistAlbumForModal = ({
   <Container onClick={onClickPlaylist}>
     <Album url={repAlbumImageUrl} size={92} borderRadius={15} />
     {trackCount - 1 > 0 ? <TrackNumInfo>+{trackCount - 1}</TrackNumInfo> : ''}
+    <Overlay />
   </Container>
 );
 

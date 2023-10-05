@@ -104,7 +104,6 @@ export const SearchResultsTemplate = ({
             openMusicPlayer={openMusicPlayer}
             soptifyArtistData={spotifyArtistForDetailArtist}
             spotifyTrackData={spotifyArtistDetailTrackData}
-            // isFavorite={false}
             onClickFavorite={() => {}}
             onClickFavoriteArtist={onClickFavoriteArtist}
             onClickPlusButton={() => {}}
