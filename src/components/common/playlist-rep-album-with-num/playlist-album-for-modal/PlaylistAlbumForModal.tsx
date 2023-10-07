@@ -1,6 +1,8 @@
 import styled, { css } from 'styled-components';
 import { Album } from '@/components/common/album';
 
+import SelectedCheckSVG from '@/assets/images/selectedCheck.svg';
+
 const Container = styled.div`
   width: 90px;
   position: relative;
@@ -39,6 +41,10 @@ export const Overlay = styled.div`
   background-color: rgba(104, 154, 255, 0.7);
   border-radius: 15px;
   z-index: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 interface PlaylistAlbumForModalProps {
@@ -57,7 +63,9 @@ const PlaylistAlbumForModal = ({
   <Container onClick={onClickPlaylist}>
     <Album url={repAlbumImageUrl} size={92} borderRadius={15} />
     {trackCount - 1 > 0 ? <TrackNumInfo>+{trackCount - 1}</TrackNumInfo> : ''}
-    <Overlay />
+    <Overlay>
+      <SelectedCheckSVG />
+    </Overlay>
   </Container>
 );
 
