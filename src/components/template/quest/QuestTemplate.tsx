@@ -5,6 +5,7 @@ import { SwiperAlbum } from '@/components/pages/quest/swiper-album';
 import { VerticalAlbum } from '@/components/common/album/vertical-album';
 import { TrackFavoritesType, TrackPlayCountType } from '@/types/trackTypes';
 import { TracksRecommendData } from '@/types/recommendType';
+import { Album } from '@/components/common/album';
 import * as style from './QuestTemplate.style';
 
 interface QuestTemplateProps {
@@ -47,6 +48,7 @@ export const QuestTemplate = ({
           singerName={track.trackArtist.artist.artistName}
         />
       ))}
+      <style.MoreSee> 더보기 </style.MoreSee>
     </SliderFreeMode>
     <style.MyFavoriteTracksTitle>
       내가 좋아요 표시한 곡
@@ -63,6 +65,7 @@ export const QuestTemplate = ({
           }
         />
       ))}
+      <style.MoreSee> 더보기 </style.MoreSee>
     </SliderFreeMode>
     <style.HighlyRecommendedTracksTitle
       style={{ marginTop: 50, marginBottom: 20 }}
@@ -83,6 +86,7 @@ export const QuestTemplate = ({
       ) : (
         <div>undefined</div>
       )}
+      <style.MoreSee> 더보기 </style.MoreSee>
     </SliderFreeMode>
   </style.Wrapper>
 );

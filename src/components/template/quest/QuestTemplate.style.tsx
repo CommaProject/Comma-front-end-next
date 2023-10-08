@@ -26,3 +26,15 @@ export const HighlyRecommendedTracksTitle = styled.title`
   margin-top: 50px;
   margin-bottom: 20px;
 `;
+
+export const MoreSee = styled.div`
+  width: 90px;
+  height: 90px;
+
+  background: #d9d9d9;
+  border-radius: 13px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;

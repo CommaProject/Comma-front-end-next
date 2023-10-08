@@ -42,7 +42,7 @@ const getTracksRecommend = async () => {
     return result.data;
   }
   // return { isSuccess, result };
-  return null;
+  return [];
 };
 
 export const useRecommend = () => {

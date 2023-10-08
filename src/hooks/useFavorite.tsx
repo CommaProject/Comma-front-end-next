@@ -25,11 +25,9 @@ export const useGetFavoriteArtist = () => {
     }
   }, [isLoading, data]);
 
-  const favoriteArtistIds = data.map(
-    (item) => item.artistResponse.spotifyArtistId,
-  );
-
-  console.log('favoriteArtistIds', favoriteArtistIds);
+  const favoriteArtistIds = data.map((item) => ({
+    [item.artistResponse.spotifyArtistId]: item.favoriteArtistId,
+  }));
 
   return { favoriteArtist, favoriteArtistIds };
 };
