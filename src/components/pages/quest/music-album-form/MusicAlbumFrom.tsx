@@ -37,8 +37,14 @@ export const MusicAlbumFrom = ({
               imgUrl={value.images ? value.images[0].url : 'error: undefine'}
               songName={value.trackName}
               singerName={value.artist}
-              onClickPlusButton={() => onClickPlusButton(value.trackId)}
-              onClickFavoriteButton={() => onClickFavoriteButton(value.trackId)}
+              onClickPlusButton={(event) => {
+                event.stopPropagation();
+                onClickPlusButton(value.trackId);
+              }}
+              onClickFavoriteButton={(event) => {
+                event.stopPropagation();
+                onClickFavoriteButton(value.trackId);
+              }}
               onClick={() => {}}
             />
           </style.AlbumBox>
