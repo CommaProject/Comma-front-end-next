@@ -107,10 +107,10 @@ export const useUserInformation = () => {
     },
   });
 
-  const { data: favoriteTracks } = useQuery({
-    queryKey: ['TrackFavorite'],
-    queryFn: getUserFavoriteTracks,
-  });
+  // const { data: favoriteTracks } = useQuery({
+  //   queryKey: ['TrackFavorite'],
+  //   queryFn: getUserFavoriteTracks,
+  // });
 
   const { data: favoriteArtists } = useQuery({
     queryKey: ['ArtistFavorite'],
@@ -119,7 +119,7 @@ export const useUserInformation = () => {
 
   return {
     favoriteArtists,
-    favoriteTracks,
+    // favoriteTracks,
     useMutationUserTrackFavorite,
     useMutationUserArtistFavorite,
   };

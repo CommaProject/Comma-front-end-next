@@ -26,7 +26,7 @@ export const getFavoriteTrack = async () => {
   return [];
 };
 
-export const deleteFavoriteTrack = async (trackId: string) => {
+export const deleteFavoriteTrack = async (trackId: number) => {
   const { isSuccess, result } = await deleteAsync<null>(
     `/favorite/track/${trackId}`,
   );

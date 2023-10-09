@@ -63,15 +63,16 @@ const SearchResults = () => {
   }, [spotifyArtistDetailTrackData]);
 
   useEffect(() => {
+    // console.log(favoriteTrackIds);
     if (spotifyTrackData && favoriteTrackIds) {
       const spotifyArtistDataWithFavorite1 = spotifyTrackData?.map((track) => ({
         ...track,
-        isFavorite: favoriteTrackIds?.includes(track.trackId),
+        isFavorite: Object.keys(favoriteTrackIds)?.includes(track.trackId),
       }));
 
       setSpotifyArtistDataWithFavorite(spotifyArtistDataWithFavorite1);
     }
-  }, [spotifyTrackData]);
+  }, [spotifyTrackData, favoriteTrackIds]);
 
   // Artist Favorite
   useEffect(() => {});
@@ -165,9 +166,10 @@ const SearchResults = () => {
       onClickCategory={handleSwitchActiveCategory}
       onClickAlbumBox={handleOpenPreviewMusicPlayer}
       category={searchItems.category}
-      onClickAlbumFavoriteButton={(trackId: string) => {
-        if (favoriteTrackIds?.includes(trackId)) deleteTrackMutate(trackId);
-        else useMutationUserTrackFavorite.mutate(trackId);
+      onClickAlbumFavoriteButton={(spotifyTrackId: string) => {
+        if (Object.keys(favoriteTrackIds).includes(spotifyTrackId))
+          deleteTrackMutate(favoriteTrackIds[spotifyTrackId]);
+        else useMutationUserTrackFavorite.mutate(spotifyTrackId);
       }}
       onClickFavoriteArtist={(artistId) => {
         useMutationUserArtistFavorite.mutate(artistId);
