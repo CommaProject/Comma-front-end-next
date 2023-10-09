@@ -124,7 +124,12 @@ const SearchResults = () => {
     (trackId: string) => {
       console.log(trackId);
 
-      openModal(<PlusModal myPlayList={commaPlaylist} />);
+      openModal(
+        <PlusModal myPlayList={commaPlaylist} onClickPlaylist={() => {}} />,
+        () => {
+          console.log(myPlaylist);
+        },
+      );
     },
     [myPlaylist],
   );

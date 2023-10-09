@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper.min.css';
@@ -21,22 +21,27 @@ export const Box = styled.div`
   margin-top: 32px;
   margin-left: 25px;
 `;
-
-export interface PlusModalProps {
-  myPlayList: PlaylistType[];
+interface EnhancedPlaylist extends PlaylistType {
+  isPlaylist: boolean;
+}
+interface PlusModalProps {
+  myPlayList: EnhancedPlaylist[];
+  onClickPlaylist: () => void;
 }
 
-export const PlusModal = ({ myPlayList }: PlusModalProps) => (
+export const PlusModal = ({ myPlayList, onClickPlaylist }: PlusModalProps) => (
   <Wrapper>
     <Box>
       <SliderFreeMode componentGab={0}>
         {myPlayList &&
-          myPlayList.map((playlist: PlaylistType) => (
+          myPlayList.map((playlist: EnhancedPlaylist) => (
             <PlaylistAlbumForModal
+              key={playlist.playlistId}
               playlistId={playlist.playlistId}
+              isPlaylist={playlist.isPlaylist}
               repAlbumImageUrl={playlist.repAlbumImageUrl}
               trackCount={playlist.trackCount}
-              onClickPlaylist={() => {}}
+              onClickPlaylist={onClickPlaylist}
             />
           ))}
       </SliderFreeMode>

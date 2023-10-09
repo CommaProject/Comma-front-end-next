@@ -1,7 +1,11 @@
-import { deleteAsync, getAsync } from '@/apis/API';
+import { deleteAsync, getAsync, postAsync } from '@/apis/API';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
-import { PlaylistType, PlaylistTypeWithTotalTime } from '@/types/playlistTypes';
+import {
+  PlaylistType,
+  PlaylistTypeWithTotalTime,
+  PostPlaylistType,
+} from '@/types/playlistTypes';
 import { ApiResponse } from '@/constants/types';
 import { TracksRecommendData } from '@/types/recommendType';
 
@@ -107,6 +111,21 @@ export const useGetPlaylistPlayTime = (playlistId: number) => {
   }, [isSuccess, data, playlistId]);
 
   return { playTime };
+};
+
+/**
+ * 추천 리스트 조회 함수 getTracksRecommendAsync
+ * @need AccessToken
+ * @returns 가입 성공 시 209, 실패 시 ...
+ */
+export const addTrackToPlaylistAsync = async (): ApiResponse<any> => {
+  // return: null
+  const response = await postAsync<any, PostPlaylistType>(
+    '/playlist/track',
+    {},
+  );
+
+  return response;
 };
 
 // 플레이리스트 삭제

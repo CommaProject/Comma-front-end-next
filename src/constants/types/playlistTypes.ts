@@ -13,3 +13,9 @@ export interface PlaylistType {
 export interface PlaylistTypeWithTotalTime extends PlaylistType {
   totalDurationTime: number;
 }
+
+// For Post (add)
+export interface PostPlaylistType {
+  playlistIdList: number[];
+  spotifyTrackId: number;
+}
