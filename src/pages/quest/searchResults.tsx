@@ -33,8 +33,8 @@ const SearchResults = () => {
     mutateCommaUser,
     mutateArtistDetailTrack,
   } = useSearch();
-  const { addFavoriteTrackMutate } = useFavoriteTrack();
-  const { favoriteTrackIds, deleteTrackMutate } = useFavoriteTrack();
+  const { favoriteTrackIds, deleteTrackMutate, addFavoriteTrackMutate } =
+    useFavoriteTrack();
   const { addFavoriteArtistMutate } = useFavoriteArtist();
 
   const [

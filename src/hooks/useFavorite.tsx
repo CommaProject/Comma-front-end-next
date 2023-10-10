@@ -67,7 +67,7 @@ export const useFavoriteTrack = () => {
           const updatedData = oldData;
           console.log('before oldData', oldData);
           console.log('id', id);
-          for (let i = 0; i < oldData.length; i + 1) {
+          for (let i = 0; i < oldData.length; i += 1) {
             if (oldData[i].favoriteTrackId === id) {
               oldData.splice(i, 1);
               break;
