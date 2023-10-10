@@ -1,14 +1,14 @@
 import { ProfileTemplate } from '@/components/template/profile/ProfileTemplate';
 import { useState } from 'react';
 import { useGetMyPlaylists } from '@/apis/playlist';
-import { useGetFavoriteArtist,useGetFavoriteTrack } from '@/hooks/useFavorite';
+import { useFavoriteArtist, useFavoriteTrack } from '@/hooks/useFavorite';
 import { useGetFollowInfo } from '@/hooks/useFollowInfo';
 import { useGetUserDetail } from '@/apis/profile';
 
 const Profile = () => {
   const { myPlaylist } = useGetMyPlaylists();
-  const { favoriteArtist } = useGetFavoriteArtist();
-  const { favoriteTrack } = useGetFavoriteTrack();
+  const { favoriteArtist } = useFavoriteArtist();
+  const { favoriteTrack } = useFavoriteTrack();
   const { followingInfo, followersInfo } = useGetFollowInfo();
   const [isProfileMine] = useState(true);
   const { nickName } = useGetUserDetail();

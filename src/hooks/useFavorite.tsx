@@ -3,15 +3,18 @@ import { useEffect, useState } from 'react';
 import { FavoriteArtistType } from '@/types/artistTypes';
 import { TrackFavoritesType } from '@/types/trackTypes';
 import {
-  deleteFavoriteTrack,
-  getFavoriteArtist,
-  getFavoriteTrack,
+  deleteFavoriteTrackAsync,
+  getFavoriteArtistAsync,
+  getFavoriteTrackAsync,
+  addFavoriteTrackAsync,
+  addFavoriteArtistAsync,
 } from '@/apis/favorite';
 
-export const useGetFavoriteArtist = () => {
+// Artist
+export const useFavoriteArtist = () => {
   const { isLoading, data = [] } = useQuery(
     ['favoriteArtist'],
-    getFavoriteArtist,
+    getFavoriteArtistAsync,
   );
   const [favoriteArtist, setFavoriteArtist] = useState<FavoriteArtistType[]>(
     [],
@@ -29,20 +32,70 @@ export const useGetFavoriteArtist = () => {
     [item.artistResponse.spotifyArtistId]: item.favoriteArtistId,
   }));
 
-  return { favoriteArtist, favoriteArtistIds };
+  const { mutate: addFavoriteArtistMutate } = useMutation(
+    ['AddArtist'],
+    addFavoriteArtistAsync,
+    {},
+  );
+
+  return { favoriteArtist, favoriteArtistIds, addFavoriteArtistMutate };
 };
 
-export const useGetFavoriteTrack = () => {
+// Track
+export const useFavoriteTrack = () => {
   const queryClient = useQueryClient();
 
   const { isLoading, data: favoriteTrack = [] } = useQuery(
-    ['favoriteTrack'],
-    getFavoriteTrack,
+    ['FavoriteTrack'],
+    getFavoriteTrackAsync,
   );
   const [favoriteTrackIds, setFavoriteTrackIds] = useState<any>();
+  const { mutate: deleteTrackMutate } = useMutation(
+    ['DeleteTrack'],
+    deleteFavoriteTrackAsync,
+    {
+      onSuccess: (response) => {},
+      onMutate: async (id: number) => {
+        // 기존 데이터를 가지고 있다가 실패하면 사용
+        const oldData: any = queryClient.getQueryData(['FavoriteTrack']);
+
+        // API가 성공해서 업데이트 되지 않게
+        await queryClient.cancelQueries({ queryKey: ['FavoriteTrack'] });
+
+        // 성공한다고 가정
+        if (oldData) {
+          const updatedData = oldData;
+          console.log('before oldData', oldData);
+          console.log('id', id);
+          for (let i = 0; i < oldData.length; i + 1) {
+            if (oldData[i].favoriteTrackId === id) {
+              oldData.splice(i, 1);
+              break;
+            }
+          }
+          console.log('after oldData', oldData);
+          queryClient.setQueryData(['FavoriteTrack'], updatedData);
+        }
+
+        // 만약 에러나서 롤백 되면 이전 것을 써놓음.
+        return () => queryClient.setQueryData(['FavoriteTrack'], oldData);
+      },
+      onError: (error, variable, rollback) => {
+        if (rollback) rollback();
+        else console.log(error);
+      },
+      onSettled: () => {
+        queryClient.invalidateQueries(['FavoriteTrack']);
+      },
+    },
+  );
+  const { mutate: addFavoriteTrackMutate } = useMutation(
+    ['AddTrack'],
+    addFavoriteTrackAsync,
+    {},
+  );
 
   useEffect(() => {
-    console.log('favoriteTrack', favoriteTrack);
     if (isLoading === false) {
       const favoriteTrackIds1 = favoriteTrack
         .map((item) => ({
@@ -59,46 +112,10 @@ export const useGetFavoriteTrack = () => {
     }
   }, [isLoading, favoriteTrack]);
 
-  const { mutate: deleteTrackMutate } = useMutation(
-    ['DeleteTrack'],
-    deleteFavoriteTrack,
-    {
-      onSuccess: (response) => {},
-      onMutate: async (id: number) => {
-        // 기존 데이터를 가지고 있다가 실패하면 사용
-        const oldData: any = queryClient.getQueryData(['favoriteTrack']);
-
-        // API가 성공해서 업데이트 되지 않게
-        await queryClient.cancelQueries({ queryKey: ['favoriteTrack'] });
-
-        // 성공한다고 가정
-        if (oldData) {
-          const updatedData = oldData;
-          console.log('before oldData', oldData);
-          console.log('id', id);
-          // eslint-disable-next-line no-plusplus
-          for (let i = 0; i < oldData.length; i++) {
-            if (oldData[i].favoriteTrackId === id) {
-              oldData.splice(i, 1); // 해당 항목을 배열에서 삭제
-              break; // 항목을 찾았으면 루프를 종료합니다.
-            }
-          }
-          console.log('after oldData', oldData);
-          queryClient.setQueryData(['favoriteTrack'], updatedData);
-        }
-
-        // 만약 에러나서 롤백 되면 이전 것을 써놓음.
-        return () => queryClient.setQueryData(['favoriteTrack'], oldData);
-      },
-      onError: (error, variable, rollback) => {
-        if (rollback) rollback();
-        else console.log(error);
-      },
-      onSettled: () => {
-        queryClient.invalidateQueries(['favoriteTrack']);
-      },
-    },
-  );
-
-  return { favoriteTrack, favoriteTrackIds, deleteTrackMutate };
+  return {
+    favoriteTrack,
+    favoriteTrackIds,
+    deleteTrackMutate,
+    addFavoriteTrackMutate,
+  };
 };

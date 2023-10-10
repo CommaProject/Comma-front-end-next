@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { Swiper as SwiperClass } from 'swiper/types';
 import * as style from '@/styles/pages-styles/myartist.style';
 import { useCallback, useEffect, useState } from 'react';
-import { useGetFavoriteArtist } from '@/hooks/useFavorite';
+import { useFavoriteArtist } from '@/hooks/useFavorite';
 import { ArtistAvataFrom } from '@/components/pages/quest/artist-avata-form';
 import 'swiper/swiper.min.css';
 import 'swiper/swiper-bundle.min.css';
@@ -34,7 +34,7 @@ const MyArtist = () => {
     }
   };
 
-  const { favoriteArtist } = useGetFavoriteArtist();
+  const { favoriteArtist } = useFavoriteArtist();
   const [clickedArtistDetail, setClickedArtistDetail] =
     useState<FavoriteArtistType>({
       favoriteArtistId: -1,

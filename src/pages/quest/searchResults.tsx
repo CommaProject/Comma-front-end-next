@@ -5,13 +5,12 @@ import {
 } from '@/components/template/quest/search-results';
 import { useRouter } from 'next/router';
 import { useSearch } from '@/hooks/useSearch';
-import { useUserInformation } from '@/hooks/useUserInformation';
 import { Swiper as SwiperClass } from 'swiper/types';
 import { SpotifyArtistProps } from '@/types/searchTypes';
 import { useAtom } from 'jotai';
 import { searchAtom } from '@/stores/atoms';
 import { EnhancedTrackProps } from '@/types/trackTypes';
-import { useGetFavoriteArtist, useGetFavoriteTrack } from '@/hooks/useFavorite';
+import { useFavoriteArtist, useFavoriteTrack } from '@/hooks/useFavorite';
 import useModal from '@/hooks/useModal';
 import { useGetCommaPlaylists, useGetMyPlaylists } from '@/apis/playlist';
 
@@ -34,10 +33,9 @@ const SearchResults = () => {
     mutateCommaUser,
     mutateArtistDetailTrack,
   } = useSearch();
-  const { useMutationUserTrackFavorite, useMutationUserArtistFavorite } =
-    useUserInformation();
-  const { favoriteTrackIds, deleteTrackMutate } = useGetFavoriteTrack();
-  // const { getFavoriteArtist } = useGetFavoriteArtist();
+  const { addFavoriteTrackMutate } = useFavoriteTrack();
+  const { favoriteTrackIds, deleteTrackMutate } = useFavoriteTrack();
+  const { addFavoriteArtistMutate } = useFavoriteArtist();
 
   const [
     spotifyArtistDetailTrackDataWithFavorite,
@@ -169,10 +167,10 @@ const SearchResults = () => {
       onClickAlbumFavoriteButton={(spotifyTrackId: string) => {
         if (Object.keys(favoriteTrackIds).includes(spotifyTrackId))
           deleteTrackMutate(favoriteTrackIds[spotifyTrackId]);
-        else useMutationUserTrackFavorite.mutate(spotifyTrackId);
+        else addFavoriteTrackMutate(spotifyTrackId);
       }}
       onClickFavoriteArtist={(artistId) => {
-        useMutationUserArtistFavorite.mutate(artistId);
+        addFavoriteArtistMutate.mutate(artistId);
       }}
       onClickPlusButton={handlePlusTrack}
       spotifyArtistData={spotifyArtistData}
