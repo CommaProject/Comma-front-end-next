@@ -1,29 +1,30 @@
 import { useAtom } from 'jotai';
-import { useState, type ReactNode } from 'react';
+import { useState, type ReactNode, useEffect } from 'react';
 
-import { handleModalAtom, handlePlayerModalAtom } from '@/stores/actions';
+import {
+  closeCallbackAtom,
+  handleModalAtom,
+  handlePlayerModalAtom,
+} from '@/stores/actions';
 
 const useModal = () => {
   const [, setModalState] = useAtom(handleModalAtom);
   const [, setPlayerModalState] = useAtom(handlePlayerModalAtom);
-  const [beforeCloseCallback, setBeforeCloseCallback] = useState<
-    (() => void) | null
-  >(null);
+  const [closeCallback, setCloseCallback] = useAtom(closeCallbackAtom);
 
   const openModal = (newContent: ReactNode, beforeClose?: () => void) => {
-    // Callback 함수 등록
     if (beforeClose !== undefined) {
-      setBeforeCloseCallback(beforeClose);
+      setCloseCallback(() => beforeClose);
+      console.log(beforeClose);
     }
     setModalState({ isOpen: true, content: newContent });
   };
 
   const closeModal = () => {
-    // Callback 함수 실행
-    if (beforeCloseCallback) {
-      beforeCloseCallback();
+    if (closeCallback) {
+      closeCallback();
     }
-    setBeforeCloseCallback(null);
+    setCloseCallback(null);
     setModalState({ isOpen: false, content: null });
   };
 
