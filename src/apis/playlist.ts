@@ -8,6 +8,7 @@ import {
 } from '@/types/playlistTypes';
 import { ApiResponse } from '@/constants/types';
 import { TracksRecommendData } from '@/types/recommendType';
+import { TrackFavoritesType } from '@/types/trackTypes';
 
 // 플레이리스트 조회
 const getMultiplePlaylists = async () => {
@@ -135,6 +136,7 @@ export const addTrackToPlaylistAsync = async (
 };
 
 // 플레이리스트 삭제
+
 export const deletePlaylist = async (playlistIdArray: number[]) => {
   const response = await deleteAsync<number[]>(`/playlist`, {
     headers: {
@@ -189,4 +191,17 @@ export const getTracksRecommendAsync = async (): ApiResponse<
   );
 
   return response;
+};
+
+//
+export const getPlaylistAllTracks = async (playlistId: number) => {
+  const { isSuccess, result } = await getAsync<TrackFavoritesType[]>(
+    `/playlist/track/${playlistId}`,
+  );
+
+  if (isSuccess && result.data) {
+    return result.data;
+  }
+
+  return [];
 };

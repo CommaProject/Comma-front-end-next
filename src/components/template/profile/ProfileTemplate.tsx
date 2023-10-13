@@ -155,9 +155,11 @@ export const ProfileTemplate = ({
               favoriteArtist.map((artist: FavoriteArtistType) => (
                 <VerticalAvata
                   key={artist.favoriteArtistId}
-                  avatarImage={artist.artistImageUrl}
-                  avartarName={artist.artistName}
-                  onClick={() => console.log(artist.artistName, '클릭')}
+                  avatarImage={artist.artistResponse.artistImageUrl}
+                  avartarName={artist.artistResponse.artistName}
+                  onClick={() =>
+                    console.log(artist.artistResponse.artistName, '클릭')
+                  }
                 />
               ))}
           </style.ListContainer>

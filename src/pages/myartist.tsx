@@ -38,15 +38,18 @@ const MyArtist = () => {
   const [clickedArtistDetail, setClickedArtistDetail] =
     useState<FavoriteArtistType>({
       favoriteArtistId: -1,
-      artistName: '-',
-      artistImageUrl: '-',
+      artistResponse: {
+        spotifyArtistId: '',
+        artistName: '-',
+        artistImageUrl: '-',
+      },
     });
 
   const { mutateTrack, spotifyTrackData } = useSearch();
   const handleAvatarClick = useCallback(
     // Detail Artist
     (artistDetailInfo: FavoriteArtistType) => {
-      mutateTrack(artistDetailInfo.artistName);
+      mutateTrack(artistDetailInfo.artistResponse.artistName);
       setClickedArtistDetail(artistDetailInfo);
 
       setIsHidden(true);
@@ -85,8 +88,8 @@ const MyArtist = () => {
         </style.Slide>
         <style.Slide>
           {/* <ArtistDetailForm
-            artistImage={clickedArtistDetail.artistImageUrl}
-            artistName={clickedArtistDetail.artistName}
+            artistImage={clickedArtistDetail.artistResponse.artistImageUrl}
+            artistName={clickedArtistDetail.artistResponse.artistName}
             spotifyTrackData={spotifyTrackData}
             isFavorite
           /> */}

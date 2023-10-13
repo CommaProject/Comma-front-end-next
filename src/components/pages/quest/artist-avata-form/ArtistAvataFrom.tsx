@@ -45,8 +45,8 @@ export const ArtistAvataFrom = ({
       favoriteArtistData.map((value) => (
         <VerticalAvata
           key={value.favoriteArtistId}
-          avatarImage={value.artistImageUrl}
-          avartarName={value.artistName}
+          avatarImage={value.artistResponse.artistImageUrl}
+          avartarName={value.artistResponse.artistName}
           onClick={() => {
             onClickFavoriteArtistDetail(value);
           }}
