@@ -57,7 +57,7 @@ interface PlaylistAlbumForModalProps {
   repAlbumImageUrl: string;
   trackCount: number;
   isPlaylist: boolean;
-  onClickPlaylist: () => void;
+  onClickPlaylist: (playlistId: number) => void;
 }
 
 const PlaylistAlbumForModal = ({
@@ -67,7 +67,11 @@ const PlaylistAlbumForModal = ({
   trackCount,
   onClickPlaylist,
 }: PlaylistAlbumForModalProps) => (
-  <Container onClick={onClickPlaylist}>
+  <Container
+    onClick={() => {
+      onClickPlaylist(playlistId);
+    }}
+  >
     <Album url={repAlbumImageUrl} size={92} borderRadius={15} />
     {trackCount - 1 > 0 ? <TrackNumInfo>+{trackCount - 1}</TrackNumInfo> : ''}
     <Overlay isPlaylist={isPlaylist}>

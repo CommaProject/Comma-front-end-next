@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import {
   PlaylistType,
   PlaylistTypeWithTotalTime,
-  PostPlaylistType,
+  PostTrackPlaylistType,
 } from '@/types/playlistTypes';
 import { ApiResponse } from '@/constants/types';
 import { TracksRecommendData } from '@/types/recommendType';
@@ -118,18 +118,23 @@ export const useGetPlaylistPlayTime = (playlistId: number) => {
  * @need AccessToken
  * @returns 가입 성공 시 209, 실패 시 ...
  */
-export const addTrackToPlaylistAsync = async (): ApiResponse<any> => {
+export const addTrackToPlaylistAsync = async (
+  playlistIdList_: number[],
+  spotifyTrackId_: string,
+): ApiResponse<any> => {
   // return: null
-  const response = await postAsync<any, PostPlaylistType>(
+  const response = await postAsync<any, PostTrackPlaylistType>(
     '/playlist/track',
-    {},
+    {
+      playlistIdList: playlistIdList_,
+      spotifyTrackId: spotifyTrackId_,
+    },
   );
 
   return response;
 };
 
 // 플레이리스트 삭제
-
 export const deletePlaylist = async (playlistIdArray: number[]) => {
   const response = await deleteAsync<number[]>(`/playlist`, {
     headers: {

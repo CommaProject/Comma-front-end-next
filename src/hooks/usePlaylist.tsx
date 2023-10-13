@@ -1,7 +1,10 @@
 import { useRouter } from 'next/router';
 import { useCallback } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { getTracksRecommendAsync } from '@/apis/playlist';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import {
+  addTrackToPlaylistAsync,
+  getTracksRecommendAsync,
+} from '@/apis/playlist';
 
 /* 플레이 리스트 상세 정보 조회 페이지로 이동 */
 export const usePlaylist = () => {
@@ -18,6 +21,34 @@ export const usePlaylist = () => {
   );
 
   return { navigateToPlaylist };
+};
+
+// PlaylistTrack
+const addPlaylistTrack = async (params: {
+  playlistIdList: number[];
+  spotifyTrackId: string;
+}) => {
+  const { isSuccess, result } = await addTrackToPlaylistAsync(
+    params.playlistIdList,
+    params.spotifyTrackId,
+  );
+
+  if (isSuccess && result.data) {
+    return result.data;
+  }
+  return [];
+};
+
+export const usePlaylistTrack = () => {
+  const { mutate: mutateAddPlaylistTrack } = useMutation(
+    ['addPlaylistTrack'],
+    addPlaylistTrack,
+    {
+      onSuccess: (response) => {},
+    },
+  );
+
+  return { mutateAddPlaylistTrack };
 };
 
 /* 플레이리스트 전체 조회 페이지로 이동 */

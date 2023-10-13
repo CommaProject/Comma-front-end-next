@@ -13,6 +13,7 @@ import { EnhancedTrackProps } from '@/types/trackTypes';
 import { useFavoriteArtist, useFavoriteTrack } from '@/hooks/useFavorite';
 import useModal from '@/hooks/useModal';
 import { useGetCommaPlaylists, useGetMyPlaylists } from '@/apis/playlist';
+import { usePlaylistTrack } from '@/hooks/usePlaylist';
 
 const SearchResults = () => {
   const router = useRouter();
@@ -21,6 +22,16 @@ const SearchResults = () => {
     useState<SpotifyArtistProps>();
   const [isHidden, setIsHidden] = useState(false); // false: Completed Search true: Detail
   const [searchItems, setSearchItems] = useAtom(searchAtom);
+  const [swiperRef, setSwiperRef] = useState<SwiperClass>();
+  const [openMusicPlayer, setOpenMusicPlayer] = useState('');
+  const [playlistIdList, setPlaylistIdList] = useState<number[]>([]);
+  const [
+    spotifyArtistDetailTrackDataWithFavorite,
+    setSpotifyArtistDetailTrackDataWithFavorite,
+  ] = useState<EnhancedTrackProps[]>([]);
+  const [spotifyArtistDataWithFavorite, setSpotifyArtistDataWithFavorite] =
+    useState<EnhancedTrackProps[]>([]);
+
   const { openModal, closeModal } = useModal();
   const {
     spotifyArtistData,
@@ -36,14 +47,10 @@ const SearchResults = () => {
   const { favoriteTrackIds, deleteTrackMutate, addFavoriteTrackMutate } =
     useFavoriteTrack();
   const { addFavoriteArtistMutate } = useFavoriteArtist();
-
-  const [
-    spotifyArtistDetailTrackDataWithFavorite,
-    setSpotifyArtistDetailTrackDataWithFavorite,
-  ] = useState<EnhancedTrackProps[]>([]);
-
-  const [spotifyArtistDataWithFavorite, setSpotifyArtistDataWithFavorite] =
-    useState<EnhancedTrackProps[]>([]);
+  const { isPlaylistAvailable, isCommaPlaylistAvailable, commaPlaylist } =
+    useGetCommaPlaylists();
+  const { myPlaylist } = useGetMyPlaylists();
+  const { mutateAddPlaylistTrack } = usePlaylistTrack();
 
   // Track Favorite
   useEffect(() => {
@@ -61,7 +68,6 @@ const SearchResults = () => {
   }, [spotifyArtistDetailTrackData]);
 
   useEffect(() => {
-    // console.log(favoriteTrackIds);
     if (spotifyTrackData && favoriteTrackIds) {
       const spotifyArtistDataWithFavorite1 = spotifyTrackData?.map((track) => ({
         ...track,
@@ -75,8 +81,6 @@ const SearchResults = () => {
   // Artist Favorite
   useEffect(() => {});
 
-  const [swiperRef, setSwiperRef] = useState<SwiperClass>();
-  const [openMusicPlayer, setOpenMusicPlayer] = useState('');
   const handleSwiper = (swiper: SwiperClass) => {
     setSlideStep(swiper.realIndex);
   };
@@ -116,17 +120,31 @@ const SearchResults = () => {
     },
     [],
   );
-  const { isPlaylistAvailable, isCommaPlaylistAvailable, commaPlaylist } =
-    useGetCommaPlaylists();
-  const { myPlaylist } = useGetMyPlaylists();
-  const handlePlusTrack = useCallback(
-    (trackId: string) => {
-      console.log(trackId);
 
+  // 기존에 있던 Track 조회해서 존재여부 파악 해야댐
+
+  const EnhancedPlaylist = commaPlaylist.map((playlist) => ({
+    ...playlist,
+    isPlaylist: playlistIdList.includes(playlist.playlistId),
+  }));
+
+  const handlePlusTrack = useCallback(
+    (spotifyTrackId: string) => {
       openModal(
-        <PlusModal myPlayList={commaPlaylist} onClickPlaylist={() => {}} />,
+        <PlusModal
+          myPlayList={EnhancedPlaylist}
+          onClickPlaylist={(playlistId) => {
+            setPlaylistIdList([playlistId]);
+            console.log(playlistId);
+          }}
+        />,
         () => {
-          console.log(myPlaylist);
+          commaPlaylist.map((playlist) => {
+            console.log(playlist);
+            // mutateAddPlaylistTrack({ playlistIdList, spotifyTrackId });
+
+            return null;
+          });
         },
       );
     },
@@ -170,7 +188,7 @@ const SearchResults = () => {
         else addFavoriteTrackMutate(spotifyTrackId);
       }}
       onClickFavoriteArtist={(artistId) => {
-        addFavoriteArtistMutate.mutate(artistId);
+        addFavoriteArtistMutate(artistId);
       }}
       onClickPlusButton={handlePlusTrack}
       spotifyArtistData={spotifyArtistData}

@@ -26,7 +26,7 @@ interface EnhancedPlaylist extends PlaylistType {
 }
 interface PlusModalProps {
   myPlayList: EnhancedPlaylist[];
-  onClickPlaylist: () => void;
+  onClickPlaylist: (playlistId: number) => void;
 }
 
 export const PlusModal = ({ myPlayList, onClickPlaylist }: PlusModalProps) => (
@@ -34,16 +34,19 @@ export const PlusModal = ({ myPlayList, onClickPlaylist }: PlusModalProps) => (
     <Box>
       <SliderFreeMode componentGab={0}>
         {myPlayList &&
-          myPlayList.map((playlist: EnhancedPlaylist) => (
-            <PlaylistAlbumForModal
-              key={playlist.playlistId}
-              playlistId={playlist.playlistId}
-              isPlaylist={playlist.isPlaylist}
-              repAlbumImageUrl={playlist.repAlbumImageUrl}
-              trackCount={playlist.trackCount}
-              onClickPlaylist={onClickPlaylist}
-            />
-          ))}
+          myPlayList.map((playlist: EnhancedPlaylist) => {
+            console.log(playlist.playlistId);
+            return (
+              <PlaylistAlbumForModal
+                key={playlist.playlistId}
+                playlistId={playlist.playlistId}
+                isPlaylist={playlist.isPlaylist}
+                repAlbumImageUrl={playlist.repAlbumImageUrl}
+                trackCount={playlist.trackCount}
+                onClickPlaylist={onClickPlaylist}
+              />
+            );
+          })}
       </SliderFreeMode>
     </Box>
   </Wrapper>
