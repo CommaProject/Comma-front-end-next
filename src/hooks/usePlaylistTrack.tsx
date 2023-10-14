@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { TrackArtistResponse } from '@/types/trackTypes';
-import { getPlaylistTracks } from '@/apis/playlisttrack';
+import { getPlaylistAllTracksAsync } from '@/apis/playlist';
 /* ms로 주어진 시간을 __ h __ m __ s 문자열로 반환하는 함수 */
 
 export const HandleMS = (ms: number) => {
@@ -34,7 +34,7 @@ export const HandleSingerName = (trackArtistList: TrackArtistResponse[]) => {
 
 export const useGetPlaylistTracks = (playlistId: number) => {
   const { isLoading, data } = useQuery(['playlistTracks'], () =>
-    getPlaylistTracks(playlistId),
+    getPlaylistAllTracksAsync(playlistId),
   );
 
   return { playlistTracks: data || [] }; // 데이터가 없는 경우 빈 배열 반환

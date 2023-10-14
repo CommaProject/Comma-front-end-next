@@ -12,8 +12,15 @@ import { searchAtom } from '@/stores/atoms';
 import { EnhancedTrackProps } from '@/types/trackTypes';
 import { useFavoriteArtist, useFavoriteTrack } from '@/hooks/useFavorite';
 import useModal from '@/hooks/useModal';
-import { useGetCommaPlaylists, useGetMyPlaylists } from '@/apis/playlist';
-import { usePlaylistTrack } from '@/hooks/usePlaylist';
+import {
+  getPlaylistAllTracksAsync,
+  useGetCommaPlaylists,
+} from '@/apis/playlist';
+import {
+  usePlaylistTrack,
+  useAllPlaylists,
+  usePlaylist,
+} from '@/hooks/usePlaylist';
 
 const SearchResults = () => {
   const router = useRouter();
@@ -49,9 +56,24 @@ const SearchResults = () => {
   const { addFavoriteArtistMutate } = useFavoriteArtist();
   const { isPlaylistAvailable, isCommaPlaylistAvailable, commaPlaylist } =
     useGetCommaPlaylists();
-  const { myPlaylist } = useGetMyPlaylists();
-  const { mutateAddPlaylistTrack } = usePlaylistTrack();
+  const { myPlaylist } = usePlaylist();
+  const {
+    mutateAddPlaylistTrack,
+    // mutateGetPlaylistAllTracks,
+    // PlaylistAllTracksData,
+  } = usePlaylistTrack();
 
+  // Get Tracks From Playlist
+  // useEffect(() => {
+  //   mutateGetPlaylistAllTracks(1);
+  // }, []);
+  // useEffect(() => {
+  //   console.log('PlaylistAllTracksData', PlaylistAllTracksData);
+  // }, [PlaylistAllTracksData]);
+  useEffect(() => {
+    // getPlaylistAllTracksAsync(1);
+    console.log('commaPlaylist', commaPlaylist);
+  }, []);
   // Track Favorite
   useEffect(() => {
     if (spotifyArtistDetailTrackData && favoriteTrackIds) {

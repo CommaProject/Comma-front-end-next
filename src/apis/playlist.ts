@@ -8,10 +8,10 @@ import {
 } from '@/types/playlistTypes';
 import { ApiResponse } from '@/constants/types';
 import { TracksRecommendData } from '@/types/recommendType';
-import { TrackFavoritesType } from '@/types/trackTypes';
+import { TrackAlarmFlagType, TrackFavoritesType } from '@/types/trackTypes';
 
 // 플레이리스트 조회
-const getMultiplePlaylists = async () => {
+export const getAllMyplaylists = async () => {
   const { isSuccess, result } = await getAsync<PlaylistType[]>('/playlist');
 
   if (isSuccess && result.data) {
@@ -20,34 +20,12 @@ const getMultiplePlaylists = async () => {
 
   return [];
 };
-export const useGetMyPlaylists = () => {
-  const { isLoading, data = [] } = useQuery(
-    ['MyPlaylists'],
-    getMultiplePlaylists,
-  );
-
-  const [myPlaylist, setMyPlaylist] = useState<PlaylistType[]>([]);
-
-  useEffect(() => {
-    if (isLoading === false) {
-      console.log('isloading후', data);
-
-      if (data.length !== 0) {
-        setMyPlaylist(data);
-      }
-    }
-  }, [isLoading, data, myPlaylist]);
-
-  return {
-    myPlaylist,
-  };
-};
 
 // 콤마 플레이리스트 가져오기
 export const useGetCommaPlaylists = () => {
   const { isLoading, data = [] } = useQuery(
     ['multiplePlaylists'],
-    getMultiplePlaylists,
+    getAllMyplaylists,
   );
   const [isPlaylistAvailable, setIsPlaylistAvailable] =
     useState<boolean>(false);
@@ -193,15 +171,17 @@ export const getTracksRecommendAsync = async (): ApiResponse<
   return response;
 };
 
-//
-export const getPlaylistAllTracks = async (playlistId: number) => {
-  const { isSuccess, result } = await getAsync<TrackFavoritesType[]>(
+/**
+ * 플레이리스트 트랙 전체 조회 getPlaylistAllTracksAsync
+ * @need AccessToken
+ * @returns 가입 성공 시 209, 실패 시 ...
+ */
+export const getPlaylistAllTracksAsync = async (playlistId: number) => {
+  const { isSuccess, result } = await getAsync<TrackAlarmFlagType[]>(
     `/playlist/track/${playlistId}`,
   );
-
   if (isSuccess && result.data) {
     return result.data;
   }
-
   return [];
 };

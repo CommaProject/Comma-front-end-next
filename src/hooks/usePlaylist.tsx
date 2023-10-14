@@ -1,8 +1,14 @@
 import { useRouter } from 'next/router';
 import { useCallback } from 'react';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import {
+  QueryFunctionContext,
+  useMutation,
+  useQuery,
+} from '@tanstack/react-query';
 import {
   addTrackToPlaylistAsync,
+  getAllMyplaylists,
+  getPlaylistAllTracksAsync,
   getTracksRecommendAsync,
 } from '@/apis/playlist';
 
@@ -20,10 +26,16 @@ export const usePlaylist = () => {
     [router],
   );
 
-  return { navigateToPlaylist };
+  const { data: myPlaylist } = useQuery(['MyPlaylists'], getAllMyplaylists);
+
+  return {
+    myPlaylist: [],
+    navigateToPlaylist,
+  };
 };
 
-// PlaylistTrack
+// PlaylistTrack API //
+// Add playlist API
 const addPlaylistTrack = async (params: {
   playlistIdList: number[];
   spotifyTrackId: string;
@@ -39,7 +51,10 @@ const addPlaylistTrack = async (params: {
   return [];
 };
 
+// Get PlaylistTrack API
+// PlaylistTrack Hook
 export const usePlaylistTrack = () => {
+  // Add Track
   const { mutate: mutateAddPlaylistTrack } = useMutation(
     ['addPlaylistTrack'],
     addPlaylistTrack,
@@ -48,11 +63,18 @@ export const usePlaylistTrack = () => {
     },
   );
 
-  return { mutateAddPlaylistTrack };
+  // // Get Track From Playlist
+  // const { mutate: mutateGetPlaylistAllTracks, data: PlaylistAllTracksData } =
+  //   useMutation(['GetPlaylistAllTracks'], getPlaylistAllTracksAsync);
+
+  return {
+    mutateAddPlaylistTrack,
+    // mutateGetPlaylistAllTracks,
+    // PlaylistAllTracksData,
+  };
 };
 
 /* 플레이리스트 전체 조회 페이지로 이동 */
-
 export const useAllPlaylists = () => {
   const router = useRouter();
 
