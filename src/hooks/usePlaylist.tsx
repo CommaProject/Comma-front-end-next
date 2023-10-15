@@ -93,11 +93,10 @@ export const usePlaylistTrack = () => {
       if (playlistToTracks) {
         const resolvedTracks = await Promise.all(playlistToTracks);
         setPlaylistIdTotrack(resolvedTracks);
-        console.log('Resolved tracks:', resolvedTracks);
       }
     };
     fetchData();
-  }, [playlistToTracks]);
+  }, []);
   return {
     mutateAddPlaylistTrack,
     playlistIdToTracks,

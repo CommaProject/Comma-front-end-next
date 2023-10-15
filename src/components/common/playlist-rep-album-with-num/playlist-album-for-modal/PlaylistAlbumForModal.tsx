@@ -32,10 +32,10 @@ const TrackNumInfo = styled.div`
   }}
 `;
 interface OverlayProps {
-  isPlaylist: boolean;
+  registeredTrack: boolean;
 }
 export const Overlay = styled.div<OverlayProps>`
-  ${({ isPlaylist }) => css`
+  ${({ registeredTrack }) => css`
     position: absolute;
     top: 0;
     left: 0;
@@ -48,7 +48,7 @@ export const Overlay = styled.div<OverlayProps>`
     display: flex;
     justify-content: center;
     align-items: center;
-    display: ${isPlaylist ? '' : 'none'};
+    display: ${registeredTrack ? '' : 'none'};
   `}
 `;
 
@@ -56,13 +56,13 @@ interface PlaylistAlbumForModalProps {
   playlistId: number;
   repAlbumImageUrl: string;
   trackCount: number;
-  isPlaylist: boolean;
+  registeredTrack: boolean;
   onClickPlaylist: (playlistId: number) => void;
 }
 
 const PlaylistAlbumForModal = ({
   playlistId,
-  isPlaylist,
+  registeredTrack,
   repAlbumImageUrl,
   trackCount,
   onClickPlaylist,
@@ -74,7 +74,7 @@ const PlaylistAlbumForModal = ({
   >
     <Album url={repAlbumImageUrl} size={92} borderRadius={15} />
     {trackCount - 1 > 0 ? <TrackNumInfo>+{trackCount - 1}</TrackNumInfo> : ''}
-    <Overlay isPlaylist={isPlaylist}>
+    <Overlay registeredTrack={registeredTrack}>
       <SelectedCheckSVG />
     </Overlay>
   </Container>

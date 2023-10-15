@@ -10,6 +10,10 @@ export interface PlaylistType {
   repAlbumImageUrl: string;
 }
 
+export interface EnhancedPlaylistType extends PlaylistType {
+  registeredTrack: boolean;
+}
+
 export interface PlaylistTypeWithTotalTime extends PlaylistType {
   totalDurationTime: number;
 }

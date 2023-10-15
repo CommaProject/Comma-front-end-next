@@ -21,6 +21,7 @@ import {
   useAllPlaylists,
   usePlaylist,
 } from '@/hooks/usePlaylist';
+import { EnhancedPlaylistType } from '@/constants/types/playlistTypes';
 
 const SearchResults = () => {
   const router = useRouter();
@@ -127,17 +128,33 @@ const SearchResults = () => {
   );
 
   // 기존에 있던 Track 조회해서 존재여부 파악 해야댐
+  const [enhancedPlaylist, setEnhancedPlaylist] = useState<
+    EnhancedPlaylistType[]
+  >([]);
 
-  const EnhancedPlaylist = commaPlaylist.map((playlist) => ({
-    ...playlist,
-    isPlaylist: playlistIdList.includes(playlist.playlistId),
-  }));
+  useEffect(() => {
+    const enhancedPlaylistTemp = commaPlaylist.map((playlist) => ({
+      ...playlist,
+      registeredTrack: playlistIdList.includes(playlist.playlistId),
+    }));
+
+    console.log('enhancedPlaylistTemp', enhancedPlaylistTemp);
+    setEnhancedPlaylist(enhancedPlaylistTemp);
+  }, [commaPlaylist]);
 
   const handlePlusTrack = useCallback(
     (spotifyTrackId: string) => {
+      commaPlaylist.map((playlist) => {
+        // spotifyTrackId;
+        // playlistIdToTracks[playlist.playlistId];
+        // setEnhancedPlaylist();
+        console.log(playlist.playlistId);
+
+        return null;
+      });
       openModal(
         <PlusModal
-          myPlayList={EnhancedPlaylist}
+          myPlayList={enhancedPlaylist}
           onClickPlaylist={(playlistId) => {
             setPlaylistIdList([playlistId]);
             console.log(playlistId);
@@ -145,7 +162,8 @@ const SearchResults = () => {
         />,
         () => {
           commaPlaylist.map((playlist) => {
-            console.log(playlist);
+            console.log('playlistIdToTracks', playlistIdToTracks);
+            console.log('commaPlaylist', commaPlaylist);
             // mutateAddPlaylistTrack({ playlistIdList, spotifyTrackId });
 
             return null;
