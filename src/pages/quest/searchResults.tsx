@@ -57,23 +57,9 @@ const SearchResults = () => {
   const { isPlaylistAvailable, isCommaPlaylistAvailable, commaPlaylist } =
     useGetCommaPlaylists();
   const { myPlaylist } = usePlaylist();
-  const {
-    mutateAddPlaylistTrack,
-    // mutateGetPlaylistAllTracks,
-    // PlaylistAllTracksData,
-  } = usePlaylistTrack();
+  const { mutateAddPlaylistTrack, playlistIdToTracks, setPlaylistIdTotrack } =
+    usePlaylistTrack();
 
-  // Get Tracks From Playlist
-  // useEffect(() => {
-  //   mutateGetPlaylistAllTracks(1);
-  // }, []);
-  // useEffect(() => {
-  //   console.log('PlaylistAllTracksData', PlaylistAllTracksData);
-  // }, [PlaylistAllTracksData]);
-  useEffect(() => {
-    // getPlaylistAllTracksAsync(1);
-    console.log('commaPlaylist', commaPlaylist);
-  }, []);
   // Track Favorite
   useEffect(() => {
     if (spotifyArtistDetailTrackData && favoriteTrackIds) {
@@ -99,9 +85,6 @@ const SearchResults = () => {
       setSpotifyArtistDataWithFavorite(spotifyArtistDataWithFavorite1);
     }
   }, [spotifyTrackData, favoriteTrackIds]);
-
-  // Artist Favorite
-  useEffect(() => {});
 
   const handleSwiper = (swiper: SwiperClass) => {
     setSlideStep(swiper.realIndex);

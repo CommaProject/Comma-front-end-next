@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import {
   QueryFunctionContext,
   useMutation,
@@ -29,7 +29,7 @@ export const usePlaylist = () => {
   const { data: myPlaylist } = useQuery(['MyPlaylists'], getAllMyplaylists);
 
   return {
-    myPlaylist: [],
+    myPlaylist,
     navigateToPlaylist,
   };
 };
@@ -63,14 +63,45 @@ export const usePlaylistTrack = () => {
     },
   );
 
-  // // Get Track From Playlist
-  // const { mutate: mutateGetPlaylistAllTracks, data: PlaylistAllTracksData } =
-  //   useMutation(['GetPlaylistAllTracks'], getPlaylistAllTracksAsync);
+  /**
+   * @returns playlist: Track[]
+   */
+  const { myPlaylist } = usePlaylist();
+  const playlistToTracks =
+    myPlaylist &&
+    myPlaylist.map(async (playlist) => {
+      const tracks = await getPlaylistAllTracksAsync(playlist.playlistId);
+      const trackList = tracks.map(
+        (trackArtist) => trackArtist.trackArtistList[0].track.spotifyTrackId,
+      );
 
+      return { [playlist.playlistId]: trackList };
+    });
+  type playlistIdTotrackListType = {
+    [key: number]: string[];
+  };
+
+  const [playlistIdToTracks, setPlaylistIdTotrack] = useState<
+    playlistIdTotrackListType[]
+  >([
+    {
+      0: [],
+    },
+  ]);
+  useEffect(() => {
+    const fetchData = async () => {
+      if (playlistToTracks) {
+        const resolvedTracks = await Promise.all(playlistToTracks);
+        setPlaylistIdTotrack(resolvedTracks);
+        console.log('Resolved tracks:', resolvedTracks);
+      }
+    };
+    fetchData();
+  }, [playlistToTracks]);
   return {
     mutateAddPlaylistTrack,
-    // mutateGetPlaylistAllTracks,
-    // PlaylistAllTracksData,
+    playlistIdToTracks,
+    setPlaylistIdTotrack,
   };
 };
 
