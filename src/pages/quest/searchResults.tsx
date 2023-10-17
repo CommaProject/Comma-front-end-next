@@ -144,11 +144,12 @@ const SearchResults = () => {
 
   const handlePlusTrack = useCallback(
     (spotifyTrackId: string) => {
+      console.log('playlistIdToTracks', playlistIdToTracks);
+
       commaPlaylist.map((playlist) => {
         // spotifyTrackId;
         // playlistIdToTracks[playlist.playlistId];
         // setEnhancedPlaylist();
-        console.log(playlist.playlistId);
 
         return null;
       });
