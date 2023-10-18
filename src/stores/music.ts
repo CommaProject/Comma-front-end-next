@@ -31,7 +31,6 @@ export const musicStateAtom = atom<MusicProps>({
         width: -1,
       },
     ],
-    popularity: -1,
     releaseDate: 'undefined',
     durationMinute: 3,
     durationSecond: 40,

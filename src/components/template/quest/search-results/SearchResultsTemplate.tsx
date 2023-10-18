@@ -104,9 +104,9 @@ export const SearchResultsTemplate = ({
             openMusicPlayer={openMusicPlayer}
             soptifyArtistData={spotifyArtistForDetailArtist}
             spotifyTrackData={spotifyArtistDetailTrackData}
-            onClickFavorite={() => {}}
+            onClickFavorite={onClickAlbumFavoriteButton}
             onClickFavoriteArtist={onClickFavoriteArtist}
-            onClickPlusButton={() => {}}
+            onClickPlusButton={onClickPlusButton}
           />
         </style.Slide>
       </style.CustomSwiper>

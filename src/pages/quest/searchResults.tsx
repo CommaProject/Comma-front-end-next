@@ -67,14 +67,14 @@ const SearchResults = () => {
       const spotifyArtistDetailTrackDataWithFavorite1 =
         spotifyArtistDetailTrackData.map((track) => ({
           ...track,
-          isFavorite: favoriteTrackIds?.includes(track.trackId),
+          isFavorite: Object.keys(favoriteTrackIds)?.includes(track.trackId),
         }));
 
       setSpotifyArtistDetailTrackDataWithFavorite(
         spotifyArtistDetailTrackDataWithFavorite1,
       );
     }
-  }, [spotifyArtistDetailTrackData]);
+  }, [spotifyArtistDetailTrackData, favoriteTrackIds]);
 
   useEffect(() => {
     if (spotifyTrackData && favoriteTrackIds) {
@@ -101,7 +101,7 @@ const SearchResults = () => {
   const handleArtistDetailTrack = useCallback(
     // Detail Artist
     (artistData: SpotifyArtistProps) => {
-      mutateArtistDetailTrack(artistData.artistName);
+      mutateArtistDetailTrack(artistData.artistId);
       setGetSpotifyArtistForDetailArtist(artistData);
       setIsHidden(true);
       swiperRef?.slideNext();
@@ -207,9 +207,11 @@ const SearchResults = () => {
       onClickAlbumBox={handleOpenPreviewMusicPlayer}
       category={searchItems.category}
       onClickAlbumFavoriteButton={(spotifyTrackId: string) => {
-        if (Object.keys(favoriteTrackIds).includes(spotifyTrackId))
-          deleteTrackMutate(favoriteTrackIds[spotifyTrackId]);
-        else addFavoriteTrackMutate(spotifyTrackId);
+        if (favoriteTrackIds) {
+          if (Object.keys(favoriteTrackIds).includes(spotifyTrackId))
+            deleteTrackMutate(favoriteTrackIds[spotifyTrackId]);
+          else addFavoriteTrackMutate(spotifyTrackId);
+        }
       }}
       onClickFavoriteArtist={(artistId) => {
         addFavoriteArtistMutate(artistId);

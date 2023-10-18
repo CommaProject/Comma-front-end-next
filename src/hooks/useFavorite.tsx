@@ -49,7 +49,9 @@ export const useFavoriteTrack = () => {
     ['FavoriteTrack'],
     getFavoriteTrackAsync,
   );
-  const [favoriteTrackIds, setFavoriteTrackIds] = useState<any>();
+  const [favoriteTrackIds, setFavoriteTrackIds] = useState<{
+    [x: string]: number;
+  }>();
   const { mutate: deleteTrackMutate } = useMutation(
     ['DeleteTrack'],
     deleteFavoriteTrackAsync,
