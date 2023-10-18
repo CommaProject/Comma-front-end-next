@@ -17,7 +17,7 @@ export async function getSpotifyArtistAsync(
   artistName: string,
 ): ApiResponse<SpotifyArtistProps[]> {
   const response = await getAsync<SpotifyArtistProps[]>(
-    `/spotify/artist/{${artistName}}`,
+    `/spotify/artists/{${artistName}}`,
     {},
   );
 
@@ -49,7 +49,7 @@ export async function getTrackAsync(
   trackName: string,
 ): ApiResponse<TrackType[]> {
   const response = await getAsync<TrackType[]>(
-    `/spotify/track/{${trackName}}`,
+    `/spotify/tracks/{${trackName}}`,
     {},
   );
 

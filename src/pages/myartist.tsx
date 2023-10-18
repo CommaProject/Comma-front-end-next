@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { Swiper as SwiperClass } from 'swiper/types';
 import * as style from '@/styles/pages-styles/myartist.style';
 import { useCallback, useEffect, useState } from 'react';
-import { useGetFavoriteArtist } from '@/hooks/useFavorite';
+import { useFavoriteArtist } from '@/hooks/useFavorite';
 import { ArtistAvataFrom } from '@/components/pages/quest/artist-avata-form';
 import 'swiper/swiper.min.css';
 import 'swiper/swiper-bundle.min.css';
@@ -34,19 +34,22 @@ const MyArtist = () => {
     }
   };
 
-  const { favoriteArtist } = useGetFavoriteArtist();
+  const { favoriteArtist } = useFavoriteArtist();
   const [clickedArtistDetail, setClickedArtistDetail] =
     useState<FavoriteArtistType>({
       favoriteArtistId: -1,
-      artistName: '-',
-      artistImageUrl: '-',
+      artistResponse: {
+        spotifyArtistId: '',
+        artistName: '-',
+        artistImageUrl: '-',
+      },
     });
 
   const { mutateTrack, spotifyTrackData } = useSearch();
   const handleAvatarClick = useCallback(
     // Detail Artist
     (artistDetailInfo: FavoriteArtistType) => {
-      mutateTrack(artistDetailInfo.artistName);
+      mutateTrack(artistDetailInfo.artistResponse.artistName);
       setClickedArtistDetail(artistDetailInfo);
 
       setIsHidden(true);
@@ -84,12 +87,12 @@ const MyArtist = () => {
           />
         </style.Slide>
         <style.Slide>
-          <ArtistDetailForm
-            artistImage={clickedArtistDetail.artistImageUrl}
-            artistName={clickedArtistDetail.artistName}
+          {/* <ArtistDetailForm
+            artistImage={clickedArtistDetail.artistResponse.artistImageUrl}
+            artistName={clickedArtistDetail.artistResponse.artistName}
             spotifyTrackData={spotifyTrackData}
-            isLike
-          />
+            isFavorite
+          /> */}
         </style.Slide>
       </style.CustomSwiper>
     </style.Wrapper>

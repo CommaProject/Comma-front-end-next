@@ -1,5 +1,10 @@
+interface ArtistResponse {
+  spotifyArtistId: string;
+  artistName: string;
+  artistImageUrl: string;
+}
+
 export interface FavoriteArtistType {
-    "favoriteArtistId" : number,
-    "artistName" : string,
-    "artistImageUrl" : string
+  favoriteArtistId: number;
+  artistResponse: ArtistResponse;
 }

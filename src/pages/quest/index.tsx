@@ -3,13 +3,13 @@ import React, { ChangeEvent } from 'react';
 import { QuestTemplate } from '@/components/template/quest/QuestTemplate';
 import { useRecommend } from '@/hooks/usePlaylist';
 import { useTrackPlayCount } from '@/hooks/uesTrack';
-import { useGetFavoriteTrack } from '@/hooks/useFavorite';
+import { useFavoriteTrack } from '@/hooks/useFavorite';
 
 const Quest = () => {
   const router = useRouter();
   const { tracksRecommendData } = useRecommend();
   const { trackPlayCountData, friendsTrackPlayCountData } = useTrackPlayCount();
-  const { favoriteTrack } = useGetFavoriteTrack();
+  const { favoriteTrack } = useFavoriteTrack();
 
   // console.log('tracksRecommendData', tracksRecommendData);
   // console.log('trackPlayCountData', trackPlayCountData);

@@ -5,13 +5,14 @@ import { ArtistAvataFrom } from '@/components/pages/quest/artist-avata-form';
 import { ArtistDetailForm } from '@/components/pages/quest/artist-detail-from';
 import { TopBar } from '@/components/pages/quest/top-bar';
 import { SpotifyArtistProps } from '@/types/searchTypes';
-import { TrackType } from '@/types/trackTypes';
+import { EnhancedTrackProps, TrackType } from '@/types/trackTypes';
 import { CommaUserType } from '@/types/authTypes';
-import * as style from './CompletedSearchTemplate.style';
+import { FavoriteArtistType } from '@/types/artistTypes';
+import * as style from './SearchResultsTemplate.style';
 import 'swiper/swiper.min.css';
 import 'swiper/swiper-bundle.min.css';
 
-interface CompletedSearchTemplateProps {
+interface SearchResultsTemplateProps {
   isHidden: boolean;
   onSlideChange: (swiper: any) => void;
   category: string;
@@ -21,16 +22,20 @@ interface CompletedSearchTemplateProps {
   onClickRoundInput: () => void;
   onClickEraseButton: () => void;
   onClickCategory: (category: string) => void;
-  onClickAlbumLikeButton: (trackId: string) => void;
+  onClickAlbumFavoriteButton: (trackId: string) => void;
   onClickArtistAvata: (artistData: SpotifyArtistProps) => void;
   onClickPrev: () => void;
+  onClickAlbumBox: (previewUrl: string, trackId: string) => void;
+  onClickFavoriteArtist: (artistId: string) => void;
+  onClickPlusButton: (trackId: string) => void;
   spotifyArtistData: SpotifyArtistProps[] | undefined;
-  spotifyTrackData: TrackType[] | undefined;
-  spotifyArtistDetailTrackData: TrackType[] | undefined;
+  spotifyTrackData: EnhancedTrackProps[];
+  spotifyArtistDetailTrackData: EnhancedTrackProps[];
   commaUserData: CommaUserType[] | undefined;
+  openMusicPlayer: string;
 }
 
-export const CompletedSearchTemplate = ({
+export const SearchResultsTemplate = ({
   isHidden,
   onSlideChange,
   category,
@@ -41,13 +46,17 @@ export const CompletedSearchTemplate = ({
   onClickRoundInput,
   onClickEraseButton,
   onClickCategory,
-  onClickAlbumLikeButton,
+  onClickAlbumFavoriteButton,
   onClickArtistAvata,
   onClickPrev,
+  onClickAlbumBox,
+  onClickFavoriteArtist,
+  onClickPlusButton,
   spotifyArtistData,
   spotifyTrackData,
   commaUserData,
-}: CompletedSearchTemplateProps) => (
+  openMusicPlayer,
+}: SearchResultsTemplateProps) => (
   <style.Wrapper>
     <TopBar
       onClickPrev={onClickPrev}
@@ -61,15 +70,12 @@ export const CompletedSearchTemplate = ({
 
     {category === 'music' && (
       <MusicAlbumFrom
-        musicData={spotifyTrackData?.map((value) => ({
-          ...value,
-          isLike: false,
-        }))}
-        onClickPlusButton={() => {}}
-        onClickLikeButton={(trackId: string) => {
-          onClickAlbumLikeButton(trackId);
-        }}
-        onClick={() => {}}
+        openMusicPlayer={openMusicPlayer}
+        musicData={spotifyTrackData}
+        onClickPlusButton={onClickPlusButton}
+        onClickFavoriteButton={onClickAlbumFavoriteButton}
+        onClickAlbumBox={onClickAlbumBox}
+        isPreviewMusicPlayerHidden={false}
       />
     )}
     {category === 'artist' && (
@@ -87,27 +93,20 @@ export const CompletedSearchTemplate = ({
           <ArtistAvataFrom
             artistData={spotifyArtistData}
             commaUserData={[]}
-            favoriteArtistData={[]}
-            onArtistAvataClick={(value) => {
-              onClickArtistAvata(value);
-            }}
+            onArtistAvataClick={onClickArtistAvata}
             onClickFavoriteArtistDetail={() => {}}
+            favoriteArtistData={undefined}
           />
         </style.Slide>
         <style.Slide>
           <ArtistDetailForm
-            artistImage={
-              spotifyArtistForDetailArtist
-                ? spotifyArtistForDetailArtist.images[2].url
-                : ''
-            }
-            artistName={
-              spotifyArtistForDetailArtist
-                ? spotifyArtistForDetailArtist.artistName
-                : ''
-            }
-            spotifyTrackData={spotifyTrackData}
-            isLike
+            onClickAlbumBox={onClickAlbumBox}
+            openMusicPlayer={openMusicPlayer}
+            soptifyArtistData={spotifyArtistForDetailArtist}
+            spotifyTrackData={spotifyArtistDetailTrackData}
+            onClickFavorite={() => {}}
+            onClickFavoriteArtist={onClickFavoriteArtist}
+            onClickPlusButton={() => {}}
           />
         </style.Slide>
       </style.CustomSwiper>
@@ -116,9 +115,9 @@ export const CompletedSearchTemplate = ({
       <ArtistAvataFrom
         artistData={[]}
         commaUserData={commaUserData}
-        favoriteArtistData={[]}
         onArtistAvataClick={() => {}}
         onClickFavoriteArtistDetail={() => {}}
+        favoriteArtistData={undefined}
       />
     )}
   </style.Wrapper>

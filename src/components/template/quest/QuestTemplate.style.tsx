@@ -9,17 +9,32 @@ export const Wrapper = styled.div`
 `;
 
 export const FriendsMostListenedTrackTitle = styled.title`
-  margintop: 15;
+  margin-top: 33px;
 `;
 
 export const MyMostListenedTrackTitle = styled.title`
-marginTop: 65, marginBottom: 20 
+  margin-top: 65px;
+  margin-bottom: 20px;
 `;
 
 export const MyFavoriteTracksTitle = styled.title`
-marginTop: 50, marginBottom: 20
+  margin-top: 50px;
+  margin-bottom: 20px;
 `;
 
 export const HighlyRecommendedTracksTitle = styled.title`
-marginTop: 50, marginBottom: 20
+  margin-top: 50px;
+  margin-bottom: 20px;
+`;
+
+export const MoreSee = styled.div`
+  width: 90px;
+  height: 90px;
+
+  background: #d9d9d9;
+  border-radius: 13px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;

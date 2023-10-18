@@ -68,13 +68,11 @@ const Id = () => {
         {playlistTracks &&
           playlistTracks.map((track) => (
             <HorizontalAlbumWithIcon
-              key={track.trackArtistResponses[0].track.id}
-              imgUrl={track.trackArtistResponses[0].track.albumImageUrl}
-              songName={track.trackArtistResponses[0].track.trackTitle}
-              singerName={HandleSingerName(track.trackArtistResponses)}
-              timer={HandleMS(
-                track.trackArtistResponses[0].track.durationTimeMs,
-              )}
+              key={track.trackArtistList[0].artist.spotifyArtistId}
+              imgUrl={track.trackArtistList[0].track.albumImageUrl}
+              songName={track.trackArtistList[0].track.trackTitle}
+              singerName={HandleSingerName(track.trackArtistList)}
+              timer={HandleMS(track.trackArtistList[0].track.durationTimeMs)}
               onClick={() => {}}
               onClickMoveButton={() => {}}
               isEditMode={isEditMode}

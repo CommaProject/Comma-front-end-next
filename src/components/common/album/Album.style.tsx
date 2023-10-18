@@ -10,9 +10,11 @@ interface ImgBoxProps {
 }
 
 export const Wrapper = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
   position: relative;
+  z-index: 0;
 `;
 
 export const ImgBox = styled.div<ImgBoxProps>`

@@ -2,12 +2,11 @@ import styled, { css } from 'styled-components';
 import heartSVG from '@/assets/images/bigHeart.svg';
 
 export interface LikeButtonProps {
-  isLike: boolean;
+  isFavorite: boolean;
 }
 
 export const Wrapper = styled.div`
   height: 100%;
- 
 `;
 
 export const AvatarBox = styled.div`
@@ -49,11 +48,11 @@ export const AvatarGroupName = styled.div`
 `;
 
 export const LikeButton = styled(heartSVG)<LikeButtonProps>`
-  ${({ theme, isLike }) => {
+  ${({ theme, isFavorite }) => {
     const { colors } = theme;
     return `
     path {
-      fill:  ${isLike ? colors.primary.main : null}
+      fill:  ${isFavorite ? colors.primary.main : null}
     }
     margin-bottom: 16px;
     `;

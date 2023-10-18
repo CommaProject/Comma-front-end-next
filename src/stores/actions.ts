@@ -14,3 +14,5 @@ export const handlePlayerModalAtom = atom(
     set(playerModalStateAtom, newModalState);
   },
 );
+
+export const closeCallbackAtom = atom<(() => void) | null>(null);

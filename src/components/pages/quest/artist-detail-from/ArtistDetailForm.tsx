@@ -1,48 +1,57 @@
 import { Avata } from '@/components/common/avata';
 import { SpotifyArtistProps } from '@/types/searchTypes';
-import { TrackType } from '@/types/trackTypes';
+import { EnhancedTrackProps } from '@/types/trackTypes';
 import { MusicAlbumFrom } from '../music-album-form';
 import * as style from './ArtistDetailForm.style';
 
 interface ArtistDetailFormProps {
-  
-  artistImage: string;
-  artistName: string;
-  spotifyTrackData: TrackType[] | undefined;
-  isLike: boolean;
+  soptifyArtistData: SpotifyArtistProps | undefined;
+  spotifyTrackData: EnhancedTrackProps[];
+  onClickFavorite: (trackId: string) => void;
+  onClickFavoriteArtist: (artistId: string) => void;
+  onClickPlusButton: (trackId: string) => void;
+  openMusicPlayer: string;
+  onClickAlbumBox: (previewUrl: string, trackId: string) => void;
 }
 
 export const ArtistDetailForm = ({
- 
-  artistImage,
-  artistName,
+  soptifyArtistData,
   spotifyTrackData,
-  isLike,
-}: ArtistDetailFormProps) =>  (
-    <style.Wrapper>
-      <style.AvatarBox>
-        <Avata
-          url={
-            artistImage && artistImage !== undefined
-              ? artistImage
-              : '~/src/assets/images/noImage.png'
-
-          }
-          size={89}
-        />
-        <style.AvatartName>{artistName}</style.AvatartName>
-        <style.LikeButton isLike={isLike} />
-      </style.AvatarBox>
-
-      <MusicAlbumFrom
-        musicData={spotifyTrackData?.map((value) => ({
-          ...value,
-          isLike: false,
-        }))}
-        onClickPlusButton={() => {}}
-        onClickLikeButton={(trackId: string) => {}}
-        onClick={() => {}}
+  onClickFavorite,
+  onClickFavoriteArtist,
+  onClickPlusButton,
+  openMusicPlayer,
+  onClickAlbumBox,
+}: ArtistDetailFormProps) => (
+  <style.Wrapper>
+    <style.AvatarBox>
+      <Avata
+        url={
+          soptifyArtistData && soptifyArtistData.images[2] !== undefined
+            ? soptifyArtistData.images[2].url
+            : '~/src/assets/images/noImage.png'
+        }
+        size={89}
       />
-    </style.Wrapper>
-  );
-
+      <style.AvatartName>{soptifyArtistData?.artistName}</style.AvatartName>
+      <style.LikeButton
+        isFavorite={false} // Avata isFavorite
+        onClick={() => {
+          onClickFavoriteArtist(
+            soptifyArtistData?.artistId !== undefined
+              ? soptifyArtistData?.artistId
+              : 'artistId is undefined', // error 처리 필요
+          );
+        }}
+      />
+    </style.AvatarBox>
+    <MusicAlbumFrom
+      openMusicPlayer={openMusicPlayer}
+      musicData={spotifyTrackData}
+      onClickPlusButton={onClickPlusButton}
+      onClickFavoriteButton={onClickFavorite}
+      onClickAlbumBox={onClickAlbumBox}
+      isPreviewMusicPlayerHidden={false}
+    />
+  </style.Wrapper>
+);

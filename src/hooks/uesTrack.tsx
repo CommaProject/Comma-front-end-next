@@ -7,7 +7,7 @@ const getTrackPlayCount = async () => {
   if (isSuccess && result.data) {
     return result.data;
   }
-  return null;
+  return [];
 };
 
 const getFriendsTrackPlayCount = async () => {
@@ -16,7 +16,7 @@ const getFriendsTrackPlayCount = async () => {
   if (isSuccess && result.data) {
     return result.data;
   }
-  return null;
+  return [];
 };
 
 export const useTrackPlayCount = () => {

@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import * as style from '@/styles/pages-styles/myplaylists.style';
 import { useRouter } from 'next/router';
-import { useGetMyPlaylists, deletePlaylist } from '../apis/playlist';
-import { PlaylistType } from '../constants/types/playlistTypes';
-import { PlaylistBox } from '../components/pages/home/playlist-box/PlaylistBox';
+import { usePlaylist } from '@/hooks/usePlaylist';
+import { deletePlaylist } from '@/apis/playlist';
+import { PlaylistType } from '@/constants/types/playlistTypes';
+import { PlaylistBox } from '@/components/pages/home/playlist-box/PlaylistBox';
 
 const MyPlaylists = () => {
   const router = useRouter();
@@ -16,13 +17,13 @@ const MyPlaylists = () => {
     setIsEditMode(!isEditMode);
   };
   // playlist api
-  const { myPlaylist } = useGetMyPlaylists();
+  const { myPlaylist } = usePlaylist();
 
   const [selectedPlaylist, setSelectedPlaylist] = useState<number[]>([]);
   const onToggleSelect = (playlistId: number) => {
     if (selectedPlaylist.includes(playlistId)) {
       setSelectedPlaylist((prevIds) =>
-        prevIds.filter((id) => id !== playlistId)
+        prevIds.filter((id) => id !== playlistId),
       );
     } else {
       setSelectedPlaylist((prevIds) => [...prevIds, playlistId]);

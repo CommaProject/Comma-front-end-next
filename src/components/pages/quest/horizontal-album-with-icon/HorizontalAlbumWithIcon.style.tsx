@@ -27,15 +27,15 @@ export const addPlayListButton = styled(plusSVG)`
 `;
 
 export interface likeButtonProps {
-  isLike: boolean;
+  isFavorite: boolean;
 }
 
 export const likeButton = styled(heartSVG)<likeButtonProps>`
-  ${({ theme, isLike }) => {
+  ${({ theme, isFavorite }) => {
     const { colors } = theme;
     return `
     path {
-      fill:  ${isLike ? colors.primary.main : null}
+      fill:  ${isFavorite ? colors.primary.main : null}
     }
     `;
   }}

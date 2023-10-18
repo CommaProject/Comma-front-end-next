@@ -1,7 +1,16 @@
 import { useRouter } from 'next/router';
-import { useCallback } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { getTracksRecommendAsync } from '@/apis/playlist';
+import { useCallback, useEffect, useState } from 'react';
+import {
+  QueryFunctionContext,
+  useMutation,
+  useQuery,
+} from '@tanstack/react-query';
+import {
+  addTrackToPlaylistAsync,
+  getAllMyplaylists,
+  getPlaylistAllTracksAsync,
+  getTracksRecommendAsync,
+} from '@/apis/playlist';
 
 /* 플레이 리스트 상세 정보 조회 페이지로 이동 */
 export const usePlaylist = () => {
@@ -17,11 +26,89 @@ export const usePlaylist = () => {
     [router],
   );
 
-  return { navigateToPlaylist };
+  const { data: myPlaylist } = useQuery(['MyPlaylists'], getAllMyplaylists);
+
+  return {
+    myPlaylist,
+    navigateToPlaylist,
+  };
+};
+
+// PlaylistTrack API //
+// Add playlist API
+const addPlaylistTrack = async (params: {
+  playlistIdList: number[];
+  spotifyTrackId: string;
+}) => {
+  const { isSuccess, result } = await addTrackToPlaylistAsync(
+    params.playlistIdList,
+    params.spotifyTrackId,
+  );
+
+  if (isSuccess && result.data) {
+    return result.data;
+  }
+  return [];
+};
+
+// Get PlaylistTrack API
+// PlaylistTrack Hook
+export const usePlaylistTrack = () => {
+  // Add Track
+  type playlistIdTotrackListType = {
+    [key: number]: string[];
+  };
+
+  const [playlistIdToTracks, setPlaylistIdTotrack] = useState<
+    playlistIdTotrackListType
+  >();
+  const { mutate: mutateAddPlaylistTrack } = useMutation(
+    ['addPlaylistTrack'],
+    addPlaylistTrack,
+    {
+      onSuccess: (response) => { },
+    },
+  );
+
+  /**
+   * @returns playlist: Track[]
+   */
+  const { myPlaylist } = usePlaylist();
+  const playlistToTracks =
+    myPlaylist &&
+    myPlaylist.map(async (playlist) => {
+      const tracks = await getPlaylistAllTracksAsync(playlist.playlistId);
+      const trackList = tracks.map(
+        (trackArtist) => trackArtist.trackArtistList[0].track.spotifyTrackId,
+      );
+      // setPlaylistIdTotrack((prevState) => ({
+      //   ...prevState,
+      //   [playlist.playlistId]: trackList,
+      // }));
+      return { [playlist.playlistId]: trackList };
+    });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (playlistToTracks) {
+        const arrTracks = await Promise.all(playlistToTracks);
+        const ObjTracks = Object.assign({}, ...arrTracks);
+        setPlaylistIdTotrack((prevState) => ({
+          ...prevState,
+          ...ObjTracks,
+        }));
+      }
+    };
+    fetchData();
+  }, []);
+  return {
+    mutateAddPlaylistTrack,
+    playlistIdToTracks,
+    setPlaylistIdTotrack,
+  };
 };
 
 /* 플레이리스트 전체 조회 페이지로 이동 */
-
 export const useAllPlaylists = () => {
   const router = useRouter();
 
@@ -42,7 +129,7 @@ const getTracksRecommend = async () => {
     return result.data;
   }
   // return { isSuccess, result };
-  return null;
+  return [];
 };
 
 export const useRecommend = () => {

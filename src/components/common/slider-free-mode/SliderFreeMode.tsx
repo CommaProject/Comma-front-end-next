@@ -20,6 +20,5 @@ export const SliderFreeMode = ({
     {React.Children.map(children, (child, index) => (
       <style.CardSwiperSlide>{child}</style.CardSwiperSlide>
     ))}
-    <style.CardSwiperSlide>더보기 (임시)</style.CardSwiperSlide>
   </style.CustomSwiper>
 );
