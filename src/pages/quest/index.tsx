@@ -23,9 +23,9 @@ const Quest = () => {
   return (
     <QuestTemplate
       onClickRoundInput={handleRoundInput}
-      friendsTrackPlayCountData={friendsTrackPlayCountData}
-      myMostListenedTracks={trackPlayCountData}
-      highlyRecommendedTracks={tracksRecommendData}
+      friendsTrackPlayCountData={friendsTrackPlayCountData || []}
+      myMostListenedTracks={trackPlayCountData || []}
+      highlyRecommendedTracks={tracksRecommendData || []}
       myFavoriteTracks={favoriteTrack}
     />
   );

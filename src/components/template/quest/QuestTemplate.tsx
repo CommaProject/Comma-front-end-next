@@ -10,10 +10,10 @@ import * as style from './QuestTemplate.style';
 
 interface QuestTemplateProps {
   onClickRoundInput: () => void;
-  myMostListenedTracks: TrackPlayCountType[] | null | undefined;
+  myMostListenedTracks: TrackPlayCountType[];
   myFavoriteTracks: TrackFavoritesType[];
-  highlyRecommendedTracks: TracksRecommendData[] | null | undefined;
-  friendsTrackPlayCountData: TrackPlayCountType[] | null | undefined;
+  highlyRecommendedTracks: TracksRecommendData[];
+  friendsTrackPlayCountData: TrackPlayCountType[];
 }
 
 export const QuestTemplate = ({
@@ -27,7 +27,7 @@ export const QuestTemplate = ({
     <RoundInput
       completedTextValue=""
       onClickRoundInput={onClickRoundInput}
-      handleEraseIconClick={() => {}}
+      handleEraseIconClick={() => { }}
       isSearchResults={false}
       isHidden={false}
     />
@@ -42,7 +42,7 @@ export const QuestTemplate = ({
       {myMostListenedTracks?.map((track) => (
         <VerticalAlbum
           key={track.trackArtist.track.id}
-          onClick={() => {}}
+          onClick={() => { }}
           imgUrl={track.trackArtist.track.albumImageUrl}
           songName={track.trackArtist.track.trackTitle}
           singerName={track.trackArtist.artist.artistName}
@@ -57,7 +57,7 @@ export const QuestTemplate = ({
       {myFavoriteTracks.map((track) => (
         <VerticalAlbum
           key={track.favoriteTrackId}
-          onClick={() => {}}
+          onClick={() => { }}
           imgUrl={track.trackArtistResponses[0].track.albumImageUrl}
           songName={track.trackArtistResponses[0].track.trackTitle}
           singerName={
@@ -67,26 +67,22 @@ export const QuestTemplate = ({
       ))}
       <style.MoreSee> 더보기 </style.MoreSee>
     </SliderFreeMode>
-    <style.HighlyRecommendedTracksTitle
-      style={{ marginTop: 50, marginBottom: 20 }}
-    >
+    <style.HighlyRecommendedTracksTitle>
       추천이 가장 많이 된 곡
     </style.HighlyRecommendedTracksTitle>
     <SliderFreeMode componentGab={0}>
-      {highlyRecommendedTracks ? (
+      {
         highlyRecommendedTracks.map((track) => (
           <VerticalAlbum
             key={track.track.id}
-            onClick={() => {}}
+            onClick={() => { }}
             imgUrl={track.track.albumImageUrl}
             songName={track.track.trackTitle}
             singerName={track.artist.artistName || 'undefined'}
           />
         ))
-      ) : (
-        <div>undefined</div>
-      )}
-      <style.MoreSee> 더보기 </style.MoreSee>
+      }
+      <style.MoreSee onClick={() => { }}> 더보기 </style.MoreSee>
     </SliderFreeMode>
   </style.Wrapper>
 );
