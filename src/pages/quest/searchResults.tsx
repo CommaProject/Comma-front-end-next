@@ -67,7 +67,8 @@ const SearchResults = () => {
       const spotifyArtistDetailTrackDataWithFavorite1 =
         spotifyArtistDetailTrackData.map((track) => ({
           ...track,
-          isFavorite: favoriteTrackIds?.includes(track.trackId),
+          isFavorite: false,
+          // isFavorite: favoriteTrackIds?.includes(track.trackId),
         }));
 
       setSpotifyArtistDetailTrackDataWithFavorite(
@@ -101,7 +102,7 @@ const SearchResults = () => {
   const handleArtistDetailTrack = useCallback(
     // Detail Artist
     (artistData: SpotifyArtistProps) => {
-      mutateArtistDetailTrack(artistData.artistName);
+      mutateArtistDetailTrack(artistData.artistId);
       setGetSpotifyArtistForDetailArtist(artistData);
       setIsHidden(true);
       swiperRef?.slideNext();

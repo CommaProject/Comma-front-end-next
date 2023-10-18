@@ -57,6 +57,22 @@ export async function getTrackAsync(
 }
 
 /**
+ * Track 데이터 가져오기
+ * @param track 이름
+ * @returns 성공: 200
+ */
+export async function getTrackOfArtistAsync(
+  spotifyArtistId: string,
+): ApiResponse<TrackType[]> {
+  const response = await getAsync<TrackType[]>(
+    `/spotify/artist/${spotifyArtistId}/tracks`,
+    {},
+  );
+
+  return response;
+}
+
+/**
  * Search History 데이터 가져오기
  * @returns 성공: 200
  */

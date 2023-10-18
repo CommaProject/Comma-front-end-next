@@ -25,7 +25,6 @@ export interface TrackType {
     url: string;
     width: number;
   }>;
-  popularity: number;
   releaseDate: string;
   durationMinute: number;
   durationSecond: number;
@@ -62,7 +61,6 @@ export interface TrackPlayCountType {
 }
 
 // Track Favorites Type
-
 export interface TrackArtistResponse {
   track: Track;
   artist: ArtistType;
