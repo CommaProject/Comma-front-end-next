@@ -15,7 +15,7 @@ const Profile = () => {
   return (
     <ProfileTemplate
       isProfileMine={isProfileMine}
-      myPlaylist={myPlaylist}
+      myPlaylist={myPlaylist || []}
       favoriteArtist={favoriteArtist}
       favoriteTrack={favoriteTrack}
       followingInfo={followingInfo}
