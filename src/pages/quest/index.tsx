@@ -5,6 +5,13 @@ import { useTrackPlayCount } from '@/hooks/uesTrack';
 import { useFavoriteTrack } from '@/hooks/useFavorite';
 import { useCallback, useState } from 'react';
 import { Swiper as SwiperClass } from 'swiper/types';
+import { AlbumProps } from '@/constants/types/albumTypes';
+
+export interface SeeMoreSlideProps extends AlbumProps {
+  // onClickPlusButton: () => void;
+  // onClickFavoriteButton: () => void;
+  // isFavorite: boolean;
+}
 
 const Quest = () => {
   const router = useRouter();
@@ -14,7 +21,7 @@ const Quest = () => {
   const [slideStep, setSlideStep] = useState(0);
   const [swiperRef, setSwiperRef] = useState<SwiperClass>();
   const [seeMoreTitle, setSeeMoreTitle] = useState('');
-
+  const [seeMoreData, setSeeMoreData] = useState<SeeMoreSlideProps[]>([]);
   // console.log('tracksRecommendData', tracksRecommendData);
   // console.log('trackPlayCountData', trackPlayCountData);
   // console.log('friendsTrackPlayCountData', friendsTrackPlayCountData);
@@ -24,14 +31,33 @@ const Quest = () => {
     router.push('/quest/search');
   };
 
+  const handleSeeMorePageData = ({
+    imgUrl,
+    songName,
+    singerName,
+  }: SeeMoreSlideProps) => {
+    const updatedSeeMoreData = [...seeMoreData];
+
+    const newSlideData: SeeMoreSlideProps = {
+      imgUrl,
+      songName,
+      singerName,
+    };
+
+    updatedSeeMoreData.push(newSlideData);
+    setSeeMoreData(updatedSeeMoreData);
+  };
   const handlePrev = useCallback(() => {
     swiperRef?.slidePrev();
   }, [swiperRef]);
 
-  const handleNext = useCallback((title: string) => {
-    setSeeMoreTitle(title);
-    swiperRef?.slideNext();
-  }, [swiperRef]);
+  const handleNext = useCallback(
+    (title: string) => {
+      setSeeMoreTitle(title);
+      swiperRef?.slideNext();
+    },
+    [swiperRef],
+  );
 
   const handleSwiper = (swiper: SwiperClass) => {
     console.log(swiper.realIndex);
@@ -50,7 +76,9 @@ const Quest = () => {
       onSlideChange={handleSwiper}
       onClickNextSlider={handleNext}
       onClickPrevButton={handlePrev}
-      slideStep={slideStep} />
+      slideStep={slideStep}
+      seeMoreData={seeMoreData}
+    />
   );
 };
 
