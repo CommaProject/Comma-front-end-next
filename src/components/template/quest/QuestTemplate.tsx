@@ -1,12 +1,9 @@
-import React from 'react';
 import { RoundInput } from '@/components/common/round-input';
-import { SliderFreeMode } from '@/components/common/slider-free-mode';
 import { SwiperAlbum } from '@/components/pages/quest/swiper-album';
-import { VerticalAlbum } from '@/components/common/album/vertical-album';
 import { TrackFavoritesType, TrackPlayCountType } from '@/types/trackTypes';
 import { TracksRecommendData } from '@/types/recommendType';
-import { Album } from '@/components/common/album';
 import * as style from './QuestTemplate.style';
+import { HighlyRecommendedTracks, MyFavoriteTracks, MyMostListenedTracks } from '@/components/pages/quest/free-sider-album-form';
 
 interface QuestTemplateProps {
   onClickRoundInput: () => void;
@@ -35,54 +32,8 @@ export const QuestTemplate = ({
       친구가 가장 많이 들은 곡
     </style.FriendsMostListenedTrackTitle>
     <SwiperAlbum friendsTrackPlayCountData={friendsTrackPlayCountData} />
-    <style.MyMostListenedTrackTitle>
-      내가 가장 많이 들은 곡
-    </style.MyMostListenedTrackTitle>
-    <SliderFreeMode componentGab={0}>
-      {myMostListenedTracks?.map((track) => (
-        <VerticalAlbum
-          key={track.trackArtist.track.id}
-          onClick={() => { }}
-          imgUrl={track.trackArtist.track.albumImageUrl}
-          songName={track.trackArtist.track.trackTitle}
-          singerName={track.trackArtist.artist.artistName}
-        />
-      ))}
-      <style.MoreSee> 더보기 </style.MoreSee>
-    </SliderFreeMode>
-    <style.MyFavoriteTracksTitle>
-      내가 좋아요 표시한 곡
-    </style.MyFavoriteTracksTitle>
-    <SliderFreeMode componentGab={0}>
-      {myFavoriteTracks.map((track) => (
-        <VerticalAlbum
-          key={track.favoriteTrackId}
-          onClick={() => { }}
-          imgUrl={track.trackArtistResponses[0].track.albumImageUrl}
-          songName={track.trackArtistResponses[0].track.trackTitle}
-          singerName={
-            track.trackArtistResponses[0]?.artist.artistName || 'undefined'
-          }
-        />
-      ))}
-      <style.MoreSee> 더보기 </style.MoreSee>
-    </SliderFreeMode>
-    <style.HighlyRecommendedTracksTitle>
-      추천이 가장 많이 된 곡
-    </style.HighlyRecommendedTracksTitle>
-    <SliderFreeMode componentGab={0}>
-      {
-        highlyRecommendedTracks.map((track) => (
-          <VerticalAlbum
-            key={track.track.id}
-            onClick={() => { }}
-            imgUrl={track.track.albumImageUrl}
-            songName={track.track.trackTitle}
-            singerName={track.artist.artistName || 'undefined'}
-          />
-        ))
-      }
-      <style.MoreSee onClick={() => { }}> 더보기 </style.MoreSee>
-    </SliderFreeMode>
+    <MyMostListenedTracks myMostListenedTracks={myMostListenedTracks} />
+    <MyFavoriteTracks myFavoriteTracks={myFavoriteTracks} />
+    <HighlyRecommendedTracks highlyRecommendedTracks={highlyRecommendedTracks} />
   </style.Wrapper>
 );
