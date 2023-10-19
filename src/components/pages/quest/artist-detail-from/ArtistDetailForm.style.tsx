@@ -7,6 +7,7 @@ export interface LikeButtonProps {
 
 export const Wrapper = styled.div`
   height: 100%;
+  width: 100%;
 `;
 
 export const AvatarBox = styled.div`
@@ -47,7 +48,7 @@ export const AvatarGroupName = styled.div`
   }}
 `;
 
-export const LikeButton = styled(heartSVG)<LikeButtonProps>`
+export const LikeButton = styled(heartSVG) <LikeButtonProps>`
   ${({ theme, isFavorite }) => {
     const { colors } = theme;
     return `
