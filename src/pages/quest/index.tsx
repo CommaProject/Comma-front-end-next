@@ -26,6 +26,11 @@ const Quest = () => {
     swiperRef?.slideNext();
   }, [swiperRef]);
 
+  const handleSwiper = (swiper: SwiperClass) => {
+    console.log(swiper.realIndex);
+    setSlideStep(swiper.realIndex);
+  };
+
   return (
     <QuestTemplate
       onClickRoundInput={handleRoundInput}
@@ -34,8 +39,11 @@ const Quest = () => {
       highlyRecommendedTracks={tracksRecommendData || []}
       myFavoriteTracks={favoriteTrack}
       setSwiperRef={setSwiperRef}
-      onSlideChange={() => { }}
-      onClickNextSlider={handleNext} />
+      onSlideChange={handleSwiper}
+      onClickNextSlider={handleNext}
+      onClickPrevButton={() => { }}
+      slideStep={slideStep}
+    />
   );
 };
 

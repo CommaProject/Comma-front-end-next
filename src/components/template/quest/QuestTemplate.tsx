@@ -5,15 +5,19 @@ import { SwiperAlbum } from '@/components/pages/quest/swiper-album';
 import { TrackFavoritesType, TrackPlayCountType } from '@/types/trackTypes';
 import { TracksRecommendData } from '@/types/recommendType';
 import { HighlyRecommendedTracks, MyFavoriteTracks, MyMostListenedTracks } from '@/components/pages/quest/free-sider-album-form';
+
 import * as style from './QuestTemplate.style';
+
 import 'swiper/swiper.min.css';
 import 'swiper/swiper-bundle.min.css';
 
 interface QuestTemplateProps {
+  slideStep: number;
   onClickRoundInput: () => void;
   setSwiperRef: Dispatch<SetStateAction<SwiperClass | undefined>>;
   onSlideChange: (swiper: any) => void;
   onClickNextSlider: () => void;
+  onClickPrevButton: () => void;
   myMostListenedTracks: TrackPlayCountType[];
   myFavoriteTracks: TrackFavoritesType[];
   highlyRecommendedTracks: TracksRecommendData[];
@@ -21,23 +25,36 @@ interface QuestTemplateProps {
 }
 
 export const QuestTemplate = ({
+  slideStep,
   onClickRoundInput,
   setSwiperRef,
   onSlideChange,
   onClickNextSlider,
+  onClickPrevButton,
   myMostListenedTracks,
   friendsTrackPlayCountData,
   myFavoriteTracks,
   highlyRecommendedTracks,
 }: QuestTemplateProps) => (
   <style.Wrapper>
-    <RoundInput
-      completedTextValue=""
-      onClickRoundInput={onClickRoundInput}
-      handleEraseIconClick={() => { }}
-      isSearchResults={false}
-      isHidden={false}
-    />
+    {
+      slideStep === 1 ?
+        <style.TopBar>
+          <style.PrevIcon onClick={onClickPrevButton} />
+          <style.Title>
+            내가 가장 많이 들은 곡
+          </style.Title>
+        </style.TopBar>
+        :
+        <RoundInput
+          completedTextValue=""
+          onClickRoundInput={onClickRoundInput}
+          handleEraseIconClick={() => { }}
+          isSearchResults={false}
+          isHidden={false}
+        />
+    }
+
 
     < style.CustomSwiper
       onSwiper={setSwiperRef}
@@ -63,6 +80,5 @@ export const QuestTemplate = ({
         test
       </style.Slide>
     </style.CustomSwiper>
-
   </style.Wrapper >
 );
