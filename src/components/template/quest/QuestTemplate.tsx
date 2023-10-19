@@ -1,12 +1,19 @@
+import { Dispatch, SetStateAction } from 'react';
 import { RoundInput } from '@/components/common/round-input';
+import { Swiper as SwiperClass } from 'swiper/types';
 import { SwiperAlbum } from '@/components/pages/quest/swiper-album';
 import { TrackFavoritesType, TrackPlayCountType } from '@/types/trackTypes';
 import { TracksRecommendData } from '@/types/recommendType';
-import * as style from './QuestTemplate.style';
 import { HighlyRecommendedTracks, MyFavoriteTracks, MyMostListenedTracks } from '@/components/pages/quest/free-sider-album-form';
+import * as style from './QuestTemplate.style';
+import 'swiper/swiper.min.css';
+import 'swiper/swiper-bundle.min.css';
 
 interface QuestTemplateProps {
   onClickRoundInput: () => void;
+  setSwiperRef: Dispatch<SetStateAction<SwiperClass | undefined>>;
+  onSlideChange: (swiper: any) => void;
+  onClickNextSlider: () => void;
   myMostListenedTracks: TrackPlayCountType[];
   myFavoriteTracks: TrackFavoritesType[];
   highlyRecommendedTracks: TracksRecommendData[];
@@ -15,6 +22,9 @@ interface QuestTemplateProps {
 
 export const QuestTemplate = ({
   onClickRoundInput,
+  setSwiperRef,
+  onSlideChange,
+  onClickNextSlider,
   myMostListenedTracks,
   friendsTrackPlayCountData,
   myFavoriteTracks,
@@ -28,12 +38,31 @@ export const QuestTemplate = ({
       isSearchResults={false}
       isHidden={false}
     />
-    <style.FriendsMostListenedTrackTitle>
-      친구가 가장 많이 들은 곡
-    </style.FriendsMostListenedTrackTitle>
-    <SwiperAlbum friendsTrackPlayCountData={friendsTrackPlayCountData} />
-    <MyMostListenedTracks myMostListenedTracks={myMostListenedTracks} />
-    <MyFavoriteTracks myFavoriteTracks={myFavoriteTracks} />
-    <HighlyRecommendedTracks highlyRecommendedTracks={highlyRecommendedTracks} />
-  </style.Wrapper>
+
+    < style.CustomSwiper
+      onSwiper={setSwiperRef}
+      slidesPerView={1}
+      centeredSlides
+      noSwiping
+      mousewheel={false}
+      centerInsufficientSlides
+      allowTouchMove={false}
+      onSlideChange={onSlideChange}
+    >
+      <style.Slide>
+        <style.FriendsMostListenedTrackTitle>
+          친구가 가장 많이 들은 곡
+        </style.FriendsMostListenedTrackTitle>
+        <SwiperAlbum friendsTrackPlayCountData={friendsTrackPlayCountData} />
+        <MyMostListenedTracks myMostListenedTracks={myMostListenedTracks}
+          onClickNextSlider={onClickNextSlider} />
+        <MyFavoriteTracks myFavoriteTracks={myFavoriteTracks} />
+        <HighlyRecommendedTracks highlyRecommendedTracks={highlyRecommendedTracks} />
+      </style.Slide>
+      <style.Slide>
+        test
+      </style.Slide>
+    </style.CustomSwiper>
+
+  </style.Wrapper >
 );

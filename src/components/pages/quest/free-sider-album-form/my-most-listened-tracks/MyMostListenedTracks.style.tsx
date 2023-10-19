@@ -4,9 +4,9 @@ export const Wrapper = styled.div`
 
 `;
 
-export const Title = styled.title`
-    margin-top: 50px;
-    margin-bottom: 20px;
+export const Title = styled.title`l
+margin-top: 65px;
+margin-bottom: 20px;
 `
 
 export const MoreSee = styled.div`
