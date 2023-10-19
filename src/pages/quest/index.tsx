@@ -13,6 +13,8 @@ const Quest = () => {
   const { favoriteTrack } = useFavoriteTrack();
   const [slideStep, setSlideStep] = useState(0);
   const [swiperRef, setSwiperRef] = useState<SwiperClass>();
+  const [seeMoreTitle, setSeeMoreTitle] = useState('');
+
   // console.log('tracksRecommendData', tracksRecommendData);
   // console.log('trackPlayCountData', trackPlayCountData);
   // console.log('friendsTrackPlayCountData', friendsTrackPlayCountData);
@@ -21,8 +23,13 @@ const Quest = () => {
   const handleRoundInput = () => {
     router.push('/quest/search');
   };
-  const handleNext = useCallback(() => {
-    console.log(swiperRef);
+
+  const handlePrev = useCallback(() => {
+    swiperRef?.slidePrev();
+  }, [swiperRef]);
+
+  const handleNext = useCallback((title: string) => {
+    setSeeMoreTitle(title);
     swiperRef?.slideNext();
   }, [swiperRef]);
 
@@ -33,6 +40,7 @@ const Quest = () => {
 
   return (
     <QuestTemplate
+      seeMoreTitle={seeMoreTitle}
       onClickRoundInput={handleRoundInput}
       friendsTrackPlayCountData={friendsTrackPlayCountData || []}
       myMostListenedTracks={trackPlayCountData || []}
@@ -41,9 +49,8 @@ const Quest = () => {
       setSwiperRef={setSwiperRef}
       onSlideChange={handleSwiper}
       onClickNextSlider={handleNext}
-      onClickPrevButton={() => { }}
-      slideStep={slideStep}
-    />
+      onClickPrevButton={handlePrev}
+      slideStep={slideStep} />
   );
 };
 

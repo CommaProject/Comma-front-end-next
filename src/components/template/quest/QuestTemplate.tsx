@@ -12,11 +12,12 @@ import 'swiper/swiper.min.css';
 import 'swiper/swiper-bundle.min.css';
 
 interface QuestTemplateProps {
+  seeMoreTitle: string;
   slideStep: number;
   onClickRoundInput: () => void;
   setSwiperRef: Dispatch<SetStateAction<SwiperClass | undefined>>;
   onSlideChange: (swiper: any) => void;
-  onClickNextSlider: () => void;
+  onClickNextSlider: (title: string) => void;
   onClickPrevButton: () => void;
   myMostListenedTracks: TrackPlayCountType[];
   myFavoriteTracks: TrackFavoritesType[];
@@ -25,6 +26,7 @@ interface QuestTemplateProps {
 }
 
 export const QuestTemplate = ({
+  seeMoreTitle,
   slideStep,
   onClickRoundInput,
   setSwiperRef,
@@ -42,7 +44,7 @@ export const QuestTemplate = ({
         <style.TopBar>
           <style.PrevIcon onClick={onClickPrevButton} />
           <style.Title>
-            내가 가장 많이 들은 곡
+            {seeMoreTitle}
           </style.Title>
         </style.TopBar>
         :
@@ -54,8 +56,6 @@ export const QuestTemplate = ({
           isHidden={false}
         />
     }
-
-
     < style.CustomSwiper
       onSwiper={setSwiperRef}
       slidesPerView={1}
@@ -71,10 +71,15 @@ export const QuestTemplate = ({
           친구가 가장 많이 들은 곡
         </style.FriendsMostListenedTrackTitle>
         <SwiperAlbum friendsTrackPlayCountData={friendsTrackPlayCountData} />
-        <MyMostListenedTracks myMostListenedTracks={myMostListenedTracks}
+        <MyMostListenedTracks
+          myMostListenedTracks={myMostListenedTracks}
           onClickNextSlider={onClickNextSlider} />
-        <MyFavoriteTracks myFavoriteTracks={myFavoriteTracks} />
-        <HighlyRecommendedTracks highlyRecommendedTracks={highlyRecommendedTracks} />
+        <MyFavoriteTracks
+          myFavoriteTracks={myFavoriteTracks}
+          onClickNextSlider={onClickNextSlider} />
+        <HighlyRecommendedTracks
+          highlyRecommendedTracks={highlyRecommendedTracks}
+          onClickNextSlider={onClickNextSlider} />
       </style.Slide>
       <style.Slide>
         test

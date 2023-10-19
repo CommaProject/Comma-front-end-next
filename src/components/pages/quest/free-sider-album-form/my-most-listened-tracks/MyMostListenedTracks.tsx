@@ -6,7 +6,7 @@ import * as style from './MyMostListenedTracks.style';
 
 interface MyMostListenedTracksProps {
     myMostListenedTracks: TrackPlayCountType[];
-    onClickNextSlider: () => void;
+    onClickNextSlider: (title: string) => void;
 }
 
 export const MyMostListenedTracks = ({ myMostListenedTracks, onClickNextSlider }: MyMostListenedTracksProps) => (
@@ -24,7 +24,7 @@ export const MyMostListenedTracks = ({ myMostListenedTracks, onClickNextSlider }
                     singerName={track.trackArtist.artist.artistName}
                 />
             ))}
-            <style.MoreSee onClick={onClickNextSlider}> 더보기 </style.MoreSee>
+            <style.MoreSee onClick={() => onClickNextSlider('내가 가장 많이 들은 곡')}> 더보기 </style.MoreSee>
         </SliderFreeMode>
     </style.Wrapper>
 )
