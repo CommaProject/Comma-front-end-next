@@ -25,6 +25,7 @@ export const HighlyRecommendedTracks = ({ highlyRecommendedTracks, onClickNextSl
             ))}
             <style.MoreSee onClick={() => {
                 const seeMoreDataArray = highlyRecommendedTracks.map(track => ({
+                    trackId: track.track.spotifyTrackId,
                     imgUrl: track.track.albumImageUrl,
                     songName: track.track.trackTitle,
                     singerName: track.artist.artistName,

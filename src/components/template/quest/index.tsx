@@ -1,3 +1,3 @@
-import { QuestTemplate } from './QuestTemplate.1';
+import { QuestTemplate } from './QuestTemplate';
 
 export { QuestTemplate };

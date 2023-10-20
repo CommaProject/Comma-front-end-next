@@ -28,6 +28,7 @@ export const MyMostListenedTracks = ({
       <style.MoreSee
         onClick={() => {
           const seeMoreDataArray = myMostListenedTracks.map(track => ({
+            trackId: track.trackArtist.track.spotifyTrackId,
             imgUrl: track.trackArtist.track.albumImageUrl,
             songName: track.trackArtist.track.trackTitle,
             singerName: track.trackArtist.artist.artistName,

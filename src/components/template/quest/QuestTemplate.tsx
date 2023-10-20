@@ -27,6 +27,7 @@ interface QuestTemplateProps {
   onSlideChange: (swiper: any) => void;
   onClickNextSlider: (title: string, data: SeeMoreSlideProps[]) => void;
   onClickPrevButton: () => void;
+  onClickFavorite: (trackId: string) => void;
   myMostListenedTracks: TrackPlayCountType[];
   myFavoriteTracks: TrackFavoritesType[];
   highlyRecommendedTracks: TracksRecommendData[];
@@ -42,6 +43,7 @@ export const QuestTemplate = ({
   onSlideChange,
   onClickNextSlider,
   onClickPrevButton,
+  onClickFavorite,
   myMostListenedTracks,
   friendsTrackPlayCountData,
   myFavoriteTracks,
@@ -99,7 +101,7 @@ export const QuestTemplate = ({
               return (
                 <HorizontalAlbumWithIcon
                   onClickPlusButton={() => { }}
-                  onClickFavoriteButton={() => { }}
+                  onClickFavoriteButton={() => { onClickFavorite(album.trackId) }}
                   isFavorite={false}
                   timer={`${String(minutes)}m ${String(seconds)}s`}
                   onClick={() => { }}

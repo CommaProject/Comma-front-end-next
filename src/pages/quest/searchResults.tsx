@@ -52,7 +52,7 @@ const SearchResults = () => {
     mutateCommaUser,
     mutateArtistDetailTrack,
   } = useSearch();
-  const { favoriteTrackIds, deleteTrackMutate, addFavoriteTrackMutate } =
+  const { favoriteTrackIds, deleteFavoriteTrackMutate, addFavoriteTrackMutate } =
     useFavoriteTrack();
   const { addFavoriteArtistMutate } = useFavoriteArtist();
   const { isPlaylistAvailable, isCommaPlaylistAvailable, commaPlaylist } =
@@ -209,7 +209,7 @@ const SearchResults = () => {
       onClickAlbumFavoriteButton={(spotifyTrackId: string) => {
         if (favoriteTrackIds) {
           if (Object.keys(favoriteTrackIds).includes(spotifyTrackId))
-            deleteTrackMutate(favoriteTrackIds[spotifyTrackId]);
+            deleteFavoriteTrackMutate(favoriteTrackIds[spotifyTrackId]);
           else addFavoriteTrackMutate(spotifyTrackId);
         }
       }}

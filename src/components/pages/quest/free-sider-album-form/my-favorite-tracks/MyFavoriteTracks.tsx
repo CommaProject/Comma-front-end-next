@@ -28,6 +28,7 @@ export const MyFavoriteTracks = ({ myFavoriteTracks, onClickNextSlider }: MyFavo
             ))}
             <style.MoreSee onClick={() => {
                 const seeMoreDataArray = myFavoriteTracks.map(track => ({
+                    trackId: track.trackArtistResponses[0].track.spotifyTrackId,
                     imgUrl: track.trackArtistResponses[0].track.albumImageUrl,
                     songName: track.trackArtistResponses[0].track.trackTitle,
                     singerName: track.trackArtistResponses[0].artist.artistName,

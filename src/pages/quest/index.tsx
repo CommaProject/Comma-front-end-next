@@ -1,18 +1,22 @@
 import { useRouter } from 'next/router';
-import { QuestTemplate } from '~/src/components/template/quest/QuestTemplate.1';
 import { useRecommend } from '@/hooks/usePlaylist';
 import { useTrackPlayCount } from '@/hooks/uesTrack';
 import { useFavoriteTrack } from '@/hooks/useFavorite';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Swiper as SwiperClass } from 'swiper/types';
 import { AlbumProps } from '@/constants/types/albumTypes';
+import { QuestTemplate } from '@/components/template/quest';
 
 export interface SeeMoreSlideProps extends AlbumProps {
   // onClickPlusButton: () => void;
   // onClickFavoriteButton: () => void;
   // isFavorite: boolean;
   timer: number;
+  trackId: string;
+}
 
+interface SeeMoreSlideWithFavoriteProps extends SeeMoreSlideProps {
+  isFavorite: boolean;
 }
 
 const Quest = () => {
@@ -23,20 +27,36 @@ const Quest = () => {
   const [slideStep, setSlideStep] = useState(0);
   const [swiperRef, setSwiperRef] = useState<SwiperClass>();
   const [seeMoreTitle, setSeeMoreTitle] = useState('');
-  const [seeMoreData, setSeeMoreData] = useState<SeeMoreSlideProps[]>([]);
+  const [seeMoreData, setSeeMoreData] = useState<SeeMoreSlideWithFavoriteProps[]>([]);
   // console.log('tracksRecommendData', tracksRecommendData);
   // console.log('trackPlayCountData', trackPlayCountData);
   // console.log('friendsTrackPlayCountData', friendsTrackPlayCountData);
   // console.log('favoriteTrack', favoriteTrack);
+
+  // isFavorite은 매번 Reload되기 때문에 따로 분리해보기.
+  const { favoriteTrackIds, deleteFavoriteTrackMutate, addFavoriteTrackMutate } =
+    useFavoriteTrack();
+
+  useEffect(() => {
+    if (seeMoreData && favoriteTrackIds) {
+      const spotifyArtistDataWithFavorite1 = seeMoreData?.map((track) => ({
+        ...track,
+        isFavorite: Object.keys(favoriteTrackIds)?.includes(track.trackId),
+      }));
+
+      setSeeMoreData(spotifyArtistDataWithFavorite1);
+    }
+  }, [favoriteTrackIds]);
+
 
   const handleRoundInput = () => {
     router.push('/quest/search');
   };
 
   const handleSeeMorePageData = (data: SeeMoreSlideProps[]) => {
-    console.log('AlbumData', data);
     setSeeMoreData(data);
   };
+
   const handlePrev = useCallback(() => {
     swiperRef?.slidePrev();
   }, [swiperRef]);
@@ -58,6 +78,7 @@ const Quest = () => {
   return (
     <QuestTemplate
       seeMoreTitle={seeMoreTitle}
+      seeMoreData={seeMoreData}
       onClickRoundInput={handleRoundInput}
       friendsTrackPlayCountData={friendsTrackPlayCountData || []}
       myMostListenedTracks={trackPlayCountData || []}
@@ -67,8 +88,15 @@ const Quest = () => {
       onSlideChange={handleSwiper}
       onClickNextSlider={handleNext}
       onClickPrevButton={handlePrev}
+      onClickFavorite={(trackId: string) => {
+        if (favoriteTrackIds) {
+          if (Object.keys(favoriteTrackIds).includes(trackId))
+            deleteFavoriteTrackMutate(favoriteTrackIds[trackId]);
+          else addFavoriteTrackMutate(trackId);
+        }
+      }}
       slideStep={slideStep}
-      seeMoreData={seeMoreData}
+
     />
   );
 };
