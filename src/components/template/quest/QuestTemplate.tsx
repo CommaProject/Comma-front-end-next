@@ -99,18 +99,21 @@ export const QuestTemplate = ({
               const { minutes, seconds } = convertTimerToMinSec(album.timer);
 
               return (
-                <HorizontalAlbumWithIcon
-                  key={album.trackId}
-                  onClickPlusButton={() => { }}
-                  onClickFavoriteButton={() => { onClickFavorite(album.trackId) }}
-                  isFavorite={album.isFavorite ? album.isFavorite : false}
-                  timer={`${String(minutes)}m ${String(seconds)}s`}
-                  onClick={() => { }}
-                  imgUrl={album.imgUrl}
-                  songName={album.songName}
-                  singerName={album.singerName}
+                <style.SeeMoreBox>
+                  <HorizontalAlbumWithIcon
+                    key={album.trackId}
+                    onClickPlusButton={() => { }}
+                    onClickFavoriteButton={() => { onClickFavorite(album.trackId) }}
+                    isFavorite={album.isFavorite ? album.isFavorite : false}
+                    timer={`${String(minutes)}m ${String(seconds)}s`}
+                    onClick={() => { }}
+                    imgUrl={album.imgUrl}
+                    songName={album.songName}
+                    singerName={album.singerName}
 
-                />
+                  />
+                </style.SeeMoreBox>
+
               );
             })
           }

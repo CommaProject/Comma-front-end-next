@@ -16,6 +16,7 @@ overflow: scroll;
 export const FriendsMostListenedTrackTitle = styled.title`
   margin-top: 33px;
 `;
+
 export const PrevIcon = styled(PrevSVG)`
   margin-right: auto; 
 `
@@ -25,6 +26,7 @@ export const TopBar = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  margin-bottom: 30px;
   `;
 
 export const Title = styled.title`
@@ -34,16 +36,8 @@ align-items: center;
 margin-right: auto;
 `;
 
-export const MoreSee = styled.div`
-    width: 90px;
-    height: 90px;
-
-    background: #d9d9d9;
-    border-radius: 13px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
+export const SeeMoreBox = styled.div`
+  margin-bottom: 15px;
     `;
 
 export const CustomSwiper = styled(Swiper)`
