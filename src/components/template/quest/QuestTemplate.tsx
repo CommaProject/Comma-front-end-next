@@ -10,12 +10,13 @@ import {
   MyMostListenedTracks,
 } from '@/components/pages/quest/free-sider-album-form';
 
-import { SeeMoreSlideProps } from '~/src/pages/quest';
+import { SeeMoreSlideProps } from '@/pages/quest';
+import { convertTimerToMinSec } from '@/utils/formatTime';
+import { HorizontalAlbumWithIcon } from '@/components/pages/quest/horizontal-album-with-icon';
 import * as style from './QuestTemplate.style';
 
 import 'swiper/swiper.min.css';
 import 'swiper/swiper-bundle.min.css';
-import { HorizontalAlbumWithIcon } from '../../pages/quest/horizontal-album-with-icon';
 
 interface QuestTemplateProps {
   seeMoreTitle: string;
@@ -24,7 +25,7 @@ interface QuestTemplateProps {
   onClickRoundInput: () => void;
   setSwiperRef: Dispatch<SetStateAction<SwiperClass | undefined>>;
   onSlideChange: (swiper: any) => void;
-  onClickNextSlider: (title: string) => void;
+  onClickNextSlider: (title: string, data: SeeMoreSlideProps[]) => void;
   onClickPrevButton: () => void;
   myMostListenedTracks: TrackPlayCountType[];
   myFavoriteTracks: TrackFavoritesType[];
@@ -56,7 +57,7 @@ export const QuestTemplate = ({
       <RoundInput
         completedTextValue=""
         onClickRoundInput={onClickRoundInput}
-        handleEraseIconClick={() => {}}
+        handleEraseIconClick={() => { }}
         isSearchResults={false}
         isHidden={false}
       />
@@ -90,18 +91,27 @@ export const QuestTemplate = ({
         />
       </style.Slide>
       <style.Slide>
-        {seeMoreData.map((album) => (
-          <HorizontalAlbumWithIcon
-            onClickPlusButton={() => {}}
-            onClickFavoriteButton={() => {}}
-            isFavorite={false}
-            timer="test"
-            onClick={() => {}}
-            imgUrl={album.imgUrl}
-            songName={album.songName}
-            singerName={album.singerName}
-          />
-        ))}
+        <style.Wrapper>
+          {
+            seeMoreData.map((album) => {
+              const { minutes, seconds } = convertTimerToMinSec(album.timer);
+
+              return (
+                <HorizontalAlbumWithIcon
+                  onClickPlusButton={() => { }}
+                  onClickFavoriteButton={() => { }}
+                  isFavorite={false}
+                  timer={`${String(minutes)}m ${String(seconds)}s`}
+                  onClick={() => { }}
+                  imgUrl={album.imgUrl}
+                  songName={album.songName}
+                  singerName={album.singerName}
+
+                />
+              );
+            })
+          }
+        </style.Wrapper>
       </style.Slide>
     </style.CustomSwiper>
   </style.Wrapper>

@@ -1,7 +1,7 @@
 interface Track {
   id: number;
   trackTitle: string;
-  durationTimeMs: number | null;
+  durationTimeMs: number;
   recommendCount: number;
   albumImageUrl: string;
   spotifyTrackId: string;

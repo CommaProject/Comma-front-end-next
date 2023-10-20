@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { QuestTemplate } from '@/components/template/quest/QuestTemplate';
+import { QuestTemplate } from '~/src/components/template/quest/QuestTemplate.1';
 import { useRecommend } from '@/hooks/usePlaylist';
 import { useTrackPlayCount } from '@/hooks/uesTrack';
 import { useFavoriteTrack } from '@/hooks/useFavorite';
@@ -11,6 +11,8 @@ export interface SeeMoreSlideProps extends AlbumProps {
   // onClickPlusButton: () => void;
   // onClickFavoriteButton: () => void;
   // isFavorite: boolean;
+  timer: number;
+
 }
 
 const Quest = () => {
@@ -31,28 +33,17 @@ const Quest = () => {
     router.push('/quest/search');
   };
 
-  const handleSeeMorePageData = ({
-    imgUrl,
-    songName,
-    singerName,
-  }: SeeMoreSlideProps) => {
-    const updatedSeeMoreData = [...seeMoreData];
-
-    const newSlideData: SeeMoreSlideProps = {
-      imgUrl,
-      songName,
-      singerName,
-    };
-
-    updatedSeeMoreData.push(newSlideData);
-    setSeeMoreData(updatedSeeMoreData);
+  const handleSeeMorePageData = (data: SeeMoreSlideProps[]) => {
+    console.log('AlbumData', data);
+    setSeeMoreData(data);
   };
   const handlePrev = useCallback(() => {
     swiperRef?.slidePrev();
   }, [swiperRef]);
 
   const handleNext = useCallback(
-    (title: string) => {
+    (title: string, data: SeeMoreSlideProps[]) => {
+      handleSeeMorePageData(data)
       setSeeMoreTitle(title);
       swiperRef?.slideNext();
     },

@@ -5,6 +5,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 
 export const Wrapper = styled.div`
+margin-top: 12px;
 margin-left: 15px;
 margin-right: 15px;
 height: 100%;

@@ -1,11 +1,12 @@
 import { SliderFreeMode } from '@/components/common/slider-free-mode';
 import { VerticalAlbum } from '@/components/common/album/vertical-album';
 import { TracksRecommendData } from '@/constants/types/recommendType';
+import { SeeMoreSlideProps } from '@/pages/quest';
 import * as style from './HighlyRecommendedTracks.style';
 
 interface HighlyRecommendedTracksProps {
     highlyRecommendedTracks: TracksRecommendData[];
-    onClickNextSlider: (title: string) => void;
+    onClickNextSlider: (title: string, seeMoreData: SeeMoreSlideProps[]) => void;
 }
 
 export const HighlyRecommendedTracks = ({ highlyRecommendedTracks, onClickNextSlider }: HighlyRecommendedTracksProps) => (
@@ -22,7 +23,17 @@ export const HighlyRecommendedTracks = ({ highlyRecommendedTracks, onClickNextSl
                     songName={track.track.trackTitle}
                     singerName={track.artist.artistName || 'undefined'} />
             ))}
-            <style.MoreSee onClick={() => onClickNextSlider('추천이 가장 많이 된 곡')}> 더보기 </style.MoreSee>
+            <style.MoreSee onClick={() => {
+                const seeMoreDataArray = highlyRecommendedTracks.map(track => ({
+                    imgUrl: track.track.albumImageUrl,
+                    songName: track.track.trackTitle,
+                    singerName: track.artist.artistName,
+                    timer: track.track.durationTimeMs,
+                }));
+
+                onClickNextSlider('추천이 가장 많이 된 곡', seeMoreDataArray)
+            }
+            }> 더보기 </style.MoreSee>
         </SliderFreeMode>
     </style.Wrapper>
 )

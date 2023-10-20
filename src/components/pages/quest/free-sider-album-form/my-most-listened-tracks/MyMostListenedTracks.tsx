@@ -6,7 +6,7 @@ import * as style from './MyMostListenedTracks.style';
 
 interface MyMostListenedTracksProps {
   myMostListenedTracks: TrackPlayCountType[];
-  onClickNextSlider: (title: string, seeMoreData: SeeMoreSlideProps) => void;
+  onClickNextSlider: (title: string, seeMoreData: SeeMoreSlideProps[]) => void;
 }
 
 export const MyMostListenedTracks = ({
@@ -19,20 +19,23 @@ export const MyMostListenedTracks = ({
       {myMostListenedTracks?.map((track) => (
         <VerticalAlbum
           key={track.trackArtist.track.id}
-          onClick={() => {}}
+          onClick={() => { }}
           imgUrl={track.trackArtist.track.albumImageUrl}
           songName={track.trackArtist.track.trackTitle}
           singerName={track.trackArtist.artist.artistName}
         />
       ))}
       <style.MoreSee
-        onClick={() =>
-          onClickNextSlider('내가 가장 많이 들은 곡', {
-            imgUrl: '',
-            songName: '',
-            singerName: '',
-          })
-        }
+        onClick={() => {
+          const seeMoreDataArray = myMostListenedTracks.map(track => ({
+            imgUrl: track.trackArtist.track.albumImageUrl,
+            songName: track.trackArtist.track.trackTitle,
+            singerName: track.trackArtist.artist.artistName,
+            timer: track.trackArtist.track.durationTimeMs,
+          }));
+
+          onClickNextSlider('내가 가장 많이 들은 곡', seeMoreDataArray);
+        }}
       >
         {' '}
         더보기{' '}
