@@ -6,6 +6,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { Swiper as SwiperClass } from 'swiper/types';
 import { AlbumProps } from '@/constants/types/albumTypes';
 import { QuestTemplate } from '@/components/template/quest';
+import { useQueryClient } from '@tanstack/react-query';
 
 export interface SeeMoreSlideProps extends AlbumProps {
   // onClickPlusButton: () => void;
@@ -15,8 +16,8 @@ export interface SeeMoreSlideProps extends AlbumProps {
   trackId: string;
 }
 
-interface SeeMoreSlideWithFavoriteProps extends SeeMoreSlideProps {
-  isFavorite: boolean;
+export interface SeeMoreSlideWithFavoriteProps extends SeeMoreSlideProps {
+  isFavorite: boolean | undefined;
 }
 
 const Quest = () => {
@@ -32,29 +33,32 @@ const Quest = () => {
   // console.log('trackPlayCountData', trackPlayCountData);
   // console.log('friendsTrackPlayCountData', friendsTrackPlayCountData);
   // console.log('favoriteTrack', favoriteTrack);
-
+  const queryClient = useQueryClient();
   // isFavorite은 매번 Reload되기 때문에 따로 분리해보기.
   const { favoriteTrackIds, deleteFavoriteTrackMutate, addFavoriteTrackMutate } =
     useFavoriteTrack();
 
   useEffect(() => {
     if (seeMoreData && favoriteTrackIds) {
-      const spotifyArtistDataWithFavorite1 = seeMoreData?.map((track) => ({
+      const spotifyTrackDataWithFavorite1 = seeMoreData?.map((track) => ({
         ...track,
         isFavorite: Object.keys(favoriteTrackIds)?.includes(track.trackId),
       }));
 
-      setSeeMoreData(spotifyArtistDataWithFavorite1);
+      setSeeMoreData(spotifyTrackDataWithFavorite1);
     }
   }, [favoriteTrackIds]);
-
 
   const handleRoundInput = () => {
     router.push('/quest/search');
   };
 
   const handleSeeMorePageData = (data: SeeMoreSlideProps[]) => {
-    setSeeMoreData(data);
+    const updatedData = data.map((track) => ({
+      ...track,
+      isFavorite: favoriteTrackIds ? Object.keys(favoriteTrackIds)?.includes(track.trackId) : false,
+    }));
+    setSeeMoreData(updatedData);
   };
 
   const handlePrev = useCallback(() => {
@@ -71,7 +75,6 @@ const Quest = () => {
   );
 
   const handleSwiper = (swiper: SwiperClass) => {
-    console.log(swiper.realIndex);
     setSlideStep(swiper.realIndex);
   };
 

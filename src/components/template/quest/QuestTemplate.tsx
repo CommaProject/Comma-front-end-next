@@ -10,7 +10,7 @@ import {
   MyMostListenedTracks,
 } from '@/components/pages/quest/free-sider-album-form';
 
-import { SeeMoreSlideProps } from '@/pages/quest';
+import { SeeMoreSlideProps, SeeMoreSlideWithFavoriteProps } from '@/pages/quest';
 import { convertTimerToMinSec } from '@/utils/formatTime';
 import { HorizontalAlbumWithIcon } from '@/components/pages/quest/horizontal-album-with-icon';
 import * as style from './QuestTemplate.style';
@@ -20,7 +20,7 @@ import 'swiper/swiper-bundle.min.css';
 
 interface QuestTemplateProps {
   seeMoreTitle: string;
-  seeMoreData: SeeMoreSlideProps[];
+  seeMoreData: SeeMoreSlideWithFavoriteProps[];
   slideStep: number;
   onClickRoundInput: () => void;
   setSwiperRef: Dispatch<SetStateAction<SwiperClass | undefined>>;
@@ -100,9 +100,10 @@ export const QuestTemplate = ({
 
               return (
                 <HorizontalAlbumWithIcon
+                  key={album.trackId}
                   onClickPlusButton={() => { }}
                   onClickFavoriteButton={() => { onClickFavorite(album.trackId) }}
-                  isFavorite={false}
+                  isFavorite={album.isFavorite ? album.isFavorite : false}
                   timer={`${String(minutes)}m ${String(seconds)}s`}
                   onClick={() => { }}
                   imgUrl={album.imgUrl}
