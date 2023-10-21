@@ -1,92 +1,124 @@
-import React from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import { RoundInput } from '@/components/common/round-input';
-import { SliderFreeMode } from '@/components/common/slider-free-mode';
+import { Swiper as SwiperClass } from 'swiper/types';
 import { SwiperAlbum } from '@/components/pages/quest/swiper-album';
-import { VerticalAlbum } from '@/components/common/album/vertical-album';
 import { TrackFavoritesType, TrackPlayCountType } from '@/types/trackTypes';
 import { TracksRecommendData } from '@/types/recommendType';
-import { Album } from '@/components/common/album';
+import {
+  HighlyRecommendedTracks,
+  MyFavoriteTracks,
+  MyMostListenedTracks,
+} from '@/components/pages/quest/free-sider-album-form';
+
+import { SeeMoreSlideProps, SeeMoreSlideWithFavoriteProps } from '@/pages/quest';
+import { convertTimerToMinSec } from '@/utils/formatTime';
+import { HorizontalAlbumWithIcon } from '@/components/pages/quest/horizontal-album-with-icon';
 import * as style from './QuestTemplate.style';
 
+import 'swiper/swiper.min.css';
+import 'swiper/swiper-bundle.min.css';
+
 interface QuestTemplateProps {
+  seeMoreTitle: string;
+  seeMoreData: SeeMoreSlideWithFavoriteProps[];
+  slideStep: number;
   onClickRoundInput: () => void;
-  myMostListenedTracks: TrackPlayCountType[] | null | undefined;
+  setSwiperRef: Dispatch<SetStateAction<SwiperClass | undefined>>;
+  onSlideChange: (swiper: any) => void;
+  onClickNextSlider: (title: string, data: SeeMoreSlideProps[]) => void;
+  onClickPrevButton: () => void;
+  onClickFavorite: (trackId: string) => void;
+  myMostListenedTracks: TrackPlayCountType[];
   myFavoriteTracks: TrackFavoritesType[];
-  highlyRecommendedTracks: TracksRecommendData[] | null | undefined;
-  friendsTrackPlayCountData: TrackPlayCountType[] | null | undefined;
+  highlyRecommendedTracks: TracksRecommendData[];
+  friendsTrackPlayCountData: TrackPlayCountType[];
 }
 
 export const QuestTemplate = ({
+  seeMoreTitle,
+  seeMoreData,
+  slideStep,
   onClickRoundInput,
+  setSwiperRef,
+  onSlideChange,
+  onClickNextSlider,
+  onClickPrevButton,
+  onClickFavorite,
   myMostListenedTracks,
   friendsTrackPlayCountData,
   myFavoriteTracks,
   highlyRecommendedTracks,
 }: QuestTemplateProps) => (
   <style.Wrapper>
-    <RoundInput
-      completedTextValue=""
-      onClickRoundInput={onClickRoundInput}
-      handleEraseIconClick={() => {}}
-      isSearchResults={false}
-      isHidden={false}
-    />
-    <style.FriendsMostListenedTrackTitle>
-      친구가 가장 많이 들은 곡
-    </style.FriendsMostListenedTrackTitle>
-    <SwiperAlbum friendsTrackPlayCountData={friendsTrackPlayCountData} />
-    <style.MyMostListenedTrackTitle>
-      내가 가장 많이 들은 곡
-    </style.MyMostListenedTrackTitle>
-    <SliderFreeMode componentGab={0}>
-      {myMostListenedTracks?.map((track) => (
-        <VerticalAlbum
-          key={track.trackArtist.track.id}
-          onClick={() => {}}
-          imgUrl={track.trackArtist.track.albumImageUrl}
-          songName={track.trackArtist.track.trackTitle}
-          singerName={track.trackArtist.artist.artistName}
-        />
-      ))}
-      <style.MoreSee> 더보기 </style.MoreSee>
-    </SliderFreeMode>
-    <style.MyFavoriteTracksTitle>
-      내가 좋아요 표시한 곡
-    </style.MyFavoriteTracksTitle>
-    <SliderFreeMode componentGab={0}>
-      {myFavoriteTracks.map((track) => (
-        <VerticalAlbum
-          key={track.favoriteTrackId}
-          onClick={() => {}}
-          imgUrl={track.trackArtistResponses[0].track.albumImageUrl}
-          songName={track.trackArtistResponses[0].track.trackTitle}
-          singerName={
-            track.trackArtistResponses[0]?.artist.artistName || 'undefined'
-          }
-        />
-      ))}
-      <style.MoreSee> 더보기 </style.MoreSee>
-    </SliderFreeMode>
-    <style.HighlyRecommendedTracksTitle
-      style={{ marginTop: 50, marginBottom: 20 }}
+    {slideStep === 1 ? (
+      <style.TopBar>
+        <style.PrevIcon onClick={onClickPrevButton} />
+        <style.Title>{seeMoreTitle}</style.Title>
+      </style.TopBar>
+    ) : (
+      <RoundInput
+        completedTextValue=""
+        onClickRoundInput={onClickRoundInput}
+        handleEraseIconClick={() => { }}
+        isSearchResults={false}
+        isHidden={false}
+      />
+    )}
+    <style.CustomSwiper
+      onSwiper={setSwiperRef}
+      slidesPerView={1}
+      centeredSlides
+      noSwiping
+      mousewheel={false}
+      centerInsufficientSlides
+      allowTouchMove={false}
+      onSlideChange={onSlideChange}
     >
-      추천이 가장 많이 된 곡
-    </style.HighlyRecommendedTracksTitle>
-    <SliderFreeMode componentGab={0}>
-      {highlyRecommendedTracks ? (
-        highlyRecommendedTracks.map((track) => (
-          <VerticalAlbum
-            key={track.track.id}
-            onClick={() => {}}
-            imgUrl={track.track.albumImageUrl}
-            songName={track.track.trackTitle}
-            singerName={track.artist.artistName || 'undefined'}
-          />
-        ))
-      ) : (
-        <div>undefined</div>
-      )}
-      <style.MoreSee> 더보기 </style.MoreSee>
-    </SliderFreeMode>
+      <style.Slide>
+        <style.FriendsMostListenedTrackTitle>
+          친구가 가장 많이 들은 곡
+        </style.FriendsMostListenedTrackTitle>
+        <SwiperAlbum friendsTrackPlayCountData={friendsTrackPlayCountData} />
+        <MyMostListenedTracks
+          myMostListenedTracks={myMostListenedTracks}
+          onClickNextSlider={onClickNextSlider}
+        />
+        <MyFavoriteTracks
+          myFavoriteTracks={myFavoriteTracks}
+          onClickNextSlider={onClickNextSlider}
+        />
+        <HighlyRecommendedTracks
+          highlyRecommendedTracks={highlyRecommendedTracks}
+          onClickNextSlider={onClickNextSlider}
+        />
+      </style.Slide>
+      <style.Slide>
+        <style.Wrapper>
+          {
+            seeMoreData.map((album) => {
+              const { minutes, seconds } = convertTimerToMinSec(album.timer);
+
+              return (
+                <style.SeeMoreBox>
+                  <HorizontalAlbumWithIcon
+                    key={album.trackId}
+                    onClickPlusButton={() => { }}
+                    onClickFavoriteButton={() => { onClickFavorite(album.trackId) }}
+                    isFavorite={album.isFavorite ? album.isFavorite : false}
+                    timer={`${String(minutes)}m ${String(seconds)}s`}
+                    onClick={() => { }}
+                    imgUrl={album.imgUrl}
+                    songName={album.songName}
+                    singerName={album.singerName}
+
+                  />
+                </style.SeeMoreBox>
+
+              );
+            })
+          }
+        </style.Wrapper>
+      </style.Slide>
+    </style.CustomSwiper>
   </style.Wrapper>
 );

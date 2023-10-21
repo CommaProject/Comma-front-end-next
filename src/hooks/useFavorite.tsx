@@ -52,7 +52,7 @@ export const useFavoriteTrack = () => {
   const [favoriteTrackIds, setFavoriteTrackIds] = useState<{
     [x: string]: number;
   }>();
-  const { mutate: deleteTrackMutate } = useMutation(
+  const { mutate: deleteFavoriteTrackMutate } = useMutation(
     ['DeleteTrack'],
     deleteFavoriteTrackAsync,
     {
@@ -126,7 +126,8 @@ export const useFavoriteTrack = () => {
   );
 
   useEffect(() => {
-    if (isLoading === false) {
+    console.log('setFavoriteTrackIds')
+    if (favoriteTrack.length > 0) {
       const favoriteTrackIds1 = favoriteTrack
         .map((item) => ({
           [item.trackArtistResponses[0].track.spotifyTrackId]:
@@ -138,14 +139,17 @@ export const useFavoriteTrack = () => {
           accumulator[key] = current[key];
           return accumulator;
         }, {});
+
+      console.log('setFavoriteTrackIds In', favoriteTrackIds1)
       setFavoriteTrackIds(favoriteTrackIds1);
+      console.log('setFavoriteTrackIds In', favoriteTrackIds)
     }
-  }, [isLoading, favoriteTrack]);
+  }, [favoriteTrack]);
 
   return {
     favoriteTrack,
     favoriteTrackIds,
-    deleteTrackMutate,
+    deleteFavoriteTrackMutate,
     addFavoriteTrackMutate,
   };
 };

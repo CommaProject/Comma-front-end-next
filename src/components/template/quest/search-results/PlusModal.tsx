@@ -3,7 +3,7 @@ import 'swiper/swiper.min.css';
 import 'swiper/swiper-bundle.min.css';
 import { SliderFreeMode } from '~/src/components/common/slider-free-mode';
 import { PlaylistType } from '@/types/playlistTypes';
-import { PlaylistAlbumForModal } from '~/src/components/common/playlist-rep-album-with-num';
+import { PlaylistAlbumForModal } from '@/components/common/playlist-rep-album-with-num';
 
 export const Wrapper = styled.div`
   height: 100%;

@@ -21,3 +21,10 @@ export const formatTime = (time: {
 
   return `${formattedHour}:${formattedMin}:${formattedSec}`;
 };
+
+export const convertTimerToMinSec = (timer: number) => {
+  const seconds = timer / 1000;
+  const minutes = Math.floor(seconds / 60);
+  const remainingSeconds = Math.floor(seconds % 60);
+  return { minutes, seconds: remainingSeconds };
+};

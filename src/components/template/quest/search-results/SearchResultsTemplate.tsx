@@ -94,7 +94,7 @@ export const SearchResultsTemplate = ({
             artistData={spotifyArtistData}
             commaUserData={[]}
             onArtistAvataClick={onClickArtistAvata}
-            onClickFavoriteArtistDetail={() => {}}
+            onClickFavoriteArtistDetail={() => { }}
             favoriteArtistData={undefined}
           />
         </style.Slide>
@@ -115,8 +115,8 @@ export const SearchResultsTemplate = ({
       <ArtistAvataFrom
         artistData={[]}
         commaUserData={commaUserData}
-        onArtistAvataClick={() => {}}
-        onClickFavoriteArtistDetail={() => {}}
+        onArtistAvataClick={() => { }}
+        onClickFavoriteArtistDetail={() => { }}
         favoriteArtistData={undefined}
       />
     )}

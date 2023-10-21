@@ -4,7 +4,6 @@ import React from 'react';
 import * as style from './HorizontalAlbumWithIcon.style';
 
 interface HorizontalAlbumWithIconProps extends HorizontalAlbumProps {
-  // eslint-disable-next-line no-unused-vars
   onClickPlusButton: (
     event: React.MouseEvent<SVGSVGElement, MouseEvent>,
   ) => void;
