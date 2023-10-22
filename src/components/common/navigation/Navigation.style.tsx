@@ -20,7 +20,7 @@ export const Wrapper = styled.nav`
       box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.18);
       border-radius: 20px 20px 0px 0px;
 
-      z-index: 1000;
+      z-index: 1001;
     `;
   }}
 `;
