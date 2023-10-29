@@ -59,14 +59,13 @@ export const usePlaylistTrack = () => {
     [key: number]: string[];
   };
 
-  const [playlistIdToTracks, setPlaylistIdTotrack] = useState<
-    playlistIdTotrackListType
-  >();
+  const [playlistIdToTracks, setPlaylistIdTotrack] =
+    useState<playlistIdTotrackListType>();
   const { mutate: mutateAddPlaylistTrack } = useMutation(
     ['addPlaylistTrack'],
     addPlaylistTrack,
     {
-      onSuccess: (response) => { },
+      onSuccess: (response) => {},
     },
   );
 
@@ -74,33 +73,7 @@ export const usePlaylistTrack = () => {
    * @returns playlist: Track[]
    */
   const { myPlaylist } = usePlaylist();
-  const playlistToTracks =
-    myPlaylist &&
-    myPlaylist.map(async (playlist) => {
-      const tracks = await getPlaylistAllTracksAsync(playlist.playlistId);
-      const trackList = tracks.map(
-        (trackArtist) => trackArtist.trackArtistList[0].track.spotifyTrackId,
-      );
-      // setPlaylistIdTotrack((prevState) => ({
-      //   ...prevState,
-      //   [playlist.playlistId]: trackList,
-      // }));
-      return { [playlist.playlistId]: trackList };
-    });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      if (playlistToTracks) {
-        const arrTracks = await Promise.all(playlistToTracks);
-        const ObjTracks = Object.assign({}, ...arrTracks);
-        setPlaylistIdTotrack((prevState) => ({
-          ...prevState,
-          ...ObjTracks,
-        }));
-      }
-    };
-    fetchData();
-  }, []);
   return {
     mutateAddPlaylistTrack,
     playlistIdToTracks,

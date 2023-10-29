@@ -1,3 +1,7 @@
+import {
+  EnhancedPlaylistType,
+  PlaylistType,
+} from '@/constants/types/playlistTypes';
 import type { ReactNode } from 'react';
 import { atom } from 'jotai';
 
@@ -25,3 +29,5 @@ export const searchAtom = atom<SearchType>({
   category: 'music',
   searchText: '',
 });
+
+export const playListsAtom = atom<PlaylistType[]>([]);

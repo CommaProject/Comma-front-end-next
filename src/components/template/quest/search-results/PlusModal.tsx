@@ -1,8 +1,12 @@
 import styled, { css } from 'styled-components';
 import 'swiper/swiper.min.css';
 import 'swiper/swiper-bundle.min.css';
-import { SliderFreeMode } from '~/src/components/common/slider-free-mode';
-import { PlaylistType } from '@/types/playlistTypes';
+import {
+  EnhancedPlaylistType,
+  PlaylistType,
+} from '@/constants/types/playlistTypes';
+import { SliderFreeMode } from '@/components/common/slider-free-mode';
+
 import { PlaylistAlbumForModal } from '@/components/common/playlist-rep-album-with-num';
 
 export const Wrapper = styled.div`
@@ -19,11 +23,9 @@ export const Box = styled.div`
   margin-top: 32px;
   margin-left: 25px;
 `;
-interface EnhancedPlaylist extends PlaylistType {
-  registeredTrack: boolean;
-}
+
 interface PlusModalProps {
-  myPlayList: EnhancedPlaylist[];
+  myPlayList: PlaylistType[];
   onClickPlaylist: (playlistId: number) => void;
 }
 
@@ -32,13 +34,13 @@ export const PlusModal = ({ myPlayList, onClickPlaylist }: PlusModalProps) => (
     <Box>
       <SliderFreeMode componentGab={0}>
         {myPlayList &&
-          myPlayList.map((playlist: EnhancedPlaylist) => {
+          myPlayList.map((playlist: PlaylistType) => {
             console.log(playlist.playlistId);
             return (
               <PlaylistAlbumForModal
                 key={playlist.playlistId}
                 playlistId={playlist.playlistId}
-                registeredTrack={playlist.registeredTrack}
+                registeredTrack={false}
                 repAlbumImageUrl={playlist.repAlbumImageUrl}
                 trackCount={playlist.trackCount}
                 onClickPlaylist={onClickPlaylist}

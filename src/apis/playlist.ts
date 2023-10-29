@@ -1,11 +1,7 @@
 import { deleteAsync, getAsync, postAsync } from '@/apis/API';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
-import {
-  PlaylistType,
-  PlaylistTypeWithTotalTime,
-  PostTrackPlaylistType,
-} from '@/types/playlistTypes';
+import { PlaylistType, PostTrackPlaylistType } from '@/types/playlistTypes';
 import { ApiResponse } from '@/constants/types';
 import { TracksRecommendData } from '@/types/recommendType';
 import { TrackAlarmFlagType, TrackFavoritesType } from '@/types/trackTypes';
@@ -128,7 +124,7 @@ export const deletePlaylist = async (playlistIdArray: number[]) => {
 
 // 단일 플레이리스트 디테일
 const getPlaylistDetail = async (playlistId: number) => {
-  const { isSuccess, result } = await getAsync<PlaylistTypeWithTotalTime>(
+  const { isSuccess, result } = await getAsync<PlaylistType>(
     `/playlist/${playlistId}`,
   );
 

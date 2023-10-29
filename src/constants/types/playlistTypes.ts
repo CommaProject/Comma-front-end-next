@@ -8,14 +8,11 @@ export interface PlaylistType {
   alarmStartTime: string;
   trackCount: number;
   repAlbumImageUrl: string;
+  totalDurationTime: number;
 }
 
 export interface EnhancedPlaylistType extends PlaylistType {
   registeredTrack: boolean;
-}
-
-export interface PlaylistTypeWithTotalTime extends PlaylistType {
-  totalDurationTime: number;
 }
 
 // For Post (add)
