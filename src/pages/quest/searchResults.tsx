@@ -156,6 +156,7 @@ const SearchResults = () => {
             mutateAddPlaylistTrack({ playlistId, spotifyTrackId });
             closeModal();
           }}
+          onClickAddPlaylist={() => {}}
         />,
       );
     },

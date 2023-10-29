@@ -95,7 +95,7 @@ export const useGetPlaylistPlayTime = (playlistId: number) => {
 };
 
 /**
- * 추천 리스트 조회 함수 getTracksRecommendAsync
+ * Playlist에 Track 추가 함수 addTrackToPlaylistAsync
  * @need AccessToken
  * @returns 가입 성공 시 209, 실패 시 ...
  */
@@ -115,8 +115,22 @@ export const addTrackToPlaylistAsync = async (
   return response;
 };
 
-// 플레이리스트 삭제
+/**
+ * 플레이 리스트 추가 addTrackToPlaylistAsync
+ * @need AccessToken
+ * @returns 가입 성공 시 209, 실패 시 ...
+ */
+export const addPlaylistAsync = async (
+  spotifyTrackId_: string,
+): ApiResponse<any> => {
+  const response = await postAsync<any, any>('/playlist', {
+    spotifyTrackId: spotifyTrackId_,
+  });
 
+  return response;
+};
+
+// 플레이리스트 삭제
 export const deletePlaylist = async (playlistIdArray: number[]) => {
   const response = await deleteAsync<number[]>(`/playlist`, {
     headers: {

@@ -28,6 +28,7 @@ export const Box = styled.div`
 interface PlusModalProps {
   myPlayList: PlaylistType[];
   onClickPlaylist: (playlistId: number) => void;
+  onClickAddPlaylist: () => void;
 }
 export const PlusButton = styled.div`
   position: absolute;
@@ -44,7 +45,11 @@ export const PlusButton = styled.div`
   align-items: center;
 `;
 
-export const PlusModal = ({ myPlayList, onClickPlaylist }: PlusModalProps) => (
+export const PlusModal = ({
+  myPlayList,
+  onClickPlaylist,
+  onClickAddPlaylist,
+}: PlusModalProps) => (
   <Wrapper>
     <Box>
       <SliderFreeMode componentGab={0}>
@@ -62,7 +67,7 @@ export const PlusModal = ({ myPlayList, onClickPlaylist }: PlusModalProps) => (
               />
             );
           })}
-        <PlusButton>
+        <PlusButton onClick={onClickAddPlaylist}>
           {' '}
           <Image
             src="/src/assets/images/playlistPlus.svg"
