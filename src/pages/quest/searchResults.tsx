@@ -60,7 +60,7 @@ const SearchResults = () => {
   const { addFavoriteArtistMutate } = useFavoriteArtist();
   const { isPlaylistAvailable, isCommaPlaylistAvailable } =
     useGetCommaPlaylists();
-  const { myPlaylist } = usePlaylist();
+  const { myPlaylist, mutateAddPlaylist } = usePlaylist();
   const { mutateAddPlaylistTrack, playlistIdToTracks, setPlaylistIdTotrack } =
     usePlaylistTrack();
 
@@ -130,33 +130,19 @@ const SearchResults = () => {
     [],
   );
 
-  // 기존에 있던 Track 조회해서 존재여부 파악 해야댐
-
-  useEffect(() => {
-    if (myPlaylist) {
-      setEnhancedPlaylist(myPlaylist);
-    }
-  }, [myPlaylist]);
-
   const handlePlusTrack = useCallback(
     (spotifyTrackId: string) => {
-      console.log('handlepustrack myPlaylist', myPlaylist);
-      // commaPlaylist.map((playlist) => {
-      //   // spotifyTrackId;
-      //   // playlistIdToTracks[playlist.playlistId];
-      //   // setEnhancedPlaylist();
-
-      //   return null;
-      // });
       openModal(
         <PlusModal
-          myPlayList={enhancedPlaylist}
+          myPlayList={myPlaylist || []}
           onClickPlaylist={(playlistId) => {
-            console.log(playlistId);
             mutateAddPlaylistTrack({ playlistId, spotifyTrackId });
             closeModal();
           }}
-          onClickAddPlaylist={() => {}}
+          onClickAddPlaylist={() => {
+            mutateAddPlaylist(spotifyTrackId);
+            closeModal();
+          }}
         />,
       );
     },

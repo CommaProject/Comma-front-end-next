@@ -7,16 +7,20 @@ import {
   useQueryClient,
 } from '@tanstack/react-query';
 import {
+  addPlaylistAsync,
   addTrackToPlaylistAsync,
   getAllMyplaylists,
   getPlaylistAllTracksAsync,
   getTracksRecommendAsync,
 } from '@/apis/playlist';
 
-/* 플레이 리스트 상세 정보 조회 페이지로 이동 */
+/**
+ * playlist hooks
+ * @returns null
+ */
 export const usePlaylist = () => {
   const router = useRouter();
-
+  const queryClient = useQueryClient();
   const navigateToPlaylist = useCallback(
     (playlistId: number) => {
       router.push({
@@ -26,12 +30,22 @@ export const usePlaylist = () => {
     },
     [router],
   );
-
+  const { mutate: mutateAddPlaylist } = useMutation(
+    ['addPlaylist'],
+    addPlaylistAsync,
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(['MyPlaylists'])
+      }
+    }
+    
+  );
   const { data: myPlaylist } = useQuery(['MyPlaylists'], getAllMyplaylists);
 
   return {
     myPlaylist,
     navigateToPlaylist,
+    mutateAddPlaylist
   };
 };
 

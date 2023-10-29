@@ -23,6 +23,7 @@ export const Wrapper = styled.div`
 export const Box = styled.div`
   margin-top: 32px;
   margin-left: 25px;
+  margin-right: 25px;
 `;
 
 interface PlusModalProps {

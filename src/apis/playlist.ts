@@ -122,12 +122,16 @@ export const addTrackToPlaylistAsync = async (
  */
 export const addPlaylistAsync = async (
   spotifyTrackId_: string,
-): ApiResponse<any> => {
-  const response = await postAsync<any, any>('/playlist', {
+) => {
+  const  { isSuccess, result }  = await postAsync<any, any>('/playlist', {
     spotifyTrackId: spotifyTrackId_,
   });
 
-  return response;
+  if (isSuccess && result.data) {
+    return result.data;
+  }
+  
+  return null;
 };
 
 // 플레이리스트 삭제
