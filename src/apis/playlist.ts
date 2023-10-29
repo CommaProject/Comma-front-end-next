@@ -19,7 +19,7 @@ export const getAllMyplaylists = async () => {
 
 // 콤마 플레이리스트 가져오기
 export const useGetCommaPlaylists = () => {
-  const { isLoading, data = [] } = useQuery(
+  const { isFetching, data: commaPlaylist } = useQuery(
     ['multiplePlaylists'],
     getAllMyplaylists,
   );
@@ -27,31 +27,37 @@ export const useGetCommaPlaylists = () => {
     useState<boolean>(false);
   const [isCommaPlaylistAvailable, setIsCommaPlaylistAvailable] =
     useState<boolean>(false);
-  const [commaPlaylist, setCommaPlaylist] = useState<PlaylistType[]>([]);
+
+  useEffect(() => {
+    console.log('isFetching');
+  }, [isFetching]);
+
   const [playlist, setPlaylist] = useState<PlaylistType[]>([]);
 
   useEffect(() => {
-    if (isLoading === false) {
-      console.log('isloading후', data);
-      if (data.length === 0) {
+    if (commaPlaylist) {
+      console.log('isloading후', commaPlaylist);
+      if (commaPlaylist.length === 0) {
         setIsPlaylistAvailable(false);
       } else {
         setIsPlaylistAvailable(true);
 
-        const filteredPlaylists: PlaylistType[] = data.filter(
+        const filteredPlaylists: PlaylistType[] = commaPlaylist.filter(
           (onePlaylist) => onePlaylist.alarmFlag === true,
         );
-        setCommaPlaylist(filteredPlaylists);
-        setPlaylist(data);
+
+        setPlaylist(filteredPlaylists);
       }
     }
-  }, [isLoading, data]);
+  }, [commaPlaylist]);
 
   useEffect(() => {
-    if (commaPlaylist.length !== 0) {
-      setIsCommaPlaylistAvailable(true);
-    } else {
-      setIsCommaPlaylistAvailable(false);
+    if (commaPlaylist) {
+      if (commaPlaylist.length !== 0) {
+        setIsCommaPlaylistAvailable(true);
+      } else {
+        setIsCommaPlaylistAvailable(false);
+      }
     }
   }, [commaPlaylist]);
 

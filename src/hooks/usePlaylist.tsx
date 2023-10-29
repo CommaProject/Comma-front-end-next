@@ -1,9 +1,10 @@
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import {
-  QueryFunctionContext,
+  Query,
   useMutation,
   useQuery,
+  useQueryClient,
 } from '@tanstack/react-query';
 import {
   addTrackToPlaylistAsync,
@@ -55,6 +56,7 @@ const addPlaylistTrack = async (params: {
 // PlaylistTrack Hook
 export const usePlaylistTrack = () => {
   // Add Track
+  const queryClient = useQueryClient();
   type playlistIdTotrackListType = {
     [key: number]: string[];
   };
@@ -65,7 +67,9 @@ export const usePlaylistTrack = () => {
     ['addPlaylistTrack'],
     addPlaylistTrack,
     {
-      onSuccess: (response) => {},
+      onSuccess: (response) => {
+        queryClient.invalidateQueries(['MyPlaylists']);
+      },
     },
   );
 
