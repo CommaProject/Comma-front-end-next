@@ -17,6 +17,6 @@ export interface EnhancedPlaylistType extends PlaylistType {
 
 // For Post (add)
 export interface PostTrackPlaylistType {
-  playlistIdList: number[];
+  playlistId: number;
   spotifyTrackId: string;
 }

@@ -94,14 +94,14 @@ export const useGetPlaylistPlayTime = (playlistId: number) => {
  * @returns 가입 성공 시 209, 실패 시 ...
  */
 export const addTrackToPlaylistAsync = async (
-  playlistIdList_: number[],
+  playlistId_: number,
   spotifyTrackId_: string,
 ): ApiResponse<any> => {
   // return: null
   const response = await postAsync<any, PostTrackPlaylistType>(
     '/playlist/track',
     {
-      playlistIdList: playlistIdList_,
+      playlistId: playlistId_,
       spotifyTrackId: spotifyTrackId_,
     },
   );

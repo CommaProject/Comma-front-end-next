@@ -154,19 +154,10 @@ const SearchResults = () => {
         <PlusModal
           myPlayList={enhancedPlaylist}
           onClickPlaylist={(playlistId) => {
-            setPlaylistIdList([playlistId]);
             console.log(playlistId);
+            mutateAddPlaylistTrack({ playlistId, spotifyTrackId });
           }}
         />,
-        () => {
-          commaPlaylist.map((playlist) => {
-            console.log('playlistIdToTracks', playlistIdToTracks);
-            console.log('commaPlaylist', commaPlaylist);
-            // mutateAddPlaylistTrack({ playlistIdList, spotifyTrackId });
-
-            return null;
-          });
-        },
       );
     },
     [myPlaylist],

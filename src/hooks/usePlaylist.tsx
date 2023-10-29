@@ -37,11 +37,11 @@ export const usePlaylist = () => {
 // PlaylistTrack API //
 // Add playlist API
 const addPlaylistTrack = async (params: {
-  playlistIdList: number[];
+  playlistId: number;
   spotifyTrackId: string;
 }) => {
   const { isSuccess, result } = await addTrackToPlaylistAsync(
-    params.playlistIdList,
+    params.playlistId,
     params.spotifyTrackId,
   );
 
