@@ -6,8 +6,9 @@ import {
   PlaylistType,
 } from '@/constants/types/playlistTypes';
 import { SliderFreeMode } from '@/components/common/slider-free-mode';
-
+import playlistPlusSVG from '@/assets/images/playlistPlus.svg';
 import { PlaylistAlbumForModal } from '@/components/common/playlist-rep-album-with-num';
+import Image from 'next/image';
 
 export const Wrapper = styled.div`
   height: 100%;
@@ -28,6 +29,20 @@ interface PlusModalProps {
   myPlayList: PlaylistType[];
   onClickPlaylist: (playlistId: number) => void;
 }
+export const PlusButton = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 92px;
+  height: 92px;
+  background-color: rgba(104, 154, 255, 0.7);
+  border-radius: 15px;
+  z-index: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 export const PlusModal = ({ myPlayList, onClickPlaylist }: PlusModalProps) => (
   <Wrapper>
@@ -47,6 +62,15 @@ export const PlusModal = ({ myPlayList, onClickPlaylist }: PlusModalProps) => (
               />
             );
           })}
+        <PlusButton>
+          {' '}
+          <Image
+            src="/src/assets/images/playlistPlus.svg"
+            width={500}
+            height={500}
+            alt="Picture of the author"
+          />
+        </PlusButton>
       </SliderFreeMode>
     </Box>
   </Wrapper>
