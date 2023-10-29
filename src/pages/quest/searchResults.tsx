@@ -154,6 +154,7 @@ const SearchResults = () => {
           onClickPlaylist={(playlistId) => {
             console.log(playlistId);
             mutateAddPlaylistTrack({ playlistId, spotifyTrackId });
+            closeModal();
           }}
         />,
       );
