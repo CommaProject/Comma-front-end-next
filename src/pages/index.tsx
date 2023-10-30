@@ -24,7 +24,7 @@ const Home = (isUserVaild: boolean) => {
       isCommaPlaylistAvailable={isCommaPlaylistAvailable}
       isEditMode={isEditMode}
       onClickIsEditMode={onClickIsEditMode}
-      commaPlaylist={commaPlaylist}
+      commaPlaylist={commaPlaylist || []}
     />
   );
 };

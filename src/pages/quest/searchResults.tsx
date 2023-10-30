@@ -7,8 +7,8 @@ import { useRouter } from 'next/router';
 import { useSearch } from '@/hooks/useSearch';
 import { Swiper as SwiperClass } from 'swiper/types';
 import { SpotifyArtistProps } from '@/types/searchTypes';
-import { useAtom } from 'jotai';
-import { searchAtom } from '@/stores/atoms';
+import { atom, useAtom } from 'jotai';
+import { playListsAtom, searchAtom } from '@/stores/atoms';
 import { EnhancedTrackProps } from '@/types/trackTypes';
 import { useFavoriteArtist, useFavoriteTrack } from '@/hooks/useFavorite';
 import useModal from '@/hooks/useModal';
@@ -21,7 +21,6 @@ import {
   useAllPlaylists,
   usePlaylist,
 } from '@/hooks/usePlaylist';
-import { EnhancedPlaylistType } from '@/constants/types/playlistTypes';
 
 const SearchResults = () => {
   const router = useRouter();
@@ -30,6 +29,7 @@ const SearchResults = () => {
     useState<SpotifyArtistProps>();
   const [isHidden, setIsHidden] = useState(false); // false: Completed Search true: Detail
   const [searchItems, setSearchItems] = useAtom(searchAtom);
+  const [enhancedPlaylist, setEnhancedPlaylist] = useAtom(playListsAtom);
   const [swiperRef, setSwiperRef] = useState<SwiperClass>();
   const [openMusicPlayer, setOpenMusicPlayer] = useState('');
   const [playlistIdList, setPlaylistIdList] = useState<number[]>([]);
@@ -52,12 +52,15 @@ const SearchResults = () => {
     mutateCommaUser,
     mutateArtistDetailTrack,
   } = useSearch();
-  const { favoriteTrackIds, deleteFavoriteTrackMutate, addFavoriteTrackMutate } =
-    useFavoriteTrack();
+  const {
+    favoriteTrackIds,
+    deleteFavoriteTrackMutate,
+    addFavoriteTrackMutate,
+  } = useFavoriteTrack();
   const { addFavoriteArtistMutate } = useFavoriteArtist();
-  const { isPlaylistAvailable, isCommaPlaylistAvailable, commaPlaylist } =
+  const { isPlaylistAvailable, isCommaPlaylistAvailable } =
     useGetCommaPlaylists();
-  const { myPlaylist } = usePlaylist();
+  const { myPlaylist, mutateAddPlaylist } = usePlaylist();
   const { mutateAddPlaylistTrack, playlistIdToTracks, setPlaylistIdTotrack } =
     usePlaylistTrack();
 
@@ -127,49 +130,20 @@ const SearchResults = () => {
     [],
   );
 
-  // 기존에 있던 Track 조회해서 존재여부 파악 해야댐
-  const [enhancedPlaylist, setEnhancedPlaylist] = useState<
-    EnhancedPlaylistType[]
-  >([]);
-
-  useEffect(() => {
-    const enhancedPlaylistTemp = commaPlaylist.map((playlist) => ({
-      ...playlist,
-      registeredTrack: playlistIdList.includes(playlist.playlistId),
-    }));
-
-    console.log('enhancedPlaylistTemp', enhancedPlaylistTemp);
-    setEnhancedPlaylist(enhancedPlaylistTemp);
-  }, [commaPlaylist]);
-
   const handlePlusTrack = useCallback(
     (spotifyTrackId: string) => {
-      console.log('playlistIdToTracks', playlistIdToTracks);
-
-      // commaPlaylist.map((playlist) => {
-      //   // spotifyTrackId;
-      //   // playlistIdToTracks[playlist.playlistId];
-      //   // setEnhancedPlaylist();
-
-      //   return null;
-      // });
       openModal(
         <PlusModal
-          myPlayList={enhancedPlaylist}
+          myPlayList={myPlaylist || []}
           onClickPlaylist={(playlistId) => {
-            setPlaylistIdList([playlistId]);
-            console.log(playlistId);
+            mutateAddPlaylistTrack({ playlistId, spotifyTrackId });
+            closeModal();
+          }}
+          onClickAddPlaylist={() => {
+            mutateAddPlaylist(spotifyTrackId);
+            closeModal();
           }}
         />,
-        () => {
-          commaPlaylist.map((playlist) => {
-            console.log('playlistIdToTracks', playlistIdToTracks);
-            console.log('commaPlaylist', commaPlaylist);
-            // mutateAddPlaylistTrack({ playlistIdList, spotifyTrackId });
-
-            return null;
-          });
-        },
       );
     },
     [myPlaylist],

@@ -1,21 +1,26 @@
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import {
-  QueryFunctionContext,
+  Query,
   useMutation,
   useQuery,
+  useQueryClient,
 } from '@tanstack/react-query';
 import {
+  addPlaylistAsync,
   addTrackToPlaylistAsync,
   getAllMyplaylists,
   getPlaylistAllTracksAsync,
   getTracksRecommendAsync,
 } from '@/apis/playlist';
 
-/* 플레이 리스트 상세 정보 조회 페이지로 이동 */
+/**
+ * playlist hooks
+ * @returns null
+ */
 export const usePlaylist = () => {
   const router = useRouter();
-
+  const queryClient = useQueryClient();
   const navigateToPlaylist = useCallback(
     (playlistId: number) => {
       router.push({
@@ -25,23 +30,33 @@ export const usePlaylist = () => {
     },
     [router],
   );
-
+  const { mutate: mutateAddPlaylist } = useMutation(
+    ['addPlaylist'],
+    addPlaylistAsync,
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(['MyPlaylists'])
+      }
+    }
+    
+  );
   const { data: myPlaylist } = useQuery(['MyPlaylists'], getAllMyplaylists);
 
   return {
     myPlaylist,
     navigateToPlaylist,
+    mutateAddPlaylist
   };
 };
 
 // PlaylistTrack API //
 // Add playlist API
 const addPlaylistTrack = async (params: {
-  playlistIdList: number[];
+  playlistId: number;
   spotifyTrackId: string;
 }) => {
   const { isSuccess, result } = await addTrackToPlaylistAsync(
-    params.playlistIdList,
+    params.playlistId,
     params.spotifyTrackId,
   );
 
@@ -55,18 +70,20 @@ const addPlaylistTrack = async (params: {
 // PlaylistTrack Hook
 export const usePlaylistTrack = () => {
   // Add Track
+  const queryClient = useQueryClient();
   type playlistIdTotrackListType = {
     [key: number]: string[];
   };
 
-  const [playlistIdToTracks, setPlaylistIdTotrack] = useState<
-    playlistIdTotrackListType
-  >();
+  const [playlistIdToTracks, setPlaylistIdTotrack] =
+    useState<playlistIdTotrackListType>();
   const { mutate: mutateAddPlaylistTrack } = useMutation(
     ['addPlaylistTrack'],
     addPlaylistTrack,
     {
-      onSuccess: (response) => { },
+      onSuccess: (response) => {
+        queryClient.invalidateQueries(['MyPlaylists']);
+      },
     },
   );
 
@@ -74,33 +91,7 @@ export const usePlaylistTrack = () => {
    * @returns playlist: Track[]
    */
   const { myPlaylist } = usePlaylist();
-  const playlistToTracks =
-    myPlaylist &&
-    myPlaylist.map(async (playlist) => {
-      const tracks = await getPlaylistAllTracksAsync(playlist.playlistId);
-      const trackList = tracks.map(
-        (trackArtist) => trackArtist.trackArtistList[0].track.spotifyTrackId,
-      );
-      // setPlaylistIdTotrack((prevState) => ({
-      //   ...prevState,
-      //   [playlist.playlistId]: trackList,
-      // }));
-      return { [playlist.playlistId]: trackList };
-    });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      if (playlistToTracks) {
-        const arrTracks = await Promise.all(playlistToTracks);
-        const ObjTracks = Object.assign({}, ...arrTracks);
-        setPlaylistIdTotrack((prevState) => ({
-          ...prevState,
-          ...ObjTracks,
-        }));
-      }
-    };
-    fetchData();
-  }, []);
   return {
     mutateAddPlaylistTrack,
     playlistIdToTracks,

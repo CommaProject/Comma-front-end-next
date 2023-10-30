@@ -1,11 +1,14 @@
 import styled, { css } from 'styled-components';
 import 'swiper/swiper.min.css';
 import 'swiper/swiper-bundle.min.css';
-import { SliderFreeMode } from '~/src/components/common/slider-free-mode';
-import { PlaylistType } from '@/types/playlistTypes';
-import { PlaylistAlbumForModal } from '@/components/common/playlist-rep-album-with-num';
+import {
+  PlaylistType,
+} from '@/constants/types/playlistTypes';
+import { SliderFreeMode } from '@/components/common/slider-free-mode';
+import PlaylistPlusSVG from '@/assets/images/playlistPlus.svg';
+import { PlaylistAlbumForModal as Album } from '@/components/common/playlist-rep-album-with-num';
 
-export const Wrapper = styled.div`
+const Wrapper = styled.div`
   height: 100%;
   width: 390px;
   height: 245px;
@@ -15,36 +18,79 @@ export const Wrapper = styled.div`
   position: absolute;
   bottom: 0;
 `;
-export const Box = styled.div`
+const Box = styled.div`
   margin-top: 32px;
-  margin-left: 25px;
+  margin-left: 15px;
+  margin-right: 15px;
 `;
-interface EnhancedPlaylist extends PlaylistType {
-  registeredTrack: boolean;
-}
+
+const AlbumBox = styled.div`
+  display: flex;
+  flex-direction: column;  
+  margin-bottom: 16px;
+  overflow: hidden;
+`
+
+const PlaylistTitle = styled.div`
+  color: #0F0F0F;
+  font-family: Pretendard;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 12px;
+`
+
 interface PlusModalProps {
-  myPlayList: EnhancedPlaylist[];
+  myPlayList: PlaylistType[];
   onClickPlaylist: (playlistId: number) => void;
+  onClickAddPlaylist: () => void;
 }
 
-export const PlusModal = ({ myPlayList, onClickPlaylist }: PlusModalProps) => (
+export const PlusButton = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 92px;
+  height: 92px;
+  background-color: rgba(104, 154, 255, 0.7);
+  border-radius: 15px;
+  z-index: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const PlusModal = ({
+  myPlayList,
+  onClickPlaylist,
+  onClickAddPlaylist,
+}: PlusModalProps) => (
   <Wrapper>
     <Box>
       <SliderFreeMode componentGab={0}>
         {myPlayList &&
-          myPlayList.map((playlist: EnhancedPlaylist) => {
+          myPlayList.map((playlist: PlaylistType) => {
             console.log(playlist.playlistId);
             return (
-              <PlaylistAlbumForModal
-                key={playlist.playlistId}
-                playlistId={playlist.playlistId}
-                registeredTrack={playlist.registeredTrack}
-                repAlbumImageUrl={playlist.repAlbumImageUrl}
-                trackCount={playlist.trackCount}
-                onClickPlaylist={onClickPlaylist}
-              />
+              <AlbumBox>
+                <Album
+                  key={playlist.playlistId}
+                  playlistId={playlist.playlistId}
+                  registeredTrack={false}
+                  repAlbumImageUrl={playlist.repAlbumImageUrl}
+                  trackCount={playlist.trackCount}
+                  onClickPlaylist={onClickPlaylist}
+                />
+                <PlaylistTitle>
+                  {playlist.playlistTitle}
+                </PlaylistTitle>
+              </AlbumBox>
             );
           })}
+        <PlusButton onClick={onClickAddPlaylist}>
+          <PlaylistPlusSVG />
+        </PlusButton>
       </SliderFreeMode>
     </Box>
   </Wrapper>

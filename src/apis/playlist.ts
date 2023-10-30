@@ -1,11 +1,7 @@
 import { deleteAsync, getAsync, postAsync } from '@/apis/API';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
-import {
-  PlaylistType,
-  PlaylistTypeWithTotalTime,
-  PostTrackPlaylistType,
-} from '@/types/playlistTypes';
+import { PlaylistType, PostTrackPlaylistType } from '@/types/playlistTypes';
 import { ApiResponse } from '@/constants/types';
 import { TracksRecommendData } from '@/types/recommendType';
 import { TrackAlarmFlagType, TrackFavoritesType } from '@/types/trackTypes';
@@ -23,7 +19,7 @@ export const getAllMyplaylists = async () => {
 
 // 콤마 플레이리스트 가져오기
 export const useGetCommaPlaylists = () => {
-  const { isLoading, data = [] } = useQuery(
+  const { isFetching, data: commaPlaylist } = useQuery(
     ['multiplePlaylists'],
     getAllMyplaylists,
   );
@@ -31,31 +27,37 @@ export const useGetCommaPlaylists = () => {
     useState<boolean>(false);
   const [isCommaPlaylistAvailable, setIsCommaPlaylistAvailable] =
     useState<boolean>(false);
-  const [commaPlaylist, setCommaPlaylist] = useState<PlaylistType[]>([]);
+
+  useEffect(() => {
+    console.log('isFetching');
+  }, [isFetching]);
+
   const [playlist, setPlaylist] = useState<PlaylistType[]>([]);
 
   useEffect(() => {
-    if (isLoading === false) {
-      console.log('isloading후', data);
-      if (data.length === 0) {
+    if (commaPlaylist) {
+      console.log('isloading후', commaPlaylist);
+      if (commaPlaylist.length === 0) {
         setIsPlaylistAvailable(false);
       } else {
         setIsPlaylistAvailable(true);
 
-        const filteredPlaylists: PlaylistType[] = data.filter(
+        const filteredPlaylists: PlaylistType[] = commaPlaylist.filter(
           (onePlaylist) => onePlaylist.alarmFlag === true,
         );
-        setCommaPlaylist(filteredPlaylists);
-        setPlaylist(data);
+
+        setPlaylist(filteredPlaylists);
       }
     }
-  }, [isLoading, data]);
+  }, [commaPlaylist]);
 
   useEffect(() => {
-    if (commaPlaylist.length !== 0) {
-      setIsCommaPlaylistAvailable(true);
-    } else {
-      setIsCommaPlaylistAvailable(false);
+    if (commaPlaylist) {
+      if (commaPlaylist.length !== 0) {
+        setIsCommaPlaylistAvailable(true);
+      } else {
+        setIsCommaPlaylistAvailable(false);
+      }
     }
   }, [commaPlaylist]);
 
@@ -93,19 +95,19 @@ export const useGetPlaylistPlayTime = (playlistId: number) => {
 };
 
 /**
- * 추천 리스트 조회 함수 getTracksRecommendAsync
+ * Playlist에 Track 추가 함수 addTrackToPlaylistAsync
  * @need AccessToken
  * @returns 가입 성공 시 209, 실패 시 ...
  */
 export const addTrackToPlaylistAsync = async (
-  playlistIdList_: number[],
+  playlistId_: number,
   spotifyTrackId_: string,
 ): ApiResponse<any> => {
   // return: null
   const response = await postAsync<any, PostTrackPlaylistType>(
     '/playlist/track',
     {
-      playlistIdList: playlistIdList_,
+      playlistId: playlistId_,
       spotifyTrackId: spotifyTrackId_,
     },
   );
@@ -113,8 +115,26 @@ export const addTrackToPlaylistAsync = async (
   return response;
 };
 
-// 플레이리스트 삭제
+/**
+ * 플레이 리스트 추가 addTrackToPlaylistAsync
+ * @need AccessToken
+ * @returns 가입 성공 시 209, 실패 시 ...
+ */
+export const addPlaylistAsync = async (
+  spotifyTrackId_: string,
+) => {
+  const  { isSuccess, result }  = await postAsync<any, any>('/playlist', {
+    spotifyTrackId: spotifyTrackId_,
+  });
 
+  if (isSuccess && result.data) {
+    return result.data;
+  }
+  
+  return null;
+};
+
+// 플레이리스트 삭제
 export const deletePlaylist = async (playlistIdArray: number[]) => {
   const response = await deleteAsync<number[]>(`/playlist`, {
     headers: {
@@ -128,7 +148,7 @@ export const deletePlaylist = async (playlistIdArray: number[]) => {
 
 // 단일 플레이리스트 디테일
 const getPlaylistDetail = async (playlistId: number) => {
-  const { isSuccess, result } = await getAsync<PlaylistTypeWithTotalTime>(
+  const { isSuccess, result } = await getAsync<PlaylistType>(
     `/playlist/${playlistId}`,
   );
 
