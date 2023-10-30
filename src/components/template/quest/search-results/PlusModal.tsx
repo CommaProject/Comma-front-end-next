@@ -2,15 +2,13 @@ import styled, { css } from 'styled-components';
 import 'swiper/swiper.min.css';
 import 'swiper/swiper-bundle.min.css';
 import {
-  EnhancedPlaylistType,
   PlaylistType,
 } from '@/constants/types/playlistTypes';
 import { SliderFreeMode } from '@/components/common/slider-free-mode';
-import playlistPlusSVG from '@/assets/images/playlistPlus.svg';
-import { PlaylistAlbumForModal } from '@/components/common/playlist-rep-album-with-num';
-import Image from 'next/image';
+import PlaylistPlusSVG from '@/assets/images/playlistPlus.svg';
+import { PlaylistAlbumForModal as Album } from '@/components/common/playlist-rep-album-with-num';
 
-export const Wrapper = styled.div`
+const Wrapper = styled.div`
   height: 100%;
   width: 390px;
   height: 245px;
@@ -20,17 +18,34 @@ export const Wrapper = styled.div`
   position: absolute;
   bottom: 0;
 `;
-export const Box = styled.div`
+const Box = styled.div`
   margin-top: 32px;
-  margin-left: 25px;
-  margin-right: 25px;
+  margin-left: 15px;
+  margin-right: 15px;
 `;
+
+const AlbumBox = styled.div`
+  display: flex;
+  flex-direction: column;  
+  margin-bottom: 16px;
+  overflow: hidden;
+`
+
+const PlaylistTitle = styled.div`
+  color: #0F0F0F;
+  font-family: Pretendard;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 12px;
+`
 
 interface PlusModalProps {
   myPlayList: PlaylistType[];
   onClickPlaylist: (playlistId: number) => void;
   onClickAddPlaylist: () => void;
 }
+
 export const PlusButton = styled.div`
   position: absolute;
   top: 0;
@@ -58,24 +73,23 @@ export const PlusModal = ({
           myPlayList.map((playlist: PlaylistType) => {
             console.log(playlist.playlistId);
             return (
-              <PlaylistAlbumForModal
-                key={playlist.playlistId}
-                playlistId={playlist.playlistId}
-                registeredTrack={false}
-                repAlbumImageUrl={playlist.repAlbumImageUrl}
-                trackCount={playlist.trackCount}
-                onClickPlaylist={onClickPlaylist}
-              />
+              <AlbumBox>
+                <Album
+                  key={playlist.playlistId}
+                  playlistId={playlist.playlistId}
+                  registeredTrack={false}
+                  repAlbumImageUrl={playlist.repAlbumImageUrl}
+                  trackCount={playlist.trackCount}
+                  onClickPlaylist={onClickPlaylist}
+                />
+                <PlaylistTitle>
+                  {playlist.playlistTitle}
+                </PlaylistTitle>
+              </AlbumBox>
             );
           })}
         <PlusButton onClick={onClickAddPlaylist}>
-          {' '}
-          <Image
-            src="/src/assets/images/playlistPlus.svg"
-            width={500}
-            height={500}
-            alt="Picture of the author"
-          />
+          <PlaylistPlusSVG />
         </PlusButton>
       </SliderFreeMode>
     </Box>
