@@ -62,9 +62,8 @@ const SignUp = () => {
       case 1: // 성별 연령
         return signUpState.sex !== 'x' && signUpState.age !== 0;
       case 2: // 카테고리
-        return (
-          signUpState.artistNames.length >= 3 && signUpState.genres.length >= 3
-        );
+        return true;
+
       case 3: // 시간
         return true;
       default:
