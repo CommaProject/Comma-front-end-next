@@ -36,16 +36,18 @@ export const HorizontalAlbumWithIcon = ({
       ) : (
         ''
       )}
-      <HorizontalAlbum
-        imgUrl={imgUrl}
-        singerName={singerName}
-        songName={songName}
-        onClick={onClick}
-        timer={timer}
-      />
-      <style.ButtonContainer>
-        {isEditMode && isTrackSelected ? <style.MoveButton /> : ''}
-      </style.ButtonContainer>
+      <style.AlbumBox isTrackSelected={isTrackSelected} isEditMode={isEditMode}>
+        <HorizontalAlbum
+          imgUrl={imgUrl}
+          singerName={singerName}
+          songName={songName}
+          onClick={onClick}
+          timer={timer}
+        />
+        <style.ButtonContainer>
+          {isEditMode && isTrackSelected ? <style.MoveButton /> : ''}
+        </style.ButtonContainer>
+      </style.AlbumBox>
     </style.Wrapper>
   );
 };

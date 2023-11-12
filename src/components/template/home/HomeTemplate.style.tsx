@@ -77,6 +77,7 @@ export const ShowPlaylist = styled.div`
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
+  height: 100%;
 `;
 
 export const EditDiv = styled.div`

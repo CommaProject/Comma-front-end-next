@@ -26,7 +26,8 @@ export const PlaylistBox = ({
   const [isAlarmSelected, setIsAlarmSelected] = useState(playlist.alarmFlag);
   const [isPlaylistSelected, setIsPlaylistSelected] = useState(false);
   const { playTime } = useGetPlaylistPlayTime(playlist.playlistId);
-  const onClickAlarmButton = () => {
+  const onClickAlarmButton = (event: { stopPropagation: () => void }) => {
+    event.stopPropagation(); // 이벤트 버블링 막기
     setIsAlarmSelected(!isAlarmSelected);
   };
   const onClickPlaylistSelectButton = () => {
