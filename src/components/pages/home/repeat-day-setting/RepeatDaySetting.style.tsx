@@ -46,15 +46,16 @@ export const DayDiv = styled.div<DayBtnProps>`
       justify-content: center;
       align-items: center;
 
-      background: ${!isClicked ? colors.primary.main : colors.grayscale.white};
-      color: ${!isClicked ? colors.grayscale.white : colors.primary.main};
+      background: ${isClicked ? colors.primary.main : colors.grayscale.white};
+      color: ${isClicked ? colors.grayscale.white : colors.primary.main};
       font-family: ${fonts.family.pre};
       font-size: 12px;
       font-weight: ${fonts.weight.bold};
       line-height: 12px;
       text-align: center;
 
-      border: 0.7px solid ${colors.grayscale.gray500};
+      border: 0.7px solid
+        ${isClicked ? colors.grayscale.gray500 : colors.primary.main};
       border-radius: 50%;
       cursor: pointer;
     `;
