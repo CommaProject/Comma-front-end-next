@@ -22,12 +22,10 @@ export const HomeTemplate = ({
   commaPlaylist,
 }: HomeTemplateProps) => {
   const router = useRouter();
-  const currentFirstPath = router.pathname.split('/')[1];
 
   const onClickAddPlaylistButton = () => {
     if (isPlaylistAvailable) {
-      console.log('애드버튼 누름', commaPlaylist);
-      router.push(`${currentFirstPath}/timesetting`);
+      router.push(`home/timesetting`);
     }
   };
   const [selectedPlaylist, setSelectedPlaylist] = useState<number[]>([]);

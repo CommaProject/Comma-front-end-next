@@ -18,6 +18,7 @@ const Home = (isUserVaild: boolean) => {
   const onClickIsEditMode = () => {
     setIsEditMode(!isEditMode);
   };
+  
   return (
     <HomeTemplate
       isPlaylistAvailable={isPlaylistAvailable}
