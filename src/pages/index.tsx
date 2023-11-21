@@ -41,7 +41,6 @@ const Home = (isUserVaild: boolean) => {
     }
   };
   const onClickDeleteButton = async () => {
-    console.log(selectedPlaylist);
     if (selectedPlaylist.length > 0) {
         // 삭제가 성공하면 다시 플레이리스트를 조회하여 업데이트
         // useGetMyPlaylists 훅을 통해 이미 업데이트되어 있음

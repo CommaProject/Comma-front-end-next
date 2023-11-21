@@ -32,6 +32,7 @@ export const PlaylistBox = ({
   };
   const onClickPlaylistSelectButton = () => {
     setIsPlaylistSelected(!isPlaylistSelected);
+    onToggleSelect(playlist.playlistId);
   };
   const { navigateToPlaylist } = usePlaylist();
 
