@@ -9,6 +9,7 @@ import {
 import {
   addPlaylistAsync,
   addTrackToPlaylistAsync,
+  deletePlaylist,
   getAllMyplaylists,
   getPlaylistAllTracksAsync,
   getTracksRecommendAsync,
@@ -38,14 +39,25 @@ export const usePlaylist = () => {
         queryClient.invalidateQueries(['MyPlaylists'])
       }
     }
-    
   );
   const { data: myPlaylist } = useQuery(['MyPlaylists'], getAllMyplaylists);
+  
+  const { mutate: mutateDeletePlaylist } = useMutation(
+    ['deletePlaylist'],
+    deletePlaylist,
+    {
+      onSuccess: () => {
+        
+      }
+    }
+    
+  );
 
   return {
     myPlaylist,
     navigateToPlaylist,
-    mutateAddPlaylist
+    mutateAddPlaylist,
+    mutateDeletePlaylist
   };
 };
 
