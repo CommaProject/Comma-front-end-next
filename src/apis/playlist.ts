@@ -1,4 +1,4 @@
-import { deleteAsync, getAsync, postAsync } from '@/apis/API';
+import { deleteAsync, getAsync, patchAsync, postAsync } from '@/apis/API';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { PlaylistType, PostTrackPlaylistType } from '@/types/playlistTypes';
@@ -142,7 +142,21 @@ export const deletePlaylist = async (playlistIdArray: number[]) => {
     },
     data: playlistIdArray, // 요청 본문에 데이터를 JSON 배열로 넣음
   });
-  console.log('삭제 결과', response, playlistIdArray);
+
+  return response;
+};
+
+/**
+ * 플레이 리스트 알람 설정
+ * @param playlistId_ number
+ * @need AccessToken
+ * @returns 가입 성공 시 null
+ */
+export const patchAlarmFlag = async (playlistId_: number) => {
+  const response = await patchAsync<any, any>(`/playlist`, {
+    playlistId: playlistId_, 
+  });
+
   return response;
 };
 

@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 
 import { useEffect, useState } from 'react';
 import { userInformationAsync } from '@/apis/auth';
-import { useGetCommaPlaylists, deletePlaylist } from '@/apis/playlist';
+import { useGetCommaPlaylists } from '@/apis/playlist';
 import HomeTemplate from '@/components/template/home';
 import { usePlaylist } from '../hooks/usePlaylist';
 
@@ -14,23 +14,22 @@ const Home = (isUserVaild: boolean) => {
       router.replace('/login');
     }
   }, []);
-
+  const [selectedPlaylist, setSelectedPlaylist] = useState<number[]>([]);
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
   const { isPlaylistAvailable, isCommaPlaylistAvailable, commaPlaylist } =
     useGetCommaPlaylists();
-  const {mutateDeletePlaylist} = usePlaylist();
+  const {mutateDeletePlaylist, mutateAlarmFlag} = usePlaylist();
 
   const onClickIsEditMode = () => {
     setIsEditMode(!isEditMode);
   };
-
 
   const onClickAddPlaylistButton = () => {
     if (isPlaylistAvailable) {
       router.push(`home/timesetting`);
     }
   };
-  const [selectedPlaylist, setSelectedPlaylist] = useState<number[]>([]);
+
   const onToggleSelect = (playlistId: number) => {
     if (selectedPlaylist.includes(playlistId)) {
       setSelectedPlaylist((prevIds) =>
@@ -47,7 +46,12 @@ const Home = (isUserVaild: boolean) => {
         mutateDeletePlaylist(selectedPlaylist);    
     }
   };
-  
+
+  const handleClickAlarmIcon = (playlistId: number) =>{
+    mutateAlarmFlag(playlistId);
+  }
+
+  console.log("commaPlaylist",commaPlaylist);
   return (
     <HomeTemplate
       onClickAddPlaylistButton={onClickAddPlaylistButton}
@@ -57,6 +61,7 @@ const Home = (isUserVaild: boolean) => {
       isEditMode={isEditMode}
       onClickIsEditMode={onClickIsEditMode}
       onClickDeleteButton={onClickDeleteButton}
+      onClickAlarmIcon={handleClickAlarmIcon}
       commaPlaylist={commaPlaylist || []}
     />
   );

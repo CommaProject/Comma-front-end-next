@@ -13,6 +13,7 @@ import {
   getAllMyplaylists,
   getPlaylistAllTracksAsync,
   getTracksRecommendAsync,
+  patchAlarmFlag,
 } from '@/apis/playlist';
 
 /**
@@ -47,17 +48,26 @@ export const usePlaylist = () => {
     deletePlaylist,
     {
       onSuccess: () => {
-        
       }
     }
     
+  );
+
+  const { mutate: mutateAlarmFlag } = useMutation(
+    ['patchAlarmFlag'],
+    patchAlarmFlag,
+    {
+      onSuccess: () => {
+      }
+    }
   );
 
   return {
     myPlaylist,
     navigateToPlaylist,
     mutateAddPlaylist,
-    mutateDeletePlaylist
+    mutateDeletePlaylist,
+    mutateAlarmFlag
   };
 };
 
@@ -98,11 +108,6 @@ export const usePlaylistTrack = () => {
       },
     },
   );
-
-  /**
-   * @returns playlist: Track[]
-   */
-  const { myPlaylist } = usePlaylist();
 
   return {
     mutateAddPlaylistTrack,

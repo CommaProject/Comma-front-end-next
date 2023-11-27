@@ -11,7 +11,8 @@ interface HomeTemplateProps {
   onClickIsEditMode: () => void;
   onClickAddPlaylistButton: () => void;
   onClickDeleteButton: () => void;
-  commaPlaylist: PlaylistType[];
+  onClickAlarmIcon: (playlistId: number) => void;
+   commaPlaylist: PlaylistType[];
 }
 
 export const HomeTemplate = ({
@@ -21,6 +22,7 @@ export const HomeTemplate = ({
   onClickIsEditMode,
   onClickAddPlaylistButton,
   onClickDeleteButton,
+  onClickAlarmIcon,
   commaPlaylist,
   onToggleSelect,
 }: HomeTemplateProps) => {
@@ -49,12 +51,12 @@ export const HomeTemplate = ({
           commaPlaylist.map((playlist: PlaylistType) => (
             <PlaylistBox
               showTimeBadge
-              showAlarmButton
+              showAlarmButton={playlist.alarmFlag}
               isEditMode={isEditMode}
               key={playlist.playlistId}
               playlist={playlist}
-              onToggleSelect={onToggleSelect}
-            />
+              onToggleSelect={onToggleSelect} 
+              onClickAlarmIcon={onClickAlarmIcon}/>
           ))}
       </style.ShowPlaylist>
     );
