@@ -3,7 +3,7 @@ import PrevIcon from '@/assets/images/prevArrow.svg';
 import SettingIcon from '@/assets/images/setting.svg';
 import TimeBadge from '@/components/pages/home/time-badge';
 import { HorizontalAlbum } from '@/components/common/album/horizontal-album';
-import { useEffect, useState } from 'react';
+import { MouseEventHandler, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import {
   HandleMS,
@@ -16,7 +16,23 @@ import { HorizontalAlbumWithIcon } from '@/components/pages/playlist/horizontal-
 const Id = () => {
   const [isEditMode, setIsEditMode] = useState(false);
   const router = useRouter();
+  const [selectedPlaylist, setSelectedPlaylist] = useState<number[]>([]);
 
+  useEffect(() => {
+    if (isEditMode === false) {
+      setSelectedPlaylist([]);
+    }
+  }, [isEditMode]);
+  const onToggleSelect = (playlistId: number) =>{
+    if (selectedPlaylist.includes(playlistId)) {
+      setSelectedPlaylist((prevIds) =>
+        prevIds.filter((id) => id !== playlistId),
+      );
+    } else {
+      setSelectedPlaylist((prevIds) => [...prevIds, playlistId]);
+    }
+  }
+  
   const { playlistId } = router.query;
   const parsedPlaylistId =
     typeof playlistId === 'string' ? parseInt(playlistId, 10) : 0;
@@ -25,7 +41,6 @@ const Id = () => {
 
   const onClickSetting = () => {
     setIsEditMode(!isEditMode);
-    console.log(playlistTracks);
   };
 
   const onClickPrevButton = () => {
@@ -79,7 +94,7 @@ const Id = () => {
             />
           ))}
       </style.AlbumList>
-      <style.DeletePlaylistBtn />
+      {isEditMode ? <style.DeletePlaylistBtn onClick={() => onToggleSelect()} />: null}
     </style.Wrapper>
   );
 };

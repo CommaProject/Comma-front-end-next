@@ -9,6 +9,7 @@ interface HorizontalAlbumWithIconProps extends HorizontalAlbumProps {
     event: React.MouseEvent<SVGSVGElement, MouseEvent>,
   ) => void;
   isEditMode: boolean;
+  onToggleSelect: (playlistId: number) => void;
 }
 
 export const HorizontalAlbumWithIcon = ({
@@ -19,11 +20,12 @@ export const HorizontalAlbumWithIcon = ({
   timer,
   onClickMoveButton,
   isEditMode,
+  onToggleSelect,
 }: HorizontalAlbumWithIconProps) => {
-  const [isAlarmSelected, setIsAlarmSelected] = useState(true);
   const [isTrackSelected, setIsTrackSelected] = useState(false);
-  const onClickSelectButton = () => {
+  const onClickSelectButton = (playlistId: number) => {
     setIsTrackSelected(!isTrackSelected);
+    onToggleSelect(playlistId);
     console.log(isTrackSelected);
   };
   return (

@@ -63,7 +63,7 @@ const MyPlaylists = () => {
               key={playlist.playlistId}
               playlist={playlist}
               onToggleSelect={onToggleSelect}
-            />
+              onClickAlarmIcon={()=>{}}/>
           ))}
       </style.PlaylistContainer>
       {!isEditMode ? (
