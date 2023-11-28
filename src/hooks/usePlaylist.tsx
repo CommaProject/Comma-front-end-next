@@ -10,6 +10,7 @@ import {
   addPlaylistAsync,
   addTrackToPlaylistAsync,
   deletePlaylist,
+  deleteTrackFromPlaylistAsync,
   getAllMyplaylists,
   getPlaylistAllTracksAsync,
   getTracksRecommendAsync,
@@ -50,7 +51,6 @@ export const usePlaylist = () => {
       onSuccess: () => {
       }
     }
-    
   );
 
   const { mutate: mutateAlarmFlag } = useMutation(
@@ -88,6 +88,17 @@ const addPlaylistTrack = async (params: {
   return [];
 };
 
+// Delete playlist API
+const deletePlaylistTrack = async (playlistTrackIdList_: number[]) => {
+  const { isSuccess, result } = await deleteTrackFromPlaylistAsync(playlistTrackIdList_);
+
+  if (isSuccess && result.data) {
+    return result.data;
+  }
+  return [];
+};
+
+
 // Get PlaylistTrack API
 // PlaylistTrack Hook
 export const usePlaylistTrack = () => {
@@ -109,8 +120,18 @@ export const usePlaylistTrack = () => {
     },
   );
 
+  const { mutate: mutateDeletelaylistTrack } = useMutation(
+    ['deletePlaylistTrack'],
+    deletePlaylistTrack,
+    {
+      onSuccess: (response) => {
+      },
+    },
+  );
+
   return {
     mutateAddPlaylistTrack,
+    mutateDeletelaylistTrack,
     playlistIdToTracks,
     setPlaylistIdTotrack,
   };

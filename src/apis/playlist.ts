@@ -116,6 +116,26 @@ export const addTrackToPlaylistAsync = async (
 };
 
 /**
+ * Playlist에 Track 추가 함수 addTrackToPlaylistAsync
+ * @need AccessToken
+ * @returns 가입 성공 시 209, 실패 시 ...
+ */
+export const deleteTrackFromPlaylistAsync = async (
+  playlistTrackIdList_: number[],
+): ApiResponse<any> => {
+  // return: null
+  const response = await deleteAsync<any>(
+    '/playlist/track',
+    {
+      data: {playlistTrackIdList: playlistTrackIdList_},
+    },
+  );
+
+  return response;
+};
+
+
+/**
  * 플레이 리스트 추가 addTrackToPlaylistAsync
  * @need AccessToken
  * @returns 가입 성공 시 209, 실패 시 ...

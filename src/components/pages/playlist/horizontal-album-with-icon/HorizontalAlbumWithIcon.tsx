@@ -10,6 +10,7 @@ interface HorizontalAlbumWithIconProps extends HorizontalAlbumProps {
   ) => void;
   isEditMode: boolean;
   onToggleSelect: (playlistId: number) => void;
+  playlistId: number,
 }
 
 export const HorizontalAlbumWithIcon = ({
@@ -21,9 +22,10 @@ export const HorizontalAlbumWithIcon = ({
   onClickMoveButton,
   isEditMode,
   onToggleSelect,
+  playlistId
 }: HorizontalAlbumWithIconProps) => {
   const [isTrackSelected, setIsTrackSelected] = useState(false);
-  const onClickSelectButton = (playlistId: number) => {
+  const onClickSelectButton = () => {
     setIsTrackSelected(!isTrackSelected);
     onToggleSelect(playlistId);
     console.log(isTrackSelected);
