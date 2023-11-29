@@ -167,6 +167,26 @@ export const deletePlaylist = async (playlistIdArray: number[]) => {
 };
 
 /**
+ * 플레이 리스트 이름 수정
+ * @param playlistId number
+ * @param title string
+ * @need AccessToken
+ * @returns 가입 성공 시 null
+ */
+
+export const patchEditTitle = async (params: {
+  playlistId: number;
+  title: string;
+}) => {
+  const response = await patchAsync<any, any>(`/playlist/title`, {
+    "playlistId" : params.playlistId,
+    "playlistTitle" : params.title
+  });
+
+  return response;
+};
+
+/**
  * 플레이 리스트 알람 설정
  * @param playlistId_ number
  * @need AccessToken

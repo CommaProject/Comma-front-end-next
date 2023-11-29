@@ -3,7 +3,7 @@ import PrevIcon from '@/assets/images/prevArrow.svg';
 import SettingIcon from '@/assets/images/setting.svg';
 import TimeBadge from '@/components/pages/home/time-badge';
 import { HorizontalAlbum } from '@/components/common/album/horizontal-album';
-import { MouseEventHandler, useEffect, useState } from 'react';
+import { MouseEventHandler, SetStateAction, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import {
   HandleMS,
@@ -12,7 +12,8 @@ import {
 } from '@/hooks/usePlaylistTrack';
 import { useGetPlaylistDetail } from '@/apis/playlist';
 import { HorizontalAlbumWithIcon } from '@/components/pages/playlist/horizontal-album-with-icon';
-import { usePlaylistTrack } from '~/src/hooks/usePlaylist';
+import { usePlaylist, usePlaylistTrack } from '@/hooks/usePlaylist';
+import { Modal, Typography } from '@mui/material';
 
 const Id = () => {
   const [isEditMode, setIsEditMode] = useState(false);
@@ -23,6 +24,14 @@ const Id = () => {
   const { myPlaylistDetail } = useGetPlaylistDetail(parsedPlaylistId);
   const { playlistTracks } = useGetPlaylistTracks(parsedPlaylistId);
   const { mutateDeletelaylistTrack } = usePlaylistTrack();
+  const { mutateEditTitle } = usePlaylist();
+  const [playlistTitle, setPlaylistTitle] = useState<string>();
+  const titleRef = useRef<HTMLInputElement>(null);
+  const [ isEditModeTitle, setIsEditModeTitle] = useState<boolean>();
+
+  useEffect(()=>{
+    setPlaylistTitle( myPlaylistDetail ? myPlaylistDetail.playlistTitle : '-');
+  },[])
 
   useEffect(() => {
     if (isEditMode === false) {
@@ -54,14 +63,35 @@ const Id = () => {
   const onClickTimeBadgeEditBtn = () => {
     router.push('../home/timesetting');
   };
+
+  const handleChangeTitle = (e: { target: { value: SetStateAction<string | undefined>; }; }) => {
+    setPlaylistTitle(e.target.value);
+  }
+  
+  const handleTitleEditActive = (e: { preventDefault: () => void; }) => {
+    e.preventDefault();
+    setIsEditModeTitle(true);
+    titleRef.current!.focus();
+  }
+
+  const titleEnter = () => {
+    setIsEditModeTitle(false);
+    const playlistId1 = Number(playlistId);
+    mutateEditTitle({ playlistId: playlistId1, title: playlistTitle || "Error"});
+  };
+
   return (
     <style.Wrapper>
       <style.TopBar>
         <PrevIcon onClick={onClickPrevButton} />
-        <style.Title>
-          {myPlaylistDetail ? myPlaylistDetail.playlistTitle : '-'}
-          {isEditMode ? <style.EditBtn /> : ''}
-        </style.Title>
+        <style.Title ref={titleRef}  readOnly={!isEditModeTitle} type="text" name="st_name"
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              titleEnter();
+            }
+          }}
+         onChange={handleChangeTitle} value={playlistTitle}/>
+        {isEditMode ? <style.EditBtn onClick={handleTitleEditActive} /> : null}
         <SettingIcon onClick={onClickSetting} />
       </style.TopBar>
       <style.PlaylistInfoBox>
@@ -86,9 +116,9 @@ const Id = () => {
       </style.PlaylistInfoBox>
       <style.AlbumList>
         {playlistTracks &&
-          playlistTracks.map((track) => (
+          playlistTracks.map((track, index) => (
             <HorizontalAlbumWithIcon
-              key={track.trackArtistList[0].artist.spotifyArtistId}
+              key={track.trackArtistList[0].track.spotifyTrackId + index.toString}
               imgUrl={track.trackArtistList[0].track.albumImageUrl}
               songName={track.trackArtistList[0].track.trackTitle}
               singerName={HandleSingerName(track.trackArtistList)}

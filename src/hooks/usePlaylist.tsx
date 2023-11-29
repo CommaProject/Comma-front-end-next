@@ -15,6 +15,7 @@ import {
   getPlaylistAllTracksAsync,
   getTracksRecommendAsync,
   patchAlarmFlag,
+  patchEditTitle,
 } from '@/apis/playlist';
 
 /**
@@ -62,12 +63,21 @@ export const usePlaylist = () => {
     }
   );
 
+  const { mutate: mutateEditTitle } = useMutation(
+    ['patchEditTitle'],
+    patchEditTitle,
+    {
+      onSuccess: () => {
+      }
+    }
+  );
   return {
     myPlaylist,
     navigateToPlaylist,
     mutateAddPlaylist,
     mutateDeletePlaylist,
-    mutateAlarmFlag
+    mutateAlarmFlag,
+    mutateEditTitle
   };
 };
 

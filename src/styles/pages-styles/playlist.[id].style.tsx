@@ -31,7 +31,8 @@ export const TopBar = styled.div`
     `;
   }}
 `;
-export const Title = styled.div`
+
+export const Title = styled.input`
   ${({ theme }) => {
     const { colors, fonts } = theme;
     return css`
