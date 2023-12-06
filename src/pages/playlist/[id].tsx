@@ -31,7 +31,7 @@ const Id = () => {
 
   useEffect(()=>{
     setPlaylistTitle( myPlaylistDetail ? myPlaylistDetail.playlistTitle : '-');
-  },[])
+  },[myPlaylistDetail])
 
   useEffect(() => {
     if (isEditMode === false) {
@@ -60,7 +60,7 @@ const Id = () => {
   const onClickPrevButton = () => {
     router.back();
   };
-  
+
   const onClickTimeBadgeEditBtn = () => {
     router.push('../home/timesetting');
   };
