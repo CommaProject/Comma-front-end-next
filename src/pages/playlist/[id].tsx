@@ -3,7 +3,7 @@ import PrevIcon from '@/assets/images/prevArrow.svg';
 import SettingIcon from '@/assets/images/setting.svg';
 import TimeBadge from '@/components/pages/home/time-badge';
 import { HorizontalAlbum } from '@/components/common/album/horizontal-album';
-import { MouseEventHandler, SetStateAction, useEffect, useRef, useState } from 'react';
+import { SetStateAction, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import {
   HandleMS,
@@ -60,6 +60,7 @@ const Id = () => {
   const onClickPrevButton = () => {
     router.back();
   };
+  
   const onClickTimeBadgeEditBtn = () => {
     router.push('../home/timesetting');
   };
@@ -127,7 +128,7 @@ const Id = () => {
               onClickMoveButton={() => { } }
               isEditMode={isEditMode} 
               onToggleSelect={onToggleSelect}
-              playlistId={track.trackArtistList[0].track.id}            />
+              playlistId={track.trackArtistList[0].track.id}/>
           ))}
       </style.AlbumList>
       {isEditMode ? <style.DeletePlaylistBtn onClick={handleDeleteTrack} />: null}

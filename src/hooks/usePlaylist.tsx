@@ -16,6 +16,7 @@ import {
   getTracksRecommendAsync,
   patchAlarmFlag,
   patchEditTitle,
+  patchPlaylistDayTime,
 } from '@/apis/playlist';
 
 /**
@@ -71,13 +72,20 @@ export const usePlaylist = () => {
       }
     }
   );
+
+  const { mutate: mutateDayTime } = useMutation(
+    ['patchDayTime'],
+    patchPlaylistDayTime,
+  )
+
   return {
     myPlaylist,
     navigateToPlaylist,
     mutateAddPlaylist,
     mutateDeletePlaylist,
     mutateAlarmFlag,
-    mutateEditTitle
+    mutateEditTitle,
+    mutateDayTime
   };
 };
 

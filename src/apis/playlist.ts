@@ -219,6 +219,25 @@ const getPlaylistDetail = async (playlistId: number) => {
   };
 };
 
+// 플레이리스트 요일 및 시간 설정
+interface dayTimeParams {
+  playlistId: number;
+  alarmStartTime: string;
+  alarmDays: number[];
+}
+export const patchPlaylistDayTime = async (params: dayTimeParams) => {
+  const { isSuccess, result } = await patchAsync<any, any>(
+    `/playlist/alert/day-time`,
+    params
+  );
+
+  if (isSuccess && result.data) {
+    return result.data;
+  }
+
+  return null;
+};
+
 export const useGetPlaylistDetail = (playlistId: number) => {
   const { isLoading, data } = useQuery(['playlistDetail', playlistId], () =>
     getPlaylistDetail(playlistId),
