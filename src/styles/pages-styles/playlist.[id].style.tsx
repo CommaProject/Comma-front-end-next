@@ -39,7 +39,8 @@ export const Title = styled.input`
       display: flex;
       flex-direction: row;
       justify-content: space-between;
-
+      outline: hidden;
+      border: none;
       color: ${colors.grayscale.dark};
       font-family: ${fonts.family.noto};
       font-size: 17px;
