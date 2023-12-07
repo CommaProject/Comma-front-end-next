@@ -58,7 +58,6 @@ export const ProfileTemplate = ({
   };
   const { openModal, closeModal } = useModal();
   const onClickSettingButton = () => {
-    console.log('클릭');
     openModal(
       <style.ModalContainer>
         <style.Modal>
@@ -157,9 +156,7 @@ export const ProfileTemplate = ({
                   key={artist.favoriteArtistId}
                   avatarImage={artist.artistResponse.artistImageUrl}
                   avartarName={artist.artistResponse.artistName}
-                  onClick={() =>
-                    console.log(artist.artistResponse.artistName, '클릭')
-                  }
+                  onClick={() => {}}
                 />
               ))}
           </style.ListContainer>

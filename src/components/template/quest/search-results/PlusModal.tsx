@@ -1,9 +1,7 @@
 import styled, { css } from 'styled-components';
 import 'swiper/swiper.min.css';
 import 'swiper/swiper-bundle.min.css';
-import {
-  PlaylistType,
-} from '@/constants/types/playlistTypes';
+import { PlaylistType } from '@/constants/types/playlistTypes';
 import { SliderFreeMode } from '@/components/common/slider-free-mode';
 import PlaylistPlusSVG from '@/assets/images/playlistPlus.svg';
 import { PlaylistAlbumForModal as Album } from '@/components/common/playlist-rep-album-with-num';
@@ -26,19 +24,19 @@ const Box = styled.div`
 
 const AlbumBox = styled.div`
   display: flex;
-  flex-direction: column;  
+  flex-direction: column;
   margin-bottom: 16px;
   overflow: hidden;
-`
+`;
 
 const PlaylistTitle = styled.div`
-  color: #0F0F0F;
+  color: #0f0f0f;
   font-family: Pretendard;
   font-size: 12px;
   font-style: normal;
   font-weight: 500;
   line-height: 12px;
-`
+`;
 
 interface PlusModalProps {
   myPlayList: PlaylistType[];
@@ -68,9 +66,8 @@ export const PlusModal = ({
   <Wrapper>
     <Box>
       <SliderFreeMode componentGab={0}>
-      {myPlayList &&
+        {myPlayList &&
           myPlayList.map((playlist: PlaylistType) => {
-            console.log(playlist.playlistId);
             return (
               <AlbumBox>
                 <Album
@@ -81,9 +78,7 @@ export const PlusModal = ({
                   trackCount={playlist.trackCount}
                   onClickPlaylist={onClickPlaylist}
                 />
-                <PlaylistTitle>
-                  {playlist.playlistTitle}
-                </PlaylistTitle>
+                <PlaylistTitle>{playlist.playlistTitle}</PlaylistTitle>
               </AlbumBox>
             );
           })}
