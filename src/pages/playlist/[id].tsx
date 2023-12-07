@@ -13,7 +13,6 @@ import {
 import { useGetPlaylistDetail } from '@/apis/playlist';
 import { HorizontalAlbumWithIcon } from '@/components/pages/playlist/horizontal-album-with-icon';
 import { usePlaylist, usePlaylistTrack } from '@/hooks/usePlaylist';
-import { Modal, Typography } from '@mui/material';
 
 const Id = () => {
   const [isEditMode, setIsEditMode] = useState(false);
