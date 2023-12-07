@@ -14,28 +14,32 @@ interface ButtonProps {
   isTrackSelected: boolean;
 }
 interface ImageBoxProps {
-  isEditMode :boolean;
+  isEditMode: boolean;
 }
 
-export const Wrapper = styled.div<WrapperProps>`
-${({ theme, isTrackSelected,isEditMode }) => {
+export const AlbumBox = styled.div<WrapperProps>`
+${({ theme, isTrackSelected, isEditMode }) => {
   const { colors } = theme;
   return css`
-  margin-bottom:10px;
+    position: relative;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    background-color: ${isTrackSelected && isEditMode
+      ? colors.primary.main
+      : colors.grayscale.white};
+    border-radius: 19px 0 0 19px;
+  `;
+}})}`;
+
+export const Wrapper = styled.div<WrapperProps>`
   display: flex;
   align-items: center;
-  position: relative;
+  width: 100%;
+`;
 
-  background-color: ${isTrackSelected && isEditMode
-    ? colors.primary.main
-    : colors.grayscale.white};
-  border-radius: 19px 0 0 19px;
- 
-  `;
-}
-})}`
-
-  
 export const ButtonContainer = styled.div`
   position: absolute;
   align-items: center;
@@ -45,31 +49,30 @@ export const ButtonContainer = styled.div`
   gap: 12px;
 `;
 
-
 export const SelectButton = styled.button<ButtonProps>`
-${({ theme, isTrackSelected }) => {
-  const { colors } = theme;
-  return css`
-    width: 18px;
-    height: 18px;
-    
-    position: relative;
-    left:-50px;
+  ${({ theme, isTrackSelected }) => {
+    const { colors } = theme;
+    return css`
+      width: 18px;
+      height: 18px;
+      margin-right: 15px;
+      left: -50px;
 
-    background-color: ${isTrackSelected? colors.primary.main: colors.grayscale.white};
-    
-    border: 2px solid ${colors.primary.main};
-    border-radius: 50%;
-  `;
-}}
+      background-color: ${isTrackSelected
+        ? colors.primary.main
+        : colors.grayscale.white};
+
+      border: 2px solid ${colors.primary.main};
+      border-radius: 50%;
+    `;
+  }}
 `;
 
 export const MoveButton = styled(MoveSVG)`
-${({theme }) => css`
-
-position: absolute;
-right: 15px;
-bottom:40px;
-cursor: pointer;
-`}
+  ${({ theme }) => css`
+    position: absolute;
+    right: 15px;
+    bottom: 40px;
+    cursor: pointer;
+  `}
 `;

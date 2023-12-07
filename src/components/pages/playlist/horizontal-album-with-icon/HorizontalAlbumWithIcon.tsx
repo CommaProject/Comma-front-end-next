@@ -9,6 +9,8 @@ interface HorizontalAlbumWithIconProps extends HorizontalAlbumProps {
     event: React.MouseEvent<SVGSVGElement, MouseEvent>,
   ) => void;
   isEditMode: boolean;
+  onToggleSelect: (playlistId: number) => void;
+  playlistId: number,
 }
 
 export const HorizontalAlbumWithIcon = ({
@@ -19,11 +21,13 @@ export const HorizontalAlbumWithIcon = ({
   timer,
   onClickMoveButton,
   isEditMode,
+  onToggleSelect,
+  playlistId
 }: HorizontalAlbumWithIconProps) => {
-  const [isAlarmSelected, setIsAlarmSelected] = useState(true);
   const [isTrackSelected, setIsTrackSelected] = useState(false);
   const onClickSelectButton = () => {
     setIsTrackSelected(!isTrackSelected);
+    onToggleSelect(playlistId);
     console.log(isTrackSelected);
   };
   return (
@@ -36,16 +40,18 @@ export const HorizontalAlbumWithIcon = ({
       ) : (
         ''
       )}
-      <HorizontalAlbum
-        imgUrl={imgUrl}
-        singerName={singerName}
-        songName={songName}
-        onClick={onClick}
-        timer={timer}
-      />
-      <style.ButtonContainer>
-        {isEditMode && isTrackSelected ? <style.MoveButton /> : ''}
-      </style.ButtonContainer>
+      <style.AlbumBox isTrackSelected={isTrackSelected} isEditMode={isEditMode}>
+        <HorizontalAlbum
+          imgUrl={imgUrl}
+          singerName={singerName}
+          songName={songName}
+          onClick={onClick}
+          timer={timer}
+        />
+        <style.ButtonContainer>
+          {isEditMode && isTrackSelected ? <style.MoveButton /> : ''}
+        </style.ButtonContainer>
+      </style.AlbumBox>
     </style.Wrapper>
   );
 };

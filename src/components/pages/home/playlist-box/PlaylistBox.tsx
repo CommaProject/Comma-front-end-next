@@ -14,6 +14,7 @@ interface PlaylistBoxProps {
   isEditMode: boolean;
   playlist: PlaylistType;
   onToggleSelect: (playlistId: number) => void;
+  onClickAlarmIcon: (playlistId: number) => void;
 }
 
 export const PlaylistBox = ({
@@ -22,15 +23,14 @@ export const PlaylistBox = ({
   isEditMode,
   playlist,
   onToggleSelect,
+  onClickAlarmIcon
 }: PlaylistBoxProps) => {
-  const [isAlarmSelected, setIsAlarmSelected] = useState(playlist.alarmFlag);
   const [isPlaylistSelected, setIsPlaylistSelected] = useState(false);
   const { playTime } = useGetPlaylistPlayTime(playlist.playlistId);
-  const onClickAlarmButton = () => {
-    setIsAlarmSelected(!isAlarmSelected);
-  };
+
   const onClickPlaylistSelectButton = () => {
     setIsPlaylistSelected(!isPlaylistSelected);
+    onToggleSelect(playlist.playlistId);
   };
   const { navigateToPlaylist } = usePlaylist();
 
@@ -81,10 +81,14 @@ export const PlaylistBox = ({
       {showAlarmButton &&
         !isEditMode &&
         !isPlaylistSelected &&
-        (isAlarmSelected ? (
-          <style.ActivateAlarmIcon onClick={onClickAlarmButton} />
+        (playlist.alarmFlag ? (
+          <style.ActivateAlarmIcon onClick={(event) => {
+            event.stopPropagation();
+            onClickAlarmIcon(playlist.playlistId)}} />
         ) : (
-          <style.DeactivateAlarmIcon onClick={onClickAlarmButton} />
+          <style.DeactivateAlarmIcon onClick={(event) => {
+            event.stopPropagation();
+            onClickAlarmIcon(playlist.playlistId)}} />
         ))}
     </style.Wrapper>
   );

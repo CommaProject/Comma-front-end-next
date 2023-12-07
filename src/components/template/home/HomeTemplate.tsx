@@ -1,17 +1,18 @@
-import { useRouter } from 'next/router';
 import * as style from '@/components/template/home/HomeTemplate.style';
 import PlaylistBox from '@/components/pages/home/playlist-box';
 import { PlaylistType } from '@/constants/types/playlistTypes';
-import React, { useState } from 'react';
-import { deletePlaylist } from '@/apis/playlist';
+
 
 interface HomeTemplateProps {
   isPlaylistAvailable: boolean;
   isCommaPlaylistAvailable: boolean;
   isEditMode: boolean;
-
+  onToggleSelect: (playlistId: number) => void;
   onClickIsEditMode: () => void;
-  commaPlaylist: PlaylistType[];
+  onClickAddPlaylistButton: () => void;
+  onClickDeleteButton: () => void;
+  onClickAlarmIcon: (playlistId: number) => void;
+   commaPlaylist: PlaylistType[];
 }
 
 export const HomeTemplate = ({
@@ -19,37 +20,13 @@ export const HomeTemplate = ({
   isCommaPlaylistAvailable,
   isEditMode,
   onClickIsEditMode,
+  onClickAddPlaylistButton,
+  onClickDeleteButton,
+  onClickAlarmIcon,
   commaPlaylist,
+  onToggleSelect,
 }: HomeTemplateProps) => {
-  const router = useRouter();
-  const currentFirstPath = router.pathname.split('/')[1];
-
-  const onClickAddPlaylistButton = () => {
-    if (isPlaylistAvailable) {
-      console.log('애드버튼 누름', commaPlaylist);
-      router.push(`${currentFirstPath}/timesetting`);
-    }
-  };
-  const [selectedPlaylist, setSelectedPlaylist] = useState<number[]>([]);
-  const onToggleSelect = (playlistId: number) => {
-    if (selectedPlaylist.includes(playlistId)) {
-      setSelectedPlaylist((prevIds) =>
-        prevIds.filter((id) => id !== playlistId),
-      );
-    } else {
-      setSelectedPlaylist((prevIds) => [...prevIds, playlistId]);
-    }
-  };
-  const onClickDeleteButton = async () => {
-    console.log(selectedPlaylist);
-    if (selectedPlaylist.length > 0) {
-      const deleted = await deletePlaylist(selectedPlaylist);
-      if (deleted) {
-        // 삭제가 성공하면 다시 플레이리스트를 조회하여 업데이트
-        // useGetMyPlaylists 훅을 통해 이미 업데이트되어 있음
-      }
-    }
-  };
+  
   let playlistContent;
   if (!isPlaylistAvailable) {
     playlistContent = (
@@ -74,12 +51,12 @@ export const HomeTemplate = ({
           commaPlaylist.map((playlist: PlaylistType) => (
             <PlaylistBox
               showTimeBadge
-              showAlarmButton
+              showAlarmButton={playlist.alarmFlag}
               isEditMode={isEditMode}
               key={playlist.playlistId}
               playlist={playlist}
-              onToggleSelect={onToggleSelect}
-            />
+              onToggleSelect={onToggleSelect} 
+              onClickAlarmIcon={onClickAlarmIcon}/>
           ))}
       </style.ShowPlaylist>
     );

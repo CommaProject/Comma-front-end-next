@@ -15,7 +15,7 @@ interface ButtonProps {
   isPlaylistSelected: boolean;
 }
 interface InmageBoxProps {
-  isEditMode :boolean;
+  isEditMode: boolean;
 }
 
 export const Wrapper = styled.div<WrapperProps>`
@@ -33,33 +33,27 @@ export const Wrapper = styled.div<WrapperProps>`
 `;
 
 export const PlaylistInfoBox = styled.div<PlaylistInfoBoxProps>`
-${({ theme, isPlaylistSelected, isEditMode }) => {
-  const { colors } = theme;
-  return css`
-  
-    width:100%;
-    width: ${isEditMode ? 'calc(100% - 50px)': '100%'};
-    height: calc(81.9px + 2 * 8px);
-    padding: 6px 8px 8px;
-    
+  ${({ theme, isPlaylistSelected, isEditMode }) => {
+    const { colors } = theme;
+    return css`
+      width: 100%;
+      width: ${isEditMode ? 'calc(100% - 50px)' : '100%'};
+      height: calc(81.9px + 2 * 8px);
+      padding: 6px 8px 8px;
 
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    position: relative;
-    left: ${isEditMode ? '50px' : 0};
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      position: relative;
+      left: ${isEditMode ? '50px' : 0};
 
-    background-color: ${isPlaylistSelected && isEditMode
-      ? colors.primary.main
-      : colors.grayscale.white};
-    border-radius: 19px 0 0 19px;
-    
-   
-  `;
-}}
-
-
-`
+      background-color: ${isPlaylistSelected && isEditMode
+        ? colors.primary.main
+        : colors.grayscale.white};
+      border-radius: 19px 0 0 19px;
+    `;
+  }}
+`;
 export const ImagesBox = styled.div<InmageBoxProps>`
   ${({ isEditMode }) =>
     css`
@@ -70,75 +64,70 @@ export const ImagesBox = styled.div<InmageBoxProps>`
 `;
 
 export const TrackNumInfo = styled.div`
-${({ theme}) => {
-  const { colors,fonts } = theme;
-  return css`
-    width:30px;
+  ${({ theme }) => {
+    const { colors, fonts } = theme;
+    return css`
+      width: 30px;
 
-    display:flex;
-    align-items: center;
-    justify-content:center;
-    position: relative;
-    top:-22px;
-    left:49px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      top: -22px;
+      left: 49px;
 
-
-    font-size:12px;
-    line-height: 12px;
-    font-weight: ${ fonts.weight.bold};
-    color: ${colors.grayscale.white};
-    background-color: ${colors.grayscale.gray300};
-    border-radius: 19px;
-    
-   
-  `;
-}}
-
-
-`
+      font-size: 12px;
+      line-height: 12px;
+      font-weight: ${fonts.weight.bold};
+      color: ${colors.grayscale.white};
+      background-color: ${colors.grayscale.gray300};
+      border-radius: 19px;
+    `;
+  }}
+`;
 export const Button = styled.button<ButtonProps>`
-${({ theme, isPlaylistSelected }) => {
-  const { colors } = theme;
-  return css`
-    width: 18px;
-    height: 18px;
-    
-    position: relative;
-    left:-50px;
+  ${({ theme, isPlaylistSelected }) => {
+    const { colors } = theme;
+    return css`
+      width: 18px;
+      height: 18px;
 
-    background-color: ${isPlaylistSelected? colors.primary.main: colors.grayscale.white};
-    
-    border: 2px solid ${colors.primary.main};
-    border-radius: 50%;
-  `;
-}}
+      position: relative;
+      left: -50px;
+
+      background-color: ${isPlaylistSelected
+        ? colors.primary.main
+        : colors.grayscale.white};
+
+      border: 2px solid
+        ${isPlaylistSelected ? colors.primary.main : colors.primary.main};
+      border-radius: 50%;
+    `;
+  }}
 `;
 
-
 export const MovePlaylistIcon = styled(MovePlaylistSvg)<WrapperProps>`
-    ${({ isPlaylistSelected }) => css`
+  ${({ isPlaylistSelected }) => css`
     display: ${isPlaylistSelected ? '' : 'none'};
     position: absolute;
     right: 15px;
     cursor: pointer;
-    `}
+  `}
 `;
 
 // SVG
 export const ActivateAlarmIcon = styled(ActivateAlarmSvg)`
-  margin:10px;
+  margin: 10px;
 
   position: absolute;
   right: 15px;
   bottom: 8px;
-  
 `;
 
 export const DeactivateAlarmIcon = styled(DeactivateAlarmSvg)`
-margin:10px;
+  margin: 10px;
 
-position: absolute;
+  position: absolute;
   right: 15px;
   bottom: 8px;
-  
 `;

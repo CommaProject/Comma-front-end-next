@@ -9,9 +9,14 @@ import {
 import {
   addPlaylistAsync,
   addTrackToPlaylistAsync,
+  deletePlaylist,
+  deleteTrackFromPlaylistAsync,
   getAllMyplaylists,
   getPlaylistAllTracksAsync,
   getTracksRecommendAsync,
+  patchAlarmFlag,
+  patchEditTitle,
+  patchPlaylistDayTime,
 } from '@/apis/playlist';
 
 /**
@@ -38,14 +43,49 @@ export const usePlaylist = () => {
         queryClient.invalidateQueries(['MyPlaylists'])
       }
     }
-    
   );
   const { data: myPlaylist } = useQuery(['MyPlaylists'], getAllMyplaylists);
+  
+  const { mutate: mutateDeletePlaylist } = useMutation(
+    ['deletePlaylist'],
+    deletePlaylist,
+    {
+      onSuccess: () => {
+      }
+    }
+  );
+
+  const { mutate: mutateAlarmFlag } = useMutation(
+    ['patchAlarmFlag'],
+    patchAlarmFlag,
+    {
+      onSuccess: () => {
+      }
+    }
+  );
+
+  const { mutate: mutateEditTitle } = useMutation(
+    ['patchEditTitle'],
+    patchEditTitle,
+    {
+      onSuccess: () => {
+      }
+    }
+  );
+
+  const { mutate: mutateDayTime } = useMutation(
+    ['patchDayTime'],
+    patchPlaylistDayTime,
+  )
 
   return {
     myPlaylist,
     navigateToPlaylist,
-    mutateAddPlaylist
+    mutateAddPlaylist,
+    mutateDeletePlaylist,
+    mutateAlarmFlag,
+    mutateEditTitle,
+    mutateDayTime
   };
 };
 
@@ -65,6 +105,17 @@ const addPlaylistTrack = async (params: {
   }
   return [];
 };
+
+// Delete playlist API
+const deletePlaylistTrack = async (playlistTrackIdList_: number[]) => {
+  const { isSuccess, result } = await deleteTrackFromPlaylistAsync(playlistTrackIdList_);
+
+  if (isSuccess && result.data) {
+    return result.data;
+  }
+  return [];
+};
+
 
 // Get PlaylistTrack API
 // PlaylistTrack Hook
@@ -87,13 +138,18 @@ export const usePlaylistTrack = () => {
     },
   );
 
-  /**
-   * @returns playlist: Track[]
-   */
-  const { myPlaylist } = usePlaylist();
+  const { mutate: mutateDeletelaylistTrack } = useMutation(
+    ['deletePlaylistTrack'],
+    deletePlaylistTrack,
+    {
+      onSuccess: (response) => {
+      },
+    },
+  );
 
   return {
     mutateAddPlaylistTrack,
+    mutateDeletelaylistTrack,
     playlistIdToTracks,
     setPlaylistIdTotrack,
   };

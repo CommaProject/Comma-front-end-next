@@ -47,7 +47,6 @@ interface PlusModalProps {
 }
 
 export const PlusButton = styled.div`
-  position: absolute;
   top: 0;
   left: 0;
   width: 92px;
@@ -69,7 +68,7 @@ export const PlusModal = ({
   <Wrapper>
     <Box>
       <SliderFreeMode componentGab={0}>
-        {myPlayList &&
+      {myPlayList &&
           myPlayList.map((playlist: PlaylistType) => {
             console.log(playlist.playlistId);
             return (

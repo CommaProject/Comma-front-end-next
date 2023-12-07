@@ -1,4 +1,4 @@
-import { deleteAsync, getAsync, postAsync } from '@/apis/API';
+import { deleteAsync, getAsync, patchAsync, postAsync } from '@/apis/API';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { PlaylistType, PostTrackPlaylistType } from '@/types/playlistTypes';
@@ -116,6 +116,26 @@ export const addTrackToPlaylistAsync = async (
 };
 
 /**
+ * Playlist에 Track 추가 함수 addTrackToPlaylistAsync
+ * @need AccessToken
+ * @returns 가입 성공 시 209, 실패 시 ...
+ */
+export const deleteTrackFromPlaylistAsync = async (
+  playlistTrackIdList_: number[],
+): ApiResponse<any> => {
+  // return: null
+  const response = await deleteAsync<any>(
+    '/playlist/track',
+    {
+      data: {playlistTrackIdList: playlistTrackIdList_},
+    },
+  );
+
+  return response;
+};
+
+
+/**
  * 플레이 리스트 추가 addTrackToPlaylistAsync
  * @need AccessToken
  * @returns 가입 성공 시 209, 실패 시 ...
@@ -142,7 +162,41 @@ export const deletePlaylist = async (playlistIdArray: number[]) => {
     },
     data: playlistIdArray, // 요청 본문에 데이터를 JSON 배열로 넣음
   });
-  console.log('삭제 결과', response, playlistIdArray);
+
+  return response;
+};
+
+/**
+ * 플레이 리스트 이름 수정
+ * @param playlistId number
+ * @param title string
+ * @need AccessToken
+ * @returns 가입 성공 시 null
+ */
+
+export const patchEditTitle = async (params: {
+  playlistId: number;
+  title: string;
+}) => {
+  const response = await patchAsync<any, any>(`/playlist/title`, {
+    "playlistId" : params.playlistId,
+    "playlistTitle" : params.title
+  });
+
+  return response;
+};
+
+/**
+ * 플레이 리스트 알람 설정
+ * @param playlistId_ number
+ * @need AccessToken
+ * @returns 가입 성공 시 null
+ */
+export const patchAlarmFlag = async (playlistId_: number) => {
+  const response = await patchAsync<any, any>(`/playlist`, {
+    playlistId: playlistId_, 
+  });
+
   return response;
 };
 
@@ -163,6 +217,25 @@ const getPlaylistDetail = async (playlistId: number) => {
     trackCount: 0,
     totalDurationTime: 0,
   };
+};
+
+// 플레이리스트 요일 및 시간 설정
+interface dayTimeParams {
+  playlistId: number;
+  alarmStartTime: string;
+  alarmDays: number[];
+}
+export const patchPlaylistDayTime = async (params: dayTimeParams) => {
+  const { isSuccess, result } = await patchAsync<any, any>(
+    `/playlist/alert/day-time`,
+    params
+  );
+
+  if (isSuccess && result.data) {
+    return result.data;
+  }
+
+  return null;
 };
 
 export const useGetPlaylistDetail = (playlistId: number) => {

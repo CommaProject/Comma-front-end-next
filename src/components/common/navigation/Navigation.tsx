@@ -42,9 +42,14 @@ const Navigation = () => {
       notSelected: (
         <NavigationSearchSvg key="Quest" onClick={() => moveToPage('/quest')} />
       ),
-      selected: <NavigationSearchSelected key="Quest" onClick={() => {
-        window.location.replace("/quest")
-      }} />,
+      selected: (
+        <NavigationSearchSelected
+          key="Quest"
+          onClick={() => {
+            window.location.replace('/quest');
+          }}
+        />
+      ),
     },
     {
       path: 'profile',

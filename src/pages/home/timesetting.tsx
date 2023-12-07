@@ -23,23 +23,23 @@ const TimeSetting = () => {
   });
 
   const [renderingStartTime] = useState('01:00');
-  function handleMeridiem(meridiem: string): void {
+  const handleMeridiem = (meridiem: string) => {
     setAlarmTime({ ...alarmTime, meridiem });
-  }
+  };
 
-  function handleHour(swiper: SwiperCore): void {
+  const handleHour = (swiper: SwiperCore) => {
     setAlarmTime({
       ...alarmTime,
       hour: swiper.realIndex + 1,
     });
-  }
+  };
 
-  function handleMin(swiper: SwiperCore): void {
+  const handleMin = (swiper: SwiperCore) => {
     setAlarmTime({
       ...alarmTime,
       min: swiper.realIndex * 10,
     });
-  }
+  };
 
   return (
     <style.Wrapper>
@@ -60,11 +60,11 @@ const TimeSetting = () => {
       <style.TimePickerBox>
         <TimePicker
           meridiem={alarmTime.meridiem}
-          onChangeMeridiem={() => handleMeridiem}
+          onChangeMeridiem={handleMeridiem}
           hour={alarmTime.hour}
-          onChangeHour={() => handleHour}
+          onChangeHour={handleHour}
           min={alarmTime.min}
-          onChangeMin={() => handleMin}
+          onChangeMin={handleMin}
         />
       </style.TimePickerBox>
       <RepeatDaySetting />
