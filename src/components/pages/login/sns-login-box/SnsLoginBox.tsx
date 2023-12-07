@@ -6,14 +6,14 @@ export const SnsLoginBox = () => (
   <style.Wrapper>
     <style.Text>간편 로그인</style.Text>
     <style.Box>
-      <Link href={`${API_URL}oauth2/authorization/kakao`}>
+      <Link href={`${API_URL}/oauth2/authorization/kakao`}>
         <style.KakaoIcon onClick={() => 0} />
       </Link>
-      <Link href={`${API_URL}oauth2/authorization/naver`}>
+      <Link href={`${API_URL}/oauth2/authorization/naver`}>
         <style.NaverIcon onClick={() => 0} />
       </Link>
       <style.InstagramIcon onClick={() => 0} />
-      <Link href={`${API_URL}oauth2/authorization/google`}>
+      <Link href={`${API_URL}/oauth2/authorization/google`}>
         <style.GoogleIcon onClick={() => 0} />
       </Link>
     </style.Box>
