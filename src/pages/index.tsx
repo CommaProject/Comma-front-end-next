@@ -18,7 +18,7 @@ const Home = (isUserVaild: boolean) => {
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
   const { isPlaylistAvailable, isCommaPlaylistAvailable, commaPlaylist } =
     useGetCommaPlaylists();
-  const {mutateDeletePlaylist, mutateAlarmFlag} = usePlaylist();
+  const { mutateDeletePlaylist, mutateAlarmFlag } = usePlaylist();
 
   const onClickIsEditMode = () => {
     setIsEditMode(!isEditMode);
@@ -41,17 +41,16 @@ const Home = (isUserVaild: boolean) => {
   };
   const onClickDeleteButton = async () => {
     if (selectedPlaylist.length > 0) {
-        // 삭제가 성공하면 다시 플레이리스트를 조회하여 업데이트
-        // useGetMyPlaylists 훅을 통해 이미 업데이트되어 있음
-        mutateDeletePlaylist(selectedPlaylist);    
+      // 삭제가 성공하면 다시 플레이리스트를 조회하여 업데이트
+      // useGetMyPlaylists 훅을 통해 이미 업데이트되어 있음
+      mutateDeletePlaylist(selectedPlaylist);
     }
   };
 
-  const handleClickAlarmIcon = (playlistId: number) =>{
+  const handleClickAlarmIcon = (playlistId: number) => {
     mutateAlarmFlag(playlistId);
-  }
+  };
 
-  console.log("commaPlaylist",commaPlaylist);
   return (
     <HomeTemplate
       onClickAddPlaylistButton={onClickAddPlaylistButton}

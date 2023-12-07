@@ -15,7 +15,6 @@ const useModal = () => {
   const openModal = (newContent: ReactNode, beforeClose?: () => void) => {
     if (beforeClose !== undefined) {
       setCloseCallback(() => beforeClose);
-      console.log(beforeClose);
     }
     setModalState({ isOpen: true, content: newContent });
   };

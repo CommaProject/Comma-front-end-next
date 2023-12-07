@@ -28,15 +28,16 @@ const Quest = () => {
   const [slideStep, setSlideStep] = useState(0);
   const [swiperRef, setSwiperRef] = useState<SwiperClass>();
   const [seeMoreTitle, setSeeMoreTitle] = useState('');
-  const [seeMoreData, setSeeMoreData] = useState<SeeMoreSlideWithFavoriteProps[]>([]);
-  // console.log('tracksRecommendData', tracksRecommendData);
-  // console.log('trackPlayCountData', trackPlayCountData);
-  // console.log('friendsTrackPlayCountData', friendsTrackPlayCountData);
-  // console.log('favoriteTrack', favoriteTrack);
+  const [seeMoreData, setSeeMoreData] = useState<
+    SeeMoreSlideWithFavoriteProps[]
+  >([]);
   const queryClient = useQueryClient();
   // isFavorite은 매번 Reload되기 때문에 따로 분리해보기.
-  const { favoriteTrackIds, deleteFavoriteTrackMutate, addFavoriteTrackMutate } =
-    useFavoriteTrack();
+  const {
+    favoriteTrackIds,
+    deleteFavoriteTrackMutate,
+    addFavoriteTrackMutate,
+  } = useFavoriteTrack();
 
   useEffect(() => {
     if (seeMoreData && favoriteTrackIds) {
@@ -56,7 +57,9 @@ const Quest = () => {
   const handleSeeMorePageData = (data: SeeMoreSlideProps[]) => {
     const updatedData = data.map((track) => ({
       ...track,
-      isFavorite: favoriteTrackIds ? Object.keys(favoriteTrackIds)?.includes(track.trackId) : false,
+      isFavorite: favoriteTrackIds
+        ? Object.keys(favoriteTrackIds)?.includes(track.trackId)
+        : false,
     }));
     setSeeMoreData(updatedData);
   };
@@ -67,7 +70,7 @@ const Quest = () => {
 
   const handleNext = useCallback(
     (title: string, data: SeeMoreSlideProps[]) => {
-      handleSeeMorePageData(data)
+      handleSeeMorePageData(data);
       setSeeMoreTitle(title);
       swiperRef?.slideNext();
     },
@@ -99,7 +102,6 @@ const Quest = () => {
         }
       }}
       slideStep={slideStep}
-
     />
   );
 };

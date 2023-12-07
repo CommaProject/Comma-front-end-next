@@ -28,15 +28,12 @@ export const useGetCommaPlaylists = () => {
   const [isCommaPlaylistAvailable, setIsCommaPlaylistAvailable] =
     useState<boolean>(false);
 
-  useEffect(() => {
-    console.log('isFetching');
-  }, [isFetching]);
+  useEffect(() => {}, [isFetching]);
 
   const [playlist, setPlaylist] = useState<PlaylistType[]>([]);
 
   useEffect(() => {
     if (commaPlaylist) {
-      console.log('isloading후', commaPlaylist);
       if (commaPlaylist.length === 0) {
         setIsPlaylistAvailable(false);
       } else {
@@ -124,33 +121,27 @@ export const deleteTrackFromPlaylistAsync = async (
   playlistTrackIdList_: number[],
 ): ApiResponse<any> => {
   // return: null
-  const response = await deleteAsync<any>(
-    '/playlist/track',
-    {
-      data: {playlistTrackIdList: playlistTrackIdList_},
-    },
-  );
+  const response = await deleteAsync<any>('/playlist/track', {
+    data: { playlistTrackIdList: playlistTrackIdList_ },
+  });
 
   return response;
 };
-
 
 /**
  * 플레이 리스트 추가 addTrackToPlaylistAsync
  * @need AccessToken
  * @returns 가입 성공 시 209, 실패 시 ...
  */
-export const addPlaylistAsync = async (
-  spotifyTrackId_: string,
-) => {
-  const  { isSuccess, result }  = await postAsync<any, any>('/playlist', {
+export const addPlaylistAsync = async (spotifyTrackId_: string) => {
+  const { isSuccess, result } = await postAsync<any, any>('/playlist', {
     spotifyTrackId: spotifyTrackId_,
   });
 
   if (isSuccess && result.data) {
     return result.data;
   }
-  
+
   return null;
 };
 
@@ -179,8 +170,8 @@ export const patchEditTitle = async (params: {
   title: string;
 }) => {
   const response = await patchAsync<any, any>(`/playlist/title`, {
-    "playlistId" : params.playlistId,
-    "playlistTitle" : params.title
+    playlistId: params.playlistId,
+    playlistTitle: params.title,
   });
 
   return response;
@@ -194,7 +185,7 @@ export const patchEditTitle = async (params: {
  */
 export const patchAlarmFlag = async (playlistId_: number) => {
   const response = await patchAsync<any, any>(`/playlist`, {
-    playlistId: playlistId_, 
+    playlistId: playlistId_,
   });
 
   return response;
@@ -228,7 +219,7 @@ interface dayTimeParams {
 export const patchPlaylistDayTime = async (params: dayTimeParams) => {
   const { isSuccess, result } = await patchAsync<any, any>(
     `/playlist/alert/day-time`,
-    params
+    params,
   );
 
   if (isSuccess && result.data) {

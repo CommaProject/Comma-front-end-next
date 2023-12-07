@@ -9,7 +9,6 @@ const getUserDetail = async () => {
   );
 
   if (isSuccess && result.data) {
-    console.log('성공', result.data, typeof result.data);
     return result.data;
   }
 
@@ -22,7 +21,6 @@ export const useGetUserDetail = () => {
 
   useEffect(() => {
     if (isLoading === false) {
-      console.log('isloading후222', data);
       if (data) {
         setNickName(data.nickName);
       }

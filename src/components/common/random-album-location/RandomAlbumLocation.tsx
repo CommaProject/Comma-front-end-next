@@ -16,7 +16,6 @@ export const RandomAlbumLocation = () => {
   const handleMouseDown = (event: React.MouseEvent<HTMLCanvasElement>) => {
     setIsDragging(true);
     setDragStart({ x: event.clientX - offset.x, y: event.clientY - offset.y });
-
   };
 
   const handleMouseMove = (event: MouseEvent) => {
@@ -25,7 +24,6 @@ export const RandomAlbumLocation = () => {
       x: event.clientX - dragStart.x,
       y: event.clientY - dragStart.y,
     });
-    console.log(event.clientX, event.clientY ,offset, dragStart)
   };
 
   const handleMouseUp = () => {
@@ -46,16 +44,16 @@ export const RandomAlbumLocation = () => {
     const canvas = canvasRef.current;
     const context = canvas?.getContext('2d');
 
-    if(canvas && context){
+    if (canvas && context) {
       const img = new Image();
-      img.src = 'https://direct.samsunglife.com/upload/202103/16084.jpg'
+      img.src = 'https://direct.samsunglife.com/upload/202103/16084.jpg';
 
-      img.onload = () =>{
+      img.onload = () => {
         canvas.width = 1000;
         canvas.height = 1000;
 
-        context.drawImage(img, 0 + offset.x , 0 + offset.y);
-      }
+        context.drawImage(img, 0 + offset.x, 0 + offset.y);
+      };
     }
   }, []);
 

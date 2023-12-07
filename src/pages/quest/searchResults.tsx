@@ -124,7 +124,6 @@ const SearchResults = () => {
 
   const handleOpenPreviewMusicPlayer = useCallback(
     (previewUrl: string, trackId: string) => {
-      console.log(previewUrl);
       setOpenMusicPlayer(trackId);
     },
     [],

@@ -22,7 +22,6 @@ export const usePlayer = () => {
         content: (
           <PlayerTemplate
             onClickMinimize={() => {
-              console.log('Minimize');
               setModalState({ isOpen: false });
             }}
             title="test"

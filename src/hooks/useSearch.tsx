@@ -131,7 +131,6 @@ export const useSearch = () => {
           if ('errors' in response.result.data) {
             console.log('error:', response.result.data.errors);
           } else if (response.result.data) {
-            console.log('setSearchHistory success');
           }
         }
       },

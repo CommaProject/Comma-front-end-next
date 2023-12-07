@@ -7,7 +7,6 @@ export const RepeatDaySetting = () => {
 
   const onClickDay = useCallback(
     (day: string) => {
-      console.log(day);
       if (selectedDays.includes(day)) {
         setSelectedDays(
           selectedDays.filter((selectedDay) => selectedDay !== day),

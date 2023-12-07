@@ -18,7 +18,6 @@ export const FollowInformationTemplate = ({
   const [nowTouchedUser, setNowTouchedUser] = useState(-1);
   const onClickPrevButton = () => {
     router.back();
-    console.log(nowTouchedUser);
   };
 
   const [search, setSearch] = useState('');
@@ -30,7 +29,6 @@ export const FollowInformationTemplate = ({
     e.preventDefault();
     const searchText = e.target.value;
     setSearch(searchText);
-    console.log(searchText);
     setSearchUserData(
       searchText
         ? userList.filter((item) => item.userNickname.includes(searchText))

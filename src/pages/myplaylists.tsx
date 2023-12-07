@@ -30,7 +30,6 @@ const MyPlaylists = () => {
     }
   };
   const onClickDeleteButton = async () => {
-    console.log(selectedPlaylist);
     if (selectedPlaylist.length > 0) {
       const deleted = await deletePlaylist(selectedPlaylist);
       if (deleted) {
@@ -63,7 +62,8 @@ const MyPlaylists = () => {
               key={playlist.playlistId}
               playlist={playlist}
               onToggleSelect={onToggleSelect}
-              onClickAlarmIcon={()=>{}}/>
+              onClickAlarmIcon={() => {}}
+            />
           ))}
       </style.PlaylistContainer>
       {!isEditMode ? (

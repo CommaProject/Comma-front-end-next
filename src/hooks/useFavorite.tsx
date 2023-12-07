@@ -67,15 +67,12 @@ export const useFavoriteTrack = () => {
         // 성공한다고 가정
         // if (oldData) {
         //   const updatedData = oldData;
-        //   console.log('before oldData', oldData);
-        //   console.log('id', id);
         //   for (let i = 0; i < oldData.length; i += 1) {
         //     if (oldData[i].favoriteTrackId === id) {
         //       oldData.splice(i, 1);
         //       break;
         //     }
         //   }
-        //   console.log('after oldData', oldData);
         //   queryClient.setQueryData(['FavoriteTrack'], updatedData);
         // }
 
@@ -106,9 +103,6 @@ export const useFavoriteTrack = () => {
         // 성공한다고 가정
         // if (oldData) {
         //   const updatedData = oldData;
-        //   console.log('before oldData', oldData);
-
-        //   console.log('after oldData', oldData);
         //   queryClient.setQueryData(['FavoriteTrack'], updatedData);
         // }
 
@@ -126,7 +120,6 @@ export const useFavoriteTrack = () => {
   );
 
   useEffect(() => {
-    console.log('setFavoriteTrackIds')
     if (favoriteTrack.length > 0) {
       const favoriteTrackIds1 = favoriteTrack
         .map((item) => ({
@@ -140,9 +133,7 @@ export const useFavoriteTrack = () => {
           return accumulator;
         }, {});
 
-      console.log('setFavoriteTrackIds In', favoriteTrackIds1)
       setFavoriteTrackIds(favoriteTrackIds1);
-      console.log('setFavoriteTrackIds In', favoriteTrackIds)
     }
   }, [favoriteTrack]);
 
